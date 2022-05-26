@@ -1,0 +1,16 @@
+<div class="bg-white w-full h-screen flex justify-start">
+     <div class="bg-blue-300 w-2/12 shadow-lg py-4 px-4 h-full">
+          <nav>
+               <ul>
+                    <a routerLink="home" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-white text-left block">Home</a>
+                    <a routerLink="course" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-white text-left block">Course</a>
+                    <a routerLink="question" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-white text-left block">Question</a>
+                    <a routerLink="change-password" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-white text-left block">Change Password</a>
+                    <a routerLinkActive="active" (click)="logout()" class="cursor-pointer leading-9 text-lg text-white text-left block">Logout</a>
+               </ul>
+          </nav>
+     </div>
+     <div class="w-full h-screen">
+          <router-outlet></router-outlet>
+     </div>
+</div>

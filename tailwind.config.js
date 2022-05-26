@@ -3,7 +3,11 @@ module.exports = {
        "./src/**/*.{html,ts}"
  ],
   theme: {
-    extend: {},
+    extend: {
+         backgroundImage: {
+              'login-bg': 'src/app/assets/login.jpg'
+         }
+    },
   },
   mode: 'jit',
   plugins: [],
