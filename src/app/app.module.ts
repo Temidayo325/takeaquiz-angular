@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +35,8 @@ import { QuestionComponent } from './question/question.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularToastifyModule
   ],
   providers: [
        // {
@@ -41,6 +44,7 @@ import { QuestionComponent } from './question/question.component';
        //      useClass: HttpErrorInterceptor,
        //      multi: true
        // }
+       ToastService
  ],
   bootstrap: [AppComponent]
 })

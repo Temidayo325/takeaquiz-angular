@@ -7,7 +7,7 @@
                     </div>
                     <h1 class="tracking-wider text-4xl my-2">Welcome back</h1>
                     <p class="tracking-wider leading-8 text-md my-1 mb-3">Enter your details to log in</p>
-                    <form [formGroup]="loginForm" (submit)="login()">
+                    <form [formGroup]="loginForm" >
                          <div class="mb-3 ">
                               <label for="email" class="block text-lg">Email</label>
                               <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.email }}</p>
@@ -21,7 +21,7 @@
                               <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="!togglePassword">
                          </div>
                          <p class="text-right cursor-pointer " (click)="forgotPassword()">Forgot password</p>
-                         <button type="submit" class="py-2 px-40 bg-orange-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg" [disabled]="!loginForm.valid" >Login</button>
+                         <button type="button" (click)="login()" class="py-2 px-40 bg-orange-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg" [disabled]="!loginForm.valid" >Login</button>
                     </form>
 
                     <p class="text-center text-lg">Don't have an account? <span class="font-bold mx-2 cursor-pointer" (click)="switchForm()">Create one here</span></p>

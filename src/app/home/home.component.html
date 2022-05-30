@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div>
+     <div class="flex justify-start items-center">
+          <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-orange-100 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
+               <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
+               <p class="text-center text-lg my-1">{{ items.text}}</p>
+
+          </div>
+          <div class="ml-3">
+               <button class="py-4 px-6 bg-blue-500 border-0 rounded-lg text-white shadow-2xl" routerLink="course">More details</button>
+          </div>
+     </div>
+</div>

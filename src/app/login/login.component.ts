@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../Services/user.service';
+import { StoreService } from '../Services/store.service';
 import { Router } from '@angular/router';
+import { ToastService } from 'angular-toastify';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,6 +35,8 @@ export class LoginComponent implements OnInit {
        private fb : FormBuilder,
        private router: Router,
        private user: UserService,
+       private store: StoreService,
+       private toast: ToastService
  ) { }
 
   ngOnInit(): void {
@@ -43,21 +48,23 @@ export class LoginComponent implements OnInit {
   }
      login()
      {
+          console.log('clicked')
           this.sub = this.user.login({email: this.loginForm.value.email, password: this.loginForm.value.password}).subscribe(
                (res) => {
-                    console.log(res)
+                    // console.log(res)
                     if (res.data.statusCode == 200) {
-                         alert(res.data.message)
+                         this.toast.success(res.data.message)
+                         this.store.setuser(res.data.user, res.data.token)
                          this.router.navigate(['/dashboard'])
                     }
                     if (res.data.statusCode >= 400) {
-                         alert(res.data.message)
+                         this.toast.warn(res.data.message)
                     }
                },
                (err) => {
                     console.log(err)
                     this.errors = err.error.errors
-                    alert("there was an error")
+                    this.toast.error("there was an error")
                }
           )
      }

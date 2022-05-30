@@ -15,7 +15,8 @@ export class UserService {
  options = {
       headers : new HttpHeaders({
            'Content-Type': 'application/json',
-           'Accept': 'application/json'
+           'Accept': 'application/json',
+           // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
       }),
  }
   login(user: object): Observable<any>
