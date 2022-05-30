@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
 }
 
      public user: any = this.store.getUser();
-  ngOnInit(): void {
-       // console.log(this.user)
+     ngOnInit(): void {
+       // this.router.navigate(['/'])
        if (this.store.token == null || this.store.token == '') {
             this.router.navigate(['/login'])
        }

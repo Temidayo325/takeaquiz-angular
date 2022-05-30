@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../Services/course.service';
 import { StoreService } from '../Services/store.service';
 import { ToastService } from 'angular-toastify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   constructor(
        private course: CourseService,
        private store: StoreService,
-       private toast: ToastService
+       private toast: ToastService,
+       private router: Router
  ) { }
   public sub: any ;
   public courses: any = []
@@ -24,6 +26,10 @@ export class HomeComponent implements OnInit {
   ]
   ngOnInit(): void {
        this.getCourse()
+  }
+  goToCourses()
+  {
+       this.router.navigate(['/dashboard', {route: 'courses'}])
   }
   getCourse()
   {

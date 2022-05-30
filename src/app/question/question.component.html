@@ -1,1 +1,113 @@
-<p>question works!</p>
+<div class="">
+     <div class="w-6/12 h-screen overflow-y-scroll bg-gray-300 absolute right-0 top-0 z-10 shadow-lg" *ngIf="edit">
+          <div class="sticky mt-8 mx-3">
+               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="closeSideBar()">X</button>
+          </div>
+
+          <!-- Interface for viewing the individual questions -->
+          <div *ngIf="view.view">
+               <div *ngIf="view.questions.length == 0">
+                    <h3 class="text-lg text-center text-gray-700">You do not have any questions under this course yet.</h3>
+               </div>
+               <div *ngIf="view.questions.length > 1">
+                    <div *ngFor="let question of view.questions">
+
+                    </div>
+               </div>
+          </div>
+          <div *ngIf="view.add">
+               <form [formGroup]="addQuestionForm" (submit)="addQuestion()" class="px-3 py-3">
+                    <div>
+                        <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
+                   </div>
+                   <div class="mt-2 flex justify-center items-center ">
+                        <label for="options" class="leading-8 font-bold ml-3 ">Full options</label>
+                        <input type="radio" id="options" value="options" checked="true" name="type" formControlName="type" class="w-4 h-8">
+                        <label for="truthOrFalse" class="leading-8 font-bold ml-4">Truth or false</label>
+                        <input type="radio" id="truthOrFalse" value="truthorfalse" name="type" formControlName="type" class="w-4 h-8">
+                        <p class="text-red-600 text-sm text-left ml-3" *ngIf="errors != null">{{ errors.type }}</p>
+                        <!-- <label for="truthOrFalse" class="leading-8 font-bold">Image</label>
+                        <input type="radio" id="truthOrFalse" value="truthorfalse"> -->
+                   </div>
+                   <div>
+                       <label for="question" class="text-md tracking-wide leading-9 block">Question</label>
+                       <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.question }}</p>
+                       <textarea name="" rows="8" cols="80" required formControlName="question" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-10/12 h-40"></textarea>
+                       <!-- <input type="text" required formControlName="question" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4"> -->
+                  </div>
+                  <div class="flex flex-wrap mt-3 justify-start gap-2 items-center">
+                        <div class="w-80">
+                          <label for="option1" class="text-md tracking-wide leading-9 block">Option 1 </label>
+                          <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.option1 }}</p>
+                          <input type="text" required formControlName="option1" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                         </div>
+                         <div class="w-80">
+                              <label for="option2" class="text-md tracking-wide leading-9 block">Option 2 </label>
+                              <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.option2 }}</p>
+                              <input type="text" required formControlName="option2" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                        </div>
+                        <div class="w-80">
+                            <label for="option3" class="text-md tracking-wide leading-9 block">Option 3 </label>
+                            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.option3 }}</p>
+                            <input type="text" required formControlName="option3" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                        </div>
+                        <div class="w-80">
+                            <label for="option4" class="text-md tracking-wide leading-9 block">Option 4 </label>
+                            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.option4 }}</p>
+                            <input type="text" required formControlName="option4" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                        </div>
+
+                        <div class="w-80">
+                            <label for="answer" class="text-md tracking-wide leading-9 block">Answer </label>
+                            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.answer }}</p>
+                            <input type="text" required formControlName="answer" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                        </div>
+                  </div>
+               <div class="flex justify-center mt-3 ">
+                    <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg">Save question</button>
+               </div>
+          </form>
+     </div>
+</div>
+     <div class="flex justify-start items-center">
+          <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-orange-100 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
+               <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
+               <p class="text-center text-lg my-1">{{ items.text}}</p>
+
+          </div>
+          <!-- <div class="ml-3">
+               <button class="py-4 px-6 bg-blue-500 border-0 rounded-lg text-white shadow-2xl" (click)="showCourse = !showCourse">Add Course</button>
+          </div> -->
+     </div>
+     <div class="relative overflow-x-auto  mt-20 ml-10 mr-10" >
+         <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
+             <thead class=" text-gray-700 uppercase">
+                 <tr>
+                     <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
+                         Course
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="The name that should be provided to the student as course name when attempting the course">
+                         Access name
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                         Questions
+                     </th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses">
+                     <td class="px-3 py-3 text-lg">{{course.course}}</td>
+                     <td class="px-3 py-3">{{course.display_token}}</td>
+                     <td class="px-3 py-3">{{ questions[courses.indexOf(course)].length}}</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[courses.indexOf(course)], 'view')">View</p></td>
+                     <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
+                     <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500 font-bold" (click)="addQuestionToggle(course.display_token, course.course)">Add</p></td>
+                 </tr>
+             </tbody>
+         </table>
+         <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl">You do not have any course yet, Click the course button on your right to create a course</h1>
+     </div>
+</div>
