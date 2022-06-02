@@ -1,16 +1,49 @@
-<div class="bg-gray-50 w-full h-screen flex justify-start text-gray-700">
+<div class="bg-gray-50 w-full h-screen flex justify-start text-gray-700 relative">
      <div class="bg-white w-2/12 shadow-lg py-4 px-4 h-full">
           <nav>
                <ul>
                     <a routerLink="home" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Home</a>
                     <a routerLink="course" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Course</a>
                     <a routerLink="question" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Question</a>
-                    <a routerLink="change-password" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Change Password</a>
+                    <a class="cursor-pointer leading-9 text-lg text-black text-left block" (click)="profile = !profile">Profile</a>
                     <a routerLinkActive="active" (click)="logout()" class="cursor-pointer leading-9 text-lg text-black text-left block">Logout</a>
                </ul>
           </nav>
      </div>
-     <div class="w-full h-full py-0 px-0">
+     <div class="w-full h-full py-0 px-0 relative">
+          <div *ngIf="profile" class="absolute top-0 right-0 w-4/12 min-h-screen bg-blue-200 shadow-lg z-30">
+               <button class="py-2 px-4 shadow-xl text-xl border-0 rounded-full mt-3 mx-3 text-2xl cursor-pointer" (click)="profile = !profile">x</button>
+               <div class="mx-auto my-2" >
+                    <div class="flex justify-center">
+                         <img src="https://i.pravatar.cc/150?img=5" alt="user avatar" class="w-32 h-32 rounded-full shadow-lg mb-2" >
+                    </div>
+                    <h3 class="my-0 text-center">{{user.name}}</h3>
+                    <p class="my-0 text-center text-lg">{{ user.institution}}</p>
+               </div>
+               <div class="my-3 mx-4">
+                    <h3>Change your password</h3>
+                    <form [formGroup]="changeForm" (submit)="changePassword()">
+                         <div class="mb-3 relative w-3/4">
+                              <label for="password" class="block text-lg text-black">Password</label>
+                              <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.password || errors.password1 }}</p>
+                              <input [type]="type" required formControlName="password" id="password" class="text-md rounded-lg px-3 py-3 border-gray-200 w-full bg-white/70">
+                              <img src="../../assets/eye-closed.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="togglePassword">
+                              <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="!togglePassword">
+                         </div>
+                         <div class="mb-3 relative w-3/4">
+                              <label for="confirmPassword" class="block text-lg text-black">Confirm Password</label>
+                              <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.confirmPassword || errors.password2}}</p>
+                              <input [type]="type2" required formControlName="confirmPassword" id="confirmPassword" class="text-md rounded-lg px-3 py-3 border-gray-200 w-full bg-white/70">
+                              <img src="../../assets/eye-closed.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showConfirmPassword()" *ngIf="toggleConfirmPassword">
+                              <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showConfirmPassword()" *ngIf="!toggleConfirmPassword">
+                         </div>
+                         <div class="flex justify-center mt-3">
+                              <button type="submit" class="py-2 w-2/4 bg-blue-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg" [disabled]="!changeForm.valid" >Change password</button>
+                         </div>
+                    </form>
+               </div>
+
+          </div>
           <div class="bg-white py-4 px-2 flex justify-around items-center">
                <div class="w-3/12 h-32 shadow-lg rounded-lg">
                     <h2 class="my-0 text-black mt-3 ml-2 tracking-wider leading-9">Welcome {{ user.name }}!</h2>
@@ -20,12 +53,12 @@
                     <p class="my-0 text-left text-md ml-2 text-black mt-3">This update is gotten from the database of new updats coming up</p>
                </div>
                <div class=" w-3/12 h-32 flex justify-end items-center shadow-lg rounded-lg px-2">
-                         <div class="mr-4">
-                              <h3 class="my-0">{{user.name}}</h3>
-                              <p class="my-0 text-center text-md">{{ user.institution}}</p>
+                         <div class="mr-4 cursor-pointer" (click)="profile = !profile">
+                              <h3 class="my-0 cursor-pointer" (click)="profile = !profile">{{user.name}}</h3>
+                              <p class="my-0 text-center text-lg cursor-pointer" (click)="profile = !profile">{{ user.institution}}</p>
                          </div>
                          <div>
-                              <img src="https://i.pravatar.cc/150?img=5" alt="user avatar" class="w-20 h-20 rounded-full">
+                              <img src="https://i.pravatar.cc/150?img=5" alt="user avatar" class="w-20 h-20 rounded-full cursor-pointer" (click)="profile = !profile">
                          </div>
                </div>
           </div>
