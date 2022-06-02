@@ -10,13 +10,27 @@
                     <h3 class="text-lg text-center text-gray-700">You do not have any questions under this course yet.</h3>
                </div>
                <div *ngIf="view.questions.length > 1">
-                    <div *ngFor="let question of view.questions">
-
-                    </div>
+                    <ol>
+                         <li *ngFor="let question of view.questions" class="mx-3 text-lg ">
+                              <p>Question: {{ question.question}}</p>
+                              <details>
+                                   <summary>Answers</summary>
+                                   <p>Option 1: {{question.option1}}</p>
+                                   <p>Option 2: {{question.option2}}</p>
+                                   <p>Option 3: {{question.option3}}</p>
+                                   <p>Option 4: {{question.option4}}</p>
+                                   <p>Answer: {{question.answer}}</p>
+                              </details>
+                              <div class="flex justify-start gap-4">
+                                   <p class="text-blue-500 tracking-wide cursor-pointer" (click)="editQuestion(question)">Edit</p>
+                                   <p class="text-red-500 cursor-pointer" (click)="deleteQuestion(question, view.questions.indexOf(question))">Delete</p>
+                              </div>
+                         </li>
+                    </ol>
                </div>
           </div>
           <div *ngIf="view.add">
-               <form [formGroup]="addQuestionForm" (submit)="addQuestion()" class="px-3 py-3">
+               <form [formGroup]="addQuestionForm"  class="px-3 py-3">
                     <div>
                         <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
                    </div>
@@ -64,7 +78,8 @@
                         </div>
                   </div>
                <div class="flex justify-center mt-3 ">
-                    <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg">Save question</button>
+                    <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg" (click)="addQuestion()" *ngIf="!courseDetail.button">Save question</button>
+                    <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg" (click)="saveEditedQuestion()" *ngIf="courseDetail.button">Save Correction</button>
                </div>
           </form>
      </div>
@@ -102,7 +117,7 @@
                      <td class="px-3 py-3 text-lg">{{course.course}}</td>
                      <td class="px-3 py-3">{{course.display_token}}</td>
                      <td class="px-3 py-3">{{ questions[courses.indexOf(course)].length}}</td>
-                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[courses.indexOf(course)], 'view')">View</p></td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[courses.indexOf(course)], 'view', course.course, course.display_token)">View</p></td>
                      <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
                      <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500 font-bold" (click)="addQuestionToggle(course.display_token, course.course)">Add</p></td>
                  </tr>

@@ -33,13 +33,17 @@ export class QuestionsService {
      {
           return this.http.get(this.baseUrl+"courseQuestion", this.options )
      }
-     editQuestion()
+     editQuestion(question: object): Observable<any>
      {
-
+          return this.http.patch(this.baseUrl+"question", question, this.options )
      }
 
      addQuestion(question: object): Observable<any>
      {
           return this.http.post(this.baseUrl+"question", question, this.options )
+     }
+     deleteQuestion(display_token: string, id: number)
+     {
+          return this.http.delete(this.baseUrl+`question?display_token=${display_token}&id=${id}`, this.options )
      }
 }

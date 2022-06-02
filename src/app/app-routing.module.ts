@@ -11,7 +11,6 @@ import { CourseComponent } from './course/course.component';
 import { QuestionComponent } from './question/question.component';
 
 const routes: Routes = [
-     { path: '', redirectTo: '/login', pathMatch: 'full' },
      {path: 'login', component: LoginComponent},
      {path: 'verify-password', component: VerifyPasswordComponent},
      {path: 'dashboard', component: DashboardComponent,
@@ -23,6 +22,7 @@ const routes: Routes = [
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'change-password', component: ChangePasswordComponent},
+     { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

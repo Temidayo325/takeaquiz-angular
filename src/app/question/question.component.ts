@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { QuestionsService } from '../Services/questions.service';
 import { CourseService } from '../Services/course.service';
 import { ToastService } from 'angular-toastify';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-question',
@@ -13,6 +14,7 @@ export class QuestionComponent implements OnInit {
 
      addQuestionForm = this.fb.group({
          course: ['', [Validators.required]],
+         id: [''],
          display_token: ['', [Validators.required, Validators.minLength(6)]],
          question: ['', [Validators.required, Validators.minLength(6)]],
          option1: ['', [Validators.required, Validators.minLength(2)]],
@@ -27,7 +29,8 @@ export class QuestionComponent implements OnInit {
        private fb : FormBuilder,
        private question: QuestionsService,
        private course: CourseService,
-       private toast: ToastService
+       private toast: ToastService,
+       private router: Router
  ) { }
 
   ngOnInit(): void {
@@ -43,6 +46,7 @@ export class QuestionComponent implements OnInit {
        // {number: 0, text: 'Completed courses'}
   ]
   public view: any = {edit: false, view: false, add: false, questions: []}
+  public courseDetail: any = {course: '', display_token: '', button: false, index: 0}
   public courses: any = []
   public questions: any = []
   public errors: any = []
@@ -84,7 +88,7 @@ export class QuestionComponent implements OnInit {
             }
        )
   }
-  viewQuestions(questions: number, option: string)
+  viewQuestions(questions: number, option: string, course: string, display_token: string)
   {
        // this.edit = true
        if (option === 'edit') {
@@ -94,6 +98,8 @@ export class QuestionComponent implements OnInit {
             this.view.view = true
             this.view.edit = false
             this.view.add = false
+            this.courseDetail.course = course
+            this.courseDetail.display_token = display_token
             this.view.questions = questions
             this.edit = true
        }
@@ -134,5 +140,58 @@ export class QuestionComponent implements OnInit {
       this.countQuestion()
       this.coursesAndQuestions()
       this.edit = !this.edit
+  }
+  editQuestion(question: any)
+  {
+       this.addQuestionForm.patchValue({
+            question: question.question, option1: question.option1, option2: question.option2,
+            option3: question.option3, option4: question.option4, answer: question.answer,
+            id: question.id, type: question.type, display_token: this.courseDetail.display_token, course: this.courseDetail.course
+       });
+       this.courseDetail.index = this.view.questions.indexOf(question)
+       // console.log(this.view.questions)
+       this.courseDetail.button = !this.courseDetail.button
+       this.view.add = false
+       this.view.view = false
+       this.view.add = true
+  }
+  saveEditedQuestion()
+  {
+       this.sub = this.question.editQuestion(this.addQuestionForm.value).subscribe(
+            (res) => {
+                 console.log(res)
+                 this.toast.success(res.message)
+                 this.view.questions.fill(this.addQuestionForm.value, this.courseDetail.index, this.courseDetail.index+1)
+                 this.addQuestionForm.patchValue({
+                      question: '', option1: '', option2: '',
+                      option3: '', option4: '', answer: ''
+                 });
+                 this.courseDetail.button = !this.courseDetail.button
+                 this.view.add = false
+                 this.view.view = true
+                 this.view.add = false
+            },
+            (err) => {
+                 console.log(err)
+                 this.errors = err.error.errors
+                 this.toast.warn(err.error.message)
+            }
+       )
+  }
+  deleteQuestion(question: any, index: number)
+  {
+       this.sub = this.question.deleteQuestion(this.courseDetail.display_token, question.id).subscribe(
+            (res: any) => {
+                 this.toast.success(res.message)
+                 // this.view.questions.splice(index, 1)
+                 const ind = this.view.questions.indexOf(question)
+                 this.view.questions.splice(this.view.questions.indexOf(question), 1)
+                 this.overview[1].number -= 1
+            },
+            (err) => {
+                 console.log(err)
+                 this.toast.warn(err.error.message)
+            }
+       )
   }
 }

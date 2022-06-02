@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../Services/course.service';
 import { StoreService } from '../Services/store.service';
+import { QuestionsService } from '../Services/questions.service';
 import { ToastService } from 'angular-toastify';
 import { Router } from '@angular/router';
 
@@ -15,17 +16,21 @@ export class HomeComponent implements OnInit {
        private course: CourseService,
        private store: StoreService,
        private toast: ToastService,
-       private router: Router
+       private router: Router,
+       private question: QuestionsService
  ) { }
   public sub: any ;
+  public questions: any = []
   public courses: any = []
   public overview: any = [
        {number: 0, text: 'Available courses'},
        {number: 0, text: 'Ongoing courses'},
-       {number: 0, text: 'Completed courses'}
+       {number: 0, text: 'Completed courses'},
+       {number: 0, text: 'Available questions'}
   ]
   ngOnInit(): void {
        this.getCourse()
+       this.countQuestion()
   }
   goToCourses()
   {
@@ -70,5 +75,22 @@ export class HomeComponent implements OnInit {
             return  now > new Date(element.end_time) && element.end_time !== null
        })
        return newArray.length
+  }
+  countQuestion()
+  {
+       this.sub = this.question.getCount().subscribe(
+           (res) => {
+               this.overview[3].number = res.count
+           },
+           (err) => {
+                console.log(err)
+                this.toast.info(err.error.message)
+           }
+      )
+  }
+  ngOnDestroy(): void {
+       //Called once, before the instance is destroyed.
+       //Add 'implements OnDestroy' to the class.
+       this.sub.unsubscribe()
   }
 }
