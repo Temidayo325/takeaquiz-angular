@@ -4,6 +4,8 @@ import { StoreService } from '../Services/store.service';
 import { QuestionsService } from '../Services/questions.service';
 import { ToastService } from 'angular-toastify';
 import { Router } from '@angular/router';
+import { EChartsOption } from 'echarts';
+import {StudentService} from '../Services/student.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,8 @@ export class HomeComponent implements OnInit {
        private store: StoreService,
        private toast: ToastService,
        private router: Router,
-       private question: QuestionsService
+       private question: QuestionsService,
+       private student: StudentService,
  ) { }
   public sub: any ;
   public questions: any = []
@@ -28,9 +31,12 @@ export class HomeComponent implements OnInit {
        {number: 0, text: 'Completed courses'},
        {number: 0, text: 'Available questions'}
   ]
+  public data: any = {xaxis: [], yaxis: []}
+  chartOption: EChartsOption = {}
   ngOnInit(): void {
        this.getCourse()
        this.countQuestion()
+       this.getstudentGraph()
   }
   goToCourses()
   {
@@ -87,6 +93,35 @@ export class HomeComponent implements OnInit {
                 this.toast.info(err.error.message)
            }
       )
+  }
+  getstudentGraph()
+  {
+       this.sub = this.student.countCourseStudent().subscribe(
+            (res) => {
+                 console.log(res)
+                 res.courses.map((elem: any) =>{
+                      this.data.xaxis.push(elem.course)
+                 })
+                 this.data.yaxis = res.count
+                 this.chartOption = {
+                      xAxis: {
+                         type: 'category',
+                         boundaryGap: false,
+                         data: this.data.xaxis
+                      },
+                      yAxis: { },
+                      series: [{
+                         data: this.data.yaxis,
+                         type: 'scatter',
+                         color: ['blue']
+                         // areaStyle: {}
+                      }]
+                     }
+            },
+            (err) => {
+                 console.log(err)
+            }
+       )
   }
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.

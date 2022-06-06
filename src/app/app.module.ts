@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { FormsModule } from '@angular/forms';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
@@ -16,6 +18,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CourseComponent } from './course/course.component';
 import { QuestionComponent } from './question/question.component';
+import { StudentComponent } from './student/student.component';
+import { PrepComponent } from './prep/prep.component';
+import { QuizComponent } from './quiz/quiz.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -29,14 +34,21 @@ import { QuestionComponent } from './question/question.component';
     ForgotPasswordComponent,
     ChangePasswordComponent,
     CourseComponent,
-    QuestionComponent
+    QuestionComponent,
+    StudentComponent,
+    PrepComponent,
+    QuizComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularToastifyModule
+    AngularToastifyModule,
+    NgxEchartsModule.forRoot({
+     echarts: () => import('echarts')
+     }),
+     FormsModule
   ],
   providers: [
        // {

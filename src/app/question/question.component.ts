@@ -42,8 +42,7 @@ export class QuestionComponent implements OnInit {
   public sub: any
   public overview: any = [
        {number: 0, text: 'Available courses'},
-       {number: 0, text: 'Available questions'},
-       // {number: 0, text: 'Completed courses'}
+       {number: 0, text: 'Available questions'}
   ]
   public view: any = {edit: false, view: false, add: false, questions: []}
   public courseDetail: any = {course: '', display_token: '', button: false, index: 0}

@@ -1,0 +1,35 @@
+<div>
+     <div class="mx-auto mt-3 flex justify-center items-center">
+          <div class="w-4/12">
+               <h3 class="text-center text-lg ">Enter student matric to search student</h3>
+               <select name="" id="" placeholder="course title" class="border-0 py-3 px-2 rounded-tl-lg rounded-bl-lg shadow-md mx-0 focus:outline-none focus:shadow-xl" [(ngModel)]="form.course">
+                    <option value="" readonly>Course</option>
+                    <option value="{{course}}" *ngFor="let course of data.xaxis">{{course}}</option>
+               </select>
+               <input type="text" class="py-3 px-2 w-6/12 border-0  bg-white shadow-md focus:outline-none focus:shadow-xl" required [(ngModel)]="form.matric">
+               <button class="mx-0 px-4 py-3 text-white font-bold bg-blue-500 border-0 hover:shadow-xl shadow-lg rounded-br-lg rounded-tr-lg outline-none mx-0" (click)="search()">Search</button>
+               <div>
+                    <p *ngIf="form.result.length == 0" class="block text-center text-orange-600">{{form.text}}</p>
+                    <div *ngIf="form.result.matric != undefined" >
+                         <div class="mt-2 shadow-md hover:shadow-lg text-lg flex justify-around items-center py-2 bg-white z-10">
+                              <p>{{form.result.matric}}</p>
+                              <p>{{form.result.score}}</p>
+                              <p>{{form.result.created_at}}</p>
+                              <p class="text-red-500 cursor-pointer" (click)="deleteStudent(form.result.matric)">Delete</p>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+     </div>
+     <div class="flex justify-start items-center">
+          <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-orange-100 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
+               <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
+               <p class="text-center text-lg my-1">{{ items.text}}</p>
+          </div>
+     </div>
+     <div>
+          <div echarts [options]="chartOption" class="demo-chart" class="w-6/12 h-1/4 mx-4"></div>
+          <p>Graph showing the the course and respective students</p>
+     </div>
+</div>

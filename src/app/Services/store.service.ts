@@ -26,4 +26,11 @@ export class StoreService {
   {
        return this.token!
   }
+
+  logout():void
+  {
+       this.token = ''
+       this.user = ''
+       sessionStorage.clear()
+  }
 }

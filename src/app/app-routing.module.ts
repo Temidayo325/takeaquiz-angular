@@ -9,6 +9,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { HomeComponent } from './home/home.component';
 import { CourseComponent } from './course/course.component';
 import { QuestionComponent } from './question/question.component';
+import { StudentComponent } from './student/student.component';
+import { PrepComponent } from './prep/prep.component';
+import { QuizComponent } from './quiz/quiz.component';
 
 const routes: Routes = [
      {path: 'login', component: LoginComponent},
@@ -19,8 +22,11 @@ const routes: Routes = [
           {path: 'course', component: CourseComponent},
           {path: 'question', component: QuestionComponent},
           {path: 'change-password', component: ChangePasswordComponent},
+          {path: 'student', component: StudentComponent},
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
+     {path: 'prep', component: PrepComponent},
+     {path: 'quiz', component: QuizComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

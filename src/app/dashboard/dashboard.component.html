@@ -1,10 +1,11 @@
 <div class="bg-gray-50 w-full h-screen flex justify-start text-gray-700 relative">
-     <div class="bg-white w-2/12 shadow-lg py-4 px-4 h-full">
+     <div class="bg-white w-2/12 shadow-lg py-4 px-4 min-h-full sticky">
           <nav>
                <ul>
                     <a routerLink="home" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Home</a>
                     <a routerLink="course" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Course</a>
                     <a routerLink="question" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Question</a>
+                    <a routerLink="student" routerLinkActive="active" class="cursor-pointer leading-9 text-lg text-black text-left block">Student</a>
                     <a class="cursor-pointer leading-9 text-lg text-black text-left block" (click)="profile = !profile">Profile</a>
                     <a routerLinkActive="active" (click)="logout()" class="cursor-pointer leading-9 text-lg text-black text-left block">Logout</a>
                </ul>
@@ -44,13 +45,13 @@
                </div>
 
           </div>
-          <div class="bg-white py-4 px-2 flex justify-around items-center">
+          <div class="bg-white py-4 px-2 flex justify-around items-center ">
                <div class="w-3/12 h-32 shadow-lg rounded-lg">
                     <h2 class="my-0 text-black mt-3 ml-2 tracking-wider leading-9">Welcome {{ user.name }}!</h2>
                     <p class="my-0 text-left text-lg ml-2 text-black">Your dashboard is looking good as always, Let's keep the ball rolling as expected</p>
                </div>
                <div class="w-3/12 h-32 shadow-lg rounded-lg py-2 px-2">
-                    <p class="my-0 text-left text-md ml-2 text-black mt-3">This update is gotten from the database of new updats coming up</p>
+                    <p class="my-0 text-left text-md ml-2 text-black mt-3">This update is gotten from the database of new updates coming up</p>
                </div>
                <div class=" w-3/12 h-32 flex justify-end items-center shadow-lg rounded-lg px-2">
                          <div class="mr-4 cursor-pointer" (click)="profile = !profile">

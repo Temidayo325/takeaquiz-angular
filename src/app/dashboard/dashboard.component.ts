@@ -42,7 +42,11 @@ export class DashboardComponent implements OnInit {
   }
   logout()
   {
-
+       if (confirm("Do you really want to logout?")) {
+            this.store.logout()
+            console.log(this.router)
+            this.router.navigate(['/login'])
+       }
   }
   changePassword()
   {
