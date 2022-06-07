@@ -1,1 +1,24 @@
-<p>prep works!</p>
+<div class="w-full h-screen overflow-hidden py-4 px-4 flex justify-center items-center">
+     <div class="w-4/12 bg-gray-100 px-3 py-3 shadow-md rounded-lg">
+          <h2>Welcome to your test platform</h2>
+          <p>fill the form to proceed to your test</p>
+          <div class="w-full">
+               <form [formGroup]="prepForm">
+                    <div class="mb-3 ">
+                         <label for="display_token" class="block text-lg">Course Access Code</label>
+                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.display_token }}</p>
+                         <input type="email" id="email" required formControlName="display_token" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                    </div>
+                    <div class="mb-3 ">
+                         <label for="matric" class="block text-lg">Matric number</label>
+                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
+                         <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                    </div>
+                    <div class="flex justify-center my-5">
+                         <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-blue-500 text-white disabled:bg-gray-400 disabled:text-white" (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
+                    </div>
+               </form>
+               <p class="text-right text-blue-500 cursor-pointer font-bold">Lodge a complaint</p>
+          </div>
+     </div>
+</div>

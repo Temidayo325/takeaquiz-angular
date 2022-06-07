@@ -21,6 +21,7 @@ import { QuestionComponent } from './question/question.component';
 import { StudentComponent } from './student/student.component';
 import { PrepComponent } from './prep/prep.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -37,7 +38,8 @@ import { QuizComponent } from './quiz/quiz.component';
     QuestionComponent,
     StudentComponent,
     PrepComponent,
-    QuizComponent
+    QuizComponent,
+    ComplaintsComponent
   ],
   imports: [
     BrowserModule,
