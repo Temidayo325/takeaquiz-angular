@@ -6,6 +6,7 @@ import { ToastService } from 'angular-toastify';
 import { Router } from '@angular/router';
 import { EChartsOption } from 'echarts';
 import {StudentService} from '../Services/student.service';
+import { ComplaintService } from '../Services/complaint.service';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +22,10 @@ export class HomeComponent implements OnInit {
        private router: Router,
        private question: QuestionsService,
        private student: StudentService,
+       private  complaint: ComplaintService
  ) { }
   public sub: any ;
+  public lastComplaint: any = '';
   public questions: any = []
   public courses: any = []
   public overview: any = [
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
        this.getCourse()
        this.countQuestion()
        this.getstudentGraph()
+       this.getLastComplaint()
   }
   goToCourses()
   {
@@ -47,7 +51,6 @@ export class HomeComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                     console.log(res.course)
                      this.courses = res.course
                      this.sortCourses(this.courses)
                  }
@@ -98,7 +101,6 @@ export class HomeComponent implements OnInit {
   {
        this.sub = this.student.countCourseStudent().subscribe(
             (res) => {
-                 console.log(res)
                  res.courses.map((elem: any) =>{
                       this.data.xaxis.push(elem.course)
                  })
@@ -119,9 +121,21 @@ export class HomeComponent implements OnInit {
                      }
             },
             (err) => {
-                 console.log(err)
+                 // console.log(err)
             }
        )
+  }
+
+  getLastComplaint()
+  {
+     this.complaint.getLastComplaint().subscribe(
+          (res) => {
+               this.lastComplaint = res.complaints[0]
+          },
+          (err) => {
+               console.log(err)
+          }
+     )
   }
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.

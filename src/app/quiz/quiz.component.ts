@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PrepService } from '../Services/prep.service';
 import { Router } from '@angular/router';
+import { QuizService } from '../Services/quiz.service';
+import { ToastService } from 'angular-toastify';
 
 @Component({
   selector: 'app-quiz',
@@ -11,9 +13,11 @@ export class QuizComponent implements OnInit {
 
   constructor(
        private prep: PrepService,
-       private router: Router
+       private router: Router,
+       private quiz: QuizService,
+       private toast: ToastService
  ) { }
-     // protected questions:  object[] = []
+     // protected questions:  any = []
      public questions: any = [
        {chosen_answer: "", hidden: false, id: 3, option1: "Osinwin", option2: "Weyrey", option3: "Ode",
           option4: "Ashiere",  question: "Madman of the housess", type: "options"},
@@ -26,30 +30,48 @@ export class QuizComponent implements OnInit {
      ]
      public currentIndex = 0
      public stat: any = {completed: 0, total: this.questions.length, submitted: false}
-     public timervalues: any = {minutes: 0, seconds: 0, currentTime: 10, ongoing: 0}
+     public timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
+     protected details = this.prep.getDetails();
   ngOnInit(): void
   {
-       // const questions = this.prep.retrieve()
-       // if (questions == null || questions == undefined || questions == '') {
-       //      this.router.navigate(['/prep'])
-       // }else{
-       //      this.prep.retrieve().map((item: any) => {
-       //           this.questions.push(item)
-       //      })
-       //      this.questions[this.currentIndex].hidden = false
-       // }
-       this.timervalues.ongoing = setInterval(() => {
-            this.timer()
-        }, 1000)
+       const questions = this.prep.retrieveQuestions()
+       if (questions == null || questions == undefined || questions == '') {
+            this.router.navigate(['/prep'])
+       }else{
+            this.questions = this.prep.questions
+            this.timervalues.currentTime = this.details.timer * 60
+            this.questions[this.currentIndex].hidden = false
+            setTimeout(() => {
+                 this.timervalues.ongoing = setInterval(() => {
+                      this.timer()
+                  }, 1000)
+            }, 1000)
+            let grace = 0
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState !== 'visible') {
+                    this.toast.info("Your test has been submitted")
+                    this.submit()
+                }
+            });
+       }
   }
   submit()
   {
        if (confirm("Are you sure you want to submit?")) {
-            // submit the form to the database
-            // clear the form
             clearInterval(this.timervalues.ongoing)
             this.timervalues.ongoing = null
             this.stat.submitted = true
+            this.quiz.submitTest({questions: JSON.stringify(this.questions), matric: this.details.matric, display_token: this.details.display_token}).subscribe(
+                 (res) => {
+                      this.toast.info(res.message)
+                      setTimeout(() => {
+                           this.router.navigate(['prep'])
+                      }, 10000)
+                 },
+                 (err) => {
+                      this.toast.error(err.error.message)
+                 }
+            )
             // console.log(this.questions)
        }
   }

@@ -12,6 +12,7 @@ import { QuestionComponent } from './question/question.component';
 import { StudentComponent } from './student/student.component';
 import { PrepComponent } from './prep/prep.component';
 import { QuizComponent } from './quiz/quiz.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
 
 const routes: Routes = [
      {path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
           {path: 'question', component: QuestionComponent},
           {path: 'change-password', component: ChangePasswordComponent},
           {path: 'student', component: StudentComponent},
+          {path: 'complaint', component: ComplaintsComponent}
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
