@@ -1,4 +1,5 @@
 <div class="bg-blue-400 md:flex md:justify-center mx-0 my-0 h-screen">
+     <ngx-loading-bar></ngx-loading-bar>
      <div class="w-10/12 h-full bg-white md:flex md:justify-center md:items-center">
           <div class="w-6/12 h-10/12 " *ngIf="registered">
                <div>
@@ -10,12 +11,12 @@
                     <form [formGroup]="loginForm" >
                          <div class="mb-3 ">
                               <label for="email" class="block text-lg">Email</label>
-                              <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.email }}</p>
+                              <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.email }}</p>
                               <input type="email" id="email" required formControlName="email" class="text-md rounded-lg px-3 py-3 bg-transparent border-gray-200 w-full">
                          </div>
                          <div class="mb-3 relative">
                               <label for="password" class="block text-lg">Password</label>
-                              <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.password }}</p>
+                              <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.password }}</p>
                               <input [type]="type" required formControlName="password" id="password" class="text-md rounded-lg px-2 py-3 border-gray-200 w-full bg-transparent focus:bg-transparent">
                               <img src="../../assets/eye-closed.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="togglePassword">
                               <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="!togglePassword">
@@ -35,29 +36,29 @@
                <form [formGroup]="registerForm" (submit)="registerUser()">
                     <div class="mb-3">
                          <label for="name" class="block text-lg">Full name</label>
-                         <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
                          <input type="text" id="name" required formControlName="name" class="text-md rounded-lg px-3 py-2 border-gray-200 w-full">
                     </div>
                     <div class="mb-3">
                          <label for="email" class="block text-lg">Email</label>
-                         <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.email }}</p>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.email }}</p>
                          <input type="email" id="email" required formControlName="email" class="text-md rounded-lg px-3 py-2 border-gray-200 w-full">
                     </div>
                     <div class="mb-3">
                          <label for="institution" class="block text-lg">Institution</label>
-                         <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.institution }}</p>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.institution }}</p>
                          <input type="text" id="institution" required formControlName="institution" class="text-md rounded-lg px-3 py-2 border-gray-200 w-full">
                     </div>
                     <div class="mb-3 relative">
                          <label for="password" class="block text-lg">Password</label>
-                         <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.password }}</p>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.password }}</p>
                          <input [type]="type" required formControlName="password" id="password" class="text-md rounded-lg px-3 py-2 border-gray-200 w-full">
                          <img src="../../assets/eye-closed.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="togglePassword">
                          <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="!togglePassword">
                     </div>
                     <div class="mb-3 relative">
                          <label for="confirmPassword" class="block text-lg">Confirm Password</label>
-                         <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.confirmPassword }}</p>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.confirmPassword }}</p>
                          <input [type]="type" required formControlName="confirmPassword" id="confirmPassword" class="text-md rounded-lg px-3 py-2 border-gray-200 w-full">
                          <img src="../../assets/eye-closed.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showConfirmPassword()" *ngIf="toggleConfirmPassword">
                          <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showConfirmPassword()" *ngIf="!toggleConfirmPassword">
@@ -79,8 +80,8 @@
                               <p class="institution">Kogi state University</p>
                          </div>
                          <div class="buttons flex justify-between">
-                              <p>Prev</p>
-                              <p>Next</p>
+                              <!-- <p>Prev</p>
+                              <p>Next</p> -->
                          </div>
                     </div>
                </div>

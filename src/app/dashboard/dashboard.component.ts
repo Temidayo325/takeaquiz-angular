@@ -3,13 +3,19 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { UserService } from '../Services/user.service';
-
+import { LoadingBarService } from '@ngx-loading-bar/core';
 import {StoreService } from '../Services/store.service';
+import { slideInRightAnimation, slideOutRightAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  animations: [
+    // animation triggers go here
+    slideInRightAnimation({duration: 2000}),
+    slideOutRightAnimation()
+  ]
 })
 export class DashboardComponent implements OnInit {
      changeForm = this.fb.group({
@@ -21,7 +27,8 @@ export class DashboardComponent implements OnInit {
        private toast: ToastService,
        private store: StoreService,
        private fb: FormBuilder,
-       private userService: UserService
+       private userService: UserService,
+       private loading: LoadingBarService,
  ) {
 
 }
@@ -36,30 +43,33 @@ export class DashboardComponent implements OnInit {
      public type2: string = 'password'
      ngOnInit(): void {
        // this.router.navigate(['/'])
+       this.loading.start()
        if (this.store.token == null || this.store.token == '') {
+            this.loading.complete()
             this.router.navigate(['/login'])
        }
+       this.loading.complete()
   }
   logout()
   {
        if (confirm("Do you really want to logout?")) {
             this.store.logout()
-            console.log(this.router)
             this.router.navigate(['/login'])
        }
   }
   changePassword()
   {
+       this.loading.start()
        if (this.changeForm.value.password !== this.changeForm.value.confirmPassword) {
             this.errors.confirmPassword = "Your passwords do not match"
-            console.log("not here")
+            this.loading.complete()
        }else{
-            console.log("definitely  not here")
             this.sub = this.userService.changeUserPassword({email: this.user.email, password1: this.changeForm.value.password, password2: this.changeForm.value.confirmPassword}).subscribe(
                  (res) => {
                       console.log(res)
                       if (res.data.statusCode === 200) {
                            this.errors = []
+                           this.loading.complete()
                            this.toast.success(res.data.message)
                            this.changeForm.patchValue({
                                 password: '',
@@ -71,6 +81,7 @@ export class DashboardComponent implements OnInit {
                       console.log(err)
                       alert(err.error.message)
                       this.errors = err.error.errors
+                      this.loading.complete()
                  }
             )
        }

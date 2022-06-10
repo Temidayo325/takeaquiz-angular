@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
-
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -52,7 +52,9 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
     NgxEchartsModule.forRoot({
      echarts: () => import('echarts')
      }),
-     FormsModule
+     FormsModule,
+     LoadingBarModule,
+     BrowserAnimationsModule,
   ],
   providers: [
        // {
@@ -60,7 +62,8 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
        //      useClass: HttpErrorInterceptor,
        //      multi: true
        // }
-       ToastService
+       ToastService,
+       Title
  ],
   bootstrap: [AppComponent]
 })

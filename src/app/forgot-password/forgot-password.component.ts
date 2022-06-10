@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../Services/user.service';
 import { Router } from '@angular/router';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import { ToastService } from 'angular-toastify';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forgot-password',
@@ -18,25 +21,30 @@ export class ForgotPasswordComponent implements OnInit {
        private fb : FormBuilder,
        private router: Router,
        private user: UserService,
+       private loading: LoadingBarService,
+       private toast: ToastService,
+       private title: Title,
  ) { }
   public errors: any  = []
   ngOnInit(): void {
+       this.title.setTitle("Recover your password")
   }
   recoverPassword()
   {
+       this.loading.start()
        this.sub = this.user.recoverEmail({email: this.recoveryForm.value.email}).subscribe(
             (res) => {
-                 console.log(res)
+                 this.loading.complete()
                  if (res.data.statusCode == 202) {
-                      alert(res.data.message)
+                      this.toast.info(res.data.message)
                       localStorage.setItem('email', this.recoveryForm.value.email)
                       this.router.navigate(['/verify-password', { origin: 'recover' }])
                  }
             },
 
             (err) => {
-                 console.log(err)
-                 alert(err.error.message)
+                 this.loading.complete
+                 this.toast.warn(err.error.message)
                  this.errors = err.error.errors
             }
        )
@@ -49,6 +57,8 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
-       this.sub.unsubscribe()
+       if (this.sub !== undefined) {
+            this.sub.unsubscribe()
+       }
   }
 }

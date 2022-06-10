@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { EChartsOption } from 'echarts';
 import {StudentService} from '../Services/student.service';
 import { ComplaintService } from '../Services/complaint.service';
+import { Title } from '@angular/platform-browser';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,9 @@ export class HomeComponent implements OnInit {
        private router: Router,
        private question: QuestionsService,
        private student: StudentService,
-       private  complaint: ComplaintService
+       private  complaint: ComplaintService,
+       private title : Title,
+       private loading: LoadingBarService
  ) { }
   public sub: any ;
   public lastComplaint: any = '';
@@ -37,10 +41,13 @@ export class HomeComponent implements OnInit {
   public data: any = {xaxis: [], yaxis: []}
   chartOption: EChartsOption = {}
   ngOnInit(): void {
+       this.loading.start()
+       this.title.setTitle("Dashboard home")
        this.getCourse()
        this.countQuestion()
        this.getstudentGraph()
        this.getLastComplaint()
+       this.loading.complete()
   }
   goToCourses()
   {
@@ -68,7 +75,6 @@ export class HomeComponent implements OnInit {
             this.overview[2].number = this.completedCourses(arrays)
        }
   }
-
   ongoingCourses(arrays: []):number
   {
        const now = new Date()
@@ -114,7 +120,7 @@ export class HomeComponent implements OnInit {
                       yAxis: { },
                       series: [{
                          data: this.data.yaxis,
-                         type: 'scatter',
+                         type: 'line',
                          color: ['blue']
                          // areaStyle: {}
                       }]
@@ -125,7 +131,6 @@ export class HomeComponent implements OnInit {
             }
        )
   }
-
   getLastComplaint()
   {
      this.complaint.getLastComplaint().subscribe(

@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { PrepService } from '../Services/prep.service';
+import { Title } from '@angular/platform-browser';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-prep',
@@ -26,19 +28,23 @@ export class PrepComponent implements OnInit {
        private fb : FormBuilder,
        private router: Router,
        private toast: ToastService,
-       private prep: PrepService
+       private prep: PrepService,
+       private title : Title,
+       private loading: LoadingBarService
  ) { }
      public sub: any
      public errors: any = []
      public complaint: boolean = false
   ngOnInit(): void
   {
-
+        this.title.setTitle("Take a test || Student test login");
   }
   preQuestion():void
   {
+       this.loading.start()
        this.sub = this.prep.get(this.prepForm.value.display_token, this.prepForm.value.matric).subscribe(
             (res) => {
+                 this.loading.complete()
                  if (res.data != undefined) {
                       this.toast.error(res.data.message)
                  }else{
@@ -48,6 +54,7 @@ export class PrepComponent implements OnInit {
                  }
             },
             (err) => {
+                 this.loading.complete()
                  this.toast.warn(err.error.message)
                  this.errors = err.error.errors
             }
@@ -55,13 +62,16 @@ export class PrepComponent implements OnInit {
   }
   sendComplaint():void
   {
+       this.loading.start()
        this.sub = this.prep.postComplaint(this.complaintForm.value).subscribe(
             (res) => {
+                 this.loading.complete()
                 this.toast.info(res.message)
                 this.complaintForm.reset()
                 this.complaint = !this.complaint
             },
             (err) => {
+                 this.loading.complete()
                  this.toast.warn(err.error.message)
                  this.errors = err.error.errors
             }
@@ -71,6 +81,8 @@ export class PrepComponent implements OnInit {
   {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
-       this.sub.unsubscribe()
+       if (this.sub != undefined) {
+            this.sub.unsubscribe()
+       }
   }
 }

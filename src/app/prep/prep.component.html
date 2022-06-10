@@ -1,31 +1,32 @@
 <div class="w-full h-screen overflow-hidden py-4 px-4 flex justify-center items-center relative">
-     <div class="w-4/12 bg-gray-100 px-3 py-3 shadow-md rounded-lg">
-          <h2>Welcome to your test platform</h2>
+     <ngx-loading-bar></ngx-loading-bar>
+     <div class="md:w-4/12 md:bg-gray-100 px-4 py-3 shadow-md rounded-lg bg-gray-200 ">
+          <h2 class="text-xl">Welcome to your test platform</h2>
           <p>fill the form to proceed to your test</p>
           <div class="w-full">
                <form [formGroup]="prepForm">
                     <div class="mb-3 ">
                          <label for="display_token" class="block text-lg">Course Access Code</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.display_token }}</p>
-                         <input type="text" id="email" required formControlName="display_token" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                         <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.display_token }}</p>
+                         <input type="text" id="email" required formControlName="display_token" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
                     </div>
                     <div class="mb-3 ">
                          <label for="matric" class="block text-lg">Matric number</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
-                         <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                         <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
+                         <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
                     </div>
                     <div class="flex justify-center my-5">
-                         <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-blue-500 text-white disabled:bg-gray-400 disabled:text-white" (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
+                         <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-orange-500 text-white disabled:bg-gray-400 disabled:text-white " (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
                     </div>
                </form>
-               <p class="text-center text-blue-500 cursor-pointer font-bold" (click)="complaint = !complaint">Lodge a complaint</p>
+               <p class="text-center text-orange-500 cursor-pointer font-bold" (click)="complaint = !complaint">Lodge a complaint</p>
           </div>
      </div>
-     <div class="z-20 w-4/12 h-full bg-gray-400 absolute top 10 right-0" *ngIf="complaint">
+     <div class="z-20 w-10/12 md:w-4/12 h-full bg-gray-400 absolute md:top-0 right-0" *ngIf="complaint">
           <div class="sticky mt-8 mx-4">
-               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="complaint = !complaint">X</button>
+               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="complaint = !complaint">x</button>
           </div>
-          <div class="flex justify-center">
+          <div class="flex justify-center my-4 md:my-0">
                <form [formGroup]="complaintForm">
                     <div class="mb-3 ">
                          <label for="display_token" class="block text-lg text-white">Course Access Code</label>

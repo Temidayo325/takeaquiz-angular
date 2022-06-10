@@ -3,12 +3,19 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { CourseService } from '../Services/course.service';
 import { StoreService } from '../Services/store.service';
 import { ToastService } from 'angular-toastify';
-
+import { Title } from '@angular/platform-browser';
+import { LoadingBarService } from '@ngx-loading-bar/core';
+import { slideInRightAnimation, slideOutRightAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  styleUrls: ['./course.component.scss'],
+  animations: [
+    // animation triggers go here
+    slideInRightAnimation({duration: 2000}),
+    slideOutRightAnimation()
+  ]
 })
 export class CourseComponent implements OnInit {
 
@@ -37,12 +44,17 @@ export class CourseComponent implements OnInit {
        private fb : FormBuilder,
        private course: CourseService,
        private store: StoreService,
-       private toast: ToastService
+       private toast: ToastService,
+       private title : Title,
+       private loading: LoadingBarService,
  ) { }
      public user: object = this.store.getUser();
 
   ngOnInit(): void {
+       this.loading.start()
+       this.title.setTitle("Course board")
        this.getCourse()
+       this.loading.complete()
   }
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.
@@ -51,14 +63,17 @@ export class CourseComponent implements OnInit {
   }
   createForm()
   {
+       this.loading.start()
        this.sub = this.course.create({course: this.courseForm.value.course}).subscribe(
             (res) => {
+                 this.loading.complete()
                  this.toast.success(res.message)
                  this.getCourse()
                  this.showCourse = false
             },
             (err) => {
                  console.log(err)
+                 this.loading.complete()
                  this.errors = err.error.errors
                  this.toast.warn(err.error.message)
             }
@@ -66,15 +81,18 @@ export class CourseComponent implements OnInit {
   }
   getCourse()
   {
+       this.loading.start()
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
                       console.log(res.course)
                       this.courses = res.course
+                      this.loading.complete()
                       this.sortCourses(this.courses)
                  }
             },
             (err) => {
+                 this.loading.complete()
                  this.toast.warn(err.error.message)
             }
        )
@@ -106,15 +124,18 @@ export class CourseComponent implements OnInit {
   }
   deleteCourse(course: any):void
   {
+       this.loading.start()
        let confirmed = confirm(`Are you sure you want to  Delete ${course.course} ?`)
        if ( confirmed ) {
             this.sub = this.course.deleteCourse({display_token: course.display_token}).subscribe(
                  (res) => {
+                      this.loading.complete()
                       this.toast.info(res.message)
                       this.courses.splice(this.courses.indexOf(course), 1)
                       this.sortCourses(this.courses)
                  },
                  (err) => {
+                      this.loading.complete()
                       this.toast.warn(err.error.message)
                  }
             )
@@ -134,16 +155,17 @@ export class CourseComponent implements OnInit {
   }
   submitEditCourse(): void
   {
+       this.loading.start()
        let user = {display_token: this.editCourseForm.value.display_token, start_time: this.editCourseForm.value.start_time, end_time: this.editCourseForm.value.end_time, duration: this.editCourseForm.value.duration, amount: this.editCourseForm.value.amount}
        this.sub = this.course.editCourse(user).subscribe(
             (res) => {
-                 console.log(res)
+                 this.loading.complete()
                  this.toast.info(res.message)
                  this.getCourse()
                  this.edit = !this.edit
             },
             (err) => {
-                 console.log(err)
+                 this.loading.complete()
                  this.errors = err.error.errors
                  this.toast.info(err.error.message)
             }
@@ -151,18 +173,21 @@ export class CourseComponent implements OnInit {
   }
   downloadResult(course: any)
   {
+       this.loading.start()
        const now = new Date
        if (now > new Date(course.end_time) && course.end_time !== null) {
             this.sub = this.course.download("display_token="+course.display_token).subscribe(
                  (res) => {
+                      this.loading.complete()
                       this.toast.info("Download request initiated")
                  },
                  (err) => {
-                      console.log()
+                     this.loading.complete()
                      this.toast.warn("Not working")
                  }
             )
        }else{
+            this.loading.complete()
             this.toast.info("The course test is still on")
        }
   }

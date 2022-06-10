@@ -1,4 +1,5 @@
 <div class="">
+     <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
      <div class="w-6/12 h-screen overflow-y-scroll bg-gray-300 absolute right-0 top-0 z-10 shadow-lg" *ngIf="edit">
           <div class="sticky mt-8 mx-3">
@@ -86,12 +87,12 @@
      </div>
      </div>
      <div class="flex justify-start items-center">
-          <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-orange-100 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
+          <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-white/80 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
                <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
                <p class="text-center text-lg my-1">{{ items.text}}</p>
           </div>
      </div>
-     <div class="relative overflow-x-auto  mt-20 ml-10 mr-10" >
+     <div class="relative overflow-x-auto  mt-20 ml-10 mr-10 shadow-lg py-10" >
          <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
              <thead class=" text-gray-700 uppercase">
                  <tr>

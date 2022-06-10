@@ -4,6 +4,7 @@ import { QuestionsService } from '../Services/questions.service';
 import { CourseService } from '../Services/course.service';
 import { ToastService } from 'angular-toastify';
 import { Router } from '@angular/router';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-question',
@@ -30,13 +31,16 @@ export class QuestionComponent implements OnInit {
        private question: QuestionsService,
        private course: CourseService,
        private toast: ToastService,
-       private router: Router
+       private router: Router,
+       private loading: LoadingBarService,
  ) { }
 
   ngOnInit(): void {
+       this.loading.start()
        this.getCourse()
        this.countQuestion()
        this.coursesAndQuestions()
+       this.loading.complete()
   }
   public edit: boolean = false
   public sub: any
@@ -51,39 +55,46 @@ export class QuestionComponent implements OnInit {
   public errors: any = []
   getCourse()
   {
+       this.loading.start()
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
                       // console.log(res.course)
+                      this.loading.complete()
                       this.overview[0].number = res.course.length
                  }
             },
             (err) => {
+                 this.loading.complete()
                  this.toast.warn(err.error.message)
             }
        )
   }
   countQuestion()
   {
+       this.loading.start()
        this.question.getCount().subscribe(
            (res) => {
+                this.loading.complete()
                this.overview[1].number = res.count
            },
            (err) => {
-                console.log(err)
+                this.loading.complete()
                 this.toast.info(err.error.message)
            }
       )
   }
   coursesAndQuestions()
   {
+       this.loading.start()
        this.question.coursesAndQuestions().subscribe(
             (res) => {
+                 this.loading.complete()
                this.courses = res.courses
                this.questions = res.questions
             },
             (err) => {
-                 console.log(err)
+                 this.loading.complete()
             }
        )
   }
@@ -117,10 +128,10 @@ export class QuestionComponent implements OnInit {
   }
   addQuestion()
   {
-       // console.log(this.addQuestionForm.value)
+       this.loading.start()
        this.sub = this.question.addQuestion(this.addQuestionForm.value).subscribe(
             (res) => {
-                 console.log(res)
+                 this.loading.complete()
                  this.toast.success(res.message)
                  this.addQuestionForm.patchValue({
                       question: '', option1: '', option2: '',
@@ -128,7 +139,7 @@ export class QuestionComponent implements OnInit {
                  });
             },
             (err) => {
-                 console.log(err)
+                 this.loading.complete()
                  this.errors = err.error.errors
                  this.toast.warn(err.error.message)
             }
@@ -156,9 +167,10 @@ export class QuestionComponent implements OnInit {
   }
   saveEditedQuestion()
   {
+       this.loading.start()
        this.sub = this.question.editQuestion(this.addQuestionForm.value).subscribe(
             (res) => {
-                 console.log(res)
+                 this.loading.complete()
                  this.toast.success(res.message)
                  this.view.questions.fill(this.addQuestionForm.value, this.courseDetail.index, this.courseDetail.index+1)
                  this.addQuestionForm.patchValue({
@@ -171,7 +183,7 @@ export class QuestionComponent implements OnInit {
                  this.view.add = false
             },
             (err) => {
-                 console.log(err)
+                 this.loading.complete()
                  this.errors = err.error.errors
                  this.toast.warn(err.error.message)
             }
@@ -179,8 +191,10 @@ export class QuestionComponent implements OnInit {
   }
   deleteQuestion(question: any, index: number)
   {
+       this.loading.start()
        this.sub = this.question.deleteQuestion(this.courseDetail.display_token, question.id).subscribe(
             (res: any) => {
+                 this.loading.complete()
                  this.toast.success(res.message)
                  // this.view.questions.splice(index, 1)
                  const ind = this.view.questions.indexOf(question)
@@ -188,7 +202,7 @@ export class QuestionComponent implements OnInit {
                  this.overview[1].number -= 1
             },
             (err) => {
-                 console.log(err)
+                 this.loading.complete()
                  this.toast.warn(err.error.message)
             }
        )
