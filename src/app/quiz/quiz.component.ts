@@ -17,19 +17,10 @@ export class QuizComponent implements OnInit {
        private quiz: QuizService,
        private toast: ToastService
  ) { }
-     // protected questions:  any = []
-     public questions: any = [
-       {chosen_answer: "", hidden: false, id: 3, option1: "Osinwin", option2: "Weyrey", option3: "Ode",
-          option4: "Ashiere",  question: "Madman of the housess", type: "options"},
-       {chosen_answer: "", hidden: true, id: 5, option1: "Osinwin", option2: "Weyrey", option3: "Ode",
-          option4: "Ashiere", question: "Madman of the housesseeerrfffffff", type: "options"},
-       {chosen_answer: "", hidden: true, id: 1, option1: "option 1", option2: "option 2", option3: "option 3",
-          option4: "option 4", question: "Another question in the house", type: "options"},
-       {chosen_answer: "", hidden: true, id: 6, option1: "True", option2: "False", option3: "option 3",
-             option4: "option 4", question: "Another question in the house", type: "truthorfalse"}
-     ]
+
+     public questions: any = []
      public currentIndex = 0
-     public stat: any = {completed: 0, total: this.questions.length, submitted: false}
+     public stat: any = {completed: 0, total: 0, submitted: false}
      public timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
      protected details = this.prep.getDetails();
   ngOnInit(): void
@@ -39,6 +30,7 @@ export class QuizComponent implements OnInit {
             this.router.navigate(['/prep'])
        }else{
             this.questions = this.prep.questions
+            this.stat.total = this.questions.length
             this.timervalues.currentTime = this.details.timer * 60
             this.questions[this.currentIndex].hidden = false
             setTimeout(() => {
