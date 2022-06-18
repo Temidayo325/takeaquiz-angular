@@ -23,6 +23,7 @@ import { PrepComponent } from './prep/prep.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
+import { HomepageComponent } from './homepage/homepage.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.co
     PrepComponent,
     QuizComponent,
     ComplaintsComponent,
-    DashboardHeaderComponent
+    DashboardHeaderComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

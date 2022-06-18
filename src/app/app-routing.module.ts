@@ -13,24 +13,26 @@ import { StudentComponent } from './student/student.component';
 import { PrepComponent } from './prep/prep.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
+     {path: 'homepage', component: HomepageComponent},
      {path: 'login', component: LoginComponent},
      {path: 'verify-password', component: VerifyPasswordComponent},
      {path: 'dashboard', component: DashboardComponent,
-     children: [
-          {path: 'home', component: HomeComponent},
-          {path: 'course', component: CourseComponent},
-          {path: 'question', component: QuestionComponent},
-          {path: 'change-password', component: ChangePasswordComponent},
-          {path: 'student', component: StudentComponent},
-          {path: 'complaint', component: ComplaintsComponent}
+          children: [
+               {path: 'home', component: HomeComponent},
+               {path: 'course', component: CourseComponent},
+               {path: 'question', component: QuestionComponent},
+               {path: 'change-password', component: ChangePasswordComponent},
+               {path: 'student', component: StudentComponent},
+               {path: 'complaint', component: ComplaintsComponent}
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
      {path: 'quiz', component: QuizComponent},
      {path: 'change-password', component: ChangePasswordComponent},
-     { path: '', redirectTo: '/login', pathMatch: 'full' },
+     { path: '', redirectTo: '/homepage', pathMatch: 'full' },
 ];
 
 @NgModule({
