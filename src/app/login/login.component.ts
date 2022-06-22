@@ -58,12 +58,11 @@ export class LoginComponent implements OnInit {
           this.loading.start()
           this.sub = this.user.login({email: this.loginForm.value.email, password: this.loginForm.value.password}).subscribe(
                (res) => {
-                    // console.log(res)
                     if (res.data.statusCode == 200) {
                          this.toast.success(res.data.message)
                          this.store.setuser(res.data.user, res.data.token)
                          this.loading.complete()
-                         this.router.navigate(['/dashboard'])
+                         this.router.navigate(['/dashboard/home'])
                     }
                     if (res.data.statusCode >= 400) {
                          this.loading.complete()
@@ -71,10 +70,9 @@ export class LoginComponent implements OnInit {
                     }
                },
                (err) => {
-                    console.log(err)
                     this.loading.complete()
                     this.errors = err.error.errors
-                    this.toast.error("there was an error")
+                    this.toast.warn(err.error.message)
                }
           )
      }
@@ -94,7 +92,6 @@ export class LoginComponent implements OnInit {
                }
                this.user.register(user).subscribe(
                     (res) => {
-                         console.log(res)
                          localStorage.setItem('email', user.email)
                          this.loading.complete()
                          this.router.navigate(['/verify-password', { origin: 'register' }])
@@ -102,7 +99,7 @@ export class LoginComponent implements OnInit {
                     (err) => {
                          this.errors = err.error.errors
                          this.loading.complete()
-                         console.log(this.errors)
+                         this.toast.warn(err.error.message)
                     }
                )
           }

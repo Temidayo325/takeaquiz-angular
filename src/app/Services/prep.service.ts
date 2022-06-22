@@ -13,7 +13,7 @@ export class PrepService {
         private complaint: ComplaintService
  ) { }
 
-     public baseUrl = "http://127.0.0.1:8000/api/v1/";
+     public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
      public questions: any = []
      public details: any = {display_token: '', matric: '', timer: 0}
      public options = {

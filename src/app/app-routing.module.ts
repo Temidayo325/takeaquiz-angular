@@ -14,6 +14,7 @@ import { PrepComponent } from './prep/prep.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { InstructionsComponent } from './instructions/instructions.component';
 
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
      {path: 'quiz', component: QuizComponent},
+     {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      { path: '', redirectTo: '/homepage', pathMatch: 'full' },
 ];

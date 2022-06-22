@@ -12,7 +12,7 @@ export class CourseService {
             private http: HttpClient,
             private store: StoreService
       ){ }
-     public baseUrl = "http://127.0.0.1:8000/api/v1/";
+     public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
      public token: string = this.store.getToken()
      options = {
          headers : new HttpHeaders({

@@ -14,7 +14,7 @@ export class QuestionsService {
        private course: CourseService,
        private http: HttpClient,
  ) { }
-      public baseUrl = "http://127.0.0.1:8000/api/v1/"
+      public baseUrl = "https://takeaquiz.luminaace.com/api/v1/"
       public token: string = this.store.getToken()
       private options = {
           headers : new HttpHeaders({
