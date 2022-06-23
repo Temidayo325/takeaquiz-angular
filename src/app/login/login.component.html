@@ -1,14 +1,14 @@
 <div class="bg-blue-400 md:flex md:justify-center mx-0 my-0 h-screen">
      <ngx-loading-bar></ngx-loading-bar>
      <div class="w-10/12 h-full bg-white md:flex md:justify-center md:items-center">
-          <div class="w-6/12 h-10/12 " *ngIf="registered">
+          <div class="w-6/12 h-10/12 font-word" *ngIf="registered">
                <div>
                     <div class="flex justify-center">
                          <img src="../../assets/logo.png" alt="takeaquiz logo" class="w-28 h-28 rounded-full my-2">
                     </div>
-                    <h1 class="tracking-wider text-4xl my-2">Welcome back</h1>
-                    <p class="tracking-wider leading-8 text-md my-1 mb-3">Enter your details to log in</p>
-                    <form [formGroup]="loginForm" >
+                    <h1 class="tracking-wider text-4xl my-2 font-headline">Welcome back</h1>
+                    <p class="tracking-wider leading-8 text-md my-1 mb-3 font-word">Enter your details to log in</p>
+                    <form [formGroup]="loginForm" class="font-word">
                          <div class="mb-3 ">
                               <label for="email" class="block text-lg">Email</label>
                               <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.email }}</p>
@@ -32,8 +32,8 @@
                <div class="flex justify-center">
                     <img src="../../assets/logo.png" alt="takeaquiz logo" class="w-28 h-28 rounded-full my-2">
                </div>
-               <h1 class="tracking-wider text-4xl my-2">Create your account</h1>
-               <form [formGroup]="registerForm" (submit)="registerUser()">
+               <h1 class="tracking-wider text-4xl my-2 font-headline">Create your account</h1>
+               <form [formGroup]="registerForm" (submit)="registerUser()" class="font-word">
                     <div class="mb-3">
                          <label for="name" class="block text-lg">Full name</label>
                          <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
@@ -66,13 +66,13 @@
                     <button type="submit" class="py-2 px-40 bg-orange-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg cursor-pointer" [disabled]="!registerForm.valid" >Register</button>
                </form>
 
-               <p class="text-center text-lg">Already have an account? <span class="font-bold mx-2 cursor-pointer" (click)="switchForm()">Log in here</span></p>
+               <p class="text-center text-lg font-word">Already have an account? <span class="font-bold mx-2 cursor-pointer" (click)="switchForm()">Log in here</span></p>
           </div>
      </div>
      <div class=" w-full h-full bg-orange-200 flex justify-center items-end" [class]="background">
-          <div class="w-10/12 h-8/12 bg-white/80 backdrop-blur-sm px-6 mb-8">
+          <div class="w-10/12 h-8/12 bg-white/80 backdrop-blur-sm px-6 mb-8 font-word">
                <div class="slider" *ngIf="registered">
-                    <h2>"I've been using takeaquiz to take my tests and it reduces the workload I have to do, Can't see myself without it for a while now"</h2>
+                    <h2 class="">I didn't have to create a website or buy the domain. The user interface is super easy to use, and I was able to set up everything in less than 5 minutes.</h2>
                     <div class="others flex justify-between">
                          <div class="person">
                               <h3 class="name">Dr Opeyemi Gbenga</h3>
@@ -85,7 +85,7 @@
                          </div>
                     </div>
                </div>
-               <div class="slider" *ngIf="!registered">
+               <div class="slider font-word" *ngIf="!registered">
                     <h2>Stop stressing yourself about setting and marking tests by using out automated system which allows you to do the following:</h2>
                     <ol>
                          <li>Set multiple questions and randomize the questions everytime</li>

@@ -4,14 +4,14 @@
      <div class="flex justify-center items-center relative">
           <div *ngIf="complaints.length < 1" class="mt-40">
                <div>
-                    <h2 class="text-center">Good news!</h2>
-                    <p class="text-center">You do not have any new Complaints yet</p>
+                    <h2 class="text-center font-headline">Good news!</h2>
+                    <p class="text-center font-word">You do not have any new Complaints yet</p>
                </div>
           </div>
           <div *ngIf="complaints.length > 0" class="mt-24">
 
                <table class="w-full text-sm text-center text-gray-500 border-collapse">
-                  <thead class=" text-gray-700 uppercase">
+                  <thead class=" text-gray-700 uppercase font-headline">
                       <tr>
                           <th scope="col" class="px-2 py-3">
                               Course Id
@@ -36,7 +36,7 @@
                           </th>
                       </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="font-word">
                       <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let complaint of complaints">
                           <td class="px-3 py-3 text-lg">{{complaint.display_token}}</td>
                           <td class="px-3 py-3">{{ complaint.matric }}</td>

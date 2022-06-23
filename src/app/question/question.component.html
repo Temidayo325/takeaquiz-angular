@@ -1,4 +1,4 @@
-<div class="">
+<div class="font-word">
      <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
      <div class="w-6/12 h-screen overflow-y-scroll bg-gray-300 absolute right-0 top-0 z-10 shadow-lg" *ngIf="edit">
@@ -9,7 +9,7 @@
           <!-- Interface for viewing the individual questions -->
           <div *ngIf="view.view">
                <div *ngIf="view.questions.length == 0">
-                    <h3 class="text-lg text-center text-gray-700">You do not have any questions under this course yet.</h3>
+                    <h3 class="text-lg text-center text-gray-700 font-headline">You do not have any questions under this course yet.</h3>
                </div>
                <div *ngIf="view.questions.length > 1">
                     <ol>
@@ -94,7 +94,7 @@
      </div>
      <div class="relative overflow-x-auto  mt-20 ml-10 mr-10 shadow-lg py-10" >
          <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
-             <thead class=" text-gray-700 uppercase">
+             <thead class=" text-gray-700 uppercase font-headline">
                  <tr>
                      <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
                          Course
@@ -121,6 +121,6 @@
                  </tr>
              </tbody>
          </table>
-         <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl">You do not have any course yet, Click the course button on your right to create a course</h1>
+         <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h1>
      </div>
 </div>

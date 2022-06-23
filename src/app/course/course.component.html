@@ -1,12 +1,12 @@
 <div class=" relative">
      <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
-     <div class="w-6/12 h-screen overflow-y-scroll border-2 border-gray-900 bg-sky-50 absolute right-0 top-0 shadow-md z-10 " *ngIf="edit" [@slideInRightAnimation] [@slideOutRightAnimation]>
+     <div class="w-6/12 h-screen overflow-y-scroll border-2 border-gray-900 bg-sky-50 absolute right-0 top-0 shadow-md z-10 font-word" *ngIf="edit" [@slideInRightAnimation] [@slideOutRightAnimation]>
           <div class="sticky mt-8 mx-3">
                <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="edit = !edit">X</button>
           </div>
           <div class="mx-5 my-2 ">
-               <h2>Edit Course</h2>
+               <h2 class="font-headline">Edit Course</h2>
                <form [formGroup]="editCourseForm" (submit)="submitEditCourse()">
                     <div class="mt-3">
                          <label for="course" class="block text-lg font-bold">Course code</label>
@@ -44,7 +44,7 @@
                </form>
           </div>
      </div>
-     <div class="flex justify-start items-center">
+     <div class="flex justify-start items-center font-word">
           <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-white/80 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
                <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
                <p class="text-center text-lg my-1">{{ items.text}}</p>
@@ -55,8 +55,8 @@
           </div>
      </div>
      <div *ngIf="showCourse" class="w-4/12 py-3 px-3 rounded-lg shadow-md bg-white/80 mt-10 ml-10">
-          <h1>Add a new course</h1>
-             <form [formGroup]="courseForm" (submit)="createForm()">
+          <h1 class="font-headline">Add a new course</h1>
+             <form [formGroup]="courseForm" (submit)="createForm()" class="font-word">
                   <div>
                        <label for="course" class="text-md tracking-wide leading-9 block">Name of the Course <span class="text-sm text-orange-500">(e.g PCP506)</span></label>
                        <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.course }}</p>
@@ -70,7 +70,7 @@
 
      <div class="relative overflow-x-auto  mt-20 ml-10 mr-10 shadow-md py-10 px-2">
          <table class="w-full text-sm text-center text-gray-500 border-collapse shadow-4xl">
-             <thead class=" text-gray-700 uppercase">
+             <thead class=" text-gray-700 uppercase font-headline">
                  <tr>
                      <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
                          Course
@@ -98,7 +98,7 @@
                      <th scope="col" class="px-2 py-3"></th>
                  </tr>
              </thead>
-             <tbody>
+             <tbody class="font-word">
                  <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses">
                      <td class="px-3 py-3 text-lg">{{course.course}}</td>
                      <td class="px-3 py-3">{{course.display_token}}</td>

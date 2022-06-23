@@ -1,9 +1,9 @@
-<div>
+<div class="font-word">
      <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
      <div class="mx-auto mt-3 flex justify-center items-center">
           <div class="w-4/12">
-               <h3 class="text-center text-lg ">Enter student matric to search student</h3>
+               <h3 class="text-center text-lg font-headline">Enter student matric to search student</h3>
                <select name="" id="" placeholder="course title" class="border-0 py-3 px-2 rounded-tl-lg rounded-bl-lg shadow-md mx-0 focus:outline-none focus:shadow-xl" [(ngModel)]="form.course">
                     <option value="" readonly>Course</option>
                     <option value="{{course}}" *ngFor="let course of data.xaxis">{{course}}</option>
@@ -27,10 +27,10 @@
      <div class="flex flex-wrap justify-start items-center mr-12 py-12">
           <div class="grid py-2 px-2 rounded-lg shadow-md mt-10 ml-10 w-full bg-white/80" >
                <div echarts [options]="chartOption" class="demo-chart" class="w-full h-1/4 mx-4"></div>
-               <h3 class="text-center">Graph showing the the course and respective students</h3>
+               <h3 class="text-center font-headline">Graph showing the the course and respective students</h3>
           </div>
           <div class="grid w-1/4 h-40 py-2 px-2 rounded-lg shadow-md bg-white/80 flex justify-center items-center mt-10 ml-10" *ngFor="let items of overview">
-               <h1 class="text-center font-bold text-5xl my-2"> {{ items.number}} </h1>
+               <h1 class="text-center font-bold text-5xl my-2 "> {{ items.number}} </h1>
                <p class="text-center text-lg my-1">{{ items.text}}</p>
           </div>
      </div>

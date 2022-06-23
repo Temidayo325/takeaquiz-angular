@@ -1,11 +1,11 @@
-<div class="flex justify-center items-center">
+<div class="flex justify-center items-center font-word">
      <div *ngIf="stat.submitted">
-          <p>You have reached the ends of your Test. Goodluck</p>
+          <p class="font-headline">You have reached the ends of your Test. Goodluck</p>
      </div>
      <div class="" *ngIf="!stat.submitted">
           <div class="mx-4">
                <p>{{stat.completed}} of {{stat.total}}</p>
-               <h1>{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
+               <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
           </div>
           <div class="overflow-hidden">
                <div *ngFor="let question of questions;  index as i;">
