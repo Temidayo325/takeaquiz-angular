@@ -44,7 +44,8 @@ export class DashboardComponent implements OnInit {
      ngOnInit(): void {
        // this.router.navigate(['/'])
        this.loading.start()
-       if (this.store.token == null || this.store.token == '') {
+       if (this.store.token == null || this.store.token == '' || this.store.token == undefined) {
+            console.log(this.store.token)
             this.loading.complete()
             this.router.navigate(['/login'])
        }

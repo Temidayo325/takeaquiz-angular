@@ -1,0 +1,82 @@
+<div class="font-word">
+     <ngx-loading-bar></ngx-loading-bar>
+     <app-dashboard-header></app-dashboard-header>
+     <div class="relative overflow-x-auto  mt-20 ml-10 mr-10 shadow-lg py-10" >
+         <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
+             <thead class=" text-gray-700 uppercase font-headline">
+                 <tr>
+                     <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
+                         Course
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="The name that should be provided to the student as course name when attempting the course">
+                         Access name
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                         Questions
+                     </th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses">
+                     <td class="px-3 py-3 text-lg">{{course.course}}</td>
+                     <td class="px-3 py-3">{{course.display_token}}</td>
+                     <td class="px-3 py-3">Nil</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500">View</p></td>
+                     <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
+                     <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500 font-bold">Add</p></td>
+                 </tr>
+             </tbody>
+         </table>
+         <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h1>
+     </div>
+     <div class="flex justify-start items-start gap-6 relative">
+          <form class="w-6/12 px-4 py-4">
+               <label for="question" class="block text-lg">Enter question</label>
+               <textarea name="question" id="question" class="w-3/4 h-24 py-3 px-3" [(ngModel)]="question"></textarea>
+               <div class="button flex justify-start gap-8 my-8">
+                    <button class="px-4 py-3 border-0 bg-blue-500 text-white" *ngIf="newQuestion" (click)="addScheme()">Create Scheme</button>
+                    <button class="px-4 py-3 border-0 bg-blue-500 text-white" *ngIf="!newQuestion" (click)="addStep()">Add step</button>
+                    <button class="px-4 py-3 border-0 bg-blue-500 text-white" *ngIf="!newQuestion" (click)="savePrevQuest()">Add new question</button>
+               </div>
+               <div *ngIf="!newQuestion">
+                    <label for="step" class="block text-lg">New step</label>
+                    <textarea name="step" id="step" class="w-3/4 h-24 py-3 px-3" [(ngModel)]="eachQuestion.step"></textarea>
+
+                    <label for="alternative" class="block text-lg">Alternative to step</label>
+                    <textarea name="alternative" id="alternative" class="w-3/4 h-24 py-3 px-3" [(ngModel)]="eachQuestion.alternative"></textarea>
+
+                    <label for="mark" class="block text-lg">Attach mark</label>
+                    <input type="number" name="mark" id="mark" [(ngModel)]="eachQuestion.mark" class="py-2 px-2 text-lg">
+                    <!-- <textarea name="step" id="step" class="w-3/4 h-24 py-3 px-3" [(ngModel)]="step"></textarea> -->
+               </div>
+
+          </form>
+          <div class="w-full px-3 py-3 ">
+               <ol>
+                    <p class="my-1"><b>Question: </b>{{question}}</p>
+                    <p class="mt-4 mb-1">Steps</p>
+                    <li *ngFor="let item of finalCopy; index as i; trackBy: trackByFn" class="flex justify-between my-2 w-6/12 ml-8">
+                         <p class="my-1 py-1"><span class="mr-4"> {{i+1}}. </span>{{item.step}}</p>
+                         <p class="my-1 py-1">{{item.alternative}}</p>
+                         <p class="my-1 py-1">{{item.mark}}</p>
+                    </li>
+               </ol>
+          </div>
+          <div class="w-full px-3 py-3 absolute top-0 right-0 border-l-2 border-black">
+               <ol *ngFor="let question of overallContainer; trackBy: trackByFn">
+                    <li>
+                         <h3>{{question.question}}</h3>
+                         <h4 class="ml-10">Steps</h4>
+                         <div *ngFor="let item of question.steps; index as i; trackBy: trackByFn" class="flex gap-10 justify-start items-center ml-10">
+                              <span>step {{i+1}}</span><p class="my-1 py-1 ">{{item.step}}</p>
+                              <p class="my-1 py-1 ">{{item.mark}}</p>
+                         </div>
+                         <p class="ml-10">Total obtainable marks is </p>
+                    </li>
+               </ol>
+          </div>
+     </div>
+</div>

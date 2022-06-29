@@ -15,6 +15,8 @@ import { QuizComponent } from './quiz/quiz.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { InstructionsComponent } from './instructions/instructions.component';
+import { AddCalculationComponent } from './add-calculation/add-calculation.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
@@ -27,7 +29,8 @@ const routes: Routes = [
                {path: 'question', component: QuestionComponent},
                {path: 'change-password', component: ChangePasswordComponent},
                {path: 'student', component: StudentComponent},
-               {path: 'complaint', component: ComplaintsComponent}
+               {path: 'complaint', component: ComplaintsComponent},
+               {path: 'set-theory', component: AddCalculationComponent},
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
@@ -35,6 +38,7 @@ const routes: Routes = [
      {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+     { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

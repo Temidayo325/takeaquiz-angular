@@ -25,6 +25,8 @@ import { ComplaintsComponent } from './complaints/complaints.component';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { InstructionsComponent } from './instructions/instructions.component';
+import { AddCalculationComponent } from './add-calculation/add-calculation.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -45,7 +47,9 @@ import { InstructionsComponent } from './instructions/instructions.component';
     ComplaintsComponent,
     DashboardHeaderComponent,
     HomepageComponent,
-    InstructionsComponent
+    InstructionsComponent,
+    AddCalculationComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,8 @@ export class CourseService {
             private http: HttpClient,
             private store: StoreService
       ){ }
-     public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
+     // public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
+     public baseUrl = " http://127.0.0.1:8000/api/v1/";
      public token: string = this.store.getToken()
      options = {
          headers : new HttpHeaders({
@@ -31,6 +32,11 @@ export class CourseService {
      get():Observable<any>
      {
           return this.http.get(this.baseUrl+"course", this.options )
+     }
+
+     getTheory():Observable<any>
+     {
+          return this.http.get(this.baseUrl+"theoryCourse", this.options )
      }
 
      deleteCourse(course: {}):Observable<any>

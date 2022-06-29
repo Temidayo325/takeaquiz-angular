@@ -73,7 +73,7 @@ export class QuestionComponent implements OnInit {
   countQuestion()
   {
        this.loading.start()
-       this.question.getCount().subscribe(
+       this.sub = this.question.getCount().subscribe(
            (res) => {
                 this.loading.complete()
                this.overview[1].number = res.count
@@ -87,7 +87,7 @@ export class QuestionComponent implements OnInit {
   coursesAndQuestions()
   {
        this.loading.start()
-       this.question.coursesAndQuestions().subscribe(
+       this.sub = this.question.coursesAndQuestions().subscribe(
             (res) => {
                  this.loading.complete()
                this.courses = res.courses
@@ -206,5 +206,12 @@ export class QuestionComponent implements OnInit {
                  this.toast.warn(err.error.message)
             }
        )
+  }
+  ngOnDestroy(): void {
+       //Called once, before the instance is destroyed.
+       //Add 'implements OnDestroy' to the class.
+       if (this.sub !== undefined  ) {
+            this.sub.unsubscribe()
+       }
   }
 }

@@ -14,7 +14,8 @@ export class QuestionsService {
        private course: CourseService,
        private http: HttpClient,
  ) { }
-      public baseUrl = "https://takeaquiz.luminaace.com/api/v1/"
+      // public baseUrl = "https://takeaquiz.luminaace.com/api/v1/"
+      public baseUrl = " http://127.0.0.1:8000/api/v1/";
       public token: string = this.store.getToken()
       private options = {
           headers : new HttpHeaders({
@@ -45,5 +46,10 @@ export class QuestionsService {
      deleteQuestion(display_token: string, id: number)
      {
           return this.http.delete(this.baseUrl+`question?display_token=${display_token}&id=${id}`, this.options )
+     }
+     // Theory question starts here
+     addTheoryQuestion(question: object): Observable<any>
+     {
+          return this.http.post(this.baseUrl+"theoryQuestion", question, this.options )
      }
 }
