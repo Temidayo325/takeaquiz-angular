@@ -27,6 +27,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { AddCalculationComponent } from './add-calculation/add-calculation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GermanComponent } from './german/german.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomepageComponent,
     InstructionsComponent,
     AddCalculationComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    GermanComponent
   ],
   imports: [
     BrowserModule,

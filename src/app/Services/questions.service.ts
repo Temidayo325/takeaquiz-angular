@@ -47,9 +47,9 @@ export class QuestionsService {
      {
           return this.http.delete(this.baseUrl+`question?display_token=${display_token}&id=${id}`, this.options )
      }
-     // Theory question starts here
+     // German question starts here
      addTheoryQuestion(question: object): Observable<any>
      {
-          return this.http.post(this.baseUrl+"theoryQuestion", question, this.options )
+          return this.http.post(this.baseUrl+"germanQuestion", question, this.options )
      }
 }

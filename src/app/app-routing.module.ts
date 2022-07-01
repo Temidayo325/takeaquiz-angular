@@ -17,7 +17,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { InstructionsComponent } from './instructions/instructions.component';
 import { AddCalculationComponent } from './add-calculation/add-calculation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { GermanComponent } from './german/german.component';
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
      {path: 'login', component: LoginComponent},
@@ -31,6 +31,7 @@ const routes: Routes = [
                {path: 'student', component: StudentComponent},
                {path: 'complaint', component: ComplaintsComponent},
                {path: 'set-theory', component: AddCalculationComponent},
+               {path: 'set-german', component: GermanComponent},
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
