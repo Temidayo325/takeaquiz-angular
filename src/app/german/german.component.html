@@ -1,10 +1,52 @@
 <div class="font-word">
      <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
-     <div class="flex justify-start gap-3 items-start">
-          <form class="w-6/12 px-4 py-4">
+     <div class="relative overflow-x-auto  mt-10 mx-10 shadow-lg pt-5 pb-10" >
+          <div class="flex justify-end my-6 mr-12">
+               <button class="bg-orange-500 px-3 py-2 border-0 text-white text-lg shadow-md hover:shadow-xl" (click)="display.showForm = !display.showForm">Add course</button>
+          </div>
+         <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
+             <thead class=" text-gray-700 uppercase font-headline">
+                 <tr>
+                     <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
+                         Course
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="The name that should be provided to the student as course name when attempting the course">
+                         Access name
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                         Total Questions
+                     </th>
+                     <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                         Total Marks
+                     </th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                     <th scope="col" class="px-2 py-3"></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn">
+                     <td class="px-3 py-3 text-md">{{course.course}}</td>
+                     <td class="px-3 py-3">{{course.display_token}}</td>
+                     <!-- <td class="px-3 py-3"></td> -->
+                     <td class="px-3 py-3">{{ answers[courses.indexOf(course)].length }}</td>
+                     <td class="px-3 py-3">{{ marks[courses.indexOf(course)] }}</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" >View</p></td>
+                     <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
+                     <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-md text-blue-500 font-bold" (click)="addQuestion(courses.indexOf(course), course.display_token)">Add</p></td>
+                 </tr>
+             </tbody>
+         </table>
+         <h3 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h3>
+     </div>
+     <div class="mx-10 mt-10 flex justify-center">
+          <app-couseform *ngIf="display.showForm" class="w-4/12 shadow-md px-4 py-2"></app-couseform>
+     </div>
+     <div class="flex justify-start gap-3 items-start mx-10 mt-10" *ngIf="display.questionForm">
+          <form class="w-6/12 px-4 py-4" >
                <label for="question" class="block text-lg">Enter question</label>
-               <textarea name="question" id="question" class="w-3/4 h-56 py-3 px-3" [(ngModel)]="question"></textarea>
+               <textarea name="question" id="question" class="w-3/4 h-56 py-3 px-3 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500" [(ngModel)]="question"></textarea>
                <div class="" *ngIf="createNewQuestion">
                     <label for="answer" class="block text-lg">Enter answer</label>
                     <p class="my-0 py-1 text-sm text-blue-500">Separate multiple words using a comma</p>

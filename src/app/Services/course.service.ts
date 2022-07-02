@@ -33,7 +33,10 @@ export class CourseService {
      {
           return this.http.get(this.baseUrl+"course", this.options )
      }
-
+     getTyped(type: string):Observable<any>
+     {
+          return this.http.get(this.baseUrl+`typedCourse?type=${type}`, this.options )
+     }
      getTheory():Observable<any>
      {
           return this.http.get(this.baseUrl+"theoryCourse", this.options )

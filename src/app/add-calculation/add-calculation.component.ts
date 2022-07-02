@@ -80,7 +80,7 @@ export class AddCalculationComponent implements OnInit {
   {
        // make a request to the database
        this.overallContainer.push({question: this.question, steps: this.finalCopy})
-       this.sub = this.questionService.addTheoryQuestion({question: this.question, answer: this.finalCopy}).subscribe(
+       this.sub = this.questionService.addGermanQuestion({question: this.question, answer: this.finalCopy}).subscribe(
             (res) => {
                  console.log(res)
             },

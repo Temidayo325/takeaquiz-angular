@@ -30,9 +30,13 @@ export class QuestionsService {
           return this.http.get(this.baseUrl+"countQuestion", this.options )
      }
 
-     coursesAndQuestions(): Observable<any>
+     typedcoursesAndQuestions(type: string): Observable<any>
      {
-          return this.http.get(this.baseUrl+"courseQuestion", this.options )
+          return this.http.get(this.baseUrl+`courseQuestion?type=${type}`, this.options )
+     }
+     germanCoursesAndQuestions():Observable<any>
+     {
+          return this.http.get(this.baseUrl+`germanCourseQuestion`, this.options )
      }
      editQuestion(question: object): Observable<any>
      {
@@ -48,7 +52,7 @@ export class QuestionsService {
           return this.http.delete(this.baseUrl+`question?display_token=${display_token}&id=${id}`, this.options )
      }
      // German question starts here
-     addTheoryQuestion(question: object): Observable<any>
+     addGermanQuestion(question: object): Observable<any>
      {
           return this.http.post(this.baseUrl+"germanQuestion", question, this.options )
      }

@@ -19,9 +19,7 @@ import { slideInRightAnimation, slideOutRightAnimation } from 'angular-animation
 })
 export class CourseComponent implements OnInit {
 
-     courseForm = this.fb.group({
-         course: ['', [Validators.required, Validators.minLength(3)]]
-     });
+
      editCourseForm = this.fb.group({
          course: ['', [Validators.required]],
          display_token: ['', [Validators.required, Validators.minLength(6)]],
@@ -61,23 +59,10 @@ export class CourseComponent implements OnInit {
        //Add 'implements OnDestroy' to the class.
        this.sub.unsubscribe()
   }
-  createForm()
+  courseAdded():void
   {
-       this.loading.start()
-       this.sub = this.course.create({course: this.courseForm.value.course}).subscribe(
-            (res) => {
-                 this.loading.complete()
-                 this.toast.success(res.message)
-                 this.getCourse()
-                 this.showCourse = false
-            },
-            (err) => {
-                 console.log(err)
-                 this.loading.complete()
-                 this.errors = err.error.errors
-                 this.toast.warn(err.error.message)
-            }
-       )
+       this.getCourse()
+       this.showCourse = false
   }
   getCourse()
   {
@@ -85,7 +70,6 @@ export class CourseComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      console.log(res.course)
                       this.courses = res.course
                       this.loading.complete()
                       this.sortCourses(this.courses)

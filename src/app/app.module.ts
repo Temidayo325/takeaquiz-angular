@@ -28,6 +28,7 @@ import { InstructionsComponent } from './instructions/instructions.component';
 import { AddCalculationComponent } from './add-calculation/add-calculation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GermanComponent } from './german/german.component';
+import { CouseformComponent } from './couseform/couseform.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -51,7 +52,8 @@ import { GermanComponent } from './german/german.component';
     InstructionsComponent,
     AddCalculationComponent,
     PageNotFoundComponent,
-    GermanComponent
+    GermanComponent,
+    CouseformComponent
   ],
   imports: [
     BrowserModule,

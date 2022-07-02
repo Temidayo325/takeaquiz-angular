@@ -56,10 +56,11 @@ export class QuestionComponent implements OnInit {
   getCourse()
   {
        this.loading.start()
-       this.sub = this.course.get().subscribe(
+       this.sub = this.course.getTyped('mcq').subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      // console.log(res.course)
+                      // console.log(res)
+                      this.courses = res.course
                       this.loading.complete()
                       this.overview[0].number = res.course.length
                  }
@@ -87,11 +88,12 @@ export class QuestionComponent implements OnInit {
   coursesAndQuestions()
   {
        this.loading.start()
-       this.sub = this.question.coursesAndQuestions().subscribe(
+       this.sub = this.question.typedcoursesAndQuestions('mcq').subscribe(
             (res) => {
+
                  this.loading.complete()
-               this.courses = res.courses
-               this.questions = res.questions
+                 this.courses = res.courses
+                 this.questions = res.questions
             },
             (err) => {
                  this.loading.complete()
