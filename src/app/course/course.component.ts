@@ -70,6 +70,7 @@ export class CourseComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
+                      console.log(res.course)
                       this.courses = res.course
                       this.loading.complete()
                       this.sortCourses(this.courses)

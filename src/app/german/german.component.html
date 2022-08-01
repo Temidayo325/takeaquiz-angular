@@ -1,6 +1,15 @@
-<div class="font-word">
+<div class="font-word relative">
      <ngx-loading-bar></ngx-loading-bar>
      <app-dashboard-header></app-dashboard-header>
+     <div class="w-6/12 h-screen overflow-y-scroll border-2 border-gray-900 bg-sky-50 absolute right-0 top-0 shadow-md z-10 font-word" *ngIf="display.edit" >
+          <div class="sticky mt-8 mx-3">
+               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="display.edit = !display.edit">X</button>
+          </div>
+          <div class="mx-5 my-2 ">
+               <h2 class="font-headline">View Course</h2>
+               <p class="text-gray-900 text-lg leading-10 tracking-wide my-4">{{display.question}}</p>
+          </div>
+     </div>
      <div class="relative overflow-x-auto  mt-10 mx-10 shadow-lg pt-5 pb-10" >
           <div class="flex justify-end my-6 mr-12">
                <button class="bg-orange-500 px-3 py-2 border-0 text-white text-lg shadow-md hover:shadow-xl" (click)="display.showForm = !display.showForm">Add course</button>
@@ -30,9 +39,9 @@
                      <td class="px-3 py-3 text-md">{{course.course}}</td>
                      <td class="px-3 py-3">{{course.display_token}}</td>
                      <!-- <td class="px-3 py-3"></td> -->
-                     <td class="px-3 py-3">{{ answers[courses.indexOf(course)].length }}</td>
-                     <td class="px-3 py-3">{{ marks[courses.indexOf(course)] }}</td>
-                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" >View</p></td>
+                     <td class="px-3 py-3">{{ answers[i].length || 0}}</td>
+                     <td class="px-3 py-3">{{ marks[i] || 0 }}</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="viewQuestion(courses.indexOf(course))">View</p></td>
                      <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
                      <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-md text-blue-500 font-bold" (click)="addQuestion(courses.indexOf(course), course.display_token)">Add</p></td>
                  </tr>
@@ -41,20 +50,23 @@
          <h3 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h3>
      </div>
      <div class="mx-10 mt-10 flex justify-center">
-          <app-couseform *ngIf="display.showForm" class="w-4/12 shadow-md px-4 py-2"></app-couseform>
+          <app-couseform *ngIf="display.showForm" class="w-4/12 shadow-md px-4 py-2" (addedCourseEvent)="courseAdded($event)"></app-couseform>
      </div>
      <div class="flex justify-start gap-3 items-start mx-10 mt-10" *ngIf="display.questionForm">
           <form class="w-6/12 px-4 py-4" >
                <label for="question" class="block text-lg">Enter question</label>
                <textarea name="question" id="question" class="w-3/4 h-56 py-3 px-3 bg-gray-50 rounded-lg border border-gray-500 focus:ring-blue-500 focus:border-blue-500" [(ngModel)]="question"></textarea>
                <div class="" *ngIf="createNewQuestion">
-                    <label for="answer" class="block text-lg">Enter answer</label>
+                    <label for="answer" class="block text-lg mt-2">Enter answer</label>
                     <p class="my-0 py-1 text-sm text-blue-500">Separate multiple words using a comma</p>
                     <input type="text" [(ngModel)]="answer.word" class="py-2 px-3 text-lg w-6/12" id="answer" name="answer">
+                    <label for="allotedMark" class="block text-lg mt-2">Allocate mark for the question</label>
                     <select name="allotedMark" id="allotedMark" [(ngModel)]="answer.mark" class="py-2 px-2 text-center border-0 bg-white border-2 border-blue-200 ml-3">
                          <option value="" disabled>Assign mark</option>
                          <option  *ngFor="let mark of available_marks; let i=index; trackBy: trackByFn" [value]="mark">{{mark}}</option>
                     </select>
+                    <label for="synonyms" class="block text-lg mt-2">Use synonyms</label>
+                    <input type="radio" class="px-2 py-2" [(ngModel)]="answer.synonyms" name="synonyms" id="synonyms">
                     <button class="px-4 py-3 border-0 bg-blue-500 text-white block mt-6" (click)="addScheme()">Add Question</button>
                </div>
                <div class="button flex justify-start gap-8 my-8">
@@ -63,6 +75,10 @@
                </div>
           </form>
           <div class="py-4 px-2 relative overflow-x-auto shadow-md sm:rounded-lg mt-8">
+               <div>
+                       <h3>Total score {{totalMarks}}</h3>
+                       <h3>Total number of questions {{finalCopy.length}}  </h3>
+               </div>
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr>
@@ -90,22 +106,6 @@
                           <td class="px-6 py-4 text-right">
                               <p class="font-word text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" *ngIf="!item.edited" (click)="editAnswer(i)">Edit</p>
                               <p class="font-word text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" *ngIf="item.edited" (click)="saveAnswer(i)">Save</p>
-                          </td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                          <th scope="row" class="px-6 py-4 font-word text-gray-900 dark:text-white whitespace-nowrap">
-                              Total score
-                          </th>
-                          <td class="px-6 py-4 text-center" colspan="2">
-                              {{totalMarks}}
-                          </td>
-                      </tr>
-                      <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                          <th scope="row" class="px-6 py-4 font-word text-gray-900 dark:text-white whitespace-nowrap">
-                              Total number of questions
-                          </th>
-                          <td class="px-6 py-4 text-center" colspan="2">
-                              {{finalCopy.length}}
                           </td>
                       </tr>
                   </tbody>

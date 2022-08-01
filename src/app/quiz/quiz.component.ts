@@ -3,6 +3,7 @@ import { PrepService } from '../Services/prep.service';
 import { Router } from '@angular/router';
 import { QuizService } from '../Services/quiz.service';
 import { ToastService } from 'angular-toastify';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz',
@@ -15,24 +16,38 @@ export class QuizComponent implements OnInit {
        private prep: PrepService,
        private router: Router,
        private quiz: QuizService,
-       private toast: ToastService
+       private toast: ToastService,
+       private sanitizer: DomSanitizer
  ) { }
 
      public questions: any = []
      public currentIndex = 0
      public stat: any = {completed: 0, total: 0, submitted: false}
      public timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
-     protected details = this.prep.getDetails();
+     public details = this.prep.getDetails();
+     public german: any = {questions: '', answer: [], total: 0}
   ngOnInit(): void
   {
        const questions = this.prep.retrieveQuestions()
        if (questions == null || questions == undefined || questions == '') {
             this.router.navigate(['/prep'])
        }else{
-            this.questions = this.prep.questions
-            this.stat.total = this.questions.length
+            if (this.details.type == 'mcq') {
+                 this.questions = this.prep.questions
+                 this.stat.total = this.questions.length
+                 this.questions[this.currentIndex].hidden = false
+            }
+            if (this.details.type == 'german') {
+                 for (let index = 0; index < this.german.total; index++) {
+                      let provided = {questionNumber: index+1, value: ''}
+                      this.german.answer.push(provided)
+                 }
+                 this.german.question = this.sanitizer.bypassSecurityTrustHtml(this.german.question.replace(/\$\#\$\#\$\#/g, (match: any, offset: number, string: string) => {
+                      return (offset > 0 ? '<input class="spans py-2 px-2 bg-gray-100 border-0 inline-block"/>' : '' )
+                 }))
+            }
+
             this.timervalues.currentTime = this.details.timer * 60
-            this.questions[this.currentIndex].hidden = false
             setTimeout(() => {
                  this.timervalues.ongoing = setInterval(() => {
                       this.timer()
@@ -118,5 +133,14 @@ export class QuizComponent implements OnInit {
           clearInterval()
           this.submit()
        }
+   }
+   submitGerman()
+   {
+        let spans = document.querySelectorAll('.spans')
+        spans.forEach((element: any, index: number, arr) => {
+             this.german.answer[index].value = element.innerText
+        });
+        console.log(this.german.answer)
+        // Post the answer to the backend for marking
    }
 }

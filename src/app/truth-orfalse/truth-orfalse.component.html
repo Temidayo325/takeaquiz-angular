@@ -1,0 +1,104 @@
+<div class="font-word relative">
+     <ngx-loading-bar></ngx-loading-bar>
+     <app-dashboard-header></app-dashboard-header>
+     <div class="w-6/12 h-screen overflow-y-scroll border-2 border-gray-900 bg-sky-50 absolute right-0 top-0 shadow-md z-10 font-word" *ngIf="display.edit" >
+          <div class="sticky mt-8 mx-3">
+               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="closeSideModal()">X</button>
+          </div>
+          <div class="mx-5 my-2 ">
+               <h2 class="font-headline">View Course</h2>
+               <div *ngIf="view.view">
+                    <div *ngIf="view.questions.length == 0">
+                         <h3 class="text-lg text-center text-gray-700 font-headline">You do not have any questions under this course yet.</h3>
+                    </div>
+                    <div *ngIf="view.questions.length > 1">
+                         <ol>
+                              <li *ngFor="let question of view.questions; index as i; trackBy: trackByFn;" class="mx-3 text-lg ">
+                                   <p>Question: {{ question.question}}</p>
+                                   <div class="flex justify-start gap-4 text-md">
+                                        <p>Answer: {{question.answer}}</p>
+                                        <p>Mark: {{question.mark}}</p>
+                                        <p class="text-blue-500 tracking-wide cursor-pointer" (click)="editQuestion(question)">Edit</p>
+                                        <p class="text-red-500 cursor-pointer" (click)="deleteQuestion(question, question.id)">Delete</p>
+                                   </div>
+                              </li>
+                         </ol>
+                    </div>
+               </div>
+               <div *ngIf="view.add">
+                    <form [formGroup]="addQuestionForm"  class="px-3 py-3">
+                         <div>
+                             <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
+                        </div>
+                        <div>
+                            <label for="question" class="text-md tracking-wide leading-9 block">Question</label>
+                            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.question }}</p>
+                            <textarea name="" rows="8" cols="80" required formControlName="question" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-10/12 h-40"></textarea>
+                       </div>
+                       <div class="flex flex-wrap mt-3 justify-start gap-2 items-center">
+                            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.answer }}</p>
+                             <div class="w-80 flex gap-3 justify-start items-center ">
+                                 <label for="trueorfalse" class="text-md tracking-wide leading-9 block">True </label>
+                                 <input type="radio" formControlName="answer" id="trueorfalse" name="answer" value="true" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20">
+
+                                 <label for="falseortrue" class="text-md tracking-wide leading-9 block">False </label>
+                                 <input type="radio" id="falseortrue" name="answer" formControlName="answer" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 " value="false">
+                             </div>
+                             <div class="w-80">
+                                 <label for="mark" class="text-md tracking-wide leading-9 block">Alotted mark</label>
+                                 <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.mark }}</p>
+                                 <input type="number" required formControlName="mark" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-3/4">
+                             </div>
+                       </div>
+                         <div class="flex justify-center mt-3 ">
+                              <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg" (click)="saveQuestion()" *ngIf="!courseDetail.button">Save question</button>
+                              <button class="py-2 px-3 bg-blue-500 text-white text-lg border-0 shadow-lg rounded-lg" (click)="saveEditedQuestion()" *ngIf="courseDetail.button">Save Correction</button>
+                         </div>
+                    </form>
+               </div>
+          </div>
+     </div>
+     <div>
+          <div class="relative overflow-x-auto  mt-10 mx-10 shadow-lg pt-5 pb-10" >
+               <div class="flex justify-end my-6 mr-12">
+                    <button class="bg-orange-500 px-3 py-2 border-0 text-white text-lg shadow-md hover:shadow-xl" (click)="display.showForm = !display.showForm">Add course</button>
+               </div>
+              <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
+                  <thead class=" text-gray-700 uppercase font-headline">
+                      <tr>
+                          <th scope="col" class="px-2 py-3" title="Name of the Course as allocated by your institution">
+                              Course
+                          </th>
+                          <th scope="col" class="px-2 py-3" title="The name that should be provided to the student as course name when attempting the course">
+                              Access name
+                          </th>
+                          <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                              Total Questions
+                          </th>
+                          <th scope="col" class="px-2 py-3" title="Total number of questions to answer">
+                              Total Marks
+                          </th>
+                          <th scope="col" class="px-2 py-3"></th>
+                          <th scope="col" class="px-2 py-3"></th>
+                          <th scope="col" class="px-2 py-3"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn">
+                          <td class="px-3 py-3 text-md">{{course.course}}</td>
+                          <td class="px-3 py-3">{{course.display_token}}</td>
+                          <td class="px-3 py-3">{{ questions[i]}}</td>
+                          <td class="px-3 py-3">{{ marks[i]}}</td>
+                          <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md font-bold text-blue-500" (click)="viewQuestion(i)">View</p></td>
+                          <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-md font-bold text-blue-500" >Edit</p></td> -->
+                          <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-md text-blue-500 font-bold" (click)="addQuestionToggle(i, course.display_token)">Add</p></td>
+                      </tr>
+                  </tbody>
+              </table>
+              <h3 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h3>
+          </div>
+          <div class="mx-10 mt-10 flex justify-center">
+               <app-couseform *ngIf="display.showForm" class="w-4/12 shadow-md px-4 py-2" (addedCourseEvent)="courseAdded($event)"></app-couseform>
+          </div>
+     </div>
+</div>

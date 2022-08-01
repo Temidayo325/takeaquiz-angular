@@ -7,7 +7,7 @@
                <p>{{stat.completed}} of {{stat.total}}</p>
                <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
           </div>
-          <div class="overflow-hidden">
+          <div class="overflow-hidden" v-if="details.type == mcq">
                <div *ngFor="let question of questions;  index as i;">
                     <div *ngIf="!question.hidden">
                          <div class="flex justify-start items-center">
@@ -38,12 +38,17 @@
                          </div>
                     </div>
                </div>
+               <div class="mt-20 mb-3 ml-12 ">
+                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
+                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               </div>
           </div>
-          <div class="mt-20 mb-3 ml-12 ">
-               <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0">Prev</button>
-               <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
-               <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+          <div v-if="details.type == german" class="">
+               <p class="leading-10 tracking-wider mx-3" [innerHTML]=german.question>{{german.question}}</p>
+               <div class="mt-20 mb-3 ml-12 ">
+                    <button (click)="submitGerman()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+               </div>
           </div>
      </div>
-
 </div>

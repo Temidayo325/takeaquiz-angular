@@ -29,6 +29,9 @@ import { AddCalculationComponent } from './add-calculation/add-calculation.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GermanComponent } from './german/german.component';
 import { CouseformComponent } from './couseform/couseform.component';
+import { TestComponent } from './test/test.component';
+import { InputComponent } from './input/input.component';
+import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -53,7 +56,10 @@ import { CouseformComponent } from './couseform/couseform.component';
     AddCalculationComponent,
     PageNotFoundComponent,
     GermanComponent,
-    CouseformComponent
+    CouseformComponent,
+    TestComponent,
+    InputComponent,
+    TruthOrfalseComponent
   ],
   imports: [
     BrowserModule,

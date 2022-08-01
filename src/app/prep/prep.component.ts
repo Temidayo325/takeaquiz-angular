@@ -49,7 +49,7 @@ export class PrepComponent implements OnInit {
                       this.toast.error(res.data.message)
                  }else{
                       this.toast.info(res.message)
-                      this.prep.store(res.questions, parseInt(res.time), this.prepForm.value.display_token, this.prepForm.value.matric)
+                      this.prep.store(res.questions, parseInt(res.time), this.prepForm.value.display_token, this.prepForm.value.matric, res.type)
                       this.router.navigate(['/quiz'])
                  }
             },

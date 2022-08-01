@@ -22,8 +22,7 @@ export class QuestionComponent implements OnInit {
          option2: ['', [Validators.required, Validators.minLength(2)]],
          option3: ['', [Validators.required, Validators.minLength(9)]],
          option4: ['', [Validators.required, Validators.minLength(2)]],
-         answer: ['', [Validators.required, Validators.minLength(2)]],
-         type: ['', [Validators.required, Validators.minLength(2)]],
+         answer: ['', [Validators.required, Validators.minLength(2)]]
      });
 
   constructor(
@@ -59,7 +58,6 @@ export class QuestionComponent implements OnInit {
        this.sub = this.course.getTyped('mcq').subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      // console.log(res)
                       this.courses = res.course
                       this.loading.complete()
                       this.overview[0].number = res.course.length
@@ -90,7 +88,6 @@ export class QuestionComponent implements OnInit {
        this.loading.start()
        this.sub = this.question.typedcoursesAndQuestions('mcq').subscribe(
             (res) => {
-
                  this.loading.complete()
                  this.courses = res.courses
                  this.questions = res.questions
@@ -102,7 +99,6 @@ export class QuestionComponent implements OnInit {
   }
   viewQuestions(questions: number, option: string, course: string, display_token: string)
   {
-       // this.edit = true
        if (option === 'edit') {
 
        }else if(option === 'view')
@@ -116,6 +112,10 @@ export class QuestionComponent implements OnInit {
             this.edit = true
        }
 
+  }
+  public trackByFn(index: any, item: any):number
+  {
+    return index;
   }
   addQuestionToggle(display_token: string, course: string)
   {
@@ -135,10 +135,7 @@ export class QuestionComponent implements OnInit {
             (res) => {
                  this.loading.complete()
                  this.toast.success(res.message)
-                 this.addQuestionForm.patchValue({
-                      question: '', option1: '', option2: '',
-                      option3: '', options4: '', answer: ''
-                 });
+                 this.addQuestionForm.reset();
             },
             (err) => {
                  this.loading.complete()
@@ -175,10 +172,7 @@ export class QuestionComponent implements OnInit {
                  this.loading.complete()
                  this.toast.success(res.message)
                  this.view.questions.fill(this.addQuestionForm.value, this.courseDetail.index, this.courseDetail.index+1)
-                 this.addQuestionForm.patchValue({
-                      question: '', option1: '', option2: '',
-                      option3: '', option4: '', answer: ''
-                 });
+                 this.addQuestionForm.reset();
                  this.courseDetail.button = !this.courseDetail.button
                  this.view.add = false
                  this.view.view = true
@@ -209,7 +203,8 @@ export class QuestionComponent implements OnInit {
             }
        )
   }
-  ngOnDestroy(): void {
+  ngOnDestroy(): void
+  {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
        if (this.sub !== undefined  ) {

@@ -36,15 +36,6 @@
                     <div>
                         <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
                    </div>
-                   <div class="mt-2 flex justify-center items-center ">
-                        <label for="options" class="leading-8 font-bold ml-3 ">Full options</label>
-                        <input type="radio" id="options" value="options" checked="true" name="type" formControlName="type" class="w-4 h-8">
-                        <label for="truthOrFalse" class="leading-8 font-bold ml-4">Truth or false</label>
-                        <input type="radio" id="truthOrFalse" value="truthorfalse" name="type" formControlName="type" class="w-4 h-8">
-                        <p class="text-red-600 text-sm text-left ml-3" *ngIf="errors != null">{{ errors.type }}</p>
-                        <!-- <label for="truthOrFalse" class="leading-8 font-bold">Image</label>
-                        <input type="radio" id="truthOrFalse" value="truthorfalse"> -->
-                   </div>
                    <div>
                        <label for="question" class="text-md tracking-wide leading-9 block">Question</label>
                        <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.question }}</p>
@@ -111,12 +102,11 @@
                  </tr>
              </thead>
              <tbody>
-                 <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses">
+                 <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn;">
                      <td class="px-3 py-3 text-lg">{{course.course}}</td>
                      <td class="px-3 py-3">{{course.display_token}}</td>
-                     <td class="px-3 py-3">{{ questions[courses.indexOf(course)].length}}</td>
-                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[courses.indexOf(course)], 'view', course.course, course.display_token)">View</p></td>
-                     <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-lg text-blue-500" >Edit</p></td> -->
+                     <td class="px-3 py-3">{{ questions[i].length }}</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[i], 'view', course.course, course.display_token)">View</p></td>
                      <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500 font-bold" (click)="addQuestionToggle(course.display_token, course.course)">Add</p></td>
                  </tr>
              </tbody>

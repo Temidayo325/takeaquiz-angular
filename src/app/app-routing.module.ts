@@ -18,6 +18,9 @@ import { InstructionsComponent } from './instructions/instructions.component';
 import { AddCalculationComponent } from './add-calculation/add-calculation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GermanComponent } from './german/german.component';
+import { TestComponent } from './test/test.component';
+import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
+
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
      {path: 'login', component: LoginComponent},
@@ -32,14 +35,17 @@ const routes: Routes = [
                {path: 'complaint', component: ComplaintsComponent},
                {path: 'set-theory', component: AddCalculationComponent},
                {path: 'set-german', component: GermanComponent},
+               {path: 'true-or-false', component: TruthOrfalseComponent},
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},
      {path: 'quiz', component: QuizComponent},
      {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
+     { path: 'tryTestForm', component: TestComponent },
      { path: '', redirectTo: '/homepage', pathMatch: 'full' },
      { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({
