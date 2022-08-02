@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StoreService } from './store.service';
+import { AssesmentService } from './assesment.service'
 
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
+export class CourseService  {
 
       constructor(
             private http: HttpClient,
@@ -55,5 +56,15 @@ export class CourseService {
      download(course: any): Observable<any>
      {
           return this.http.get(this.baseUrl+"result?"+course , this.options )
+     }
+
+     createCa(course: object): Observable<any>
+     {
+          return this.http.post(this.baseUrl+"assesment", course, this.options )
+     }
+
+     toggleCaStatus(details: object): Observable<any>
+     {
+          return this.http.patch(this.baseUrl+"assesment", details, this.options )
      }
 }

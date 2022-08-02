@@ -31,8 +31,8 @@ export class GermanComponent implements OnInit {
 
   public sub: any
   public question: string = ''
-  public answer: any = {word: '', mark: 0, synonyms: false}
-  public correction: any = {word: '', mark: 0, synonyms: false}
+  public answer: any = {word: '', mark: 0, synonyms: false, assesment_id: 1}
+  public correction: any = {word: '', mark: 0, synonyms: false, assesment_id: 1}
   public available_marks: Array<number> = [0,1,2,3,4,5]
   public createNewQuestion: boolean = false
   public finalCopy: any = []
@@ -43,6 +43,7 @@ export class GermanComponent implements OnInit {
   public answers: Array<[]> = []
   public marks: Array<number> = []
   public display: any =  {questionForm: false, showForm: false, display_token: '', edit: false, question: ''}
+  public assesment_ids: Array<number> = []
   private options = {
       headers : new HttpHeaders({
             'Content-Type': 'application/json',
@@ -63,6 +64,7 @@ export class GermanComponent implements OnInit {
             (res: any) => {
                  if (res.statusCode == 200) {
                      this.courses = res.courses
+                     this.generateAssesmentId(res.courses)
                      this.questions = res.questions[0];
                      if (this.questions.length >= 1) {
                           this.questions.map((value: any, index: number) => {
@@ -90,6 +92,23 @@ export class GermanComponent implements OnInit {
             }
        )
   }
+  public generateAssesmentId(values: Array<any>)
+  {
+       values.forEach((item: any, index: number) => {
+            item.assesment.forEach( (value:any) => {
+                 if (!this.assesment_ids.includes(value.numb)) {
+                    this.assesment_ids.push(value.numb)
+                }
+                if (this,this.assesment_ids.length == 0) {
+                    this.assesment_ids.push(1)
+                }
+            });
+       })
+
+       if (this.assesment_ids.length == 0) {
+            this.assesment_ids.push(1)
+       }
+  }
   public courseAdded(value: boolean)
   {
        this.display.showForm = false
@@ -103,57 +122,71 @@ export class GermanComponent implements OnInit {
   }
   public addScheme()
   {
-       this.http.get(`http://127.0.0.1:8000/api/v1/getSynonym?word=${this.answer.word}`, this.options).subscribe(
-            (response: any) => {
-                 this.toast.info("Retrieving synonyms...")
-                 console.log(response)
-                 if (response.data.result.length > 1) {
-                      let words = ''
-                      response.data.result.map((item: any, index: number) => {
-                           words.concat('', item.synonyms)
-                      })
-                      let wordArray = words.split(',')
-                      let newWordArray = ''
-                      wordArray.map( (item: string, index:number) => {
-                           if (!newWordArray.includes(item)) {
-                                newWordArray = newWordArray + ',' + item
-                           }
-                      })
-                      this.answer.word = newWordArray
-                 }
+       if (this.answer.synonyms) {
+            this.http.get(`http://127.0.0.1:8000/api/v1/getSynonym?word=${this.answer.word}`, this.options).subscribe(
+                 (response: any) => {
+                      this.toast.info("Retrieving synonyms...")
+                      console.log(response)
+                      if (response.data.result.length > 1) {
+                           let words = ''
+                           response.data.result.map((item: any, index: number) => {
+                                words.concat('', item.synonyms)
+                           })
+                           let wordArray = words.split(',')
+                           let newWordArray = ''
+                           wordArray.map( (item: string, index:number) => {
+                                if (!newWordArray.includes(item)) {
+                                     newWordArray = newWordArray + ',' + item
+                                }
+                           })
+                           this.answer.word = newWordArray
+                      }
 
-                 if (response.data.result.length == 1) {
-                      this.answer.word.concat(',', response.data.result[0].synonyms)
-                 }
+                      if (response.data.result.length == 1) {
+                           this.answer.word.concat(',', response.data.result[0].synonyms)
+                      }
 
-                 if (response.data.result.length < 1) {
-                      this.toast.info("No Synonyms found ...")
+                      if (response.data.result.length < 1) {
+                           this.toast.info("No Synonyms found ...")
+                      }
+                      this.finalCopy.push({...this.answer, edited: false})
+                      this.totalMarks += parseInt(this.answer.mark)
+                      this.createNewQuestion = false;
+                      this.clearForm()
+                      this.saveGerman()
+                 },
+                 (err) => {
+                      this.toast.warn("Unable to retrieve synonyms.")
                  }
-                 // this.finalCopy.push({...this.answer, edited: false})
-                 // this.totalMarks += parseInt(this.answer.mark)
-                 // this.createNewQuestion = false;
-                 // this.clearForm()
-            },
-            (err) => {
-                 this.toast.warn("Unable to retrieve synonyms.")
-            }
-       )
-
+            )
+       }
+       else{
+            this.finalCopy.push({...this.answer, edited: false})
+            this.totalMarks += parseInt(this.answer.mark)
+            this.createNewQuestion = false;
+            this.clearForm()
+            this.saveGerman()
+       }
   }
   public addQuestion(index: number, display_token: string)
   {
-       this.display.questionForm = !this.display.questionForm
        this.display.display_token = display_token
-       this.question = this.questions[index].question
+       this.question = (this.questions.length > 0) ? this.questions[index].question : ''
        this.totalMarks = this.marks[index]
-       this.finalCopy = JSON.parse(this.questions[index].answer)
+       this.finalCopy = (this.questions.length > 0) ? JSON.parse(this.questions[index].answer) : []
+       this.display.questionForm = !this.display.questionForm
   }
   public viewQuestion(index: number)
   {
        // Add the html entity character for bold to the replaced string
-       this.display.question = (this.questions[index].question.length > 0 ) ? this.questions[index].question.replace(/[$#$#$#]/g, (match: any, offset: number, string: string) => {
-            return (offset > 0 ? '--------' : '' )
-       }) : "You have not set the question. Close  the modal and click on the add button corresponding with the course to add questions"
+       if (this.questions.length == 0) {
+             this.display.question = "You have not set the question. Close  the modal and click on the add button corresponding with the course to add questions"
+       }else{
+            this.display.question = (this.questions[index].question.length > 0 ) ? this.questions[index].question.replace(/[$#$#$#]/g, (match: any, offset: number, string: string) => {
+                 return (offset > 0 ? '--------' : '' )
+            }) : "You have not set the question. Close  the modal and click on the add button corresponding with the course to add questions"
+       }
+
        this.display.edit = !this.display.edit
   }
   public trackByFn(index: any, item: any):number
@@ -183,7 +216,7 @@ export class GermanComponent implements OnInit {
   }
   saveGerman():void
   {
-       this.sub = this.questionService.addGermanQuestion({question: this.question, answer: JSON.stringify(this.finalCopy), display_token: this.display.display_token}).subscribe(
+       this.sub = this.questionService.addGermanQuestion({question: this.question, answer: JSON.stringify(this.finalCopy), display_token: this.display.display_token, assesment_id: this.answer.assesment_id}).subscribe(
             (res) => {
                  this.toast.info(res.message)
                  this.getCourse()
@@ -192,6 +225,11 @@ export class GermanComponent implements OnInit {
                  this.toast.warn(err.error.message)
             }
        )
+  }
+  public closeModal()
+  {
+       this.display.questionForm = false
+       this.getCourse()
   }
   ngOnDestroy(): void
   {

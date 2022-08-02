@@ -22,6 +22,7 @@
                                    <p>Option 3: {{question.option3}}</p>
                                    <p>Option 4: {{question.option4}}</p>
                                    <p>Answer: {{question.answer}}</p>
+                                   <p>Continous Assesment {{question.assesment_id}}</p>
                               </details>
                               <div class="flex justify-start gap-4">
                                    <p class="text-blue-500 tracking-wide cursor-pointer" (click)="editQuestion(question)">Edit</p>
@@ -34,7 +35,12 @@
           <div *ngIf="view.add">
                <form [formGroup]="addQuestionForm"  class="px-3 py-3">
                     <div>
-                        <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
+                         <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
+                         <label for="assesment_id" class="text-md tracking-wide leading-9 block">Continous Assesment</label>
+                         <select required id="assesment_id" formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-24">
+                              <option [value]="item" *ngFor="let item of assesment_ids; let i=index; ">{{item}}</option>
+                         </select>
+                         <!-- <input type="text" required id="assesment_id" formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4 block"> -->
                    </div>
                    <div>
                        <label for="question" class="text-md tracking-wide leading-9 block">Question</label>

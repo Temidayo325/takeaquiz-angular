@@ -29,6 +29,10 @@
                     <form [formGroup]="addQuestionForm"  class="px-3 py-3">
                          <div>
                              <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-2/4" readonly>
+                             <label for="assesment_id" class="text-md tracking-wide leading-9 block">Continous Assesment</label>
+                             <select required id="assesment_id" formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white/90 border-white/20 w-24 text-center ">
+                                 <option class="text-center" [value]="item" *ngFor="let item of assesment_ids; let i=index; ">{{item}}</option>
+                             </select>
                         </div>
                         <div>
                             <label for="question" class="text-md tracking-wide leading-9 block">Question</label>

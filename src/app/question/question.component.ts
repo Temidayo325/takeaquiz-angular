@@ -22,7 +22,8 @@ export class QuestionComponent implements OnInit {
          option2: ['', [Validators.required, Validators.minLength(2)]],
          option3: ['', [Validators.required, Validators.minLength(9)]],
          option4: ['', [Validators.required, Validators.minLength(2)]],
-         answer: ['', [Validators.required, Validators.minLength(2)]]
+         answer: ['', [Validators.required, Validators.minLength(2)]],
+         assesment_id: ['1']
      });
 
   constructor(
@@ -51,6 +52,7 @@ export class QuestionComponent implements OnInit {
   public courseDetail: any = {course: '', display_token: '', button: false, index: 0}
   public courses: any = []
   public questions: any = []
+  public assesment_ids: Array<number> = []
   public errors: any = []
   getCourse()
   {
@@ -91,12 +93,31 @@ export class QuestionComponent implements OnInit {
                  this.loading.complete()
                  this.courses = res.courses
                  this.questions = res.questions
+                 this.generateAssesmentId(res.courses)
             },
             (err) => {
                  this.loading.complete()
             }
        )
   }
+  public generateAssesmentId(values: Array<any>)
+  {
+       values.forEach((item: any, index: number) => {
+            item.assesment.forEach( (value:any) => {
+                 if (!this.assesment_ids.includes(value.numb)) {
+                     this.assesment_ids.push(value.numb)
+                }
+                if (this,this.assesment_ids.length == 0) {
+                     this.assesment_ids.push(1)
+                }
+            });
+       })
+
+       if (this.assesment_ids.length == 0) {
+            this.assesment_ids.push(1)
+       }
+  }
+
   viewQuestions(questions: number, option: string, course: string, display_token: string)
   {
        if (option === 'edit') {
@@ -155,7 +176,7 @@ export class QuestionComponent implements OnInit {
        this.addQuestionForm.patchValue({
             question: question.question, option1: question.option1, option2: question.option2,
             option3: question.option3, option4: question.option4, answer: question.answer,
-            id: question.id, type: question.type, display_token: this.courseDetail.display_token, course: this.courseDetail.course
+            id: question.id, type: question.type, display_token: this.courseDetail.display_token, course: this.courseDetail.course, assesment_id: question.assesment_id
        });
        this.courseDetail.index = this.view.questions.indexOf(question)
        // console.log(this.view.questions)

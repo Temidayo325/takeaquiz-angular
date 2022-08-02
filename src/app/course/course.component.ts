@@ -38,6 +38,7 @@ export class CourseComponent implements OnInit {
      public sub: any
      public showCourse: boolean = false
      public edit: boolean = false
+     public modal: any = {display: false, assesments: [], display_token: '', index: 0}
   constructor(
        private fb : FormBuilder,
        private course: CourseService,
@@ -48,15 +49,15 @@ export class CourseComponent implements OnInit {
  ) { }
      public user: object = this.store.getUser();
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
        this.loading.start()
        this.title.setTitle("Course board")
        this.getCourse()
        this.loading.complete()
   }
-  ngOnDestroy(): void {
-       //Called once, before the instance is destroyed.
-       //Add 'implements OnDestroy' to the class.
+  ngOnDestroy(): void
+  {
        this.sub.unsubscribe()
   }
   courseAdded():void
@@ -70,7 +71,6 @@ export class CourseComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      console.log(res.course)
                       this.courses = res.course
                       this.loading.complete()
                       this.sortCourses(this.courses)
@@ -175,5 +175,46 @@ export class CourseComponent implements OnInit {
             this.loading.complete()
             this.toast.info("The course test is still on")
        }
+  }
+  public trackByFn(index: any, item: any):number
+  {
+    return index;
+  }
+  public checkCa(course: any, i: number)
+  {
+       this.modal.assesments = course.assesments
+       this.modal.display_token = course.display_token
+       this.modal.index = i
+       this.modal.display = true
+  }
+  public toggleStatus(numb: number, status: string, index:number)
+  {
+       this.loading.start()
+       this.course.toggleCaStatus({display_token: this.modal.display_token, index: numb}).subscribe(
+            (res) => {
+                 this.loading.complete()
+                 this.toast.success(res.message)
+                 this.modal.assesments[index].status = status
+            },
+            (err) => {
+                 this.loading.complete()
+                 this.toast.info(err.error.message)
+            }
+       )
+  }
+  public CreateCA()
+  {
+       this.loading.start()
+       this.course.createCa({display_token: this.modal.display_token}).subscribe(
+            (res) => {
+                  this.toast.success(res.message)
+                  this.courses[this.modal.index].assesments.push({numb: this.courses[this.modal.index].assesments.length + 1, status: 'inactive'})
+                 this.loading.complete()
+            },
+            (err) => {
+                 this.loading.complete()
+                  this.toast.info(err.error.message)
+            }
+       )
   }
 }

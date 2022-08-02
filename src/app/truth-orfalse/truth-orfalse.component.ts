@@ -16,7 +16,8 @@ export class TruthOrfalseComponent implements OnInit {
          display_token: ['', [Validators.required, Validators.minLength(6)]],
          question: ['', [Validators.required, Validators.minLength(6)]],
          mark: ['1', [Validators.required, Validators.minLength(1)]],
-         answer: ['', [Validators.required, Validators.minLength(2)]]
+         answer: ['', [Validators.required, Validators.minLength(2)]],
+         assesment_id: ['1']
      });
   constructor(
        private toast: ToastService,
@@ -34,7 +35,8 @@ export class TruthOrfalseComponent implements OnInit {
    public marks: Array<number> = []
    public errors: any = []
    public view: any = {edit: false, view: false, add: false, questions: []}
-
+   public assesment_ids: Array<number> = []
+   // public currentAssesment: number = 1
   ngOnInit(): void {
        this.getCourse()
   }
@@ -47,8 +49,9 @@ export class TruthOrfalseComponent implements OnInit {
                  if (res.success) {
                       if (res.courses.length > 0) {
                            this.courses = res.courses
+                           this.generateAssesmentId(res.courses)
                            res.questions.map((value: any, index: number) => {
-
+                                console.log(res.questions)
                                if (value.question == null) {
                                     this.questions.push(0)
                                     this.marks.push(0)
@@ -79,6 +82,23 @@ export class TruthOrfalseComponent implements OnInit {
                  this.toast.warn(err.error.message)
             }
        )
+  }
+  public generateAssesmentId(values: Array<any>)
+  {
+       values.forEach((item: any, index: number) => {
+            item.assesment.forEach( (value:any) => {
+                 if (!this.assesment_ids.includes(value.numb)) {
+                    this.assesment_ids.push(value.numb)
+                }
+                if (this,this.assesment_ids.length == 0) {
+                    this.assesment_ids.push(1)
+                }
+            });
+       })
+
+       if (this.assesment_ids.length == 0) {
+            this.assesment_ids.push(1)
+       }
   }
   public courseAdded(value: boolean)
   {
