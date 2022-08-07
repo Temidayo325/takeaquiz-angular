@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StoreService } from './store.service';
-import { AssesmentService } from './assesment.service'
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +19,18 @@ export class CourseService  {
          headers : new HttpHeaders({
                'Content-Type': 'application/json',
                'Accept': 'application/json',
-               // 'Access-Control-Allow-Origin': '*',
                'Authorization': "Bearer "+this.token
          }),
      }
-
+     dowload = {
+          headers : new HttpHeaders({
+               'responseType': 'arrayBuffer',
+               'observe': 'response',
+               'Content-Disposition': 'attachment; filename="thetestresult.csv',
+               'X-Content-Type-Options': 'nosniff',
+               'Authorization': "Bearer "+this.token
+         }),
+     }
      create(course: object): Observable<any>
      {
           return this.http.post(this.baseUrl+"course", course, this.options )
@@ -53,9 +59,11 @@ export class CourseService  {
           return this.http.patch(this.baseUrl+"course", course , this.options )
      }
 
-     download(course: any): Observable<any>
+     download(course: object):Observable<any>
      {
-          return this.http.get(this.baseUrl+"result?"+course , this.options )
+          // console.log(this.token)
+          return this.http.post(this.baseUrl+"result", course, this.options)
+          // window.open(`/result?display_token=${course}`)
      }
 
      createCa(course: object): Observable<any>

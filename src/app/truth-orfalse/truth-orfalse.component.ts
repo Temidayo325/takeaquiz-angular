@@ -181,6 +181,7 @@ export class TruthOrfalseComponent implements OnInit {
                       this.addQuestionForm.patchValue({
                            question: '', answer: ''
                       })
+                      this.errors = []
                  },
                  (err) => {
                       this.loading.complete()

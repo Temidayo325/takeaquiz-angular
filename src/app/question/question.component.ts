@@ -147,6 +147,8 @@ export class QuestionComponent implements OnInit {
             course: course,
             display_token: display_token
        })
+       this.courseDetail.display_token = display_token
+       this.courseDetail.course = course
       this.edit =  true
   }
   addQuestion()
@@ -156,7 +158,8 @@ export class QuestionComponent implements OnInit {
             (res) => {
                  this.loading.complete()
                  this.toast.success(res.message)
-                 this.addQuestionForm.reset();
+                 this.addQuestionForm.reset()
+                 this.addQuestionForm.patchValue({display_token: this.courseDetail.display_token, assesment_id: 1, course: this.courseDetail.course})
             },
             (err) => {
                  this.loading.complete()

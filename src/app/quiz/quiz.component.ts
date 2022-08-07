@@ -25,41 +25,44 @@ export class QuizComponent implements OnInit {
      public stat: any = {completed: 0, total: 0, submitted: false}
      public timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
      public details = this.prep.getDetails();
-     public german: any = {questions: '', answer: [], total: 0}
+     public german: any = {question: '', answer: [], total: 0}
   ngOnInit(): void
   {
        const questions = this.prep.retrieveQuestions()
        if (questions == null || questions == undefined || questions == '') {
             this.router.navigate(['/prep'])
        }else{
-            if (this.details.type == 'mcq') {
+            if (this.details.type == 'mcq' || this.details.type == 'trueorfalse') {
                  this.questions = this.prep.questions
                  this.stat.total = this.questions.length
                  this.questions[this.currentIndex].hidden = false
             }
             if (this.details.type == 'german') {
+                 this.german = {...questions[0]}
                  for (let index = 0; index < this.german.total; index++) {
                       let provided = {questionNumber: index+1, value: ''}
                       this.german.answer.push(provided)
                  }
-                 this.german.question = this.sanitizer.bypassSecurityTrustHtml(this.german.question.replace(/\$\#\$\#\$\#/g, (match: any, offset: number, string: string) => {
+                 const modifyQuestion = "  "+ questions[0].question + "  "
+                 this.german.question = this.sanitizer.bypassSecurityTrustHtml(modifyQuestion.replace(/\$\#\$\#\$\#/g, (match: any, offset: number, string: string) => {
                       return (offset > 0 ? '<input class="spans py-2 px-2 bg-gray-100 border-0 inline-block"/>' : '' )
                  }))
             }
 
-            this.timervalues.currentTime = this.details.timer * 60
-            setTimeout(() => {
-                 this.timervalues.ongoing = setInterval(() => {
-                      this.timer()
-                  }, 1000)
-            }, 1000)
-            let grace = 0
-            document.addEventListener("visibilitychange", () => {
-                if (document.visibilityState !== 'visible') {
-                    this.toast.info("Your test has been submitted")
-                    this.submit()
-                }
-            });
+
+            // this.timervalues.currentTime = this.details.timer * 60
+            // setTimeout(() => {
+            //      this.timervalues.ongoing = setInterval(() => {
+            //           this.timer()
+            //       }, 1000)
+            // }, 1000)
+            // let grace = 0
+            // document.addEventListener("visibilitychange", () => {
+            //     if (document.visibilityState !== 'visible') {
+            //         this.toast.info("Your test has been submitted")
+            //         this.submit()
+            //     }
+            // });
        }
   }
   submit()
@@ -68,7 +71,10 @@ export class QuizComponent implements OnInit {
             clearInterval(this.timervalues.ongoing)
             this.timervalues.ongoing = null
             this.stat.submitted = true
-            this.quiz.submitTest({questions: JSON.stringify(this.questions), matric: this.details.matric, display_token: this.details.display_token}).subscribe(
+            if (this.details.type == 'german') {
+                 this.questions = this.submitGerman()
+            }
+            this.quiz.submitTest({questions: JSON.stringify(this.questions), matric: this.details.matric, display_token: this.details.display_token, assesment_id: this.details.assessment_id, type: this.details.type}).subscribe(
                  (res) => {
                       this.toast.info(res.message)
                       setTimeout(() => {
@@ -79,10 +85,9 @@ export class QuizComponent implements OnInit {
                       this.toast.error(err.error.message)
                  }
             )
-            // console.log(this.questions)
        }
   }
-  prev()
+  public prev()
   {
        if (this.currentIndex > 0) {
             this.questions[this.currentIndex].hidden = true
@@ -91,7 +96,7 @@ export class QuizComponent implements OnInit {
             this.getCompleted()
        }
   }
-  next()
+  public next()
   {
        if (this.currentIndex >= this.questions.length - 1) {
             this.questions[this.currentIndex].hidden = true
@@ -106,7 +111,12 @@ export class QuizComponent implements OnInit {
        }
 
   }
-  getCompleted()
+  public trackByFn(index: any, item: any):number
+  {
+    return index;
+  }
+
+  public getCompleted()
   {
        let done = 0
        const completed = this.questions.forEach( (element: any ) => {
@@ -116,7 +126,7 @@ export class QuizComponent implements OnInit {
        });
        this.stat.completed = done
   }
-  timer()
+  public timer()
   {
        this.timervalues.minutes = Math.floor(this.timervalues.currentTime / 60)
        this.timervalues.seconds  = (this.timervalues.currentTime % 60)
@@ -134,13 +144,12 @@ export class QuizComponent implements OnInit {
           this.submit()
        }
    }
-   submitGerman()
+   public submitGerman():Array<any>
    {
         let spans = document.querySelectorAll('.spans')
         spans.forEach((element: any, index: number, arr) => {
-             this.german.answer[index].value = element.innerText
+             this.german.answer[index].value = element.value
         });
-        console.log(this.german.answer)
-        // Post the answer to the backend for marking
+        return this.german.answer
    }
 }

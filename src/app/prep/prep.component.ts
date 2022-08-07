@@ -15,7 +15,8 @@ export class PrepComponent implements OnInit {
 
      prepForm = this.fb.group({
           display_token: ['', [Validators.required, Validators.minLength(6)]],
-          matric: ['', [Validators.required, Validators.minLength(6)]]
+          matric: ['', [Validators.required, Validators.minLength(6)]],
+          assesment_id: ['1',  [Validators.required, Validators.minLength(1)]]
      });
      complaintForm = this.fb.group({
           complaint: ['', [Validators.required, Validators.minLength(6)]],
@@ -42,14 +43,14 @@ export class PrepComponent implements OnInit {
   preQuestion():void
   {
        this.loading.start()
-       this.sub = this.prep.get(this.prepForm.value.display_token, this.prepForm.value.matric).subscribe(
+       this.sub = this.prep.get(this.prepForm.value.display_token, this.prepForm.value.matric, this.prepForm.value.assesment_id).subscribe(
             (res) => {
                  this.loading.complete()
                  if (res.data != undefined) {
                       this.toast.error(res.data.message)
                  }else{
                       this.toast.info(res.message)
-                      this.prep.store(res.questions, parseInt(res.time), this.prepForm.value.display_token, this.prepForm.value.matric, res.type)
+                      this.prep.store(res.questions, parseInt(res.time), this.prepForm.value.display_token, this.prepForm.value.matric, res.type, parseInt(this.prepForm.value.assesment_id))
                       this.router.navigate(['/quiz'])
                  }
             },

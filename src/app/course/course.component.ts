@@ -161,13 +161,21 @@ export class CourseComponent implements OnInit {
        this.loading.start()
        const now = new Date
        if (now > new Date(course.end_time) && course.end_time !== null) {
-            this.sub = this.course.download("display_token="+course.display_token).subscribe(
-                 (res) => {
+            this.sub = this.course.download({display_token: course.display_token})
+            .subscribe(
+                 (res: any) => {
+                      let filepath = 'http://127.0.0.1:8000'+res.result
+                      // let blob = new Blob([...res], {type: 'application/octet-binary;charset=utf-8'})
+                      let link = document.createElement('a')
+                      link.href = filepath
+                      link.download = 'result.xlsx'
+                      link.click()
                       this.loading.complete()
-                      this.toast.info("Download request initiated")
+                      this.toast.info(res.message)
                  },
-                 (err) => {
+                 (err: any) => {
                      this.loading.complete()
+                     console.log(err)
                      this.toast.warn("Not working")
                  }
             )

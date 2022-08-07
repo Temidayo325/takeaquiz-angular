@@ -38,6 +38,7 @@ export class StudentComponent implements OnInit {
                       this.data.xaxis.push(elem.course)
                  })
                  this.data.yaxis = res.count
+                 this.overview.number = res.count
                  this.chartOption = {
                       xAxis: {
                          type: 'category',
@@ -52,6 +53,7 @@ export class StudentComponent implements OnInit {
                          // areaStyle: {}
                       }]
                      }
+
                  this.loading.complete()
             },
             (err) => {

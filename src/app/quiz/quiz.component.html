@@ -1,20 +1,25 @@
 <div class="flex justify-center items-center font-word">
-     <div *ngIf="stat.submitted">
-          <p class="font-headline">You have reached the ends of your Test. Goodluck</p>
+     <div *ngIf="stat.submitted " class="flex items-center justify-center">
+          <div class="w-full ">
+               <h3 class="font-headline">You have reached the ends of your Test. Goodluck</h3>
+               <img src="../../assets/weldone.svg" alt="All the best in your test" class="md:w-full md:h-1/4 mt-4">
+          </div>
      </div>
      <div class="" *ngIf="!stat.submitted">
-          <div class="mx-4">
-               <p>{{stat.completed}} of {{stat.total}}</p>
-               <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
+          <div class="mx-4 flex justify-center mt-4">
+               <div>
+                    <p>{{stat.completed}} of {{stat.total}}</p>
+                    <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
+               </div>
           </div>
-          <div class="overflow-hidden" v-if="details.type == mcq">
-               <div *ngFor="let question of questions;  index as i;">
+          <div class="overflow-hidden" *ngIf="details.type == 'mcq'">
+               <div *ngFor="let question of questions;  index as i; trackBy: trackByFn">
                     <div *ngIf="!question.hidden">
                          <div class="flex justify-start items-center">
                               <p class="mx-4">{{i+1}}.</p>
                               <p class="ml-2 text-xl my-2">{{question.question}}</p>
                          </div>
-                         <div *ngIf="question.type == 'options'" class="grid gap-2 ml-12">
+                         <div class="grid gap-2 ml-12">
                               <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider ">
                                    <input type="radio" [value]="question.option1" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.chosen_answer">{{question.option1}}
                               </label>
@@ -28,26 +33,41 @@
                                    <input type="radio" [value]="question.option4" id="option4{{i}}" name="option4{{i}}" [(ngModel)]="question.chosen_answer">{{question.option4}}
                               </label>
                          </div>
-                         <div *ngIf="question.type == 'truthorfalse'" class="grid gap-2 ml-12">
-                              <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider">
-                                   <input type="radio" [value]="question.option1" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.chosen_answer">{{question.option1}}
-                              </label>
-                              <label for="option2{{i}}" class="text-md cursor-pointer tracking-wider">
-                                   <input type="radio" [value]="question.option2" id="option2{{i}}" name="option2{{i}}" [(ngModel)]="question.chosen_answer">{{question.option2}}
-                              </label>
-                         </div>
                     </div>
                </div>
-               <div class="mt-20 mb-3 ml-12 ">
+               <div class="mt-20 mb-3 ml-12 flex justify-center gap-3">
                     <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
                     <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
                     <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
                </div>
           </div>
-          <div v-if="details.type == german" class="">
+          <div *ngIf="details.type == 'trueorfalse'" class="grid gap-2 ml-12">
+               <div *ngFor="let question of questions;  index as i; trackBy: trackByFn">
+                    <div *ngIf="!question.hidden">
+                         <div class="flex justify-start items-center">
+                              <p class="mx-4">{{i+1}}.</p>
+                              <p class="ml-2 text-xl my-2">{{question.question}}</p>
+                         </div>
+                         <div class="grid gap-2 ml-12">
+                              <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider">
+                                   <input type="radio" value="true" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.answer">True
+                              </label>
+                              <label for="option2{{i}}" class="text-md cursor-pointer tracking-wider">
+                                   <input type="radio" value="false" id="option2{{i}}" name="option2{{i}}" [(ngModel)]="question.answer">False
+                              </label>
+                         </div>
+                    </div>
+               </div>
+               <div class="mt-20 mb-3 ml-12 flex justify-center gap-3">
+                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
+                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               </div>
+          </div>
+          <div *ngIf="details.type == 'german'" class="md:mx-20 mx-8 md:">
                <p class="leading-10 tracking-wider mx-3" [innerHTML]=german.question>{{german.question}}</p>
-               <div class="mt-20 mb-3 ml-12 ">
-                    <button (click)="submitGerman()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+               <div class="mt-20 mb-3 ml-12 flex justify-center">
+                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
                </div>
           </div>
      </div>

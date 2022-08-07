@@ -15,6 +15,19 @@
                          <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
                          <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
                     </div>
+                    <div class="mb-3 ">
+                         <label for="matric" class="block text-lg">Continous Assessment</label>
+                         <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.assesment_id }}</p>
+                         <!-- <input type="text" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off"> -->
+                         <select name="" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md">
+                              <option value=""></option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                         </select>
+                    </div>
                     <div class="flex justify-center my-5">
                          <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-orange-500 text-white disabled:bg-gray-400 disabled:text-white " (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
                     </div>
