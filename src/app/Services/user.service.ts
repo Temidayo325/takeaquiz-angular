@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-     public baseUrl = " http://127.0.0.1:8000/api/v1/";
-     // public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
+     // public baseUrl = " http://127.0.0.1:8000/api/v1/";
+     public baseUrl = "https://takeaquiz.luminaace.com/api/v1/";
      // public headers = {'Content-Type': 'application/json' , 'Accept': 'application/json'};
 
   constructor(

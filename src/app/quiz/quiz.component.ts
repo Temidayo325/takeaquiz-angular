@@ -50,19 +50,19 @@ export class QuizComponent implements OnInit {
             }
 
 
-            // this.timervalues.currentTime = this.details.timer * 60
-            // setTimeout(() => {
-            //      this.timervalues.ongoing = setInterval(() => {
-            //           this.timer()
-            //       }, 1000)
-            // }, 1000)
-            // let grace = 0
-            // document.addEventListener("visibilitychange", () => {
-            //     if (document.visibilityState !== 'visible') {
-            //         this.toast.info("Your test has been submitted")
-            //         this.submit()
-            //     }
-            // });
+            this.timervalues.currentTime = this.details.timer * 60
+            setTimeout(() => {
+                 this.timervalues.ongoing = setInterval(() => {
+                      this.timer()
+                  }, 1000)
+            }, 1000)
+            let grace = 0
+            document.addEventListener("visibilitychange", () => {
+                if (document.visibilityState !== 'visible') {
+                    this.toast.info("Your test has been submitted")
+                    this.submit()
+                }
+            });
        }
   }
   submit()
