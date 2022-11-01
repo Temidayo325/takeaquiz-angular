@@ -1,0 +1,17 @@
+<ngx-loading-bar></ngx-loading-bar>
+     <div>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+               <div class="">
+                    <label for="">Email</label>
+                    <input type="email" formControlName="email">
+               </div>
+               <div>
+                    <label for="">Password</label>
+                    <input type="password" formControlName="password">
+               </div>
+
+               <div>
+                    <button type="submit" [disabled]="!form.valid">Login</button>
+               </div>
+          </form>
+     </div>

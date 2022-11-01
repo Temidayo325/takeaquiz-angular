@@ -1,0 +1,60 @@
+<div class="px-2 py-3">
+     <div class="lg:flex lg:justify-start lg:gap-3">
+          <div>
+               <p *ngIf="topics.length == 0" class="text-xl">No topic available yet</p>
+               <h1>We have {{topics.length}} topics available!</h1>
+          </div>
+     </div>
+
+     <div class="mt-6 w-2/4 ml-3">
+          <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+              <table class="w-full text-lg text-left text-gray-500 dark:text-gray-400">
+                  <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                      <tr>
+                          <th scope="col" class="py-3 px-6">
+                              Title
+                          </th>
+                          <th scope="col" class="py-3 px-6">
+                              Department
+                          </th>
+                          <th scope="col" class="py-3 px-6">
+                              Faculty
+                          </th>
+                          <th scope="col" class="py-3 px-6">
+                              Available Question(s)
+                          </th>
+                          <th scope="col" class="py-3 px-6">
+                              <!-- <button>View</button> -->
+                          </th>
+                          <th scope="col" class="py-3 px-6">
+                              <!-- <butto>Delete</butto> -->
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="topics.length == 0">
+                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" >
+                               <td class="text-xl font-bold text-center py-3 " colspan="5">No topic to display yet.</td>
+                      </tr>
+                  </tbody>
+                  <tbody *ngIf="topics.length > 0">
+                      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let topic of topics; let i = index; trackBy: trackByFn">
+                           <td>{{topic.title}}</td>
+                           <td>{{topic.department}}</td>
+                           <td>{{topic.faculty}}</td>
+                           <td class="text-center">{{topic.question}}</td>
+                           <td class="text-center">Edit</td>
+                          <td class="text-center"><button (click)="deleteTopic(topic.id, i)" class="bg-red-600 text-white px-2 py-2">Del</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+     </div>
+
+     <div #buttons class="mt-4 ">
+          <button class="bg-blue-500 text-white py-3 px-4" routerLink="/admin/dashboard/forms/topic">New topic</button>
+     </div>
+
+     <div class="mt-6">
+          <router-outlet></router-outlet>
+     </div>
+</div>

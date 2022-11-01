@@ -1,18 +1,39 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { EffectsModule } from '@ngrx/effects';
+import { HomeComponent } from './home/home.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { TopicComponent } from './forms/topic/topic.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    AdminLoginComponent,
+    DashboardComponent,
+    TopicComponent
   ],
   imports: [
+    LoadingBarModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AngularToastifyModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

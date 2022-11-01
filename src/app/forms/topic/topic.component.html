@@ -1,0 +1,35 @@
+<div>
+     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="">
+               <label for="title">Title</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.title}}</p>
+               <input type="text" formControlName="title" id="title">
+          </div>
+          <div class="mt-3">
+               <label for="department">Department</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.department}}</p>
+               <select id="department" formControlName="department">
+                    <option value=""></option>
+                    <option value="Pharmacology">Pharmacognosy</option>
+                    <option value="Pharmaceutical Microbiology and biotechnology">Pharmaceutical Microbiology and biotechnology</option>
+                    <option value="Clinical Pharmacy and Pharmacy Practice">Clinical Pharmacy and Pharmacy Practice</option>
+                    <option value="Pharmacology">Pharmacology</option>
+                    <option value="Medicinal Chemistry">Medicinal Chemistry</option>
+                    <option value="Pharmaceutics">Pharmaceutics</option>
+               </select>
+          </div>
+
+          <div class="mt-3">
+               <label for="faculty">Facullty</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.faculty}}</p>
+               <select id="faculty" formControlName="faculty">
+                    <option value=""></option>
+                    <option value="Pharmaceutical Sciences">Pharmaceutical sciences</option>
+               </select>
+          </div>
+
+          <div>
+               <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Login</button>
+          </div>
+     </form>
+</div>
