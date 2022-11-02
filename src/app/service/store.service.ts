@@ -30,6 +30,11 @@ export class StoreService {
        sessionStorage.setItem('topics', JSON.stringify(topics))
   }
 
+  setTopics(topics: Array<any>)
+  {
+       sessionStorage.setItem('topics', JSON.stringify(topics));
+  }
+
   getToken():string
   {
        return this.token!

@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   {
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
-                 console.log(response)
                  this.topics = response.data
+                 this.storeService.setTopics(this.topics)
             },
 
             (error) => {
@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
        this.newTopic = this.shared.getAddedTopic().subscribe(
             (resp) => {
                  this.topics.push(resp)
+                 this.storeService.setTopics(this.topics)
                  this.router.navigate(['/admin/dashboard'])
             }
        )
@@ -49,6 +50,11 @@ export class DashboardComponent implements OnInit {
 
   trackByFn(index: number, topic: any) {
         return topic ? topic.id : undefined;
+    }
+
+    editTopic(topic_id: number)
+    {
+
     }
 
    deleteTopic(id: number, index: number)

@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { TopicComponent } from './forms/topic/topic.component';
+import { QuestionComponent } from './forms/question/question.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TopicComponent } from './forms/topic/topic.component';
     HomeComponent,
     AdminLoginComponent,
     DashboardComponent,
-    TopicComponent
+    TopicComponent,
+    QuestionComponent
   ],
   imports: [
     LoadingBarModule,

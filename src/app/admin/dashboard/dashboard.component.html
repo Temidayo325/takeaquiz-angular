@@ -1,3 +1,4 @@
+<ngx-loading-bar></ngx-loading-bar>
 <div class="px-2 py-3">
      <div class="lg:flex lg:justify-start lg:gap-3">
           <div>
@@ -42,16 +43,17 @@
                            <td>{{topic.department}}</td>
                            <td>{{topic.faculty}}</td>
                            <td class="text-center">{{topic.question}}</td>
-                           <td class="text-center">Edit</td>
-                          <td class="text-center"><button (click)="deleteTopic(topic.id, i)" class="bg-red-600 text-white px-2 py-2">Del</button></td>
+                           <td class="text-center"> <button class="bg-blue-400 text-white px-2 py-2" (click)="editTopic(topic.id)">Edit</button></td>
+                          <td class="text-center"><button (click)="deleteTopic(topic.id, i)" class="bg-red-400 text-white px-2 py-2">Del</button></td>
                       </tr>
                   </tbody>
               </table>
           </div>
      </div>
 
-     <div #buttons class="mt-4 ">
+     <div #buttons class="mt-4 flex justify-start gap-6">
           <button class="bg-blue-500 text-white py-3 px-4" routerLink="/admin/dashboard/forms/topic">New topic</button>
+          <button class="bg-blue-500 text-white py-3 px-4" routerLink="/admin/dashboard/forms/question">Add question</button>
      </div>
 
      <div class="mt-6">
