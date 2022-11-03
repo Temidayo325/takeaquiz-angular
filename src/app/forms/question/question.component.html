@@ -1,6 +1,15 @@
 <ngx-loading-bar></ngx-loading-bar>
      <div>
-          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div>
+               <label for="questionMethodType">Choose question upload method</label>
+               <select name="questionMethodType" id="questionMethodType" [(ngModel)]="methodType" (change)="chooseQuestionType($event)">
+                    <option value="" disabled></option>
+                    <option value="true">Enter question</option>
+                    <option value="false">Upload File</option>
+               </select>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="methodType">
                <div class="">
                     <label for="topic">Select Topic</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.topic_id}}</p>
@@ -88,6 +97,44 @@
                </div>
                <div>
                     <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>
+               </div>
+          </form>
+
+          <form *ngIf="!methodType" (ngSubmit)="ngSubmitfile()" [formGroup]="formByFile">
+               <div class="">
+                    <label for="topic">Select Topic</label>
+                    <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.topic_id}}</p>
+                    <div *ngIf="topic_id!.invalid && (topic_id!.dirty || topic_id!.touched)"
+                        class="text-red-600 mt-1 text-sm">
+
+                      <p *ngIf="topic_id!.errors?.['required']">
+                        Topic is required.
+                      </p>
+                    </div>
+                    <select id="topic_id" formControlName="topic_id">
+                         <option value="" disabled>Select topic to add question</option>
+                         <option value="{{topic.id}}" *ngFor="let topic of topics; let i = index; trackBy: trackByFn">{{topic.title}}</option>
+                    </select>
+               </div>
+               <div class="">
+                    <label for="file">Choose File</label>
+                    <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.question}}</p>
+                    <div *ngIf="file!.invalid && (file!.dirty || file!.touched)"
+                        class="text-red-600 mt-1 text-sm">
+
+                      <p *ngIf="file!.errors?.['required']">
+                        An Excel file is required
+                      </p>
+                    </div>
+                    <input type="file" accept="application/msexcel" required (change)="filePicked($event)" #pickFile class="hidden">
+                    <div class="">
+                       {{fileName}}
+
+                        <a (click)="pickFile.click()" class="bg-gray-300 py-6 px-8 font-bold cursor-pointer">Click to upload a file</a>
+                    </div>
+               </div>
+               <div>
+                    <button type="submit" [disabled]="!formByFile.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>
                </div>
           </form>
      </div>

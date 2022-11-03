@@ -15,6 +15,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { TopicComponent } from './forms/topic/topic.component';
 import { QuestionComponent } from './forms/question/question.component';
+import { VerifyQuestionComponent } from './admin/verify-question/verify-question.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { QuestionComponent } from './forms/question/question.component';
     AdminLoginComponent,
     DashboardComponent,
     TopicComponent,
-    QuestionComponent
+    QuestionComponent,
+    VerifyQuestionComponent
   ],
   imports: [
     LoadingBarModule,

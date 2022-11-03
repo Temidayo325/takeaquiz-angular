@@ -16,6 +16,14 @@ export class QuestionService {
                'Authorization': 'Bearer '+ this.store.token,
           }),
      }
+
+     public form = {
+          headers: new HttpHeaders({
+               // 'Content-Type': 'multipart/form-data',
+               'Accept': 'application/json',
+               'Authorization': 'Bearer '+ this.store.token,
+          })
+     }
      constructor(
           private http: HttpClient,
           private store: StoreService,
@@ -26,8 +34,15 @@ export class QuestionService {
        return this.http.post(this.baseUrl+"question", question, this.options )
      }
 
-     createFromFile(question: File, topic_id: number):Observable<any>
+     createFromFile(question: File, topic_id: any, data: object):Observable<any>
      {
-          return this.http.post(this.baseUrl+"topics", question, this.options )
+          const file:File = question;
+          const formData = new FormData();
+
+          formData.append("question", file);
+          formData.append("topic_id", topic_id);
+
+            // const upload$ = this.http.post("/api/thumbnail-upload", formData);
+          return this.http.post(this.baseUrl+"importquestion", formData, this.form )
      }
 }
