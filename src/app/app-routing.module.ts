@@ -10,6 +10,7 @@ import { TopicComponent } from './forms/topic/topic.component';
 import { QuestionComponent } from './forms/question/question.component';
 import { VerifyQuestionComponent } from './admin/verify-question/verify-question.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { ResultsComponent } from './user/results/results.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -19,8 +20,9 @@ const routes: Routes = [
           canActivateChild: [LoggeninUserGuard],
           children: [
                {
-                    path: '',
-                    component: UserDashboardComponent
+                    path: 'results',
+                    // outlet: "user-dashboard",
+                    component: ResultsComponent
                }
           ]},
      {path: 'admin/dashboard', component: DashboardComponent,

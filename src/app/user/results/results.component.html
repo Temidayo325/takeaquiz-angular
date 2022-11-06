@@ -1,0 +1,30 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div>
+     <table class="w-full text-lg text-left text-gray-500 dark:text-gray-400">
+         <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+             <tr>
+                 <th scope="col" class="py-3 px-6">
+                     Topic
+                 </th>
+                 <th scope="col" class="py-3 px-6">
+                     Score
+                 </th>
+                 <th scope="col" class="py-3 px-6">
+                     Date
+                 </th>
+             </tr>
+         </thead>
+         <tbody *ngIf="results.length == 0">
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" >
+                      <td class="text-xl font-bold text-center py-3 " colspan="5">No Result to display yet.</td>
+             </tr>
+         </tbody>
+         <tbody *ngIf="results.length > 0">
+             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let result of results; let i = index; trackBy: trackByFn">
+                  <td>{{result.topic}}</td>
+                  <td>{{result.score}}</td>
+                  <td>{{result.date}}</td>
+             </tr>
+          </tbody>
+     </table>
+</div>

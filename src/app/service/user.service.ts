@@ -8,9 +8,7 @@ import { Login } from './../models/login.models';
   providedIn: 'root'
 })
 export class UserService {
-     // public baseUrl = " http://127.0.0.1:8000/api/v1/";
      public baseUrl = "https://quizly-api.luminaace.com/api/";
-     // public headers = {'Content-Type': 'application/json' , 'Accept': 'application/json'};
      constructor(
             private http: HttpClient
       ){}
@@ -49,5 +47,10 @@ export class UserService {
   changeUserPassword(user: object): Observable<any>
   {
        return this.http.put(this.baseUrl+"reset-password", user, this.options )
+  }
+
+  getResults()
+  {
+       return this.http.get(this.baseUrl+`result?user_id=1`, this.options )
   }
 }

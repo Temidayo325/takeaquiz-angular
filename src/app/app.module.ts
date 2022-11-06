@@ -18,6 +18,7 @@ import { QuestionComponent } from './forms/question/question.component';
 import { VerifyQuestionComponent } from './admin/verify-question/verify-question.component';
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { AssessmentComponent } from './user/assessment/assessment.component';
+import { ResultsComponent } from './user/results/results.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AssessmentComponent } from './user/assessment/assessment.component';
     QuestionComponent,
     VerifyQuestionComponent,
     UserDashboardComponent,
-    AssessmentComponent
+    AssessmentComponent,
+    ResultsComponent
   ],
   imports: [
     LoadingBarModule,
