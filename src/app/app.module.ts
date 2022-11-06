@@ -16,6 +16,8 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { TopicComponent } from './forms/topic/topic.component';
 import { QuestionComponent } from './forms/question/question.component';
 import { VerifyQuestionComponent } from './admin/verify-question/verify-question.component';
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { AssessmentComponent } from './user/assessment/assessment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { VerifyQuestionComponent } from './admin/verify-question/verify-question
     DashboardComponent,
     TopicComponent,
     QuestionComponent,
-    VerifyQuestionComponent
+    VerifyQuestionComponent,
+    UserDashboardComponent,
+    AssessmentComponent
   ],
   imports: [
     LoadingBarModule,
