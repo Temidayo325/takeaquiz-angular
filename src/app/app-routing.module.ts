@@ -6,7 +6,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { TopicComponent } from './forms/topic/topic.component';
 import { QuestionComponent } from './forms/question/question.component';
-
+import { VerifyQuestionComponent } from './admin/verify-question/verify-question.component';
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
      {path: 'login', component: LoginComponent},
@@ -20,6 +20,10 @@ const routes: Routes = [
                {
                     path: 'forms/question',
                     component: QuestionComponent
+               },
+               {
+                    path: 'topic/:id',
+                    component: VerifyQuestionComponent
                }
           ]},
      { path: '', redirectTo: '/index', pathMatch: 'full' },

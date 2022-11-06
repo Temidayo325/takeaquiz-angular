@@ -38,4 +38,19 @@ export class TopicService {
      {
           return this.http.delete(this.baseUrl+"topics/"+id, this.options)
      }
+
+     getbyId(id: number): Observable<any>
+     {
+          return this.http.get(this.baseUrl+"topics/"+id, this.options)
+     }
+
+     activateQuestion(question_id: number): Observable<any>
+     {
+          return this.http.patch(this.baseUrl+"question/"+question_id, {question_id: question_id},this.options)
+     }
+
+     editQuestion(question: object): Observable<any>
+     {
+          return this.http.patch(this.baseUrl+"question", question ,this.options)
+     }
 }

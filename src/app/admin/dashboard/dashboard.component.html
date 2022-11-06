@@ -43,7 +43,7 @@
                            <td>{{topic.department}}</td>
                            <td>{{topic.faculty}}</td>
                            <td class="text-center">{{topic.question}}</td>
-                           <td class="text-center"> <button class="bg-blue-400 text-white px-2 py-2" (click)="editTopic(topic.id)">Edit</button></td>
+                           <td class="text-center"> <button class="bg-blue-400 text-white px-2 py-2" routerLink="/admin/dashboard/topic/{{topic.id}}">Edit</button></td>
                           <td class="text-center"><button (click)="deleteTopic(topic.id, i)" class="bg-red-400 text-white px-2 py-2">Del</button></td>
                       </tr>
                   </tbody>
