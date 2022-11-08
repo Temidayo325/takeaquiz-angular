@@ -35,6 +35,7 @@ export class StoreService {
   {
        sessionStorage.setItem('user', JSON.stringify(data))
        sessionStorage.setItem('token', JSON.stringify(token))
+       localStorage.setItem('token', token)
        this.token = token
        this.user = data
   }

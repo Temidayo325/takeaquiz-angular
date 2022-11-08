@@ -12,27 +12,27 @@ export class LoggeninUserGuard implements CanActivate, CanActivateChild, CanDeac
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-         const token = sessionStorage.getItem('token')
-         return (token == undefined || token == '') ? this.router.parseUrl('/login') : true;
+         const token = localStorage.getItem('token')
+         return (token === null || token === '') ? this.router.parseUrl('/login') : true;
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-         const token = sessionStorage.getItem('token')
-         return (token == undefined || token == '') ? this.router.parseUrl('/login') : true;
+         const token = localStorage.getItem('token')
+         return (token === undefined || token === '') ? this.router.parseUrl('/login') : true;
   }
   canDeactivate(
     component: unknown,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-         const token = sessionStorage.getItem('token')
-         return (token == undefined || token == '') ? false : true;
+         const token = localStorage.getItem('token')
+         return (token === null || token === '') ? this.router.parseUrl('/login') : true;
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-         const token = sessionStorage.getItem('token')
-         return (token == undefined || token == '') ? false : true;
+         const token = localStorage.getItem('token')
+         return (token === null || token === '') ? this.router.parseUrl('/login') : true;
   }
 }

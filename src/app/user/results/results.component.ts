@@ -18,12 +18,14 @@ export class ResultsComponent implements OnInit {
        private toast: ToastService
  ) { }
   public results: Array<any> = JSON.parse(sessionStorage.getItem('results')!)
+  public user: any = JSON.parse(sessionStorage.getItem('user')!)
 
   ngOnInit(): void
   {
-       this.userService.getResults().subscribe(
+       this.userService.getResults(this.user.id).subscribe(
             (response: any) => {
                  this.results = response.results
+                 console.log(response)
                  sessionStorage.setItem('results', JSON.stringify(response.results))
             },
             (error) => {

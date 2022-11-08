@@ -49,8 +49,12 @@ export class UserService {
        return this.http.put(this.baseUrl+"reset-password", user, this.options )
   }
 
-  getResults()
+  getResults(id: number): Observable<any>
   {
        return this.http.get(this.baseUrl+`result?user_id=1`, this.options )
+  }
+  logout(user_id: number): Observable<any>
+  {
+      return this.http.post(this.baseUrl+"logout", {user_id: user_id},this.options)
   }
 }

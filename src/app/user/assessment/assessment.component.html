@@ -1,1 +1,43 @@
-<p>assessment works!</p>
+<ngx-loading-bar></ngx-loading-bar>
+<div>
+     <div *ngIf="stat.submitted">
+          <h2>Submitted succesfully</h2>
+          <h3>Your score is {{stat.correctScore}}</h3>
+     </div>
+
+     <div *ngIf="!stat.submitted">
+          <div class="mx-4 flex justify-center mt-4">
+               <div>
+                    <p>{{stat.completed}} of {{stat.total}}</p>
+                    <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
+               </div>
+          </div>
+          <div *ngFor="let question of questions;  index as i; trackBy: trackByFn">
+                    <div *ngIf="!question.hidden">
+                         <div class="flex justify-start items-center">
+                              <p class="mx-4">{{i+1}}.</p>
+                              <p class="ml-2 text-xl my-2">{{question.question}}</p>
+                         </div>
+                         <div class="grid gap-2 ml-12">
+                              <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider ">
+                                   <input type="radio" [value]="question.option1" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.chosen">{{question.option1}}
+                              </label>
+                              <label for="option2{{i}}" class="text-md cursor-pointer tracking-wider ">
+                                   <input type="radio" [value]="question.option2" id="option2{{i}}" name="option2{{i}}" [(ngModel)]="question.chosen">{{question.option2}}
+                              </label>
+                              <label for="option3{{i}}" class="text-md cursor-pointer tracking-wider " *ngIf="question.option3.length > 0">
+                                   <input type="radio" [value]="question.option3" id="option3{{i}}" name="option3{{i}}" [(ngModel)]="question.chosen">{{question.option3}}
+                              </label>
+                              <label for="option4{{i}}" class="text-md cursor-pointer tracking-wider " *ngIf="question.option4.length > 0">
+                                   <input type="radio" [value]="question.option4" id="option4{{i}}" name="option4{{i}}" [(ngModel)]="question.chosen" >{{question.option4}}
+                              </label>
+                         </div>
+                    </div>
+               </div>
+               <div class="mt-20 mb-3 ml-2 md:ml-12 flex justify-center gap-3">
+                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
+                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               </div>
+     </div>
+</div>

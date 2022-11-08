@@ -19,6 +19,8 @@ import { VerifyQuestionComponent } from './admin/verify-question/verify-question
 import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
 import { AssessmentComponent } from './user/assessment/assessment.component';
 import { ResultsComponent } from './user/results/results.component';
+import { PrepComponent } from './user/prep/prep.component';
+import { Error404Component } from './errors/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ResultsComponent } from './user/results/results.component';
     VerifyQuestionComponent,
     UserDashboardComponent,
     AssessmentComponent,
-    ResultsComponent
+    ResultsComponent,
+    PrepComponent,
+    Error404Component
   ],
   imports: [
     LoadingBarModule,

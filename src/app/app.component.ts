@@ -15,12 +15,12 @@ export class AppComponent {
      ){
 
      }
-     title = 'quizly-ng'
+     title = 'Quizly-ng'
 
      ngOnInit(): void {
           //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
           //Add 'implements OnInit' to the class.
-          this.htitle.setTitle("quizly-ng")
+          this.htitle.setTitle("Quizly-ng")
           // this.loggedInUser = this.store.select((store) => store.user);
      }
 }

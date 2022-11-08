@@ -5,6 +5,7 @@ import { UserService } from '../service/user.service';
 import { StoreService } from '../service/store.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +23,16 @@ export class LoginComponent implements OnInit {
        private storeService: StoreService,
        private loader: LoadingBarService,
        private router: Router,
-       private toast: ToastService
+       private toast: ToastService,
+       private title: Title
  ) { }
+
 
   public error: any = []
   public message: string = ''
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+       this.title.setTitle('Login in to your dashboard')
   }
 
   onSubmit()

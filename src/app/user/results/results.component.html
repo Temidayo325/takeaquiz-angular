@@ -21,7 +21,7 @@
          </tbody>
          <tbody *ngIf="results.length > 0">
              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let result of results; let i = index; trackBy: trackByFn">
-                  <td>{{result.topic}}</td>
+                  <td>{{result.topic.title}}</td>
                   <td>{{result.score}}</td>
                   <td>{{result.date}}</td>
              </tr>
