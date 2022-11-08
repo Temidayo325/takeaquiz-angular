@@ -21,6 +21,8 @@ import { AssessmentComponent } from './user/assessment/assessment.component';
 import { ResultsComponent } from './user/results/results.component';
 import { PrepComponent } from './user/prep/prep.component';
 import { Error404Component } from './errors/error404/error404.component';
+import { RegisterComponent } from './register/register.component';
+import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { Error404Component } from './errors/error404/error404.component';
     AssessmentComponent,
     ResultsComponent,
     PrepComponent,
-    Error404Component
+    Error404Component,
+    RegisterComponent,
+    VerifyAccountComponent
   ],
   imports: [
     LoadingBarModule,

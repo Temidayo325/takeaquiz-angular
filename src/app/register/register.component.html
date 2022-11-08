@@ -1,0 +1,89 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div class="flex justify-center items-center h-screen">
+     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
+          <div class="">
+               <label for="name" class="block">Full Name</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.name}}</p>
+               <div *ngIf="name!.invalid && (name!.dirty || name!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="name!.errors?.['required']">
+                   Kindly input your Full name.
+                 </p>
+                 <p *ngIf="name!.errors?.['minLength']">
+                   Your full name should not be less than 5 characters
+                 </p>
+               </div>
+               <input type="text" formControlName="name" id="name" name="name" class="block border border-gray-400">
+          </div>
+
+          <div class="">
+               <label for="email" class="block">Email</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.email}}</p>
+               <div *ngIf="email!.invalid && (email!.dirty || email!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="email!.errors?.['required']">
+                   Kindly input your email address.
+                 </p>
+                 <p *ngIf="email!.errors?.['email']">
+                   Input a valid email
+                 </p>
+               </div>
+               <input type="email" formControlName="email" id="email" name="email" class="block border border-gray-400">
+          </div>
+
+          <div class="">
+               <label for="nickname" class="block">Choose Nickname</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.nickname}}</p>
+               <div *ngIf="nickname!.invalid && (nickname!.dirty || nickname!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="nickname!.errors?.['required']">
+                   Kindly input your desired | popular nickname.
+                 </p>
+                 <p *ngIf="nickname!.errors?.['minLength']">
+                   nickname too short(cannot be less than 5 characters)
+                 </p>
+               </div>
+               <input type="text" formControlName="nickname" id="nickname" name="nickname" class="block border border-gray-400">
+          </div>
+
+          <div class="">
+               <label for="institution" class="block">Your institution</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.institution}}</p>
+               <div *ngIf="institution!.invalid && (institution!.dirty || institution!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="institution!.errors?.['required']">
+                   Kindly input Tertiary Institution.
+                 </p>
+                 <p *ngIf="institution!.errors?.['minLength']">
+                   Institution name too short(cannot be less than 3 characters)
+                 </p>
+               </div>
+               <input type="text" formControlName="institution" id="institution" name="institution" class="block border border-gray-400">
+          </div>
+
+          <div>
+               <label for="password">Password</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.password}}</p>
+               <div *ngIf="password!.invalid && (password!.dirty || password!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="password!.errors?.['required']">
+                   Kindly input your desired password.
+                 </p>
+                 <p *ngIf="password!.errors?.['minLength']">
+                   password name too short(cannot be less than 5 characters)
+                 </p>
+               </div>
+               <input type="password" formControlName="password" id="password" name="password" class="border border-gray-400">
+          </div>
+
+          <div class="my-3 flex justify-center">
+               <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Register</button>
+          </div>
+     </form>
+</div>

@@ -1,0 +1,25 @@
+<ngx-loading-bar></ngx-loading-bar>
+<div class="flex justify-center items-center h-screen">
+     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
+          <div>
+               <label for="code">Code</label>
+               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.code}}</p>
+               <div *ngIf="code!.invalid && (code!.dirty || code!.touched)"
+                   class="text-red-600 mt-1 text-sm">
+
+                 <p *ngIf="code!.errors?.['required']">
+                   Kindly input code sent to your email.
+                 </p>
+                 <p *ngIf="code!.errors?.['minLength']">
+                   Your full name should not be less than 5 characters
+                 </p>
+               </div>
+               <input type="number" formControlName="code" id="code" name="code" class="block border border-gray-400">
+          </div>
+
+          <div class="flex justify-center my-3">
+               <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Verify Account</button>
+          </div>
+     </form>
+</div>

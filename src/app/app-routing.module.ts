@@ -15,10 +15,14 @@ import { ResultsComponent } from './user/results/results.component';
 import { AssessmentComponent } from './user/assessment/assessment.component';
 import { PrepComponent } from './user/prep/prep.component';
 import { Error404Component } from './errors/error404/error404.component';
+import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
      {path: 'login', component: LoginComponent},
+     {path: 'register', component: RegisterComponent},
+     {path: 'verify-account', component: VerifyAccountComponent},
      {path: 'admin', component: AdminLoginComponent},
      {path: 'user/dashboard', component: UserDashboardComponent,
           canActivateChild: [LoggeninUserGuard],

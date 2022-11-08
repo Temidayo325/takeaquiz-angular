@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Login } from './../models/login.models';
+import { NewUser } from './../models/newUser.models';
 
 @Injectable({
   providedIn: 'root'
@@ -29,14 +30,14 @@ export class UserService {
     return this.http.post(this.baseUrl+"admin", user, this.options )
   }
 
-  register(user: object): Observable<any>
+  register(user: NewUser): Observable<any>
   {
-       return this.http.post(this.baseUrl+"users", user, this.options )
+       return this.http.post(this.baseUrl+"register", user, this.options )
   }
 
   verifyAccount(user: object): Observable<any>
   {
-       return this.http.put(this.baseUrl+"verify-password", user, this.options )
+       return this.http.post(this.baseUrl+"verifyEmail", user, this.options )
   }
 
   recoverEmail(email: any):Observable<any>
