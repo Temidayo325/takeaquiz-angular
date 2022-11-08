@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
                      this.toast.success(response.message)
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
-                     this.router.navigate(['/verify-account', {email: response.email}])
+                     this.router.navigate(['/verify-account'])
                 }
                 this.toast.success(response.message)
                 this.message = response.message

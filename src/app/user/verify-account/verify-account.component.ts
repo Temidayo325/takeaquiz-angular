@@ -33,13 +33,13 @@ export class VerifyAccountComponent implements OnInit {
   ngOnInit(): void
   {
        this.title.setTitle("Verify your Account")
-      this.route.snapshot.paramMap.get('email')
+      // this.route.snapshot.paramMap.get('email')
   }
 
   onSubmit(): void
   {
        this.loader.start()
-       this.userService.verifyAccount({email: this.route.snapshot.paramMap.get('email'), code: this.form.value.code}).subscribe(
+       this.userService.verifyAccount({email: sessionStorage.getItem('email'), code: this.form.value.code}).subscribe(
             (response) => {
                  this.loader.complete()
                  if (response.status) {
