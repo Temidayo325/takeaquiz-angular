@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
+// import { flowbite } from 'flowbite';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { PrepComponent } from './user/prep/prep.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { VerifyAccountComponent } from './user/verify-account/verify-account.com
     PrepComponent,
     Error404Component,
     RegisterComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    AdminHomeComponent
   ],
   imports: [
     LoadingBarModule,

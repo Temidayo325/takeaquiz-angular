@@ -27,13 +27,29 @@ export class DashboardComponent implements OnInit {
  ) { }
 
      public topics: Array<any> = this.storeService.topics
+     public totalQuestions: number = 0
+     public totalUsers: number = 0
+     public totalDepartments: number = 0
      public newTopic!: Subscription
+     public navigation: boolean = false
+     public user = JSON.parse(sessionStorage.getItem('user')!)
+     public imageSource: string = `https://avatars.dicebear.com/api/identicon/${this.user.nickname}.svg?mood[]=happy`
   ngOnInit(): void
   {
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
                  this.topics = response.data
+                 this.totalUsers = response.users
+                 this.totalDepartments = response.faculties
+                 let questionTotalsArray: Array<number> = []
+                 this.topics.forEach((current, index) => {
+                      questionTotalsArray.push(current.question)
+                 })
+                 this.totalQuestions = questionTotalsArray.reduce((total, current, index) => {
+                     return total + current
+                }, 0)
                  this.storeService.setTopics(this.topics)
+                 this.router.navigate(['/admin/dashboard/home'])
             },
 
             (error) => {
@@ -44,12 +60,18 @@ export class DashboardComponent implements OnInit {
        this.newTopic = this.shared.getAddedTopic().subscribe(
             (resp) => {
                  this.topics.push(resp)
+                 console.log(this.topics)
                  this.storeService.setTopics(this.topics)
                  this.router.navigate(['/admin/dashboard'])
             }
        )
+
   }
 
+  toggleNavigation(): void
+  {
+       this.navigation = !this.navigation
+  }
   trackByFn(index: number, topic: any) {
         return topic ? topic.id : undefined;
     }
@@ -94,6 +116,13 @@ export class DashboardComponent implements OnInit {
                   }
              )
         }
+   }
+
+   location(link: string)
+   {
+        this.router.navigate([link])
+        this.toggleNavigation()
+
    }
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.

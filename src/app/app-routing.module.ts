@@ -17,6 +17,7 @@ import { PrepComponent } from './user/prep/prep.component';
 import { Error404Component } from './errors/error404/error404.component';
 import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
 import { RegisterComponent } from './register/register.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -52,6 +53,10 @@ const routes: Routes = [
                {
                     path: 'topic/:id',
                     component: VerifyQuestionComponent
+               },
+               {
+                    path: 'home',
+                    component: AdminHomeComponent
                }
           ]},
      { path: '', redirectTo: '/index', pathMatch: 'full' },

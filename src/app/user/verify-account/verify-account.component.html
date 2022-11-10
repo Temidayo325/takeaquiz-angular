@@ -1,25 +1,32 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="flex justify-center items-center h-screen">
-     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
-          <div>
-               <label for="code">Code</label>
-               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.code}}</p>
-               <div *ngIf="code!.invalid && (code!.dirty || code!.touched)"
-                   class="text-red-600 mt-1 text-sm">
+<div class="tracking-wider md:flex md:justify-start">
+     <div class="w-full h-64 relative z-20 bg-no-repeat md:bg-cover md:w-3/6 md:h-screen" style="background-image: url('../../assets/images/blob-scene-haikei.svg')">
+          <div class="absolute -bottom-12 bg-dark -left-12 w-24 h-24 rotate-45 z-10 md:hidden" style="background: #001220"></div>
+     </div>
+     <div class="grid gap-6 justify-center px-6 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
+          <h2 class="font-bold text-center mt-10 text-xl md:text md:mt-64 md:text-xl">Verify Account</h2>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-1/3 mt-12 mx-auto">
+               <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
+               <div>
+                    <label for="code" class="block text-md mb-2 md:font-bold md:text-sm">Code</label>
+                    <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.code}}</p>
+                    <div *ngIf="code!.invalid && (code!.dirty || code!.touched)"
+                        class="text-red-600 mt-1 text-sm">
 
-                 <p *ngIf="code!.errors?.['required']">
-                   Kindly input code sent to your email.
-                 </p>
-                 <p *ngIf="code!.errors?.['minLength']">
-                   Your full name should not be less than 5 characters
-                 </p>
+                      <p *ngIf="code!.errors?.['required']">
+                        Kindly input code sent to your email.
+                      </p>
+                      <p *ngIf="code!.errors?.['minLength']">
+                        Your full name should not be less than 5 characters
+                      </p>
+                    </div>
+                    <input type="number" formControlName="code" id="code" name="code" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <input type="number" formControlName="code" id="code" name="code" class="block border border-gray-400">
-          </div>
 
-          <div class="flex justify-center my-3">
-               <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Verify Account</button>
-          </div>
-     </form>
+               <div class="mt-6 ">
+                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Verify account</button>
+               </div>
+          </form>
+     </div>
+
 </div>

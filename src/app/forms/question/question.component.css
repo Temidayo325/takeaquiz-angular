@@ -1,0 +1,8 @@
+button:disabled{
+     background: #001220;
+     color: #FBAE3C;
+}
+button:enabled{
+     background: #FBAE3C;
+     color: #001220
+}

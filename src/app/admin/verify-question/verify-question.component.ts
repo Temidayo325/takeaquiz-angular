@@ -51,7 +51,7 @@ export class VerifyQuestionComponent implements OnInit {
   ngDoCheck()
   {
        // this.getData()
-       console.log('chande')
+       // console.log('chande')
   }
 
   trackByFn(index: number, topic: any)
@@ -93,7 +93,7 @@ export class VerifyQuestionComponent implements OnInit {
   }
   public closeModal()
   {
-      this.showEditForm.display = false  
+      this.showEditForm.display = false
   }
   public submitEditForm()
   {

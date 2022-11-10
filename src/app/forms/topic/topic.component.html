@@ -1,14 +1,15 @@
-<div>
-     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div class="mt-3">
+     <h2 class="font-bold text-md">Create a new topic</h2>
+     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mt-6">
           <div class="">
                <label for="title">Title</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.title}}</p>
-               <input type="text" formControlName="title" id="title">
+               <input type="text" formControlName="title" id="title" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
           </div>
           <div class="mt-3">
                <label for="department">Department</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.department}}</p>
-               <select id="department" formControlName="department">
+               <select id="department" formControlName="department" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value=""></option>
                     <option value="Pharmacology">Pharmacognosy</option>
                     <option value="Pharmaceutical Microbiology and biotechnology">Pharmaceutical Microbiology and biotechnology</option>
@@ -22,14 +23,14 @@
           <div class="mt-3">
                <label for="faculty">Facullty</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.faculty}}</p>
-               <select id="faculty" formControlName="faculty">
+               <select id="faculty" formControlName="faculty" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value=""></option>
                     <option value="Pharmaceutical Sciences">Pharmaceutical sciences</option>
                </select>
           </div>
 
-          <div>
-               <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Login</button>
+          <div class="mt-6 md:mt-12">
+               <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Add topic</button>
           </div>
      </form>
 </div>

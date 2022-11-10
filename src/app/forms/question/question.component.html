@@ -1,15 +1,16 @@
 <ngx-loading-bar></ngx-loading-bar>
-     <div>
-          <div>
-               <label for="questionMethodType">Choose question upload method</label>
-               <select name="questionMethodType" id="questionMethodType" [(ngModel)]="methodType" (change)="chooseQuestionType($event)">
+     <div class="mt-5">
+          <h2 class="font-bold text-md">Create new questions</h2>
+          <div class="mt-3">
+               <label for="questionMethodType">Choose question creation method</label>
+               <select name="questionMethodType" id="questionMethodType" [(ngModel)]="methodType" (change)="chooseQuestionType($event)" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value="" disabled></option>
                     <option value="true">Enter question</option>
                     <option value="false">Upload File</option>
                </select>
           </div>
 
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="methodType">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="methodType" class="mt-6">
                <div class="">
                     <label for="topic">Select Topic</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.topic_id}}</p>
@@ -20,12 +21,12 @@
                         Topic is required.
                       </p>
                     </div>
-                    <select id="topic_id" formControlName="topic_id">
+                    <select id="topic_id" formControlName="topic_id" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          <option value="" disabled>Select topic to add question</option>
                          <option value="{{topic.id}}" *ngFor="let topic of topics; let i = index; trackBy: trackByFn">{{topic.title}}</option>
                     </select>
                </div>
-               <div class="">
+               <div class="mt-3">
                     <label for="question">Question</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.question}}</p>
                     <div *ngIf="question!.invalid && (question!.dirty || question!.touched)"
@@ -38,9 +39,11 @@
                         Question must be at least 5 characters long.
                       </p>
                     </div>
-                    <input type="text" formControlName="question" id="question" class="border">
+                    <textarea type="text" formControlName="question" id="question" class="border" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300 h-40">
+                    </textarea>
                </div>
-               <div>
+
+               <div class="mt-3">
                     <label for="option1">Option1</label>
                     <div *ngIf="option1!.invalid && (option1!.dirty || option1!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -53,9 +56,10 @@
                       </p>
                     </div>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option1}}</p>
-                    <input type="text" formControlName="option1" id="option1">
+                    <input type="text" formControlName="option1" id="option1" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <div>
+
+               <div class="mt-3">
                     <label for="option2">Option2</label>
                     <div *ngIf="option2!.invalid && (option2!.dirty || option2!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -68,19 +72,22 @@
                       </p>
                     </div>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option2}}</p>
-                    <input type="text" formControlName="option2" id="option2">
+                    <input type="text" formControlName="option2" id="option2" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <div>
+
+               <div class="mt-3">
                     <label for="option3">Option3</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option3}}</p>
-                    <input type="text" formControlName="option3" id="option3">
+                    <input type="text" formControlName="option3" id="option3" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <div>
+
+               <div class="mt-3">
                     <label for="option4">Option4</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option4}}</p>
-                    <input type="text" formControlName="option4" id="option4">
+                    <input type="text" formControlName="option4" id="option4" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <div>
+
+               <div class="mt-3">
                     <label for="answer">Answer</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.answer}}</p>
                     <div *ngIf="answer!.invalid && (answer!.dirty || answer!.touched)"
@@ -93,14 +100,15 @@
                         Answer must be at least 5 characters long.
                       </p>
                     </div>
-                    <input type="text" formControlName="answer" id="answer">
+                    <input type="text" formControlName="answer" id="answer" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
-               <div>
-                    <button type="submit" [disabled]="!form.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>
+
+               <div class="mt-6 md:mt-12">
+                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Submit question</button>
                </div>
           </form>
 
-          <form *ngIf="!methodType" (ngSubmit)="ngSubmitfile()" [formGroup]="formByFile">
+          <form *ngIf="!methodType" (ngSubmit)="ngSubmitfile()" [formGroup]="formByFile" class="mt-6">
                <div class="">
                     <label for="topic">Select Topic</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.topic_id}}</p>
@@ -111,12 +119,12 @@
                         Topic is required.
                       </p>
                     </div>
-                    <select id="topic_id" formControlName="topic_id">
+                    <select id="topic_id" formControlName="topic_id" class="w-full text-md text-black bg-gray-200 py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          <option value="" disabled>Select topic to add question</option>
                          <option value="{{topic.id}}" *ngFor="let topic of topics; let i = index; trackBy: trackByFn">{{topic.title}}</option>
                     </select>
                </div>
-               <div class="">
+               <div class="mt-5">
                     <label for="file">Choose File</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.question}}</p>
                     <div *ngIf="file!.invalid && (file!.dirty || file!.touched)"
@@ -130,11 +138,12 @@
                     <div class="">
                        {{fileName}}
 
-                        <a (click)="pickFile.click()" class="bg-gray-300 py-6 px-8 font-bold cursor-pointer">Click to upload a file</a>
+                        <a (click)="pickFile.click()" class="py-3 px-4 mt-2 text-md font-bold cursor-pointer block" style="background: #FBAE3C; color: #001220">Click to upload a file</a>
                     </div>
                </div>
-               <div>
-                    <button type="submit" [disabled]="!formByFile.valid" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>
+
+               <div class="mt-6 md:mt-12">
+                    <button type="submit" [disabled]="!formByFile.valid" class="px-4 py-2 text-center w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Submit question</button>
                </div>
           </form>
      </div>

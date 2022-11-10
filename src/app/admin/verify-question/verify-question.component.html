@@ -1,9 +1,9 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div class="mt-6 w-full ml-3">
-     <h3>{{topic}}</h3>
-     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-         <table class="w-full text-lg text-left text-gray-500 dark:text-gray-400">
-             <thead class="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+     <h2 class="font-bold text-md">{{topic}}</h2>
+     <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-3">
+         <table class="w-full text-left text-gray-500 dark:text-gray-400">
+             <thead class="text-sm font-bold text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                  <tr>
                      <th scope="col" class="py-3 px-6">
                          Question
@@ -36,11 +36,11 @@
              </thead>
              <tbody *ngIf="questions.length == 0">
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" >
-                          <td class="text-xl font-bold text-center py-3 " colspan="5">No Question to available for this question.</td>
+                          <td class="text-md font-bold text-center py-3 " colspan="5">No Question to available for this question.</td>
                  </tr>
              </tbody>
              <tbody *ngIf="questions.length > 0">
-                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
+                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-black" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
                       <td class="text-center">{{question.question}}</td>
                       <td class="text-center">{{question.option1}}</td>
                       <td class="text-center">{{question.option2}}</td>
@@ -48,8 +48,8 @@
                       <td class="text-center">{{question.option4}}</td>
                       <td class="text-center">{{question.answer}}</td>
                       <td class="text-center">
-                           <p class="bg-blue-300 text-white px-2 py-2" *ngIf="question.status == 1">Active</p>
-                           <p class="bg-red-300 text-black px-2 py-2" *ngIf="question.status == 0">Inactive</p>
+                           <p class="text-blue-300 text-white px-2 py-2" *ngIf="question.status == 1">Active</p>
+                           <p class="text-red-300 text-black px-2 py-2" *ngIf="question.status == 0">Inactive</p>
                       </td>
                      <td class="text-center">
                           <button (click)="toggleActivation(question.id, questions.indexOf(question))" *ngIf="question.status == 1" class="bg-red-300 text-white px-2 py-2 mx-2">Inactivate</button>
