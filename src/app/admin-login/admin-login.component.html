@@ -5,12 +5,12 @@
                <div class="mt-10">
                     <label for="email" class="font-bold text-sm">Email</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.email}}</p>
-                    <input type="email" formControlName="email" id="email" class="w-full text-md text-black py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="email" formControlName="email" id="email" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
                <div class="mt-6">
                     <label for="password" class="font-bold text-sm">Password</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.password}}</p>
-                    <input type="password" formControlName="password" id="password" class="w-full text-md text-black py-2 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="password" formControlName="password" id="password" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                </div>
 
                <div class="mt-8 flex justify-center">

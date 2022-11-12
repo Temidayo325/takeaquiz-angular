@@ -40,7 +40,7 @@
                  </tr>
              </tbody>
              <tbody *ngIf="questions.length > 0">
-                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-black" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
+                 <tr class="bg-white border-b  text-black" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
                       <td class="text-center">{{question.question}}</td>
                       <td class="text-center">{{question.option1}}</td>
                       <td class="text-center">{{question.option2}}</td>

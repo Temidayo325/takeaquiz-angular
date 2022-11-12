@@ -1,11 +1,13 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div>
-     <div *ngIf="stat.submitted">
-          <h2>Submitted succesfully</h2>
-          <h3>Your score is {{stat.correctScore}}</h3>
+     <div *ngIf="stat.submitted" style="color: #001220" class="flex justify-center items-center w-full h-screen">
+          <div>
+               <h2>Submitted succesfully</h2>
+               <h3>Your score is {{stat.correctScore}}</h3>
+          </div>
      </div>
 
-     <div *ngIf="!stat.submitted">
+     <div *ngIf="!stat.submitted" class="py-4 px-2">
           <div class="mx-4 flex justify-center mt-4">
                <div>
                     <p>{{stat.completed}} of {{stat.total}}</p>
@@ -35,9 +37,9 @@
                     </div>
                </div>
                <div class="mt-20 mb-3 ml-2 md:ml-12 flex justify-center gap-3">
-                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
-                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
-                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" style="background: #001220; color: #FBAE3C;" [disabled]="currentIndex == 0" >Prev</button>
+                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg text-white" style="background: #FBAE3C; color: #001220;">Submit</button>
+                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1" style="background: #001220; color: #FBAE3C;">Next</button>
                </div>
      </div>
 </div>

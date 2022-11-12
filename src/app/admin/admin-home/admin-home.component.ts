@@ -29,6 +29,7 @@ export class AdminHomeComponent implements OnInit {
      public totalQuestions: number = 0
      public totalUsers: number = 0
      public totalDepartments: number = 0
+     public totalAssesments: number = 0
      public newTopic!: Subscription
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
@@ -42,6 +43,7 @@ export class AdminHomeComponent implements OnInit {
                     this.topics = response.data
                     this.totalUsers = response.users
                     this.totalDepartments = response.faculties
+                    this.totalAssesments = response.results
                     let questionTotalsArray: Array<number> = []
                     this.topics.forEach((current, index) => {
                          questionTotalsArray.push(current.question)

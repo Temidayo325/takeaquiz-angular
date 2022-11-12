@@ -74,6 +74,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  Number(this.route.snapshot.paramMap.get('topic_id'))}).subscribe(
                  (response) => {
                       this.loader.complete()
+                      sessionStorage.setItem('results', JSON.stringify(response.results))
                       setTimeout(() => {
                            this.router.navigate(['/user/dashboard/results'])
                       }, 5000)

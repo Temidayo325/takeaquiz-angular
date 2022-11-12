@@ -1,5 +1,5 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div>
+<div class="">
      <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <div class="">
                <label for="faculty">Faculty</label>
@@ -14,12 +14,12 @@
                    Invalid Faculty chosen
                  </p>
                </div>
-               <select name="faculty" id="faculty" formControlName="faculty">
+               <select name="faculty" id="faculty" formControlName="faculty" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value="" disabled></option>
                     <option value="Pharmaceutical sciences">Pharmaceutical sciences</option>
                </select>
           </div>
-          <div class="">
+          <div class="mt-6">
                <label for="faculty">Department</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.department}}</p>
                <div *ngIf="department!.invalid && (department!.dirty || department!.touched)"
@@ -32,12 +32,12 @@
                    Invalid Department chosen
                  </p>
                </div>
-               <select name="department" id="department" formControlName="department">
+               <select name="department" id="department" formControlName="department" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value="" disabled></option>
                     <option value=`${department}` *ngFor="let department of departments;let i = index; trackBy: trackByFn">{{department}}</option>
                </select>
           </div>
-          <div class="">
+          <div class="mt-6">
                <label for="topic_id">Choose Topic</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.topic_id}}</p>
                <div *ngIf="topic_id!.invalid && (topic_id!.dirty || topic_id!.touched)"
@@ -50,14 +50,14 @@
                    Invalid Topic chosen
                  </p>
                </div>
-               <select name="topic_id" id="topic_id" formControlName="topic_id">
+               <select name="topic_id" id="topic_id" formControlName="topic_id" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value="" disabled></option>
                     <option [value]="topic.id" *ngFor="let topic of topics;let i = index; trackBy: trackByFn">{{topic.title}}</option>
                </select>
           </div>
 
-          <div>
-               <button type="submit" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300" [disabled]="!form.valid">Start assesment</button>
+          <div class="mt-10">
+               <button type="submit" class="px-4 py-2 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg" [disabled]="!form.valid">Start assesment</button>
           </div>
      </form>
 </div>

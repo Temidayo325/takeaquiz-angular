@@ -18,6 +18,7 @@ import { Error404Component } from './errors/error404/error404.component';
 import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -30,6 +31,10 @@ const routes: Routes = [
           canLoad: [LoggeninUserGuard],
           canActivate: [LoggeninUserGuard],
           children: [
+               {
+                    path: 'home',
+                    component: UserHomeComponent
+               },
                {
                     path: 'results',
                     component: ResultsComponent

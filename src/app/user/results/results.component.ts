@@ -25,7 +25,6 @@ export class ResultsComponent implements OnInit {
        this.userService.getResults(this.user.id).subscribe(
             (response: any) => {
                  this.results = response.results
-                 console.log(response)
                  sessionStorage.setItem('results', JSON.stringify(response.results))
             },
             (error) => {

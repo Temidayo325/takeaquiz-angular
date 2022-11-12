@@ -25,6 +25,7 @@ import { Error404Component } from './errors/error404/error404.component';
 import { RegisterComponent } from './register/register.component';
 import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { UserHomeComponent } from './user/user-home/user-home.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
     Error404Component,
     RegisterComponent,
     VerifyAccountComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    UserHomeComponent
   ],
   imports: [
     LoadingBarModule,

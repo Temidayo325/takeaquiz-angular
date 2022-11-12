@@ -20,10 +20,26 @@ export class UserDashboardComponent implements OnInit {
       private router: Router,
       private userService: UserService
  ) { }
-  public result: Array<[]> = JSON.parse(sessionStorage.getItem('results')!)
-  public countedResult: number = this.result === null ? 0 : this.result.length
+
+  public navigation: boolean = false
+  public user = JSON.parse(sessionStorage.getItem('user')!)
+  public imageSource: string = `https://avatars.dicebear.com/api/identicon/${this.user.nickname}.svg?mood[]=happy`
+
   ngOnInit(): void
   {
+       this.router.navigate(['/user/dashboard/home'])
+  }
+
+  toggleNavigation(): void
+  {
+       this.navigation = !this.navigation
+  }
+
+  location(link: string)
+  {
+       this.router.navigate([link])
+       this.toggleNavigation()
+
   }
 
   logout()
