@@ -49,6 +49,9 @@ export class LoginComponent implements OnInit {
                      this.toast.success(response.message)
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
+                     sessionStorage.setItem('totalResults', response.countedResult)
+                     sessionStorage.setItem('totalTopics', response.countTopics)
+                     sessionStorage.setItem('top3Topics', JSON.stringify(response.top3))
                      this.router.navigate(['/user/dashboard'])
                 }
                 this.toast.success(response.message)

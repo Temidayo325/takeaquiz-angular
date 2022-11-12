@@ -33,6 +33,7 @@ export class PrepComponent implements OnInit, OnDestroy {
       error: any = []
       topics: Array<any> = []
       departments: Array<string> = []
+      titles: Array<any> = []
 
       ngOnInit(): void
       {
@@ -81,6 +82,15 @@ export class PrepComponent implements OnInit, OnDestroy {
           return topic ? topic.id : undefined;
       }
 
+      chosenDepartment($event:any)
+      {
+           console.log($event.target.value)
+           this.topics.forEach((item, index) => {
+                if (item.department.toLowerCase() === $event.target.value.toLowerCase() ) {
+                     this.titles.push(item)
+                }
+           })
+      }
       ngOnDestroy(): void
       {
            //Called once, before the instance is destroyed.

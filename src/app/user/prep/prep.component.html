@@ -32,9 +32,9 @@
                    Invalid Department chosen
                  </p>
                </div>
-               <select name="department" id="department" formControlName="department" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+               <select name="department" id="department" formControlName="department" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300" (change)="chosenDepartment($event)">
                     <option value="" disabled></option>
-                    <option value=`${department}` *ngFor="let department of departments;let i = index; trackBy: trackByFn">{{department}}</option>
+                    <option [value]="department" *ngFor="let department of departments;let i = index; trackBy: trackByFn">{{department}}</option>
                </select>
           </div>
           <div class="mt-6">
@@ -52,7 +52,7 @@
                </div>
                <select name="topic_id" id="topic_id" formControlName="topic_id" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                     <option value="" disabled></option>
-                    <option [value]="topic.id" *ngFor="let topic of topics;let i = index; trackBy: trackByFn">{{topic.title}}</option>
+                    <option [value]="topic.id" *ngFor="let topic of titles;let i = index; trackBy: trackByFn">{{topic.title}}</option>
                </select>
           </div>
 

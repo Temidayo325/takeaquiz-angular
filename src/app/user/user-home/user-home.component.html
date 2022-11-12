@@ -50,3 +50,34 @@
           </tbody>
      </table>
 </section>
+
+<section class="mt-8 overflow-x-scroll">
+     <h2 class="text-md font-bold">Latest topics</h2>
+     <table class="w-full text-md text-left text-gray-500 mt-4 shadow-lg py-3 ">
+         <thead class="text-sm font-bold text-gray-700 bg-gray-50">
+             <tr>
+                 <th scope="col" class="py-3 px-6">
+                     Title
+                 </th>
+                 <th scope="col" class="py-3 px-6">
+                     Department
+                 </th>
+                 <th scope="col" class="py-3 px-6">
+                      Faculty
+                 </th>
+             </tr>
+         </thead>
+         <tbody *ngIf="topTopics.length == 0">
+              <tr class="bg-white border-b" >
+                     <td class="text-sm font-bold text-center py-3 " colspan="5">No Topics to display yet.</td>
+             </tr>
+         </tbody>
+         <tbody *ngIf="topTopics.length > 0">
+             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn">
+                  <td>{{topic.title || 'NA'}}</td>
+                  <td class="text-center">{{topic.department}}</td>
+                  <td class="text-center" >{{topic.faculty}}</td>
+             </tr>
+          </tbody>
+     </table>
+</section>

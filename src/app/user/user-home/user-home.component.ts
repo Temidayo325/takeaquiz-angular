@@ -21,14 +21,16 @@ export class UserHomeComponent implements OnInit {
       private userService: UserService
  ) { }
 
-  public result: Array<[]> = JSON.parse(sessionStorage.getItem('results')!)
-  public countedResult: number = this.result === null ? 0 : this.result.length
+  // public result: Array<[]> = JSON.parse(sessionStorage.getItem('results')!)
+  public topTopics: Array<any> = JSON.parse(sessionStorage.getItem('top3Topics')!)
+  public countedResult: number = sessionStorage.getItem('totalResults') === null ? 0 : Number(sessionStorage.getItem('totalResults'))
+   public countedTopics: number = sessionStorage.getItem('totalTopics') === null ? 0 : Number(sessionStorage.getItem('totalTopics'))
   public topics: Array<any> = JSON.parse(sessionStorage.getItem('topics')!)
   public results: Array<any> = JSON.parse(sessionStorage.getItem('results')!)
-  
+
   ngOnInit(): void
   {
-
+       console.log(this.topTopics)
   }
   trackByFn(index: number, result: any)
   {
