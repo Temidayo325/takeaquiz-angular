@@ -1,9 +1,11 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div>
      <div *ngIf="stat.submitted" style="color: #001220" class="flex justify-center items-center w-full h-screen">
-          <div>
-               <h2>Submitted succesfully</h2>
-               <h3>Your score is {{stat.correctScore}}</h3>
+          <div class="text-center" style="color: #001220">
+               <div class="w-full h-40 relative z-20 bg-no-repeat md:bg-cover md:w-3/6 md:h-screen" style="background-image: url('../../assets/images/success.jpg')">
+               </div>
+               <h2 class=" py-2">Submitted succesfully</h2>
+               <h3 class=" py-2 mt-3">Your score is <span class="font-bold px-2 py-2" style="color: #FBAE3C; background: #001220">{{stat.correctScore}}</span></h3>
           </div>
      </div>
 

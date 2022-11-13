@@ -1,6 +1,6 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div class="pb-3">
-     <header class="sticky py-4 px-3 shadow-md w-full flex justify-start gap-20">
+     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-start gap-20 bg-white">
           <button class="grid gap-1 w-8" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
                <div class="rounded-full h-1 w-full bg-black"></div>
                <div class="rounded-full h-1 w-2/3 bg-black"></div>
@@ -9,7 +9,7 @@
           <h2 class="text-lg ">Dashboard</h2>
      </header>
      <!-- drawer component -->
-     <div id="drawer-example" class="fixed z-40 h-screen overflow-y-auto bg-white w-80 dark:bg-gray-800 border-0 border-r border-gray-400 bg-white/90 bg-no-repeat bg-cover bg-fixed" tabindex="-1" aria-labelledby="drawer-label" *ngIf="navigation" style="background-image: url('../../assets/images/low-poly-grid-haikei.svg')">
+     <div id="drawer-example" class="fixed z-40 h-screen overflow-y-auto bg-white w-80 dark:bg-gray-800 border-0 border-r border-gray-400 bg-white/90 bg-no-repeat bg-cover bg-fixed" tabindex="-1" aria-labelledby="drawer-label" *ngIf="navigation" style="background-image: url('../../assets/images/low-poly-grid-haikei.svg')"  @onOff>
         <button type="button" data-drawer-dismiss="drawer-example" aria-controls="drawer-example" class="text-gray-100 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="toggleNavigation()">
            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
            <span class="sr-only">Close menu</span>

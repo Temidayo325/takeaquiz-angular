@@ -33,15 +33,18 @@ const routes: Routes = [
           children: [
                {
                     path: 'home',
-                    component: UserHomeComponent
+                    component: UserHomeComponent,
+                    // data: { animation: 'insertRemovePage' }
                },
                {
                     path: 'results',
-                    component: ResultsComponent
+                    component: ResultsComponent,
+                    // data: { animation: 'insertRemovePage' }
                },
                {
                     path: 'take-assessment',
-                    component: PrepComponent
+                    component: PrepComponent,
+                    // data: { animation: 'insertRemovePage' }
                }
           ]},
      {path: 'user/assessment', component: AssessmentComponent},

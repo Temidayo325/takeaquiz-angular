@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { LoadingBarModule } from '@ngx-loading-bar/core';
@@ -50,6 +51,7 @@ import { UserHomeComponent } from './user/user-home/user-home.component';
   imports: [
     LoadingBarModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

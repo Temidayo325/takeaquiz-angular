@@ -4,12 +4,33 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import { StoreService } from './../../service/store.service';
 import { UserService } from './../../service/user.service';
-import { Router } from '@angular/router';
+import { Router, ChildrenOutletContexts } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { slideInAnimation } from './../animations';
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  styleUrls: ['./user-dashboard.component.css'],
+  animations: [
+       slideInAnimation,
+     trigger('onOff', [
+            transition(':enter', [style({
+                   opacity: 0,
+                   transform: 'translateX(-100%)'
+                 }),
+                 animate(200)
+               ])
+     ]),
+     trigger('onOff', [
+            transition(':leave', [style({
+                   opacity: 0,
+                   transform: 'translateX(-100%)'
+                 }),
+                 animate(200)
+               ])
+     ])
+  ]
 })
 export class UserDashboardComponent implements OnInit {
 
@@ -18,7 +39,8 @@ export class UserDashboardComponent implements OnInit {
       private loader: LoadingBarService,
       private toast: ToastService,
       private router: Router,
-      private userService: UserService
+      private userService: UserService,
+      private contexts: ChildrenOutletContexts
  ) { }
 
   public navigation: boolean = false
@@ -28,6 +50,11 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit(): void
   {
        this.router.navigate(['/user/dashboard/home'])
+  }
+
+  getRouteAnimationData()
+  {
+       return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
   }
 
   toggleNavigation(): void

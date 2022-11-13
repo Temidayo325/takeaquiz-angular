@@ -30,7 +30,7 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit(): void
   {
-       console.log(this.topTopics)
+     
   }
   trackByFn(index: number, result: any)
   {

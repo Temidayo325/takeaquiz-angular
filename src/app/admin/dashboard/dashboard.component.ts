@@ -8,11 +8,30 @@ import { StoreService } from './../../service/store.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ShareService } from './../../services/share.service'
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  animations: [
+    trigger('onOff', [
+            transition(':enter', [style({
+                   opacity: 0,
+                   transform: 'translateX(-100%)'
+                 }),
+                 animate(200)
+               ])
+    ]),
+    trigger('onOff', [
+            transition(':leave', [style({
+                   opacity: 0,
+                   transform: 'translateX(-100%)'
+                 }),
+                 animate(200)
+               ])
+    ])
+  ]
 })
 export class DashboardComponent implements OnInit {
 
