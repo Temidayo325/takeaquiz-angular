@@ -8,6 +8,7 @@ import { StoreService } from './../../service/store.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ShareService } from './../../services/share.service'
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-home',
@@ -24,6 +25,7 @@ export class AdminHomeComponent implements OnInit {
        private toast: ToastService,
        private router: Router,
        private userService: UserService,
+       private title: Title
  ) { }
      public topics: Array<any> = this.storeService.topics
      public totalQuestions: number = 0
@@ -55,6 +57,7 @@ export class AdminHomeComponent implements OnInit {
                },
 
                (error) => {
+                    this.toast.error(error.error.message)
                     console.log(error)
                }
           )
@@ -84,11 +87,13 @@ export class AdminHomeComponent implements OnInit {
            this.newTopic = this.topicService.delete(id).subscribe(
                 () => {
                      this.loader.complete()
+                     this.toast.info("Topic removed succesfully")
                      this.topics.splice(index, 1);
                 },
 
                 (error) => {
                      this.loader.complete()
+                     this.toast.error(error.error.message)
                 }
            )
       }

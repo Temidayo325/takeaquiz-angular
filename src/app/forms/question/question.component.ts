@@ -6,6 +6,7 @@ import { QuestionService } from './../../services/question.service';
 import { Router } from '@angular/router';
 import { Subject, Observable, of, Subscription } from 'rxjs';
 // import { ShareService } from './../../services/share.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-question',
@@ -42,7 +43,10 @@ export class QuestionComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private router: Router,
- ) { }
+       private title: Title
+ ) {
+      this.title.setTitle("Create new questions")
+ }
 
   ngOnInit(): void
   {
@@ -73,6 +77,7 @@ export class QuestionComponent implements OnInit {
        this.subs = this.questionService.createFromForm({...this.form.value}).subscribe(
             (response: any) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                  this.error = []
                 this.form.reset()
                 this.form.patchValue({type: "word", topic_id: topic_id})
@@ -98,6 +103,7 @@ export class QuestionComponent implements OnInit {
        this.subs = this.questionService.createFromFile(this.excelFile, this.formByFile.value.topic_id, {topic_id:this.formByFile.value.topic_id, question: this.excelFile }).subscribe(
             (response: any) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                  this.error = []
                 this.form.reset()
                 this.form.patchValue({type: "word", topic_id: this.formByFile.value.topic_id})

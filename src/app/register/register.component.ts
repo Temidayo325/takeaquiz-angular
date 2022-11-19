@@ -30,7 +30,9 @@ export class RegisterComponent implements OnInit {
      private router: Router,
      private toast: ToastService,
      private title: Title
- ) { }
+ ) {
+      this.title.setTitle('Create an account with us')
+ }
 
       get name() { return this.form.get('name'); }
       get nickname() { return this.form.get('nickname'); }
@@ -52,18 +54,18 @@ export class RegisterComponent implements OnInit {
            (response) => {
                 this.loader.complete()
                 if (response.status != false) {
-                     this.toast.success(response.message)
+                     this.toast.info(response.message)
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
+                     sessionStorage.setItem('email', this.form.value.email!)
+                     this.form.reset()
                      this.router.navigate(['/verify-account'])
                 }
-                this.toast.success(response.message)
                 this.message = response.message
            },
 
            (error) => {
                 this.loader.complete()
-                console.log(error)
                 this.toast.warn(error.error.message)
                 this.error = error.error.errors
            }

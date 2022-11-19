@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-// import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AssesmentService } from './../../service/assesment.service';
-// import { StoreService } from './../../service/store.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Subject, Observable, of } from 'rxjs';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-assessment',
@@ -16,12 +15,14 @@ export class AssessmentComponent implements OnInit, OnDestroy {
 
   constructor(
        private assesementService: AssesmentService,
-      // private storeService: StoreService,
+      private title: Title,
       private loader: LoadingBarService,
       private router: Router,
       private route: ActivatedRoute,
       private toast: ToastService
- ) { }
+ ) {
+          this.title.setTitle("Ongoing assessment")
+   }
 
   questions: Array<any> = []
   duration: number = 0
@@ -29,10 +30,11 @@ export class AssessmentComponent implements OnInit, OnDestroy {
   stat: any = {completed: 0, total: 0, submitted: false, correctScore: 0}
   timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
   currentIndex = 0
-
+  screen  = document.documentElement
   ngOnInit(): void
   {
           this.loader.start()
+          this.openFullscreen()
           if (sessionStorage.getItem('questions') === null || sessionStorage.getItem('duration') === null) {
                this.router.navigate(['/user/dashboard/take-assessment'])
           }
@@ -69,11 +71,13 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             this.stat.submitted = true
             this.timervalues.ongoing = null
             const score = this.markTest()
+            this.closeFullscreen()
             this.stat.correctScore = score
             const user = JSON.parse(sessionStorage.getItem('user')!)
             this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  Number(this.route.snapshot.paramMap.get('topic_id'))}).subscribe(
                  (response) => {
                       this.loader.complete()
+                      this.toast.info(response.message)
                       sessionStorage.setItem('results', JSON.stringify(response.results))
                       setTimeout(() => {
                            this.router.navigate(['/user/dashboard/results'])
@@ -81,6 +85,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
                  },
                  (error) => {
                       this.loader.complete()
+                      this.toast.error(error.message)
                       console.log(error)
                  }
             )
@@ -133,6 +138,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
        });
        this.stat.completed = done
   }
+
   public prev()
      {
           if (this.currentIndex > 0) {
@@ -142,6 +148,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
                this.getCompleted()
           }
      }
+
   public next()
      {
          if (this.currentIndex >= this.questions.length - 1) {
@@ -157,6 +164,21 @@ export class AssessmentComponent implements OnInit, OnDestroy {
          }
 
      }
+
+     openFullscreen()
+     {
+            if (this.screen.requestFullscreen) {
+              this.screen.requestFullscreen();
+             }
+      }
+
+      closeFullscreen()
+     {
+            if (document.exitFullscreen) {
+                 document.exitFullscreen();
+             }
+      }
+
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.

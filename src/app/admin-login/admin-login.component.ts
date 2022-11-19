@@ -6,7 +6,7 @@ import { UserService } from '../service/user.service';
 import { StoreService } from '../service/store.service';
 import { Router } from '@angular/router';
 import { Login } from './../models/login.models';
-
+import {Title} from '@angular/platform-browser';
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -25,7 +25,10 @@ export class AdminLoginComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private router: Router,
- ) { }
+       private title: Title
+ ) {
+      this.title.setTitle("Login to your admin dashboard")
+   }
 
   ngOnInit(): void {
   }
@@ -35,6 +38,7 @@ export class AdminLoginComponent implements OnInit {
        this.userService.adminLogin({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
             (response) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                  this.toast.success(response.message)
                  this.storeService.setuser(response.user, response.token)
                  this.storeService.setAdmin(response.questions, response.topics)

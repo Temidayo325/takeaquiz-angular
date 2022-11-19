@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
       this.userService.login({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
            (response) => {
                 this.loader.complete()
+                this.toast.info(response.message)
                 if (response.statusCode === 303) {
                      sessionStorage.setItem('email', this.form.value.email!)
                      this.router.navigate(['/verify-account'])
                 }
                 if (response.status != false && response.statusCode === 200) {
-                     this.toast.success(response.message)
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
                      sessionStorage.setItem('totalResults', response.countedResult)
@@ -54,13 +54,11 @@ export class LoginComponent implements OnInit {
                      sessionStorage.setItem('top3Topics', JSON.stringify(response.top3))
                      this.router.navigate(['/user/dashboard'])
                 }
-                this.toast.success(response.message)
                 this.message = response.message
            },
 
            (error) => {
                 this.loader.complete()
-                console.log(error)
                 this.toast.warn(error.error.message)
                 this.error = error.error.errors
            }

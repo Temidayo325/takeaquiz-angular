@@ -5,6 +5,7 @@ import { ToastService } from 'angular-toastify';
 import { StoreService } from './../../service/store.service';
 import { UserService } from './../../service/user.service';
 import { Router } from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-home',
@@ -18,7 +19,8 @@ export class UserHomeComponent implements OnInit {
       private loader: LoadingBarService,
       private toast: ToastService,
       private router: Router,
-      private userService: UserService
+      private userService: UserService,
+      private title: Title
  ) { }
 
   // public result: Array<[]> = JSON.parse(sessionStorage.getItem('results')!)
@@ -30,7 +32,7 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit(): void
   {
-     
+     this.title.setTitle('Your dashboard home')
   }
   trackByFn(index: number, result: any)
   {

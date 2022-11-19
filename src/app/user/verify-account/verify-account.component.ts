@@ -33,7 +33,6 @@ export class VerifyAccountComponent implements OnInit {
   ngOnInit(): void
   {
        this.title.setTitle("Verify your Account")
-      // this.route.snapshot.paramMap.get('email')
   }
 
   onSubmit(): void
@@ -42,8 +41,8 @@ export class VerifyAccountComponent implements OnInit {
        this.userService.verifyAccount({email: sessionStorage.getItem('email'), code: this.form.value.code}).subscribe(
             (response) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                  if (response.status) {
-                      alert(response.message)
                       this.router.navigate(['/login'])
                  }
             },

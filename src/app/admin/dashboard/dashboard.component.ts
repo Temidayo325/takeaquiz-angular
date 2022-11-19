@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ShareService } from './../../services/share.service'
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,8 +43,11 @@ export class DashboardComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private router: Router,
+       private title: Title,
        private userService: UserService,
- ) { }
+ ) {
+          this.title.setTitle("Admin dashboard")
+   }
 
      public topics: Array<any> = this.storeService.topics
      public totalQuestions: number = 0
@@ -72,14 +76,12 @@ export class DashboardComponent implements OnInit {
             },
 
             (error) => {
-                 console.log(error)
             }
        )
 
        this.newTopic = this.shared.getAddedTopic().subscribe(
             (resp) => {
                  this.topics.push(resp)
-                 console.log(this.topics)
                  this.storeService.setTopics(this.topics)
                  this.router.navigate(['/admin/dashboard'])
             }
@@ -106,11 +108,13 @@ export class DashboardComponent implements OnInit {
         this.newTopic = this.topicService.delete(id).subscribe(
              () => {
                   this.loader.complete()
+                  this.toast.info("Topic removed successfully")
                   this.topics.splice(index, 1);
              },
 
              (error) => {
                   this.loader.complete()
+                  this.toast.error(error.error.message)
              }
         )
    }
@@ -123,6 +127,7 @@ export class DashboardComponent implements OnInit {
              this.userService.logout(user.id).subscribe(
                   (response: any) => {
                        this.loader.complete()
+                       this.toast.info(response.message)
                        if (response.status) {
                             sessionStorage.clear()
                             localStorage.clear()
@@ -131,7 +136,7 @@ export class DashboardComponent implements OnInit {
                   },
                   (error) => {
                        this.loader.complete()
-                       this.toast.error(error.message)
+                       this.toast.error(error.error.message)
                   }
              )
         }

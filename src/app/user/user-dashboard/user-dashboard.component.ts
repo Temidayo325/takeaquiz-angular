@@ -7,6 +7,7 @@ import { UserService } from './../../service/user.service';
 import { Router, ChildrenOutletContexts } from '@angular/router';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { slideInAnimation } from './../animations';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -40,7 +41,8 @@ export class UserDashboardComponent implements OnInit {
       private toast: ToastService,
       private router: Router,
       private userService: UserService,
-      private contexts: ChildrenOutletContexts
+      private contexts: ChildrenOutletContexts,
+      private title: Title
  ) { }
 
   public navigation: boolean = false
@@ -50,6 +52,7 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit(): void
   {
        this.router.navigate(['/user/dashboard/home'])
+       this.title.setTitle("Your dashboard home")
   }
 
   getRouteAnimationData()
@@ -66,7 +69,6 @@ export class UserDashboardComponent implements OnInit {
   {
        this.router.navigate([link])
        this.toggleNavigation()
-
   }
 
   logout()
@@ -78,6 +80,7 @@ export class UserDashboardComponent implements OnInit {
                  (response: any) => {
                       this.loader.complete()
                       if (response.status) {
+                           this.toast.info("You have signed out from your account")
                            sessionStorage.clear()
                            localStorage.clear()
                            this.router.navigate(['/login'])

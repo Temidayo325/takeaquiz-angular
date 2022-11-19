@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Subject, Observable, of } from 'rxjs';
 import { Topic } from './../../models/topic.models';
 import { ShareService } from './../../services/share.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-topic',
@@ -27,7 +28,10 @@ export class TopicComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private router: Router,
- ) { }
+       private title: Title,
+ ) {
+      this.title.setTitle("Create a new topic")
+ }
 
   ngOnInit(): void
   {
@@ -39,6 +43,7 @@ export class TopicComponent implements OnInit {
        this.subs = this.topicService.create({title: this.form.value.title!, department: this.form.value.department!, faculty: this.form.value.faculty!}).subscribe(
             (response) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                  this.error = []
                 this.share.newTopicAdded.next({...this.form.value})
                 this.form.reset()

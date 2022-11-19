@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subject, Observable, of, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ShareService } from './../../services/share.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-verify-question',
@@ -30,7 +31,10 @@ export class VerifyQuestionComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private router: Router,
- ) { }
+       private title: Title
+ ) {
+          this.title.setTitle("Verify questions")
+     }
      public subs!: Subscription
      public questions: Array<any> = []
      public error: any = []
@@ -65,10 +69,12 @@ export class VerifyQuestionComponent implements OnInit {
        this.topicService.activateQuestion(question_id).subscribe(
             (response) => {
                  this.loader.complete()
+                 this.toast.info("Question status updated")
                  this.questions[index].status = 1
             },
             (error) => {
                  this.loader.complete()
+                 this.toast.error(error.error.message)
             }
        )
   }
@@ -101,6 +107,7 @@ export class VerifyQuestionComponent implements OnInit {
        this.topicService.editQuestion({...this.form.value}).subscribe(
             (response) => {
                  this.loader.complete()
+                 this.toast.info(response.message)
                 this.error = []
                 this.form.reset()
                 const index = this.questions.indexOf(this.showEditForm.question)
@@ -124,10 +131,11 @@ export class VerifyQuestionComponent implements OnInit {
                  this.topic = response.data.topic.title
                  this.questions = response.data.questions
                  this.loader.complete()
+                 this.toast.info(response.message)
             },
             (error) => {
                  this.topic = "Invalid topic requested"
-                 console.log("wahala dey")
+                 this.toast.error(error.error.message)
             }
        )
   }

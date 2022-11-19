@@ -5,6 +5,7 @@ import { AssesmentService } from './../../service/assesment.service';
 // import { StoreService } from './../../service/store.service';
 import { Router,  ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from 'angular-toastify';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-prep',
@@ -24,8 +25,11 @@ export class PrepComponent implements OnInit, OnDestroy {
     // private storeService: StoreService,
          private loader: LoadingBarService,
          private router: Router,
-         private toast: ToastService
-      ) { }
+         private toast: ToastService,
+         private title: Title
+      ) {
+           this.title.setTitle("Take assessment")
+      }
       get faculty() { return this.form.get('faculty'); }
       get department() { return this.form.get('department'); }
       get topic_id() { return this.form.get('topic_id'); }
@@ -37,9 +41,11 @@ export class PrepComponent implements OnInit, OnDestroy {
 
       ngOnInit(): void
       {
+           this.loader.start()
            const topics = sessionStorage.getItem('topics')
            this.topics = topics === null ? [] : JSON.parse(topics)
            this.departments = this.distinctValues(this.topics)
+           this.loader.complete()
       }
 
       onSubmit()
@@ -50,6 +56,7 @@ export class PrepComponent implements OnInit, OnDestroy {
            this.assesementService.requestAssesment(topic_id).subscribe(
                 (response) => {
                      this.loader.complete()
+                     this.toast.info(response.message)
                      if (response.status) {
                           sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
                           sessionStorage.setItem('duration', response.data.duration)
@@ -61,6 +68,7 @@ export class PrepComponent implements OnInit, OnDestroy {
 
                 (error) => {
                      this.loader.complete()
+                     this.toast.error(error.message)
                      this.error = error.errors
                 }
            )
