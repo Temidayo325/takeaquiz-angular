@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       this.userService.login({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
            (response) => {
                 this.loader.complete()
-                this.toast.info(response.message)
+                // this.toast.info(response.message)
                 if (response.statusCode === 303) {
                      sessionStorage.setItem('email', this.form.value.email!)
                      this.router.navigate(['/verify-account'])

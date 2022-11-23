@@ -38,7 +38,7 @@ export class AdminLoginComponent implements OnInit {
        this.userService.adminLogin({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
             (response) => {
                  this.loader.complete()
-                 this.toast.info(response.message)
+                 // this.toast.info(response.message)
                  this.toast.success(response.message)
                  this.storeService.setuser(response.user, response.token)
                  this.storeService.setAdmin(response.questions, response.topics)
@@ -47,7 +47,6 @@ export class AdminLoginComponent implements OnInit {
 
             (error) => {
                  this.loader.complete()
-                 console.log(error)
                  this.toast.warn(error.error.message)
                  this.error = error.error.errors
             }

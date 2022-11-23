@@ -107,7 +107,7 @@ export class QuestionComponent implements OnInit {
                  this.error = []
                 this.form.reset()
                 this.form.patchValue({type: "word", topic_id: this.formByFile.value.topic_id})
-                this.router.navigate(['/admin/dashboard'])
+                this.router.navigate(['/admin/dashboard/home'])
             },
             (error: any) => {
                  this.loader.complete()
