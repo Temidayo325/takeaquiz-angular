@@ -16,6 +16,7 @@ import { Title } from '@angular/platform-browser';
 export class VerifyQuestionComponent implements OnInit {
      form = new FormGroup({
             "topic_id": new FormControl("", [Validators.required]),
+            "question_id": new FormControl("", [Validators.required]),
             "question": new FormControl("", [Validators.required, Validators.minLength(4)]),
             "option1": new FormControl("", [Validators.required, Validators.minLength(4)]),
             "option2": new FormControl("", [Validators.required, Validators.minLength(4)]),
@@ -85,6 +86,7 @@ export class VerifyQuestionComponent implements OnInit {
        this.loader.start()
        this.form.setValue({
             topic_id: `${this.topic_id}`,
+            question_id: `${question_id}`,
             question: question.question,
             option1: question.option1,
             option2: question.option2,
@@ -111,7 +113,7 @@ export class VerifyQuestionComponent implements OnInit {
                 this.error = []
                 this.form.reset()
                 const index = this.questions.indexOf(this.showEditForm.question)
-                this.questions[index] = {...this.form.value, status: this.showEditForm.question.status}
+                this.questions[index] = {...response.data, status: this.showEditForm.question.status}
                  this.showEditForm.display = false
             },
             (error) => {

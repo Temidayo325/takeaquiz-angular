@@ -41,14 +41,13 @@ export class VerifyAccountComponent implements OnInit {
        this.userService.verifyAccount({email: sessionStorage.getItem('email'), code: this.form.value.code}).subscribe(
             (response) => {
                  this.loader.complete()
-                 this.toast.info(response.message)
+                 this.toast.info("Account verified")
                  if (response.status) {
                       this.router.navigate(['/login'])
                  }
             },
             (error) => {
                  this.loader.complete()
-                console.log(error)
                 this.toast.warn(error.error.message)
                 this.error = error.error.errors
             }

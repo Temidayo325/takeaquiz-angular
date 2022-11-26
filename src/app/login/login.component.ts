@@ -6,6 +6,7 @@ import { StoreService } from '../service/store.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
+// import { LoaderComponent } from './../components/loader/loader.component';
 
 @Component({
   selector: 'app-login',
@@ -23,12 +24,14 @@ export class LoginComponent implements OnInit {
        private storeService: StoreService,
        private loader: LoadingBarService,
        private router: Router,
+       // public myLoader: LoaderComponent,
        private toast: ToastService,
        private title: Title
  ) { }
 
 
   public error: any = []
+  public showLoader: boolean = false
   public message: string = ''
   ngOnInit(): void
   {
@@ -37,10 +40,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit()
   {
+       this.showLoader = true
        this.loader.start()
       this.userService.login({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
            (response) => {
                 this.loader.complete()
+                this.showLoader = false
                 // this.toast.info(response.message)
                 if (response.statusCode === 303) {
                      sessionStorage.setItem('email', this.form.value.email!)

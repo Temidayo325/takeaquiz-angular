@@ -27,6 +27,7 @@ import { RegisterComponent } from './register/register.component';
 import { VerifyAccountComponent } from './user/verify-account/verify-account.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UserHomeComponent } from './user/user-home/user-home.component';
     RegisterComponent,
     VerifyAccountComponent,
     AdminHomeComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    LoaderComponent
   ],
   imports: [
     LoadingBarModule,
