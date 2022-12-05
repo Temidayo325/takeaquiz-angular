@@ -28,6 +28,8 @@ import { VerifyAccountComponent } from './user/verify-account/verify-account.com
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { SuccessComponent } from './components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     VerifyAccountComponent,
     AdminHomeComponent,
     UserHomeComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmComponent,
+    SuccessComponent
   ],
   imports: [
     LoadingBarModule,

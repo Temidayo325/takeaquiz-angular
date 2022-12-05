@@ -6,7 +6,7 @@ import { StoreService } from '../service/store.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
-// import { LoaderComponent } from './../components/loader/loader.component';
+// import { SuccessComponent } from './../components/success/success.component';
 
 @Component({
   selector: 'app-login',

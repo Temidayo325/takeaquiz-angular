@@ -62,9 +62,9 @@
              </tbody>
          </table>
      </div>
-     <div *ngIf="showEditForm.display" aria-hidden="true" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center bg-white/60">
+     <div *ngIf="showEditForm.display" aria-hidden="true" class="overflow-y-auto fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center bg-white/60 backdrop-blur-sm ">
           <div class="relative p-4 w-full max-w-2xl h-full md:h-auto ">
-               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+               <div class="relative bg-white overflow-y-scroll rounded-lg shadow dark:bg-gray-700">
                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                           <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                               Edit selected question
@@ -88,7 +88,8 @@
                                   Question must be at least 5 characters long.
                                 </p>
                               </div>
-                              <input type="text" formControlName="question" id="question" class="border">
+                              <!-- <input type="text" formControlName="question" id="question" class="border"> -->
+                              <textarea  formControlName="question" id="question" class="w-full h-24 p-2 w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300"></textarea>
                          </div>
                          <div>
                               <label for="option1">Option1</label>
@@ -103,7 +104,7 @@
                                 </p>
                               </div>
                               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option1}}</p>
-                              <input type="text" formControlName="option1" id="option1">
+                              <input type="text" formControlName="option1" id="option1" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          </div>
                          <div>
                               <label for="option2">Option2</label>
@@ -118,17 +119,17 @@
                                 </p>
                               </div>
                               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option2}}</p>
-                              <input type="text" formControlName="option2" id="option2">
+                              <input type="text" formControlName="option2" id="option2" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          </div>
                          <div>
                               <label for="option3">Option3</label>
                               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option3}}</p>
-                              <input type="text" formControlName="option3" id="option3">
+                              <input type="text" formControlName="option3" id="option3" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          </div>
                          <div>
                               <label for="option4">Option4</label>
                               <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option4}}</p>
-                              <input type="text" formControlName="option4" id="option4">
+                              <input type="text" formControlName="option4" id="option4" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          </div>
                          <div>
                               <label for="answer">Answer</label>
@@ -143,7 +144,7 @@
                                   Answer must be at least 5 characters long.
                                 </p>
                               </div>
-                              <input type="text" formControlName="answer" id="answer">
+                              <input type="text" formControlName="answer" id="answer" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
                          </div>
                          <div>
                               <button type="submit" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>

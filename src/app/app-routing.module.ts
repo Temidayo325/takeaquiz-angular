@@ -20,6 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -27,7 +28,8 @@ const routes: Routes = [
      {path: 'register', component: RegisterComponent},
      {path: 'verify-account', component: VerifyAccountComponent},
      {path: 'admin', component: AdminLoginComponent},
-     {path: 'spinner', component: LoaderComponent},
+     // {path: 'spinner', component: LoaderComponent},
+     // {path: 'confirm', component: ConfirmComponent},
      {path: 'user/dashboard', component: UserDashboardComponent,
           canActivateChild: [LoggeninUserGuard],
           canLoad: [LoggeninUserGuard],
