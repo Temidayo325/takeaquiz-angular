@@ -1,10 +1,10 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div>
      <section class="mt-8">
-          <h2 class="text-md font-bold">Your last Assesments Results</h2>
+          <!-- <h2 class="text-md font-bold">Your last Assesments Results</h2> -->
           <div class="overflow-x-scroll">
-               <table class="w-full text-md text-left text-gray-500 mt-4 shadow-lg py-3 ">
-                   <thead class="text-sm font-bold text-gray-700 bg-gray-50">
+               <table class="w-full text-md text-left mt-4 shadow-lg py-3 ">
+                   <thead class="text-sm uppercase font-bold text-white " style="background: #001220">
                        <tr>
                            <th scope="col" class="py-3 px-6">
                                Topic
@@ -24,15 +24,15 @@
                        </tr>
                    </thead>
                    <tbody *ngIf="results.length == 0">
-                        <tr class="bg-white border-b" >
+                        <tr class="bg-white border-b" style="color: #001220">
                                <td class="text-sm font-bold text-center py-3 " colspan="5">No Result to display yet.</td>
                        </tr>
                        <tr>
                              <td class="text-sm font-bold text-center py-3 " colspan="5"><a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3" style="color: #FBAE3C; background: #001220">Click here to take an assessment</a></td>
                        </tr>
                    </tbody>
-                   <tbody *ngIf="results.length > 0">
-                       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let result of results; let i = index; trackBy: trackByFn">
+                   <tbody *ngIf="results.length > 0" class="text-black font-bold">
+                       <tr class="bg-white" *ngFor="let result of results; let i = index; trackBy: trackByFn">
                             <td>{{result.topic.title}}</td>
                             <td class="text-center">{{result.score}}</td>
                             <td class="text-center font-bold" >{{result.grade}}</td>

@@ -1,14 +1,13 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="tracking-wider md:flex md:justify-start">
-     <div class="w-full h-64 relative z-20 bg-no-repeat md:bg-cover md:w-3/6 md:h-screen" style="background-image: url('../../assets/images/blob-scene-haikei.svg')">
-          <div class="absolute -bottom-12 bg-dark -left-12 w-24 h-24 rotate-45 z-10 md:hidden" style="background: #001220"></div>
-     </div>
-     <div class="grid gap-6 justify-center px-6 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
-          <h2 class="font-bold text-center mt-10 text-xl md:text md:mt-64 md:text-xl">Verify Account</h2>
+<app-loader [display]="showLoader"></app-loader>
+<app-success [display]="showSuccess" [text]="successMessage"></app-success>
+<div class="tracking-wider md:flex md:justify-start mt-12 md:mt-0">
+     <div class="grid gap-6 justify-center px-2 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
+          <h2 class="font-bold text-center mt-10 text-md md:text md:mt-64 md:text-xl">Verify Account</h2>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full md:w-1/3 mt-12 mx-auto">
                <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
                <div>
-                    <label for="code" class="block text-md mb-2 md:font-bold md:text-sm">Code</label>
+                    <label for="code" class="block text-sm mb-2 font-bold md:text-sm">Enter Code</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.code}}</p>
                     <div *ngIf="code!.invalid && (code!.dirty || code!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -20,11 +19,11 @@
                         Your full name should not be less than 5 characters
                       </p>
                     </div>
-                    <input type="number" formControlName="code" id="code" name="code" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="number" formControlName="code" id="code" name="code" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
-
-               <div class="mt-6 ">
-                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Verify account</button>
+               <p class="font-bold text-sm text-right underline mt-4 cursor-pointer" (click)="resendCode()">Resend code</p>
+               <div class="mt-8 ">
+                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center rounded-lg disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Verify account</button>
                </div>
           </form>
      </div>

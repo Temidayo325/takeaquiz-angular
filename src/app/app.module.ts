@@ -30,6 +30,8 @@ import { UserHomeComponent } from './user/user-home/user-home.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { SuccessComponent } from './components/success/success.component';
+import { RecoverPasswordComponent } from './user/recover-password/recover-password.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { SuccessComponent } from './components/success/success.component';
     UserHomeComponent,
     LoaderComponent,
     ConfirmComponent,
-    SuccessComponent
+    SuccessComponent,
+    RecoverPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     LoadingBarModule,

@@ -5,6 +5,10 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Subject, Observable, of } from 'rxjs';
 import {Title} from '@angular/platform-browser';
+import { ShareService } from './../../services/share.service';
+import { LoaderComponent } from './../../components/loader/loader.component';
+import { SuccessComponent } from './../../components/success/success.component';
+import { ConfirmComponent } from './../../components/confirm/confirm.component';
 
 @Component({
   selector: 'app-assessment',
@@ -19,22 +23,29 @@ export class AssessmentComponent implements OnInit, OnDestroy {
       private loader: LoadingBarService,
       private router: Router,
       private route: ActivatedRoute,
-      private toast: ToastService
+      private toast: ToastService,
+      private sharedService: ShareService
  ) {
           this.title.setTitle("Ongoing assessment")
+          this.sharedService.newHeader.next("Assessment")
    }
 
   questions: Array<any> = []
   duration: number = 0
   subs!: Subject<any>
-  stat: any = {completed: 0, total: 0, submitted: false, correctScore: 0}
+  stat: any = {completed: 0, total: 0, submitted: false, correctScore: 0, submissionStatus: false}
   timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
   currentIndex = 0
   screen  = document.documentElement
+  showLoader: boolean = false
+  showSuccess: boolean = false
+  showConfirm: boolean =  false
+  priority: any = {yes: '', no: '', text: ''}
+  confirmAction: any = {cancel: false, submit: false}
   ngOnInit(): void
   {
           this.loader.start()
-          this.openFullscreen()
+          // this.openFullscreen()
           if (sessionStorage.getItem('questions') === null || sessionStorage.getItem('duration') === null) {
                this.router.navigate(['/user/dashboard/take-assessment'])
           }
@@ -56,40 +67,81 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             document.addEventListener("visibilitychange", () => {
                 if (document.visibilityState !== 'visible') {
                     this.toast.info("Your test has been submitted")
-                    this.submit()
+                    if (!this.stat.submissionStatus) {
+                         this.submit()
+                    }
+
                 }
             });
           this.loader.complete()
   }
 
+  cancel()
+  {
+       this.loader.start()
+       this.priority.no = 'bg-yellow-600'
+       this.priority.text = "Do you want to cancel ?"
+       this.confirmAction.submit = false
+       this.confirmAction.cancel = true
+       this.showConfirm = true;
+  }
+
+  confirmStatus(event: boolean)
+  {
+       this.showConfirm = false
+       // Check if my action was to submit and user clicked yes on the confirm dialogue
+       if (event && this.confirmAction.submit) {
+            this.submit()
+       }
+
+       // Check if my action was to submit and user clicked yes on the confirm dialogue
+       if (event && this.confirmAction.cancel) {
+            sessionStorage.setItem('questions', '')
+            setTimeout(() => {
+                 this.router.navigate(['/user/dashboard/take-assessment'])
+            }, 1000)
+       }
+  }
+
+  initsubmission()
+  {
+       this.loader.start()
+       this.priority.yes = 'bg-yellow-600'
+       this.priority.text = "Do you want to submit ?"
+       this.confirmAction.submit = true
+       this.confirmAction.cancel = false
+       this.showConfirm = true;
+  }
+
   submit()
   {
-       // Data to post {user_id: number, score: number, topic_id: number}
-       this.loader.start()
-       if (confirm("Are you sure you want to submit?")) {
-            clearInterval(this.timervalues.ongoing)
-            this.stat.submitted = true
-            this.timervalues.ongoing = null
-            const score = this.markTest()
-            this.closeFullscreen()
-            this.stat.correctScore = score
-            const user = JSON.parse(sessionStorage.getItem('user')!)
-            this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  Number(this.route.snapshot.paramMap.get('topic_id'))}).subscribe(
-                 (response) => {
-                      this.loader.complete()
-                      this.toast.info(response.message)
-                      sessionStorage.setItem('results', JSON.stringify(response.results))
-                      setTimeout(() => {
-                           this.router.navigate(['/user/dashboard/results'])
-                      }, 5000)
-                 },
-                 (error) => {
-                      this.loader.complete()
-                      this.toast.error(error.message)
-                      console.log(error)
-                 }
-            )
-       }
+       this.showLoader = true
+       clearInterval(this.timervalues.ongoing)
+       this.stat.submitted = true
+       this.timervalues.ongoing = null
+       const score = this.markTest()
+       // this.closeFullscreen()
+       this.stat.correctScore = score
+       const user = JSON.parse(sessionStorage.getItem('user')!)
+       this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  Number(this.route.snapshot.paramMap.get('topic_id'))}).subscribe(
+            (response) => {
+                 this.loader.complete()
+                 // this.toast.info(response.message)
+                 this.stat.submissionStatus = true
+                 sessionStorage.setItem('results', JSON.stringify(response.results))
+                 this.showLoader = false
+                 this.showSuccess = true
+                 setTimeout(() => {
+                      this.showSuccess = false
+                      this.router.navigate(['/user/dashboard/results'])
+                 }, 3000)
+            },
+            (error) => {
+                 this.loader.complete()
+                 this.toast.error(error.message)
+                 console.log(error)
+            }
+       )
   }
 
   markTest(): number

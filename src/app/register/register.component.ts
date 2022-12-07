@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
 import { NewUser } from './../models/newUser.models';
+import { LoaderComponent } from './../components/loader/loader.component';
+import { SuccessComponent } from './../components/success/success.component';
 
 @Component({
   selector: 'app-register',
@@ -42,6 +44,8 @@ export class RegisterComponent implements OnInit {
 
       error: any = []
       message: string = ''
+      showLoader: boolean = false
+      showSuccess: boolean = false
   ngOnInit(): void
   {
   }
@@ -49,23 +53,29 @@ export class RegisterComponent implements OnInit {
   onSubmit()
   {
        this.loader.start()
+       this.showLoader = true
        let user: NewUser = {email: this.form.value.email!, password: this.form.value.password!, nickname: this.form.value.nickname!, institution: this.form.value.institution!, name: this.form.value.name!}
       this.userService.register(user).subscribe(
            (response) => {
                 this.loader.complete()
                 if (response.status != false) {
-                     this.toast.info(response.message)
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
                      sessionStorage.setItem('email', this.form.value.email!)
                      this.form.reset()
-                     this.router.navigate(['/verify-account'])
+                     this.showLoader = false
+                     this.showSuccess = true
+                     setTimeout(() => {
+                          this.showSuccess = false
+                          this.router.navigate(['/verify-account'])
+                     }, 2000)
                 }
                 this.message = response.message
            },
 
            (error) => {
                 this.loader.complete()
+                this.showLoader = false
                 this.toast.warn(error.error.message)
                 this.error = error.error.errors
            }

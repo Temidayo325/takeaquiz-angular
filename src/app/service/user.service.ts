@@ -42,18 +42,24 @@ export class UserService {
 
   recoverEmail(email: any):Observable<any>
   {
-       return this.http.patch(this.baseUrl+"reset-password", email, this.options )
+       return this.http.patch(this.baseUrl+"resendVerification", email, this.options )
   }
 
   changeUserPassword(user: object): Observable<any>
   {
-       return this.http.put(this.baseUrl+"reset-password", user, this.options )
+       return this.http.put(this.baseUrl+"resetPassword", user, this.options )
   }
 
   getResults(id: number): Observable<any>
   {
-       return this.http.get(this.baseUrl+`result?user_id=1`, this.options )
+       return this.http.get(this.baseUrl+`result?user_id=${id}`, this.options )
   }
+
+  resendVerificationCode(email: string): Observable<any>
+  {
+      return this.http.post(this.baseUrl+"resendVerification", {email: email},this.options)
+  }
+
   logout(user_id: number): Observable<any>
   {
       return this.http.post(this.baseUrl+"logout", {user_id: user_id},this.options)

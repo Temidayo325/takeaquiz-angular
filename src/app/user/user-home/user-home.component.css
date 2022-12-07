@@ -1,0 +1,9 @@
+p,h1,h2,h3,h4,h5,h6
+{
+     color: #001220
+}
+.home-cta
+{
+     background: #001220;
+     background: radial-gradient(45% 107.58% at 94.48% 5%, rgba(0, 18, 32, 0.65) 0%, #001220 100%);
+}

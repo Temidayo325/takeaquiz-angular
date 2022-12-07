@@ -6,7 +6,8 @@ import { StoreService } from '../service/store.service';
 import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
-// import { SuccessComponent } from './../components/success/success.component';
+import { LoaderComponent } from './../components/loader/loader.component';
+import { SuccessComponent } from './../components/success/success.component';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
   public error: any = []
   public showLoader: boolean = false
   public message: string = ''
+  public showSuccess: boolean = false
+
   ngOnInit(): void
   {
        this.title.setTitle('Login in to your dashboard')
@@ -46,7 +49,6 @@ export class LoginComponent implements OnInit {
            (response) => {
                 this.loader.complete()
                 this.showLoader = false
-                // this.toast.info(response.message)
                 if (response.statusCode === 303) {
                      sessionStorage.setItem('email', this.form.value.email!)
                      this.router.navigate(['/verify-account'])
@@ -57,13 +59,20 @@ export class LoginComponent implements OnInit {
                      sessionStorage.setItem('totalResults', response.countedResult)
                      sessionStorage.setItem('totalTopics', response.countTopics)
                      sessionStorage.setItem('top3Topics', JSON.stringify(response.top3))
-                     this.router.navigate(['/user/dashboard'])
+                     this.showLoader = false
+                     this.showSuccess = true
+                     setTimeout(() => {
+                          this.showSuccess = false
+                          this.router.navigate(['/user/dashboard'])
+                     },
+                     3000)
                 }
                 this.message = response.message
            },
 
            (error) => {
                 this.loader.complete()
+                this.showLoader = false
                 this.toast.warn(error.error.message)
                 this.error = error.error.errors
            }

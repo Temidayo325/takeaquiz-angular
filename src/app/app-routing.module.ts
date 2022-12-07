@@ -19,14 +19,18 @@ import { VerifyAccountComponent } from './user/verify-account/verify-account.com
 import { RegisterComponent } from './register/register.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
-import { LoaderComponent } from './components/loader/loader.component';
-import { ConfirmComponent } from './components/confirm/confirm.component';
+// import { LoaderComponent } from './components/loader/loader.component';
+// import { ConfirmComponent } from './components/confirm/confirm.component';
+import { RecoverPasswordComponent } from './user/recover-password/recover-password.component';
+import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
      {path: 'login', component: LoginComponent},
      {path: 'register', component: RegisterComponent},
      {path: 'verify-account', component: VerifyAccountComponent},
+     {path: 'recover-password', component: RecoverPasswordComponent},
+     {path: 'change-password', component: ChangePasswordComponent},
      {path: 'admin', component: AdminLoginComponent},
      // {path: 'spinner', component: LoaderComponent},
      // {path: 'confirm', component: ConfirmComponent},

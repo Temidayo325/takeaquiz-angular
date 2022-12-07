@@ -6,6 +6,9 @@ import { AssesmentService } from './../../service/assesment.service';
 import { Router,  ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
+import { ShareService } from './../../services/share.service';
+import { LoaderComponent } from './../../components/loader/loader.component';
+import { SuccessComponent } from './../../components/success/success.component';
 
 @Component({
   selector: 'app-prep',
@@ -26,9 +29,11 @@ export class PrepComponent implements OnInit, OnDestroy {
          private loader: LoadingBarService,
          private router: Router,
          private toast: ToastService,
-         private title: Title
+         private title: Title,
+         private sharedService: ShareService
       ) {
            this.title.setTitle("Take assessment")
+           this.sharedService.newHeader.next("Assessment")
       }
       get faculty() { return this.form.get('faculty'); }
       get department() { return this.form.get('department'); }
@@ -38,7 +43,8 @@ export class PrepComponent implements OnInit, OnDestroy {
       topics: Array<any> = []
       departments: Array<string> = []
       titles: Array<any> = []
-
+      showLoader: boolean = false
+      showSuccess: boolean = false
       ngOnInit(): void
       {
            this.loader.start()
@@ -52,15 +58,18 @@ export class PrepComponent implements OnInit, OnDestroy {
       {
            this.loader.start()
            const topic_id: any = this.form.value.topic_id
-           console.log(topic_id)
+           this.showLoader = true
            this.assesementService.requestAssesment(topic_id).subscribe(
                 (response) => {
                      this.loader.complete()
-                     this.toast.info(response.message)
+                     this.showLoader = false
+                     this.showSuccess = true
+                     // this.toast.info(response.message)
                      if (response.status) {
                           sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
                           sessionStorage.setItem('duration', response.data.duration)
                           setTimeout(() => {
+                               this.showSuccess = false
                                this.router.navigate(['/user/assessment', {topic_id: topic_id}])
                           }, 5000)
                      }

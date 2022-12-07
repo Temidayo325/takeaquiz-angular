@@ -1,14 +1,14 @@
 <ngx-loading-bar></ngx-loading-bar>
+<app-loader [display]="showLoader"></app-loader>
+<app-success [display]="showSuccess" [text]="'Account successfully created'"></app-success>
 <div class="tracking-wider md:flex md:justify-start">
-     <div class="w-full h-24 relative z-20 bg-no-repeat md:bg-cover md:w-3/6 md:h-screen" style="background-image: url('../../assets/images/blob-scene-haikei.svg')">
-          <div class="absolute -bottom-12 bg-dark -left-12 w-24 h-24 rotate-45 z-10 md:hidden" style="background: #001220"></div>
-     </div>
-     <div class="grid gap-6 justify-center px-6 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
-          <h2 class="font-bold text-center mt-10 text-xl md:text md:mt-32 md:text-xl">Register</h2>
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full md:w-1/3 mt-6 mx-auto">
+     <img src="../../assets/images/register.png" alt="smiling people loging in" class="w-full">
+     <div class="grid justify-center px-2 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
+          <h2 class="font-bold text-center mt-4 text-lg md:text md:mt-32 md:text-xl">Register</h2>
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full md:w-1/3 mt-1 mx-auto">
                <p class="text-red-600 mt-1 text-sm text-sm text-red-400">{{message}}</p>
                <div class="">
-                    <label for="name" class="block text-md mb-1 md:font-bold md:text-sm">Full Name</label>
+                    <label for="name" class="block text-sm mb-1 font-bold md:text-sm">Full Name</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.name}}</p>
                     <div *ngIf="name!.invalid && (name!.dirty || name!.touched)" class="text-red-600 mt-1 text-sm">
 
@@ -19,11 +19,11 @@
                         Your full name should not be less than 5 characters
                       </p>
                     </div>
-                    <input type="text" formControlName="name" id="name" name="name" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="text" formControlName="name" id="name" name="name" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
 
                <div class="mt-3 md:mt-6">
-                    <label for="email" class="block text-md mb-1 md:font-bold md:text-sm">Email</label>
+                    <label for="email" class="block text-sm mb-1 font-bold md:text-sm">Email</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.email}}</p>
                     <div *ngIf="email!.invalid && (email!.dirty || email!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -35,11 +35,11 @@
                         Input a valid email
                       </p>
                     </div>
-                    <input type="email" formControlName="email" id="email" name="email" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="email" formControlName="email" id="email" name="email" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
 
                <div class="mt-3 md:mt-6">
-                    <label for="nickname" class="block text-md mb-1 md:font-bold md:text-sm">Choose Nickname</label>
+                    <label for="nickname" class="block text-sm mb-1 font-bold md:text-sm">Choose Nickname</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.nickname}}</p>
                     <div *ngIf="nickname!.invalid && (nickname!.dirty || nickname!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -51,11 +51,11 @@
                         nickname too short(cannot be less than 5 characters)
                       </p>
                     </div>
-                    <input type="text" formControlName="nickname" id="nickname" name="nickname" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="text" formControlName="nickname" id="nickname" name="nickname" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
 
                <div class="mt-3 md:mt-6">
-                    <label for="institution" class="block text-md mb-1 md:font-bold md:text-sm">Your institution</label>
+                    <label for="institution" class="block text-sm mb-1 font-bold md:text-sm">Your institution</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.institution}}</p>
                     <div *ngIf="institution!.invalid && (institution!.dirty || institution!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -67,11 +67,11 @@
                         Institution name too short(cannot be less than 3 characters)
                       </p>
                     </div>
-                    <input type="text" formControlName="institution" id="institution" name="institution" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="text" formControlName="institution" id="institution" name="institution" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
 
                <div class="mt-3 md:mt-6">
-                    <label for="password" class="block text-md mb-1 md:font-bold md:text-sm">Password</label>
+                    <label for="password" class="block text-sm mb-1 font-bold md:text-sm">Password</label>
                     <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.password}}</p>
                     <div *ngIf="password!.invalid && (password!.dirty || password!.touched)"
                         class="text-red-600 mt-1 text-sm">
@@ -83,11 +83,11 @@
                         password name too short(cannot be less than 5 characters)
                       </p>
                     </div>
-                    <input type="password" formControlName="password" id="password" name="password" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    <input type="password" formControlName="password" id="password" name="password" class="w-full border rounded-lg border-gray-500 mt-1 rounded-sm text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none">
                </div>
 
                <div class="mt-6 md:mt-12">
-                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Register</button>
+                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center rounded-lg disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Register</button>
                </div>
           </form>
           <p class="mt-4 text-sm md:text-center md:text-md">Have an account? <a routerLink="/login" class="text-blue-500 font-bold">Login here</a></p>
