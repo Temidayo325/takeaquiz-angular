@@ -2,7 +2,7 @@
 <app-loader [display]="showLoader"></app-loader>
 <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm>
 <div class="pb-3 mb-4">
-     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-between items-center gap-10 bg-white">
+     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-between items-center gap-10 bg-white z-20">
           <button class="w-7" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>

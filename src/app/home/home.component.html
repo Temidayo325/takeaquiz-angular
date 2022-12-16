@@ -1,1 +1,126 @@
-<p>home works!</p>
+<header class="header w-full py-6 px-3 sticky top-0 shadow-xl z-30 ">
+     <div class="flex justify-between items-center">
+          <h1 class="text-white font-bold text-xl">Quizly</h1>
+          <nav>
+               <ul class="text-white flex justify-start gap-3 text-md">
+                    <li class="inline"><a routerLink="/login">Login</a></li>
+                    <li><a routerLink="/register" class="px-7 py-3 rounded-full bg-white/60 pulsee">Sign up</a></li>
+               </ul>
+          </nav>
+     </div>
+</header>
+<div class="banner pb-4">
+     <div class="">
+          <div class="relative h-[47vh]">
+               <img src="../../assets/images/header.png" class="absolute top-0 -left-4" alt="Smiling as you pass your exam">
+          </div>
+          <div class="px-4 my-3">
+               <h1 class="text-white font-bold text-3xl">You don't have to fail your next assessment.</h1>
+               <h2 class="text-white text-lg mt-4 ">You totally don't have to be afraid of your next assesment. Get all the practice you require.</h2>
+               <button routerLink="/login" class="px-5 py-3 shadow my-2 cta-1 font-bold mt-4 text-lg">Try it out for free</button>
+          </div>
+     </div>
+</div>
+
+<main class="px-3 mb-6">
+     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4">What is quizly</h1>
+     <div class="mt-2 grid justify-start gap-10">
+          <img src="../../assets/images/pensive-cropped.png" alt="smiling people loging in" class="mt-2 mx-auto">
+          <p class="text-xl text-justify ">I read but had no idea what I was walking into in the CBT hall, i end up panicking everytime and getting behind the device is another time to panic, seeing the time running I start to panic even more or I start missing out on details. This among many more gave the basis the Quizly, the assessment increases you all the little details in the mock assessments We help you panic less, and you get to not fail your next exam</p>
+     </div>
+</main>
+
+<section class="px-3 bg-gray-100 py-3 pb-12">
+     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4">Why Quizly</h1>
+     <div class="grid gap-10 mt-2">
+          <div class="shadow-lg px-3 pb-3">
+               <img src="../../assets/images/feature-icon.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto">
+               <h3 class="text-center">Measure</h3>
+               <p class="text-xl text-justify">You can use as a means to test your understanding of a topic you've just read, a class you've just attended, or just assess your knowledge of a topic at your own time and venue.</p>
+          </div>
+          <div class="shadow-lg px-3 pb-3">
+               <img src="../../assets/images/feature-icon.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto">
+               <h3 class="text-center">As real as possible</h3>
+               <p class="text-xl text-justify">The mock assessment is desgined to mimick real world assesment scenatios as much as possible including inability to copy and paste, inabilty to leave your test screen without consequences, submission immediately the timer is up</p>
+          </div>
+          <div class="shadow-lg px-3 pb-3">
+               <img src="../../assets/images/feature-icon.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto">
+               <h3 class="text-center">High number of questions</h3>
+               <p class="text-xl text-justify">Each topic up for assesment has a high ratio of available question to assessment question. There is a high number of questions available for assesment per each topic </p>
+          </div>
+          <div class="shadow-lg px-3 pb-3">
+               <img src="../../assets/images/feature-icon.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto">
+               <h3 class="text-center">Curriculum based questions</h3>
+               <p class="text-xl text-justify">The questions are based on the curent curriculum acreddited by the NUC for the department under which the title exists.</p>
+          </div>
+          <div class="shadow-lg px-3 pb-3">
+               <img src="../../assets/images/feature-icon.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto">
+               <h3 class="text-center">Ease of Access</h3>
+               <p class="text-xl text-justify">All you need is your Mobile phone, or your Personal computer (PC) with a working internet and you are ready to go. You can use at any time of the day from anywhere you can make use of your mobile and internet</p>
+          </div>
+     </div>
+</section>
+
+<section class="px-3 banner py-3">
+     <h1 class="font-bold text-2xl tracking-wider text-center yellow my-4">View statistics</h1>
+     <div class="grid justify-center text-center gap-16 text-white mt-3">
+          <div>
+               <div class="bg-gray-200 w-28 h-28 rounded-full flex justify-center items-center mx-auto blue">
+                    <p class="font-bold text-4xl text-center ">{{statistics.users}}+</p>
+               </div>
+               <h2 class="font-bold text-xl py-2">Registered users</h2>
+          </div>
+
+          <div>
+               <div class="bg-gray-200 w-28 h-28 rounded-full flex justify-center items-center mx-auto blue">
+                    <p class="font-bold text-4xl text-center ">{{statistics.assessments}}+</p>
+               </div>
+               <h2 class="font-bold text-xl py-2">Assesments completed</h2>
+          </div>
+
+          <div>
+               <div class="bg-gray-200 w-28 h-28 rounded-full flex justify-center items-center mx-auto blue">
+                    <p class="font-bold text-4xl text-center ">{{statistics.topics}}+</p>
+               </div>
+               <h2 class="font-bold text-xl py-2">Topics available</h2>
+          </div>
+     </div>
+</section>
+
+<section class="px-3 py-3 pb-10">
+     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4">How to get started</h1>
+     <p class="text-center text-lg font-bold blue">Get started in 3 simple steps</p>
+     <div class="grid gap-4 mt-8">
+          <div class="w-full h-[500px] rounded-xl relative overflow-hidden">
+               <img src="./../../assets/images/register-step-2.jpg" alt="" class="z-10 h-full w-full">
+               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                    <div class="w-full mt-[360px]">
+                         <h2 class="font-bold mb-2 text-xl">Register</h2>
+                         <p class="text-lg text-justify">Create your account on the platform, verify ypur email address and you are good to go</p>
+                    </div>
+               </div>
+          </div>
+          <div class="w-full h-[500px] rounded-xl relative overflow-hidden">
+               <img src="./../../assets/images/mikhail.jpg" alt="" class="z-10 h-full w-full">
+               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                    <div class="w-full mt-[330px] ">
+                         <h2 class="font-bold mb-2 text-xl">Prepare</h2>
+                         <p class="text-lg text-justify">Prepare for the mock assessments by actually going thorugh the topic or better yet attending the corresponding class, so you won't become Agbafiriyoyo</p>
+                    </div>
+               </div>
+          </div>
+          <div class="w-full h-[500px] rounded-xl relative overflow-hidden">
+               <img src="./../../assets/images/assessment.jpg" alt="" class="z-10 h-full w-full">
+               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                    <div class="w-full mt-[360px] ">
+                         <h2 class="font-bold mb-2 text-xl">Take mock assessments</h2>
+                         <p class="text-lg text-justify">Choose your desired topic from the available topics and test away! Ensure not to be an Agbafiriyoyo</p>
+                    </div>
+               </div>
+          </div>
+     </div>
+</section>
+
+<footer class="banner py-4 px-4 text-center text-lg text-white">
+     <p>	&copy; Copyright of Luminaace.com</p>
+</footer>

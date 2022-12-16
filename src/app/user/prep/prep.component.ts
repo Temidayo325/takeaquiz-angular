@@ -101,7 +101,7 @@ export class PrepComponent implements OnInit, OnDestroy {
 
       chosenDepartment($event:any)
       {
-           console.log($event.target.value)
+           // console.log($event.target.value)
            this.topics.forEach((item, index) => {
                 if (item.department.toLowerCase() === $event.target.value.toLowerCase() ) {
                      this.titles.push(item)

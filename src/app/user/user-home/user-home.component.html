@@ -1,16 +1,16 @@
-<div class="rounded-[45px] py-10 px-5 home-cta">
+<div class="rounded-[12px] py-10 px-5 home-cta">
      <h2 class="text-2xl" style="color: #FBAE3C">Start a quiz !</h2>
      <button routerLink="/user/dashboard/take-assessment" class="text-center w-full rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold">Take assessment</button>
 </div>
 
 <section class="mt-8 ">
      <h2 class="text-md font-bold">Your last Assesments Results</h2>
-     <div class="w-full overflow-x-scroll mt-4">
+     <div class="w-full overflow-x-scroll mt-4 z-10">
           <div class="bg-gray-300 rounded-lg py-4 px-2 grid justify-center" *ngIf="results.length == 0">
                <h2 class="text-center font-bold text-lg my-2 ">You have no result yet</h2>
                <a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3 text-center " style="color: #FBAE3C; background: #001220">Click here to take an assessment</a>
           </div>
-          <div *ngIf="results.length > 0">
+          <div *ngIf="results.length > 0" class="z-10">
               <div class="flex justify-start gap-6">
                    <div class="bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left" *ngFor="let result of results; let i = index; trackBy: trackByFn">
                         <p class="uppercase"> title {{result.topic.title}}</p>
@@ -47,12 +47,12 @@
 <section class="mt-10">
      <h2 class="text-md font-bold mb-4">Latest topics</h2>
      <div *ngIf="topTopics.length == 0">
-          <h2 class="text-xl font-bold text-center py-3 ">No Topics to display yet.</h2>
+          <h2 class="text-xl font-bold text-center py-3 ">Loading available topics...</h2>
      </div>
      <div *ngIf="topTopics.length > 0">
-          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full border border-gray-400 shadow-inner shadow-outline shadow-xl text-left rounded-xl py-3 px-3">
+          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full border border-gray-400 shadow-inner shadow-outline shadow-xl text-left rounded-xl py-3 px-3 mb-3">
                <p class="font-bold">{{topic.title || 'NA'}}</p>
-               <p class="">{{topic.department}}</p>
+               <p class="">Department of {{topic.department}}</p>
                <!-- <p class="text-center" >{{topic.faculty}}</p> -->
           </div>
      </div>

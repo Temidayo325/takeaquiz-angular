@@ -3,23 +3,13 @@
 <app-success [display]="showSuccess" [text]="'Assessment submitted succesfully'"></app-success>
 <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm>
 <div class="container" onmousedown="return false" onselectstart="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" oncontextmenu="return false">
-     <!-- <div *ngIf="stat.submitted" style="color: #001220" class="flex justify-center items-center w-full h-screen">
-          <div class="text-center" style="color: #001220">
-               <div class="w-full h-40 relative z-20 bg-no-repeat md:bg-cover md:w-3/6 md:h-screen" style="background-image: url('../../assets/images/success.jpg')">
-               </div>
-               <h2 class=" py-2">Submitted succesfully</h2>
-               <h3 class=" py-2 mt-3">Your score is <span class="font-bold px-2 py-2" style="color: #FBAE3C; background: #001220">{{stat.correctScore}}</span></h3>
-          </div>
-     </div> -->
-
      <div *ngIf="!stat.submitted" class="py-4 px-6">
-          <div class="flex justify-center my-10">
+          <div class="flex justify-center my-5 fixed right-[45%] translate-x-4">
                <div class="border border-gray-700 rounded-lg py-1 px-4 shadow-xl border-b-2">
-                    <!-- <p>{{stat.completed}} of {{stat.total}}</p> -->
                     <h1 class="font-bold text-lg">{{timervalues.minutes}} : {{timervalues.seconds}}</h1>
                </div>
           </div>
-          <div *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="w-full tracking-wide leading-7 " style="color:#001220">
+          <div *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="w-full tracking-wide leading-7 my-20" style="color:#001220">
                     <div *ngIf="!question.hidden" class="w-full">
                          <div class="flex justify-start items-center mb-4">
                               <p class="text-justify text-xl my-2 font-bold">{{question.question}}</p>

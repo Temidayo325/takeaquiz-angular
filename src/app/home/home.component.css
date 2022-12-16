@@ -1,0 +1,48 @@
+.header, .banner
+{
+     background: #001220;
+}
+.cta-1
+{
+     background: #FBAE3C;
+     color: #001220;
+}
+.blue
+{
+     color: #001220;
+}
+.yellow
+{
+     color: #FBAE3C;
+}
+h3
+{
+     color: #001220;
+     font-weight: bold;
+     letter-spacing: 1px;
+     font-size: 1.4em;
+}
+.pulsee
+{
+     box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+	transform: scale(1);
+	animation: pulse 2s infinite;
+     /* background-image: url(''); */
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+	}
+
+	100% {
+		transform: scale(0.95);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+	}
+}
