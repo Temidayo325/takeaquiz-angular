@@ -2,13 +2,13 @@
 <app-loader [display]="showLoader"></app-loader>
 <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm>
 <div class="pb-3 mb-4">
-     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-between items-center gap-10 bg-white z-20">
-          <button class="w-7" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
+     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-between items-center gap-10 bg-white z-20 md:relative md:hidden">
+          <button class="w-7 md:hidden" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>
           </button>
-          <h2 class="text-lg font-bold">{{ headerMessage }}</h2>
+          <h2 class="text-lg font-bold font-header">{{ headerMessage }}</h2>
           <img [src]="imageSource" alt="user avater" class="w-10 h-10 rounded-full ">
      </header>
      <!-- *ngIf="navigation" -->
@@ -17,7 +17,7 @@
            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
            <span class="sr-only">Close menu</span>
         </button>
-        <nav class="mt-16 ">
+        <nav class="mt-16 font-mono">
              <ul class="grid gap-3 justify-start ml-4 text-lg block text-black w-full">
                   <li >
                        <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer"  (click)='location("/user/dashboard/home")'><img src="./../../assets/images/Vector.png"  alt="home icon"><span>Home</span></a>
@@ -29,8 +29,8 @@
                        <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer" (click)='location("/user/dashboard/take-assessment")'><img src="./../../assets/images/assessment.png" alt="Assessment icon"><span>Take assessment</span></a>
                   </li>
                   <li>
-                     <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer" href="https://forms.gle/bTPnFYNtKDaU4bbQA" target="_blank"
-                      ><img src="./../../assets/images/assessment.png"                alt="Assessment icon"><span>Request new topic</span>
+                     <a class="py-3 px-4 block flex justify-start gap-1 items-center cursor-pointer" href="https://forms.gle/bTPnFYNtKDaU4bbQA" target="_blank"
+                      ><img src="./../../assets/images/large-screen-icons/edit.png"  class="w-8 h-9"    alt="Assessment icon"><span>Request new topic</span>
                       </a>
                   </li>
                   <li>
@@ -39,9 +39,38 @@
              </ul>
         </nav>
      </div>
-     <div class="px-3 py-4">
-          <div class="mt-6" >
-               <!-- [@routeAnimations]="getRouteAnimationData()" -->
+     <div class="px-3 py-4 md:py-0 md:px-0 md:flex md:justify-start md:items-start">
+        <nav class="font-mono hidden md:block h-screen sticky top-0 md:w-1/6 " style="background-color: #001220;">
+          <img [src]="imageSource" alt="user avater" class="w-10 h-10 rounded-full mx-auto md:w-16 md:h-16 md:mt-12">
+          <ul class="grid gap-3 justify-start ml-4 text-lg block text-white w-full md:pt-12">
+            <li>
+              <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer"
+                (click)='largeScreenLocation("/user/dashboard/home")'><img src="./../../assets/images/large-screen-icons/home.svg"
+                  alt="home icon"><span>Home</span></a>
+            </li>
+            <li>
+              <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer"
+                (click)='largeScreenLocation("/user/dashboard/results")'><img src="./../../assets/images/large-screen-icons/result.svg"
+                  alt="Result icon"><span>Results</span></a>
+            </li>
+            <li>
+              <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer"
+                (click)='largeScreenLocation("/user/dashboard/take-assessment")'><img src="./../../assets/images/large-screen-icons/assessment.svg"
+                  alt="Assessment icon"><span>Take assessment</span></a>
+            </li>
+            <li>
+              <a class="py-3 px-4 block flex justify-start gap-1 items-center cursor-pointer"
+                href="https://forms.gle/bTPnFYNtKDaU4bbQA" target="_blank"><img src="./../../assets/images/large-screen-icons/assessment.svg"
+                  class="w-6 h-6" alt="Assessment icon"><span>Request new topic</span>
+              </a>
+            </li>
+            <li>
+              <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer" (click)="desktopinitLogout()"><img
+                  src="./../../assets/images/large-screen-icons/logout.svg" alt="Assessment icon"><span>Logout</span></a>
+            </li>
+          </ul>
+        </nav>
+          <div class="mt-6 px-12 md:w-full" >
                <router-outlet></router-outlet>
           </div>
      </div>

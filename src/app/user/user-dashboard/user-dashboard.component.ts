@@ -91,6 +91,11 @@ export class UserDashboardComponent implements OnInit {
        this.toggleNavigation()
   }
 
+   largeScreenLocation(link: string)
+  {
+       this.router.navigate([link])
+  }
+
   confirmStatus($event: boolean)
   {
      if($event)
@@ -105,7 +110,10 @@ export class UserDashboardComponent implements OnInit {
        this.toggleNavigation()
       this.showConfirm = true
   }
-
+  desktopinitLogout()
+  {
+      this.showConfirm = true
+  }
   logout()
   {
             this.loader.start()

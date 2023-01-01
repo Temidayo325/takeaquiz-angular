@@ -2,7 +2,11 @@
 <app-loader [display]="showLoader"></app-loader>
 <app-success [display]="showSuccess" [text]="successMessage"></app-success>
 <div class="tracking-wider md:flex md:justify-start">
-     <img src="../../assets/images/verify.png" alt="smiling people loging in" class="w-full">
+    <div class="md:bg-blue-800 md:w-4/6 w-full md:h-screen md:flex md:justify-center md:items-center"
+      style="background: #001220;">
+      <img src="../../assets/images/verify.png" alt="smiling people loging in" class="md:hidden md:w-3/6">
+      <img src="../../assets/images/verify-md.jpg" alt="smiling people loging in" class="hidden md:block w-full h-full">
+    </div>
      <div class="grid gap-6 justify-center px-2 md:bg-white md:gap-2 md:items-center md:h-screen md:block md:w-3/6">
           <h2 class="font-bold text-center mt-10 text-md md:text md:mt-64 md:text-xl">Verify Account</h2>
           <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full md:w-1/3 mt-12 mx-auto">

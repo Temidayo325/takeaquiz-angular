@@ -13,7 +13,10 @@ module.exports = {
          backgroundImage: theme => ({
               'register-bg': "url('../src/assets/images/blob-scene-haikei.svg')",
               'login': "url('./src/assets/images/low-poly-grid-haikei.svg')",
-         })
+         }),
+         fontFamily: {
+            header: ['"Amaranth"', 'sans-serif']
+          }
     }
   },
   plugins: [

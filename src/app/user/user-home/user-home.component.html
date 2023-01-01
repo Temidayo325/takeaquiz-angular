@@ -1,12 +1,18 @@
-<div class="rounded-[12px] py-10 px-5 home-cta">
+<div class="rounded-[12px] py-10 px-5 home-cta md:hidden">
      <h2 class="text-2xl" style="color: #FBAE3C">Start a quiz !</h2>
-     <button routerLink="/user/dashboard/take-assessment" class="text-center w-full rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold">Take assessment</button>
+     <button routerLink="/user/dashboard/take-assessment" class="text-center w-full rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold animate-bounce">Take assessment</button>
 </div>
 
-<section class="mt-8 ">
+<div class="rounded-[12px] py-10 px-5 mt-16 home-cta2 hidden md:block md:w-4/6 h-[300px]  relative">
+     <h2 class="text-3xl font-bold " style="color: #001220">Start a quiz !</h2>
+    <img src="./../../assets/images/dashboard-banner.png" alt="home icon" class="h-[300px] absolute right-32 top-0 -mt-[80px]">
+     <button routerLink="/user/dashboard/take-assessment" class="text-center w-5/6 rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold animate-bounce absolute bottom-5">Take assessment</button>
+</div>
+
+<section class="mt-8 md:mt-12">
      <h2 class="text-md font-bold">Your last Assesments Results</h2>
      <div class="w-full overflow-x-scroll mt-4 z-10">
-          <div class="bg-gray-300 rounded-lg py-4 px-2 grid justify-center" *ngIf="results.length == 0">
+          <div class="bg-gray-100 rounded-lg py-4 px-2 grid justify-center md:py-20" *ngIf="results.length == 0">
                <h2 class="text-center font-bold text-lg my-2 ">You have no result yet</h2>
                <a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3 text-center " style="color: #FBAE3C; background: #001220">Click here to take an assessment</a>
           </div>
@@ -24,18 +30,18 @@
      </div>
 </section>
 
-<div class="mt-5">
+<div class="mt-5 md:mt-12">
      <h2 class="text-md font-bold mb-5">Your usage statistics</h2>
-     <div class="overflow-x-scroll flex justify-start gap-3 ">
-          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline">
-               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto" style="background: #FBAE3C; color: #001220">
+     <div class="overflow-x-scroll flex justify-start gap-3 md:gap-12 md:overflow-x-hidden">
+          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-1/4 md:h-[240px]">
+               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto md:mt-[55px]" style="background: #FBAE3C; color: #001220">
                     <h1 class="text-center">{{countedResult}}</h1>
                </div>
                <p class="text-md mt-2 overflow-hidden text-center font-bold">Results</p>
           </div>
 
-          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline">
-               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto" style="background: #FBAE3C; color: #001220">
+          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-1/4 md:h-[240px]">
+               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto md:mt-[55px]" style="background: #FBAE3C; color: #001220">
                     <h1 class="text-center">{{topics.length}}</h1>
                </div>
                <p class="text-md mt-2 overflow-hidden text-center font-bold">Topics</p>
@@ -44,13 +50,13 @@
 
 </div>
 
-<section class="mt-10">
+<section class="mt-10 md:mt-16 md:mb-10">
      <h2 class="text-md font-bold mb-4">Latest topics</h2>
      <div *ngIf="topTopics.length == 0">
           <h2 class="text-xl font-bold text-center py-3 ">Loading available topics...</h2>
      </div>
-     <div *ngIf="topTopics.length > 0">
-          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full border border-gray-400 shadow-inner shadow-outline shadow-xl text-left rounded-xl py-3 px-3 mb-3">
+     <div *ngIf="topTopics.length > 0" class="md:flex md:justify-start md:gap-12">
+          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full md:w-1/4 border border-gray-400 shadow-inner shadow-outline shadow-xl text-left rounded-xl py-3 md:py-16 px-3 mb-3">
                <p class="font-bold">{{topic.title || 'NA'}}</p>
                <p class="">Department of {{topic.department}}</p>
                <!-- <p class="text-center" >{{topic.faculty}}</p> -->
