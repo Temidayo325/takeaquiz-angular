@@ -4,7 +4,7 @@
 }
 .cta-1
 {
-     background: #FBAE3C;
+     background: #EFA11F;
      color: #001220;
 }
 .blue
@@ -49,4 +49,14 @@ p,h2,h3,a, li
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
 	}
+}
+
+@media only screen and (min-width: 1000px)
+{
+     .banner{
+          background-image: url("../../assets/images/background-2.svg");
+          background-size: cover;
+          background-repeat: no-repeat;
+          /* background-attachment: fixed; */
+     }
 }
