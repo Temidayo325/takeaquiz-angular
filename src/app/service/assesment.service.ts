@@ -12,7 +12,8 @@ export class AssesmentService {
   constructor(
        private http: HttpClient
   ) { }
-  public baseUrl = "https://quizly-api.luminaace.com/api/";
+  // public baseUrl = "https://quizly-api.luminaace.com/api/";
+  public baseUrl =  'http://127.0.0.1:8000';
   public token: string = sessionStorage.getItem('token')!
 
   options = {

@@ -30,7 +30,10 @@ export class StoreService {
   {
        return this.user = JSON.parse(sessionStorage.getItem('user')!)
   }
-
+  resetUser(user: object):void
+  {
+     sessionStorage.setItem('user', JSON.stringify(user))
+  }
   setuser(data: object, token: any): void
   {
        sessionStorage.setItem('user', JSON.stringify(data))

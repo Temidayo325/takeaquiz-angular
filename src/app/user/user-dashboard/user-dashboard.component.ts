@@ -34,7 +34,23 @@ import { SuccessComponent } from './../../components/success/success.component';
                  }),
                  animate(200)
                ])
-     ])
+     ]),
+     trigger('sideOff', [
+            transition(':enter', [style({
+                   opacity: 0,
+                   transform: 'translateX(100%)'
+                 }),
+                 animate(200)
+               ])
+     ]),
+     trigger('sideOff', [
+            transition(':leave', [style({
+                   opacity: 0,
+                   transform: 'translateX(-100%)'
+                 }),
+                 animate(200)
+               ])
+     ]),
   ]
 })
 export class UserDashboardComponent implements OnInit {
@@ -53,11 +69,13 @@ export class UserDashboardComponent implements OnInit {
 
   public navigation: boolean = false
   public user = JSON.parse(sessionStorage.getItem('user')!)
+  public fields = {faculty: "", department: ""}
   public imageSource: string = `https://avatars.dicebear.com/api/initials/${this.user.nickname}.svg?mood[]=happy`
   headerMessage: Subject<string> =  new Subject
   showLoader: boolean = false
   showConfirm: boolean = false
   priority: any = {yes: '', no: 'bg-yellow-600', text: 'Do you want to logout?'}
+  profileDisplay: boolean = false
 
   ngOnInit(): void
   {
@@ -114,6 +132,33 @@ export class UserDashboardComponent implements OnInit {
   {
       this.showConfirm = true
   }
+
+  showProfile()
+  {
+          this.profileDisplay = !this.profileDisplay
+  }
+
+  addUserDetail(type: string, value:string)
+  {
+       let user = this.storeService.getUser()
+       this.loader.start()
+       this.userService.updateProfile({type: type, value: value, user_id: this.storeService.user.id}).subscribe(
+            (response) => {
+                 Object.defineProperty(user, type, {
+                      value: value,
+                      writable: false
+                 })
+                 this.user = user
+                 this.storeService.resetUser(user)
+                 this.loader.complete()
+            },
+            (error) => {
+                 this.loader.complete()
+                 this.toast.error(error.message)
+            }
+       )
+  }
+
   logout()
   {
             this.loader.start()

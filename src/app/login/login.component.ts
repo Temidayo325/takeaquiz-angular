@@ -73,7 +73,8 @@ export class LoginComponent implements OnInit {
            (error) => {
                 this.loader.complete()
                 this.showLoader = false
-                this.toast.warn(error.error.message)
+                let message = (error.error.message !== undefined) ? error.error.message : "Unable to connect to server";
+                this.toast.warn(message)
                 this.error = error.error.errors
            }
       )

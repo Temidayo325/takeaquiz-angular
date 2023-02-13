@@ -4,14 +4,18 @@ import { Subject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Login } from './../models/login.models';
 import { NewUser } from './../models/newUser.models';
+import { Profile } from './../models/newUser.models';
+import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
      public baseUrl = "https://quizly-api.luminaace.com/api/";
+     // public baseUrl =  'http://127.0.0.1:8000';
      constructor(
-            private http: HttpClient
+            private http: HttpClient,
+            private storeService: StoreService
       ){}
  options = {
       headers : new HttpHeaders({
@@ -63,5 +67,20 @@ export class UserService {
   logout(user_id: number): Observable<any>
   {
       return this.http.post(this.baseUrl+"logout", {user_id: user_id},this.options)
+  }
+
+  updateProfile(profile: Profile): Observable<any>
+  {
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+      // console.log(this.storeService.getToken(), token)
+       return this.http.post(this.baseUrl+"profile/edit", profile, options )
   }
 }

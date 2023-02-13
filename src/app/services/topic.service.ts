@@ -10,6 +10,7 @@ import { StoreService } from './../service/store.service';
 })
 export class TopicService {
 
+     // public baseUrl =  'http://127.0.0.1:8000';
   public baseUrl = "https://quizly-api.luminaace.com/api/";
   public options = {
        headers : new HttpHeaders({
@@ -34,6 +35,10 @@ export class TopicService {
           return this.http.get(this.baseUrl+"topics", this.options)
      }
 
+     publicGet(): Observable<any>
+     {
+          return this.http.get(this.baseUrl+"public/topics", this.options)
+     }
      delete(id: number): Observable<any>
      {
           return this.http.delete(this.baseUrl+"topics/"+id, this.options)
@@ -53,4 +58,6 @@ export class TopicService {
      {
           return this.http.patch(this.baseUrl+"question", question ,this.options)
      }
+
+
 }

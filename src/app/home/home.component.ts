@@ -17,8 +17,9 @@ export class HomeComponent implements OnInit {
   public sub!: Subscription
   ngOnInit(): void
   {
-       this.sub  = this.topicService.get().subscribe(
+       this.sub  = this.topicService.publicGet().subscribe(
             (response) => {
+                 // console.log(response)
                  this.statistics.users = response.users
                  this.statistics.assessments = response.results
                  let questionTotalsArray: Array<number> = []
@@ -28,7 +29,10 @@ export class HomeComponent implements OnInit {
                  this.statistics.topics = questionTotalsArray.reduce((total, current, index) => {
                     return total + current
                }, 0)
-            }
+          },
+          (error) => {
+               console.log(error)
+          }
        )
   }
 

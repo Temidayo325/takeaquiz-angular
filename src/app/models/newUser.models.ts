@@ -5,3 +5,9 @@ export interface NewUser {
      password: string,
      institution: string
 }
+
+export interface Profile {
+     type: string,
+     value: string,
+     user_id: number
+}
