@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Result } from './../models/uploadrresult.models';
+import { StoreService } from './../service/store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import { Result } from './../models/uploadrresult.models';
 export class AssesmentService {
 
   constructor(
-       private http: HttpClient
+       private http: HttpClient,
+       private store: StoreService
   ) { }
-  public baseUrl = "https://quizly-api.luminaace.com/api/";
-  // public baseUrl =  'http://127.0.0.1:8000';
-  public token: string = sessionStorage.getItem('token')!
+  
+     public baseUrl = "https://quizly-api.luminaace.com/api/";
+    public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
 
   options = {
        headers : new HttpHeaders({
@@ -44,5 +46,10 @@ export class AssesmentService {
   GetSharedAssessmentResult(code$: string):Observable<unknown>
   {
       return this.http.post(this.baseUrl+`share/result/${code$}`, {code: code$}, this.guest)
+  }
+
+  countTotalQuestion(id: number): Observable<unknown>
+  {
+       return this.http.post(this.baseUrl+"content/show", {topic_id: id}, this.options)
   }
 }

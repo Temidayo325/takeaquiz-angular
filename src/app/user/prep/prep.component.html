@@ -52,10 +52,15 @@
                    Invalid Topic chosen
                  </p>
                </div>
-               <select name="topic_id" id="topic_id" formControlName="topic_id" class="w-full border border-gray-700 text-md text-black py-2 rounded-lg px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:py-2 focus:bg-white">
+               <select name="topic_id" id="topic_id" formControlName="topic_id" class="w-full border border-gray-700 text-md text-black py-2 rounded-lg px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:py-2 focus:bg-white" (change)="chosenTopic($event)">
                     <option value="" disabled></option>
                     <option [value]="topic.id" *ngFor="let topic of titles;let i = index; trackBy: trackByFn">{{topic.title}}</option>
                </select>
+          </div>
+
+          <div class="mt-6" *ngIf="totalAvailableQuestions > 0">
+               <label for="topic_id" class="text-md ">Total available questions</label>
+               <span class=" ml-3 text-black font-bold text-md">{{totalAvailableQuestions}}</span>
           </div>
 
           <div class="mt-10">

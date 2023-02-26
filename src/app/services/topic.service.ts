@@ -11,12 +11,13 @@ import { StoreService } from './../service/store.service';
 export class TopicService {
 
      // public baseUrl =  'http://127.0.0.1:8000';
+  public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
   public baseUrl = "https://quizly-api.luminaace.com/api/";
   public options = {
        headers : new HttpHeaders({
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer '+ this.store.token,
+            'Authorization': 'Bearer '+ this.token,
        }),
   }
 
@@ -61,14 +62,6 @@ export class TopicService {
 
      shareAssessment(id$: number):Observable<unknown>
      {
-          const token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
-          let redo = {
-               headers : new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer '+ token,
-               }),
-          }
-          return this.http.post(this.baseUrl+"share/generate-code", {topic_id: id$}, redo)
+          return this.http.post(this.baseUrl+"share/generate-code", {topic_id: id$}, this.options)
      }
 }

@@ -4,6 +4,7 @@ import { AssesmentService } from './../../service/assesment.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { LoaderComponent } from './../../components/loader/loader.component';
 import { ToastService } from 'angular-toastify';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-shared-result',
@@ -17,8 +18,11 @@ export class SharedResultComponent implements OnInit {
       private router: Router,
       private assesment: AssesmentService,
       private loader: LoadingBarService,
-      private toast: ToastService
- ) { }
+      private toast: ToastService,
+      private title: Title
+ ) {
+      this.title.setTitle("View shared result")
+ }
      result: any;
      showLoader: boolean = true
   ngOnInit(): void

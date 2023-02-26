@@ -11,12 +11,12 @@
                     <div *ngIf="results.length > 0" class="z-10">
                         <div class="flex justify-start gap-6">
                              <div class="bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-full shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left relative" *ngFor="let result of results; let i = index; trackBy: trackByFn">
-                                  <p class="uppercase mt-9"> title {{result.topic.title}}</p>
+                                  <p class="uppercase mt-6"> title {{result.topic.title}}</p>
                                   <p class="uppercase">Score: {{result.score}}</p>
                                   <p class="uppercase" > Grade: {{result.grade}}</p>
                                   <p class="uppercase mb-7 mb-9">Date: {{result.date}}</p>
                                   <p class="uppercase text-sm absolute bottom-0 py-2 px-3 rounded-[12px] mt-0 text-gray-200 w-full left-0 " style="background: #001220; color: white">Inscription: {{result.opinion}}</p>
-                                  <img src="../../../assets/images/share-icon.svg" alt="share icon from icons8" class="absolute top-0 right-0 mr-2 mt-2 h-8 w-8" (click)="shareAssessment(result.topic.id)">
+                                  <img src="../../../assets/images/share-icon.svg" alt="share icon from icons8" class="absolute top-0 right-0 mr-2 mt-2 h-6 w-6" (click)="shareAssessment(result.topic.id)">
                              </div>
                         </div>
                     </div>
