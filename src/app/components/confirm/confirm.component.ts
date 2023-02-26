@@ -1,9 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { trigger, state, style, animate, transition, } from '@angular/animations';
 
 @Component({
   selector: 'app-confirm',
   templateUrl: './confirm.component.html',
-  styleUrls: ['./confirm.component.css']
+  styleUrls: ['./confirm.component.css'],
+  animations: [
+    trigger("openClose", [
+          state('open', style({
+               transform: 'translateY(0)',
+          })),
+          state('close', style({
+               transform: 'translateY(100%)',
+          })),
+          transition("open <=> close", animate("300ms linear"))
+    ])
+     ]
 })
 export class ConfirmComponent implements OnInit {
 
@@ -25,7 +37,7 @@ export class ConfirmComponent implements OnInit {
   }
   positive()
   {
-       this.actionEvent.emit(true)
+     this.actionEvent.emit(true)
   }
 
   negative()

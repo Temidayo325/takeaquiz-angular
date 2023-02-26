@@ -1,139 +1,142 @@
-<header class="header w-full py-6 px-3 sticky top-0 shadow-xl z-30 md:shadow-none md:px-56 ">
-     <div class="flex justify-between items-center">
-          <h1 class="text-white font-bold text-xl font-header">Quizly</h1>
-          <nav>
-               <ul class="text-white flex justify-start gap-3 text-md font-sans">
-                    <li class="inline"><a routerLink="/login">Login</a></li>
-                    <li><a routerLink="/register" class="px-7 py-3 rounded-full bg-white/60 pulsee">Sign up</a></li>
-               </ul>
-          </nav>
-     </div>
-</header>
-<div class="banner pb-4 h-[80vh] w-full">
-     <div class="relative md:flex md:justify-around md:px-[200px] md:items-center h-full md:w-5/6 md:mx-auto">
+<div class="wrapper">
+     <header class="header w-full py-6 px-3 sticky top-0 shadow-xl z-30 md:shadow-none md:px-56 ">
+          <div class="flex justify-between items-center">
+               <h1 class="text-white font-bold text-xl font-header">Quizly</h1>
+               <nav>
+                    <ul class="text-white flex justify-start gap-3 text-md font-sans">
+                         <li class="inline"><a routerLink="/login">Login</a></li>
+                         <li><a routerLink="/register" class="px-7 py-3 rounded-full bg-white/60 pulsee">Sign up</a></li>
+                    </ul>
+               </nav>
+          </div>
+     </header>
+     <div class="banner pb-4 h-[80vh] w-full">
+          <div class="relative md:flex md:justify-around md:px-[200px] md:items-center h-full md:w-5/6 md:mx-auto">
 
-          <div class="px-4 py-3 absolute bottom-0 md:relative md:mt-0 md:my-0">
-               <h1 class="text-white font-bold text-3xl font-header leading-9">You don't have to fail your next assessment.</h1>
-               <h2 class="text-white text-lg mt-4 font-sans md:hidden">You totally don't have to be afraid of your next assesment. Get all the practice you require.</h2>
-               <h2 class="text-white text-lg mt-4 font-sans hidden md:block">We help you be more prepared for your next exam and assessment by providing you with more than enough practice for your assessment.</h2>
-               <button routerLink="/login" class="px-5 py-3 shadow my-2 cta-1 font-bold mt-4 text-lg font-mono">Try it out for free</button>
-          </div>
-
-          <div class="absolute top-0 md:relative h-[47vh] md:h-[80vh] md:w-[800px]">
-               <img src="../../assets/images/header.png" class="-left-4 md:mt-28" alt="Smiling as you pass your exam">
-          </div>
-     </div>
-</div>
-
-<main class="px-3 mb-6">
-     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header md:hidden">What is quizly</h1>
-     <div class="mt-2 grid justify-start gap-10 md:mt-6 md:flex md:justify-center md:items-center md:gap-3 md:py-8">
-          <img src="../../assets/images/pensive-cropped.png" alt="smiling people loging in" class="mt-2 mx-auto md:w-1/4 md:mx-0">
-          <p class="text-xl text-justify font-sans md:w-2/6">"Practice makes perfect". Quizly presents a fun and engaging medium to practice and prepare fr your assessments at the University level. With Quizly, you can be rest assured that when you are faced  with the challenge of an examination equipped to do your absolute best.</p>
-     </div>
-</main>
-
-<section class="px-3 bg-gray-100 py-3 pb-12 md:h-[90vh] w-full">
-     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header">Why choose Quizly</h1>
-     <div class="grid gap-16 mt-2 md:flex md:justify-center md:gap-10 md:mt-32 md:w-4/6 md:mx-auto">
-          <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
-               <img src="../../assets/images/settings.gif" alt="Animated icon by Icons8" class="w-32 h-32 mt-2 mx-auto md:mt-8">
-               <h3 class="text-center font-header md:mt-3 md:text-2xl">As real as possible</h3>
-               <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform simulates the assessment scenario as accurately as possible</p>
-          </div>
-          <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
-               <img src="../../assets/images/large.png" alt="smiling people loging in" class="w-56 h-64 md:w-32 md:h-40 mt-2 mx-auto">
-               <h3 class="text-center font-header md:text-2xl">Large database</h3>
-               <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform hosts the largest database of questions in the country and being updated regularly</p>
-          </div>
-          <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
-               <img src="../../assets/images/book.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto md:w-32 md:h-32 md:mt-10">
-               <h3 class="text-center font-header md:text-2xl">Curriculum based</h3>
-               <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our practice questions are developed using the National Curriculum accreditted by NUC.</p>
-          </div>
-          <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
-               <img src="../../assets/images/easy-to-use.png" title="easy icons" alt="Easy icons created by Freepik - Flaticon" class="w-32 h-32 md:w-24 md:w-28 mt-6 mb-6 mx-auto">
-               <!-- <a href="https://www.flaticon.com/free-icons/easy" title="easy icons">Easy icons created by Freepik - Flaticon</a> -->
-               <h3 class="text-center font-header md:text-2xl">Ease of Access</h3>
-               <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform is optimized for all devices - Laptop, Tablet and Mobile</p>
-          </div>
-     </div>
-</section>
-
-<section class="px-3 banner-2 py-3 md:h-[90vh]">
-     <h1 class="font-bold text-2xl tracking-wider text-center yellow my-4 font-header md:hidden">View statistics</h1>
-     <h1 class="font-bold text-2xl tracking-wider text-center yellow my-4 font-header md:text-4xl md:block hidden">What our numbers say</h1>
-     <div class="grid justify-center text-center gap-16 text-white mt-3 md:flex md:justify-center md:gap-40 md:mt-56">
-          <div>
-               <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
-                    <p class="font-bold text-4xl text-center font-header ">{{statistics.users}}+</p>
+               <div class="px-4 py-3 absolute bottom-0 md:relative md:mt-0 md:my-0">
+                    <h1 class="text-white font-bold text-3xl font-header leading-9">You don't have to fail your next assessment.</h1>
+                    <h2 class="text-white text-lg mt-4 font-sans md:hidden">You totally don't have to be afraid of your next assesment. Get all the practice you require.</h2>
+                    <h2 class="text-white text-lg mt-4 font-sans hidden md:block">We help you be more prepared for your next exam and assessment by providing you with more than enough practice for your assessment.</h2>
+                    <button routerLink="/login" class="px-5 py-3 shadow my-2 cta-1 font-bold mt-4 text-lg font-mono">Try it out for free</button>
                </div>
-               <h2 class="font-bold text-xl md:text-2xl md:mt-2 py-2 font-sans">Registered users</h2>
-          </div>
-          <div>
-               <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
-                    <p class="font-bold text-4xl text-center font-header">{{statistics.assessments}}+</p>
+
+               <div class="absolute top-0 md:relative h-[47vh] md:h-[80vh] md:w-[800px]">
+                    <img src="../../assets/images/header.png" class="-left-4 md:mt-28" alt="Smiling as you pass your exam">
                </div>
-               <h2 class="font-bold text-xl py-2 font-sans md:text-2xl md:mt-2">Assesments completed</h2>
-          </div>
-          <div>
-               <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
-                    <p class="font-bold text-4xl text-center font-header">{{statistics.topics}}+</p>
-               </div>
-               <h2 class="font-bold text-xl py-2 fot-sans md:text-2xl md:mt-2">Questions available</h2>
           </div>
      </div>
-</section>
 
-<section class="px-3 py-3 md:py-12 pb-10 md:h-[90vh]">
-     <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header md:text-4xl">How to get started</h1>
-     <p class="text-center text-lg font-bold blue font-header">Get started in 3 simple steps</p>
-     <div class="grid gap-4 mt-8 md:flex md:justify-center md:gap-20 md:mt-20 md:w-4/6 md:mx-auto">
-          <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
-               <img src="./../../assets/images/register-step-2.jpg" alt="" class="z-10 h-full w-full">
-               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
-                    <div class="w-full mt-[360px]">
-                         <h2 class="font-bold mb-2 text-2xl">Register</h2>
-                         <p class="text-lg text-justify">To begin, create and verify your account</p>
+     <section class="px-3 mb-6">
+          <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header md:hidden">What is quizly</h1>
+          <div class="mt-2 grid justify-start gap-10 md:mt-6 md:flex md:justify-center md:items-center md:gap-3 md:py-8">
+               <img src="../../assets/images/pensive-cropped.png" alt="smiling people loging in" class="mt-2 mx-auto md:w-1/4 md:mx-0">
+               <p class="text-xl text-justify font-sans md:w-2/6">"Practice makes perfect". Quizly presents a fun and engaging medium to practice and prepare fr your assessments at the University level. With Quizly, you can be rest assured that when you are faced  with the challenge of an examination equipped to do your absolute best.</p>
+          </div>
+     </section>
+
+     <section class="px-3 bg-gray-100 py-3 pb-12 md:h-[90vh] w-full">
+          <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header">Why choose Quizly</h1>
+          <div class="grid gap-16 mt-2 md:flex md:justify-center md:gap-10 md:mt-32 md:w-4/6 md:mx-auto">
+               <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
+                    <img src="../../assets/images/settings.gif" alt="Animated icon by Icons8" class="w-32 h-32 mt-2 mx-auto md:mt-8">
+                    <h3 class="text-center font-header md:mt-3 md:text-2xl">As real as possible</h3>
+                    <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform simulates the assessment scenario as accurately as possible</p>
+               </div>
+               <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
+                    <img src="../../assets/images/large.png" alt="smiling people loging in" class="w-56 h-64 md:w-32 md:h-40 mt-2 mx-auto">
+                    <h3 class="text-center font-header md:text-2xl">Large database</h3>
+                    <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform hosts the largest database of questions in the country and being updated regularly</p>
+               </div>
+               <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
+                    <img src="../../assets/images/book.png" alt="smiling people loging in" class="w-56 h-64 mt-2 mx-auto md:w-32 md:h-32 md:mt-10">
+                    <h3 class="text-center font-header md:text-2xl">Curriculum based</h3>
+                    <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our practice questions are developed using the National Curriculum accreditted by NUC.</p>
+               </div>
+               <div class="shadow-lg px-3 pb-3 md:h-[360px] md:w-[25vw] md:px-5 md:py-5">
+                    <img src="../../assets/images/easy-to-use.png" title="easy icons" alt="Easy icons created by Freepik - Flaticon" class="w-32 h-32 md:w-24 md:w-28 mt-6 mb-6 mx-auto">
+                    <!-- <a href="https://www.flaticon.com/free-icons/easy" title="easy icons">Easy icons created by Freepik - Flaticon</a> -->
+                    <h3 class="text-center font-header md:text-2xl">Ease of Access</h3>
+                    <p class="text-xl text-left font-sans md:text-lg md:mt-2">Our platform is optimized for all devices - Laptop, Tablet and Mobile</p>
+               </div>
+          </div>
+     </section>
+
+     <section class="px-3 banner-2 py-3 md:h-[90vh]">
+          <h1 class="font-bold text-2xl tracking-wider text-center yellow my-4 font-header md:hidden">View statistics</h1>
+          <h1 class="font-bold text-2xl tracking-wider text-center yellow my-4 font-header md:text-4xl md:block hidden">What our numbers say</h1>
+          <div class="grid justify-center text-center gap-16 text-white mt-3 md:flex md:justify-center md:gap-40 md:mt-56">
+               <div>
+                    <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
+                         <p class="font-bold text-4xl text-center font-header ">{{statistics.users}}+</p>
+                    </div>
+                    <h2 class="font-bold text-xl md:text-2xl md:mt-2 py-2 font-sans">Registered users</h2>
+               </div>
+               <div>
+                    <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
+                         <p class="font-bold text-4xl text-center font-header">{{statistics.assessments}}+</p>
+                    </div>
+                    <h2 class="font-bold text-xl py-2 font-sans md:text-2xl md:mt-2">Assesments completed</h2>
+               </div>
+               <div>
+                    <div class="bg-gray-200 w-28 h-28 md:w-40 md:h-40 rounded-full flex justify-center items-center mx-auto blue">
+                         <p class="font-bold text-4xl text-center font-header">{{statistics.topics}}+</p>
+                    </div>
+                    <h2 class="font-bold text-xl py-2 fot-sans md:text-2xl md:mt-2">Questions available</h2>
+               </div>
+          </div>
+     </section>
+
+     <section class="px-3 py-3 md:py-12 pb-10 md:h-[90vh]">
+          <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header md:text-4xl">How to get started</h1>
+          <p class="text-center text-lg font-bold blue font-header">Get started in 3 simple steps</p>
+          <div class="grid gap-4 mt-8 md:flex md:justify-center md:gap-20 md:mt-20 md:w-4/6 md:mx-auto">
+               <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
+                    <img src="./../../assets/images/register-step-2.jpg" alt="" class="z-10 h-full w-full">
+                    <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                         <div class="w-full mt-[360px]">
+                              <h2 class="font-bold mb-2 text-2xl">Register</h2>
+                              <p class="text-lg text-justify">To begin, create and verify your account</p>
+                         </div>
+                    </div>
+               </div>
+               <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
+                    <img src="./../../assets/images/mikhail.jpg" alt="" class="z-10 h-full w-full">
+                    <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                         <div class="w-full mt-[360px] ">
+                              <h2 class="font-bold mb-2 text-2xl font-header">Practice</h2>
+                              <p class="text-lg text-justify font-sans">Pick a topic and begin your mock assesment</p>
+                         </div>
+                    </div>
+               </div>
+               <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
+                    <img src="./../../assets/images/assessment.jpg" alt="" class="z-10 h-full w-full">
+                    <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
+                         <div class="w-full mt-[360px] ">
+                              <h2 class="font-bold mb-2 text-2xl font-header">Review</h2>
+                              <p class="text-lg text-justify font-sans">Get your results, review your school work and retake</p>
+                         </div>
                     </div>
                </div>
           </div>
-          <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
-               <img src="./../../assets/images/mikhail.jpg" alt="" class="z-10 h-full w-full">
-               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
-                    <div class="w-full mt-[360px] ">
-                         <h2 class="font-bold mb-2 text-2xl font-header">Practice</h2>
-                         <p class="text-lg text-justify font-sans">Pick a topic and begin your mock assesment</p>
-                    </div>
-               </div>
-          </div>
-          <div class="w-full md:w-[18vw] h-[500px] rounded-xl relative overflow-hidden">
-               <img src="./../../assets/images/assessment.jpg" alt="" class="z-10 h-full w-full">
-               <div class="w-full h-full z-20 bg-black/50 absolute top-0 text-white px-3 ">
-                    <div class="w-full mt-[360px] ">
-                         <h2 class="font-bold mb-2 text-2xl font-header">Review</h2>
-                         <p class="text-lg text-justify font-sans">Get your results, review your school work and retake</p>
-                    </div>
-               </div>
-          </div>
-     </div>
-</section>
+     </section>
 
-<section class="px-3 py-3 pb-10 md:py-12 pb-10 md:h-[90vh] md:bg-gray-100">
-  <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header">Can't find your Department?</h1>
-  <div class="md:flex md:justify-center md:items-center md:gap-20 md:mt-20">
-      <img src="../../assets/images/course-request.png" title="easy icons" alt="" class="mt-6 mb-6 mx-auto md:mx-0">
-      <div class="md:w-2/6">
-           <p class="text-lg text-justify font-sans">Can't find your department or desired topic in the repository yet? Click the button below to speed up your department or desired topic. And better still get your friends to make a request of the same topic to increase your chances. Questions are added on a daily basis.</p>
-           <div class="my-3 mt-10 flex justify-center ">
-             <a href="https://forms.gle/bTPnFYNtKDaU4bbQA" _blank
-               class="font-bold cta-1 px-6 py-3 mx-auto text-xl cursor-pointer text-center animate-bounce font-header"
-               target="_blank">Make a Request</a>
+     <section class="px-3 py-3 pb-10 md:py-12 pb-10 md:h-[90vh] md:bg-gray-100">
+       <h1 class="font-bold text-2xl tracking-wider text-center blue my-4 font-header">Can't find your Department?</h1>
+       <div class="md:flex md:justify-center md:items-center md:gap-20 md:mt-20">
+           <img src="../../assets/images/course-request.png" title="easy icons" alt="" class="mt-6 mb-6 mx-auto md:mx-0">
+           <div class="md:w-2/6">
+                <p class="text-lg text-justify font-sans">Can't find your department or desired topic in the repository yet? Click the button below to speed up your department or desired topic. And better still get your friends to make a request of the same topic to increase your chances. Questions are added on a daily basis.</p>
+                <div class="my-3 mt-10 flex justify-center ">
+                  <a href="https://forms.gle/bTPnFYNtKDaU4bbQA" _blank
+                    class="font-bold cta-1 px-6 py-3 mx-auto text-xl cursor-pointer text-center animate-bounce font-header"
+                    target="_blank">Make a Request</a>
+                </div>
            </div>
-      </div>
-  </div>
-</section>
+       </div>
+     </section>
 
-<footer class="banner py-8 px-4 text-center text-lg text-white font-sans">
-     <p>	&copy; Copyright of Luminaace.com</p>
-</footer>
+     <footer class="banner py-8 px-4 text-center text-lg text-white font-sans">
+          <p>	&copy; Copyright of Luminaace.com</p>
+     </footer>
+
+</div>

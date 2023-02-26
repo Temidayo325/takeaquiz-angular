@@ -19,10 +19,11 @@ import { VerifyAccountComponent } from './user/verify-account/verify-account.com
 import { RegisterComponent } from './register/register.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
-// import { LoaderComponent } from './components/loader/loader.component';
-// import { ConfirmComponent } from './components/confirm/confirm.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 import { RecoverPasswordComponent } from './user/recover-password/recover-password.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
+import { SharedResultComponent } from './user/shared-result/shared-result.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -32,8 +33,8 @@ const routes: Routes = [
      {path: 'recover-password', component: RecoverPasswordComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      {path: 'admin', component: AdminLoginComponent},
-     // {path: 'spinner', component: LoaderComponent},
-     // {path: 'confirm', component: ConfirmComponent},
+     {path: 'spinner', component: LoaderComponent},
+     {path: 'confirm', component: ConfirmComponent},
      {path: 'user/dashboard', component: UserDashboardComponent,
           canActivateChild: [LoggeninUserGuard],
           canLoad: [LoggeninUserGuard],
@@ -75,6 +76,7 @@ const routes: Routes = [
                     component: AdminHomeComponent
                }
           ]},
+     {path: 'share/result/:code', component: SharedResultComponent},
      { path: '', redirectTo: '/index', pathMatch: 'full' },
      { path: '**', component: Error404Component },
 ];

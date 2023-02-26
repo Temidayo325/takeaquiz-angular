@@ -21,7 +21,6 @@ export class UserService {
       headers : new HttpHeaders({
            'Content-Type': 'application/json',
            'Accept': 'application/json',
-           // 'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
       }),
  }
   login(user: Login): Observable<any>
@@ -56,7 +55,16 @@ export class UserService {
 
   getResults(id: number): Observable<any>
   {
-       return this.http.get(this.baseUrl+`result?user_id=${id}`, this.options )
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+       return this.http.get(this.baseUrl+`result?user_id=${id}`, options )
   }
 
   resendVerificationCode(email: string): Observable<any>

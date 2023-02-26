@@ -1,0 +1,45 @@
+<app-loader [display]="showLoader"></app-loader>
+<div class="px-6">
+     <div class="bg-white w-full" *ngIf="result !== undefined">
+          <div class="mt-10">
+               <img [src]="result.user.image" alt="user avater" class="w-32 h-32 mx-auto rounded-full ">
+               <h1 class="font-bold text-2xl text-center mt-2">{{result.user.name}}</h1>
+               <p class="text-lg text-center ">{{result.user.nickname}}</p>
+          </div>
+          <div class="mt-4">
+               <label for="institution" class="text-md">Name of Institution</label>
+               <h3 class="font-bold text-lg">{{result.user.institution}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="faculty" class="text-md">Faculty</label>
+               <h3 class="font-bold text-lg">{{result.user.faculty}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-department" class="text-sm">Department</label>
+               <h3 class="font-bold text-lg">{{result.user.department}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-topic" class="text-sm">Assessment topic</label>
+               <h3 class="font-bold text-lg">{{result.topic.title}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-score" class="text-sm">Assessment score</label>
+               <h3 class="font-bold text-lg">{{result.score}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-grade" class="text-sm">Assessment grade</label>
+               <h3 class="font-bold text-lg">{{result.grade}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-date" class="text-sm">Assessment date</label>
+               <h3 class="font-bold text-lg">{{result.date}}</h3>
+          </div>
+          <div class="mt-4">
+               <label for="assessment-date" class="text-sm">Assessment grade tag</label>
+               <h3 class="font-bold text-lg">{{result.opinion}}</h3>
+          </div>
+          <div class="border border-blue-900 p-2 relative mt-8 mb-16" (click)="signup()">
+               <p class="text-center text-blue-900 text-xl">Sign up to take your assessment</p>
+          </div>
+     </div>
+</div>

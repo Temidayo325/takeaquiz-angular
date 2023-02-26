@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -59,5 +59,16 @@ export class TopicService {
           return this.http.patch(this.baseUrl+"question", question ,this.options)
      }
 
-
+     shareAssessment(id$: number):Observable<unknown>
+     {
+          const token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
+          let redo = {
+               headers : new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer '+ token,
+               }),
+          }
+          return this.http.post(this.baseUrl+"share/generate-code", {topic_id: id$}, redo)
+     }
 }

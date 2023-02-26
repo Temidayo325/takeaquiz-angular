@@ -18,39 +18,24 @@ import { SuccessComponent } from './../../components/success/success.component';
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css'],
   animations: [
-       slideInAnimation,
      trigger('onOff', [
-            transition(':enter', [style({
-                   opacity: 0,
-                   transform: 'translateX(-100%)'
-                 }),
-                 animate(200)
-               ])
+          state('on', style({
+              transform: 'translateX(0)',
+         })),
+         state('off', style({
+              transform: 'translateX(100%)',
+         })),
+         transition("on <=> off", animate("300ms linear"))
      ]),
-     trigger('onOff', [
-            transition(':leave', [style({
-                   opacity: 0,
-                   transform: 'translateX(-100%)'
-                 }),
-                 animate(200)
-               ])
-     ]),
-     trigger('sideOff', [
-            transition(':enter', [style({
-                   opacity: 0,
-                   transform: 'translateX(100%)'
-                 }),
-                 animate(200)
-               ])
-     ]),
-     trigger('sideOff', [
-            transition(':leave', [style({
-                   opacity: 0,
-                   transform: 'translateX(-100%)'
-                 }),
-                 animate(200)
-               ])
-     ]),
+     trigger("openClose", [
+           state('open', style({
+                transform: 'translateX(0)',
+           })),
+           state('close', style({
+                transform: 'translateX(-100%)',
+           })),
+           transition("open <=> close", animate("400ms linear"))
+     ])
   ]
 })
 export class UserDashboardComponent implements OnInit {

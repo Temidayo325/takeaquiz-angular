@@ -1,4 +1,4 @@
-<div *ngIf="display" class="w-full h-screen fixed top-0 z-30 right-0">
+<div [@openClose]="display ? 'open' : 'close'" class="w-full h-screen fixed top-0 z-30 right-0">
      <div class="flex justify-center items-center w-full h-screen flex justify-center items-center bg-white/80 ">
           <img src="../../../assets/images/spinner.gif" alt="spinner" class="w-20 h-20">
      </div>

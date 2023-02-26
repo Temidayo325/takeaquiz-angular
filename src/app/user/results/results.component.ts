@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
 import { ShareService } from './../../services/share.service';
+import { TopicService } from './../../services/topic.service';
 
 @Component({
   selector: 'app-results',
@@ -17,6 +18,7 @@ export class ResultsComponent implements OnInit {
 
   constructor(
        private userService: UserService,
+       private topicService: TopicService,
        private loader: LoadingBarService,
        private router: Router,
        private toast: ToastService,
@@ -24,7 +26,7 @@ export class ResultsComponent implements OnInit {
        private sharedService: ShareService
  ) {
       this.title.setTitle("Assessment results")
-      this.sharedService.newHeader.next("Results")
+      this.sharedService.newHeader.next("My Results")
  }
   public results: Array<any> = []
   public user: any = JSON.parse(sessionStorage.getItem('user')!)
@@ -49,5 +51,35 @@ export class ResultsComponent implements OnInit {
 
   {
         return result ? result.id : undefined;
+  }
+
+  shareAssessment(id$: number)
+  {
+       // send a request to create the code
+       this.topicService.shareAssessment(id$).subscribe(
+            (response: any) => {
+                 // Generate a full-link
+                 let link = "https://quizly.luminaace.com/share/result/"+ response.data.code
+                 // generate copy
+                 let copy = "Check out the result of an assessment I just took on Quizly. "+ link
+                 // Copy link + copy to the clipboard
+                 console.log(response)
+                 try{
+                      navigator.clipboard.writeText(copy)
+                      this.toast.info("Link has been copied to your clipboard, paste on any of your social media to share")
+                 }catch(err){
+                      this.toast.warn("Unable to copy shared assessment")
+                 }
+                 // Let the user know that the content is available on the clipboard
+
+            },
+
+            (error) => {
+                 this.toast.error("Unable to generate sharable link")
+                 console.log(error)
+            }
+       )
+       // Retrieve the code and save the link and the writeup to the clipboard
+       // the content of the clipboard can be shared across platforms
   }
 }

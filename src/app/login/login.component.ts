@@ -9,12 +9,13 @@ import {Title} from '@angular/platform-browser';
 import { LoaderComponent } from './../components/loader/loader.component';
 import { SuccessComponent } from './../components/success/success.component';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+     export class LoginComponent implements OnInit {
      form = new FormGroup({
             "email": new FormControl("", [Validators.required, Validators.email]),
             "password": new FormControl("", [Validators.required, Validators.minLength(5)]),
@@ -60,7 +61,9 @@ export class LoginComponent implements OnInit {
                      sessionStorage.setItem('totalTopics', response.countTopics)
                      sessionStorage.setItem('top3Topics', JSON.stringify(response.top3))
                      this.showLoader = false
-                     this.showSuccess = true
+                     setTimeout(() => {
+                          this.showSuccess = true
+                     }, 300)
                      setTimeout(() => {
                           this.showSuccess = false
                           this.router.navigate(['/user/dashboard'])
