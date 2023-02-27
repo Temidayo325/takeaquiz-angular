@@ -16,23 +16,16 @@ import {Title} from '@angular/platform-browser';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   animations: [
-    trigger('onOff', [
-            transition(':enter', [style({
-                   opacity: 0,
-                   transform: 'translateX(-100%)'
-                 }),
-                 animate(200)
-               ])
-    ]),
-    trigger('onOff', [
-            transition(':leave', [style({
-                   opacity: 0,
-                   transform: 'translateX(-100%)'
-                 }),
-                 animate(200)
-               ])
-    ])
-  ]
+       trigger("openClose", [
+              state('open', style({
+                   transform: 'translateX(0)',
+              })),
+              state('close', style({
+                   transform: 'translateX(-100%)',
+              })),
+              transition("open <=> close", animate("300ms linear"))
+       ])
+]
 })
 export class DashboardComponent implements OnInit {
 
@@ -56,11 +49,12 @@ export class DashboardComponent implements OnInit {
      public newTopic!: Subscription
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
-     public imageSource: string = `https://avatars.dicebear.com/api/identicon/${this.user.nickname}.svg?mood[]=happy`
+
   ngOnInit(): void
   {
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
+                 console.log(response)
                  this.topics = response.data
                  this.totalUsers = response.users
                  this.totalDepartments = response.faculties
@@ -76,6 +70,7 @@ export class DashboardComponent implements OnInit {
             },
 
             (error) => {
+                 console.log(error)
             }
        )
 

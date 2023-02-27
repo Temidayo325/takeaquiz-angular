@@ -35,7 +35,6 @@ export class AdminHomeComponent implements OnInit {
      public newTopic!: Subscription
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
-     public imageSource: string = `https://avatars.dicebear.com/api/identicon/${this.user.nickname}.svg?mood[]=happy`
 
 
      ngOnInit(): void

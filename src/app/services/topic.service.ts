@@ -11,20 +11,26 @@ import { StoreService } from './../service/store.service';
 export class TopicService {
 
      // public baseUrl =  'http://127.0.0.1:8000';
-  public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
+  public token: string = ''
+
   public baseUrl = "https://quizly-api.luminaace.com/api/";
-  public options = {
-       headers : new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Bearer '+ this.token,
-       }),
-  }
+  public options: Object = {}
 
        constructor(
             private http: HttpClient,
             private store: StoreService,
-      ) { }
+      ) {
+           if (this.store.getToken() !== null) {
+               this.token = this.store.getToken().slice(1,this.store.getToken().length - 1)
+               this.options = {
+                    headers : new HttpHeaders({
+                         'Content-Type': 'application/json',
+                         'Accept': 'application/json',
+                         'Authorization': 'Bearer '+ this.token,
+                    }),
+               }
+           }
+      }
 
      create(topic: Topic): Observable<any>
      {
@@ -38,7 +44,14 @@ export class TopicService {
 
      publicGet(): Observable<any>
      {
-          return this.http.get(this.baseUrl+"public/topics", this.options)
+          let guest = {
+               headers : new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer '+ this.token,
+               }),
+          }
+          return this.http.get(this.baseUrl+"public/topics", guest)
      }
      delete(id: number): Observable<any>
      {

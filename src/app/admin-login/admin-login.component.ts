@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import { UserService } from '../service/user.service';
@@ -37,15 +38,17 @@ export class AdminLoginComponent implements OnInit {
        this.loader.start()
        this.userService.adminLogin({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
             (response) => {
+                 console.log(response)
                  this.loader.complete()
                  this.toast.success(response.message)
                  this.storeService.setuser(response.user, response.token)
                  this.storeService.setAdmin(response.questions, response.topics)
-                 this.router.navigate(['/admin/dashboard'])
+                 this.router.navigate(['/admin/dashboard/home'])
             },
 
             (error) => {
                  this.loader.complete()
+                 console.log(error)
                  this.toast.warn(error.error.message)
                  this.error = error.error.errors
             }
