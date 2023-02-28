@@ -33,6 +33,8 @@ import { SuccessComponent } from './components/success/success.component';
 import { RecoverPasswordComponent } from './user/recover-password/recover-password.component';
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { SharedResultComponent } from './user/shared-result/shared-result.component';
+import { ContentComponent } from './admin/content/content.component';
+import { OutlineComponent } from './forms/outline/outline.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,9 @@ import { SharedResultComponent } from './user/shared-result/shared-result.compon
     SuccessComponent,
     RecoverPasswordComponent,
     ChangePasswordComponent,
-    SharedResultComponent
+    SharedResultComponent,
+    ContentComponent,
+    OutlineComponent
   ],
   imports: [
     LoadingBarModule,

@@ -1,0 +1,48 @@
+<div class="w-3/4 mx-auto mt-10 overflow-hidden relative">
+     <div *ngIf="topics == null">
+          <p>Loading topics ....</p>
+     </div>
+     <div *ngIf="topics.length > 0">
+          <div class="grid grid-cols-4 gap-3 py-3 font-bold text-lg">
+               <h5>Title</h5>
+               <h5>Faculty</h5>
+               <h5>Department</h5>
+               <h5></h5>
+          </div>
+          <div *ngFor="let item of topics; trackBy: trackByFn" class="grid grid-cols-4 gap-3 py-3 ">
+               <p>{{item.title}}</p>
+               <p>{{item.faculty}}</p>
+               <p>{{item.department}}</p>
+               <div class="flex justify-start">
+                    <button class="bg-blue-600 text-white px-4 py-3 " (click)="viewContent(item.contents, item.topic_id, item.title)">View content</button>
+               </div>
+          </div>
+     </div>
+     <div [@openClose]="navigation ? 'open' : 'close'" class="fixed top-0 right-0 z-40 h-screen overflow-y-hidden bg-white w-2/4 bg-gray-200 bg-no-repeat bg-cover bg-fixed border-0 border-r-2 border-gray-800 shadow-inner py-3 px-8 overflow-x-hidden">
+          <button type="button" data-drawer-dismiss="drawer-example" aria-controls="drawer-example" class="text-gray-100 bg-red-500 hover:bg-red-600 rounded-lg text-sm p-1.5 absolute top-4 right-4 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="toggleNavigation()">
+            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <span class="sr-only">Close menu</span>
+         </button>
+
+         <button class="px-6 py-3 bg-blue-900 text-white font-bold translate-y-[-130%]" [class]="classes.show">Add Outline</button>
+          <div class="w-full flex justify-start items-start mt-0">
+               <button *ngIf="contents.length > 0" class="px-6 py-3 bg-blue-900 text-white font-bold" (click)="classes.form = !classes.form">Add Outline</button>
+          </div>
+
+          <div [@showHide]="classes.form ? 'show' : 'hide'" class="mx-auto w-2/4 h-40 ">
+               <p class="text-left text-lg my-2 ">Topic: {{chosenTopic}}</p>
+               <app-outline [topic_id]="currentTopicId" (AddedOutline)="outlineAdded($event)"></app-outline>
+          </div>
+
+          <div *ngIf="contents.length === 0" class="flex flex-col gap-2 mt-[20%]" [class]="classes.hide">
+               <p class="text-center">No Outline available for this topic, click the button below to add outline to the topic</p>
+               <button class="mx-auto bg-blue-900 text-white px-6 py-2 text-sm hover:bg-blue-700 mt-2" (click)="addOutline(1)">Add new outline</button>
+          </div>
+          <div *ngIf="contents.length > 0" class="mt-16">
+               <p class="font-bold text-lg mb-2">The Assessment covers the following parts</p>
+               <ol *ngFor="let item of contents; trackBy: trackByFn" class="ml-8 text-sm py-3 list-disc">
+                    <li> {{item.content}}</li>
+               </ol>
+          </div>
+     </div>
+</div>

@@ -54,7 +54,6 @@ export class DashboardComponent implements OnInit {
   {
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
-                 console.log(response)
                  this.topics = response.data
                  this.totalUsers = response.users
                  this.totalDepartments = response.faculties
@@ -70,7 +69,6 @@ export class DashboardComponent implements OnInit {
             },
 
             (error) => {
-                 console.log(error)
             }
        )
 

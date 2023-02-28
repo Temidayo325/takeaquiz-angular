@@ -1,0 +1,16 @@
+<div class="w-full h-full">
+     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <label for="outline" class="block font-bold text-sm mb-2">Input outline</label>
+          <div *ngIf="outline!.invalid && (outline!.dirty || outline!.touched)"
+              class="text-red-600 mt-1 text-sm">
+            <p *ngIf="outline!.errors?.['required']">
+              Outline to be added is required.
+            </p>
+          </div>
+          <textarea name="outline" type="text" id="outline" formControlName="outline" class="py-2 px-3 w-full h-full focus:shadow-lg focus:outline-none focus:border-0" ></textarea>
+
+          <div class="flex justify-center">
+               <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center px-6 py-3 bg-blue-700 text-white hover:bg-blue-900 hover:shadow-xl disabled:bg-gray-400 disabled:text-black disabled:shadow-inner my-3 shadow-lg ">Add</button>
+          </div>
+     </form>
+</div>
