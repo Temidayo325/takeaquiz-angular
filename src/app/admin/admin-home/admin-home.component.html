@@ -1,27 +1,50 @@
-<div class="overflow-x-scroll flex justify-start gap-3 mt-3">
-     <div class="bg-gradient-to-b from-pink-500 via-purple-500 to-indigo-500 h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white">
-          <p class="text-xl">Topics</p>
-          <h1 class="font-bold text-2xl mt-2 ">{{topics.length}}</h1>
+<section class="flex justify-around px-10 items-center bg-blue-200 rounded-[30px] h-[200px] w-full mt-[-50px]">
+     <div>
+          <h2 class="font-bold text-3xl heading-9"> Hi, {{user.nickname}}</h2>
+          <h4 class="font-bold text-md">Continue to create magic and magic</h4>
+     </div>
+      <img src="./../../assets/images/admin/businessman-explaining-the-strategy.svg" alt="" class="mt-[-40px] w-3/6 h-48">
+</section>
+<p class="text-gray-400 text-lg mt-10">Overview</p>
+<div class="overflow-x-scroll flex justify-start gap-3 mt-2 md:overflow-x-hidden">
+     <div class="h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white md:w-64 md:flex md:items-center md:gap-8 md:justify-start md:h-24" style="background: #F39237">
+          <svg fill="currentColor" class="w-10 h-16 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0016.5 9h-1.875a1.875 1.875 0 01-1.875-1.875V5.25A3.75 3.75 0 009 1.5H5.625z"></path><path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z"></path></svg>
+          <div class="md:mt-[-15px]">
+               <h1 class="font-bold text-4xl mt-2 ">{{topics.length}}</h1>
+               <p class="text-md font-bold">Topics created</p>
+          </div>
      </div>
 
-     <div class="bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white">
-          <p class="text-xl">Questions</p>
-          <h1 class="font-bold text-2xl mt-2 ">{{totalQuestions}}</h1>
+     <div class="h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white md:w-64 md:flex md:items-center md:gap-10 md:justify-start md:h-24" style="background: #0E79B2">
+          <svg fill="currentColor" class="w-12 h-16 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path></svg>
+          <div class="md:mt-[-15px]">
+               <h1 class="font-bold text-4xl mt-2 ">{{totalQuestions}}</h1>
+               <p class="text-md font-bold">Questions</p>
+          </div>
      </div>
 
-     <div class="bg-gradient-to-b from-purple-500 via-pink-500 to-indigo-500 h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white">
-          <p class="text-xl">Users</p>
-          <h1 class="font-bold text-2xl mt-2 ">{{totalUsers}}</h1>
+     <div class="h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white md:w-64 md:flex md:items-center md:gap-10 md:justify-start md:h-24" style="background: #191923">
+          <svg fill="currentColor" class="w-12 h-16 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z"></path></svg>
+          <div class="md:mt-[-15px]">
+               <h1 class="font-bold text-4xl mt-2 ">{{totalUsers}}</h1>
+               <p class="text-md font-bold">Registered Users</p>
+          </div>
      </div>
 
-     <div class="bg-gradient-to-b from-pink-500 via-purple-500 to-indigo-500 h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white">
-          <p class="text-xl">Faculties</p>
-          <h1 class="font-bold text-2xl mt-2 ">{{totalDepartments}}</h1>
+     <div class="h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white md:w-56 md:flex md:items-center md:gap-10 md:justify-start md:h-24" style="background: #BF1363">
+          <svg fill="currentColor" class="w-12 h-16 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M3 2.25a.75.75 0 01.75.75v.54l1.838-.46a9.75 9.75 0 016.725.738l.108.054a8.25 8.25 0 005.58.652l3.109-.732a.75.75 0 01.917.81 47.784 47.784 0 00.005 10.337.75.75 0 01-.574.812l-3.114.733a9.75 9.75 0 01-6.594-.77l-.108-.054a8.25 8.25 0 00-5.69-.625l-2.202.55V21a.75.75 0 01-1.5 0V3A.75.75 0 013 2.25z"></path></svg>
+          <div class="md:mt-[-15px]">
+               <h1 class="font-bold text-4xl mt-2 ">{{totalDepartments}}</h1>
+               <p class="text-md font-bold">Faculties</p>
+          </div>
      </div>
 
-     <div class="bg-gradient-to-b from-pink-500 via-purple-500 to-indigo-500 h-40 w-1/3 shrink-0 grow-1 rounded-lg py-2 px-2 text-white">
-          <p class="text-xl">Assesments completed</p>
-          <h1 class="font-bold text-2xl mt-2 ">{{totalAssesments}}</h1>
+     <div class="h-40 w-1/3 shrink-0 grow rounded-lg py-2 px-2 text-white md:w-64 md:flex md:items-center md:gap-8 md:justify-start md:h-24" style="background: #F39237">
+          <svg fill="currentColor" class="w-12 h-16 " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M15.22 6.268a.75.75 0 01.968-.432l5.942 2.28a.75.75 0 01.431.97l-2.28 5.941a.75.75 0 11-1.4-.537l1.63-4.251-1.086.483a11.2 11.2 0 00-5.45 5.174.75.75 0 01-1.199.19L9 12.31l-6.22 6.22a.75.75 0 11-1.06-1.06l6.75-6.75a.75.75 0 011.06 0l3.606 3.605a12.694 12.694 0 015.68-4.973l1.086-.484-4.251-1.631a.75.75 0 01-.432-.97z"></path></svg>
+          <div class="md:mt-[-15px]">
+               <h1 class="font-bold text-4xl mt-2 ">{{totalAssesments}}</h1>
+               <p class="text-md font-bold">Assesments completed</p>
+          </div>
      </div>
 </div>
 
