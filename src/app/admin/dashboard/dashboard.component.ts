@@ -49,9 +49,16 @@ export class DashboardComponent implements OnInit {
      public newTopic!: Subscription
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
-
+     public mytime : string = ''
+     public currentTime: Date = new Date()
   ngOnInit(): void
   {
+       // Get current time
+       const today = new Intl.DateTimeFormat("en-US", {weekday: "long"}).format(this.currentTime)
+       const day = (this.currentTime.getDate() < 10) ? '0'+this.currentTime.getDate() : this.currentTime.getDate()
+       const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
+       this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
+       console.log(this.mytime)
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
                  this.topics = response.data

@@ -1,0 +1,28 @@
+.dark-blue
+{
+     color: #191923;
+}
+.light-blue
+{
+     color: #0E79B2;
+}
+.pale-yellow
+{
+     color: #F39237;
+}
+.dull-pink
+{
+     color: #BF1363;
+}
+.pc-nav li svg
+{
+     width: 23px;
+     height: 23px;
+     display: inline-block;
+     color: #191923;
+}
+.pc-nav li
+{
+     display: flex;
+     place-items: center
+}

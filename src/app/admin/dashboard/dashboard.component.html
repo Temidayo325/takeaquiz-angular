@@ -1,15 +1,36 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="pb-3">
-     <header class="sticky top-0 py-4 px-3 shadow-md w-full flex justify-start gap-20 bg-white">
-          <button class="grid gap-1 w-8" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
+<div class="pb-3 md:overflow-x-hidden">
+     <header class="sticky top-0 py-4 px-3 shadow-md w-full md:shadow-none flex justify-start gap-20 bg-white md:px-16">
+          <div class="hidden md:block md:py-3 w-full md:flex md:justify-between md:items-center">
+               <div class="flex flex-row">
+                    <h1 class="font-bold text-2xl tracking-wide dark-blue">Quizly.com</h1>
+                    <div class="ml-32 mt-[-22px]">
+                         <h1 class="font-bold text-2xl tracking-wide dark-blue">Dashboard</h1>
+                         <p class="text-gray-500" style="">{{mytime}}</p>
+                    </div>
+               </div>
+               <div class="flex justify-end gap-12 items-center dark-blue">
+                    <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+                    </svg>
+                    <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"></path>
+                    </svg>
+                    <div class="flex flex-row gap-5 items-center">
+                         <img [src]="user.image" alt="User image" class="rounded-[20px] w-12 h-16">
+                         <h2 class="font-bold text-md tracking-wide">{{user.nickname}}</h2>
+                    </div>
+               </div>
+          </div>
+          <button class="grid gap-1 w-6 md:hidden" type="button" data-drawer-target="drawer-example" data-drawer-show="drawer-example" aria-controls="drawer-example" (click)="toggleNavigation()">
                <div class="rounded-full h-1 w-full bg-black"></div>
                <div class="rounded-full h-1 w-2/3 bg-black"></div>
                <div class="rounded-full h-1 w-full bg-black"></div>
           </button>
-          <h2 class="text-lg ">Dashboard</h2>
+          <h2 class="text-lg md:hidden">Dashboard</h2>
      </header>
      <!-- drawer component -->
-     <div id="drawer-example" class="fixed z-40 h-screen overflow-y-auto bg-white w-80 dark:bg-gray-800 border-0 border-r border-gray-400 bg-white/90 bg-no-repeat bg-cover bg-fixed" tabindex="-1" aria-labelledby="drawer-label" style="background-image: url('../../assets/images/low-poly-grid-haikei.svg')"  [@openClose]="navigation ? 'open' : 'close'">
+     <div id="drawer-example" class="fixed z-40 h-screen overflow-y-auto bg-white w-80 dark:bg-gray-800 border-0 border-r border-gray-400 bg-white/90 bg-no-repeat bg-cover bg-fixed md:hidden" tabindex="-1" aria-labelledby="drawer-label" style="background-image: url('../../assets/images/low-poly-grid-haikei.svg')"  [@openClose]="navigation ? 'open' : 'close'">
         <button type="button" data-drawer-dismiss="drawer-example" aria-controls="drawer-example" class="text-gray-100 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="toggleNavigation()">
            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
            <span class="sr-only">Close menu</span>
@@ -19,20 +40,44 @@
                   <li ><a class="py-3 px-4 block"  (click)='location("/admin/dashboard/home")'>Home</a></li>
                   <li><a class="py-3 px-4 block" (click)='location("/admin/dashboard/forms/topic")' >New topic</a></li>
                   <li><a class="py-3 px-4 block" (click)='location("/admin/dashboard/forms/question")'>Add question</a></li>
-                  <li><a class="py-3 px-4 block" (click)='location("/admin/dashboard/content")'>Add Content</a></li>
+                  <li><a class="py-3 px-4 block" (click)='location("/admin/dashboard/content")'>Add Outline</a></li>
                   <li><a class="py-3 px-4 block" (click)="logout()">Logout</a></li>
              </ul>
         </nav>
      </div>
 
-     <div class="px-3 py-4">
-          <section class="flex justify-between items-center">
-               <h2 class="font-bold text-xl">{{user.nickname}}</h2>
-               <img [src]="user.image" alt="user avater" class="w-8 h-8 rounded-full ">
-          </section>
-
-          <div class="mt-12">
-               <router-outlet></router-outlet>
+     <div class="px-3 py-4 md:flex md:justify-start md:items-start">
+          <nav class="hidden md:block md:w-1/6 mr-5 md:pl-9 ">
+               <div class="bg-blue-100 rounded-md px-3 py-2 md:w-5/6 md:flex md:justify-start md:items-center md:gap-4 cursor-pointer hover:-skew-x-12" (click)='location("/admin/dashboard/forms/topic")'>
+                    <p class="text-sm font-bold heading-8 dark-blue">Create New Topic</p>
+                    <svg class="dark-blue w-[45px] h-[45px]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 9a.75.75 0 00-1.5 0v2.25H9a.75.75 0 000 1.5h2.25V15a.75.75 0 001.5 0v-2.25H15a.75.75 0 000-1.5h-2.25V9z"></path></svg>
+               </div>
+              <ul class=" mt-16 grid gap-3 justify-start ml-4 font-bold block dark-blue w-full cursor-pointer pc-nav">
+                   <li>
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"></path></svg>
+                        <a class="py-3 px-4 block"  (click)='location("/admin/dashboard/home")'>Home</a>
+                   </li>
+                   <li>
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+                        <a class="py-3 px-4 block" (click)='location("/admin/dashboard/forms/topic")' >New topic</a></li>
+                   <li>
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"></path></svg>
+                        <a class="py-3 px-4 block" (click)='location("/admin/dashboard/forms/question")'>Add question</a>
+                   </li>
+                   <li>
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"></path></svg>
+                        <a class="py-3 px-4 block" (click)='location("/admin/dashboard/content")'>Add Outline</a>
+                   </li>
+                   <li>
+                        <img src="./../../assets/images/logout.png" alt="Assessment icon" class="md:ml-[3.5px] md:mr-1">
+                        <a class="dark-blue py-3 px-4 block" (click)="logout()">Logout</a>
+                   </li>
+              </ul>
+          </nav>
+          <div class="w-full ml-12 mr-4 pr-10">
+               <div class="mt-12">
+                    <router-outlet></router-outlet>
+               </div>
           </div>
      </div>
 </div>
