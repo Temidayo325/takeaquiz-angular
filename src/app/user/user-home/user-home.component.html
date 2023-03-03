@@ -1,53 +1,83 @@
+<div class="hidden md:block bg-white z-20 md:sticky md:top-0 md:py-4 md:flex md:justify-start md:w-full">
+      <div class="w-2/5">
+           <h1 class="font-bold text-2xl text-black">Dashboard</h1>
+           <p class="text-gray-200" style="">{{mytime}}</p>
+     </div>
+     <div class="w-full flex justify-end gap-12 items-center dark-blue mt-[-20px] mr-8">
+          <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+          </svg>
+          <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"></path>
+          </svg>
+          <div class="flex flex-row gap-5 items-center">
+               <img [src]="user.image" alt="User image" class="rounded-[20px] w-12 h-16">
+               <h2 class="font-bold text-md tracking-wide">{{user.nickname}}</h2>
+          </div>
+     </div>
+</div>
 <div class="rounded-[12px] py-10 px-5 home-cta md:hidden">
      <h2 class="text-2xl" style="color: #FBAE3C">Start a quiz !</h2>
      <button routerLink="/user/dashboard/take-assessment" class="text-center w-full rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold animate-bounce">Take assessment</button>
 </div>
 
-<div class="rounded-[12px] py-10 px-5 mt-16 home-cta2 hidden md:block md:w-4/6 h-[300px]  relative">
-     <h2 class="text-3xl font-bold " style="color: #001220">Start a quiz !</h2>
-    <img src="./../../assets/images/dashboard-banner.png" alt="home icon" class="h-[300px] absolute right-32 top-0 -mt-[80px]">
-     <button routerLink="/user/dashboard/take-assessment" class="text-center w-5/6 rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold animate-bounce absolute bottom-5">Take assessment</button>
+<div class="rounded-[12px] py-10 px-5 mt-16 hidden md:block h-[250px] mr-8  relative" style="background: #b8b8d1">
+     <h2 class="text-4xl font-bold mt-10">Hi, {{user.nickname}}</h2>
+     <p class="mt-2 text-md text-gray-200">Repetition is the name of the game we playing. take the assessments it till you get a perfect score</p>
+    <img src="./../../assets/images/user/undraw_blooming_re_2kc4.svg" alt="home icon" class="h-[250px] absolute right-32 top-0 -mt-[60px]">
+     <button routerLink="/user/dashboard/take-assessment" class="text-center py-3 px-6 bg-gray-300 mt-6 font-bold absolute bottom-10 bg-[#ffc145] ">Take assessment</button>
 </div>
 
-<section class="mt-8 md:mt-12">
-     <h2 class="text-md font-bold">Your last Assesments Results</h2>
-     <div class="w-full overflow-x-scroll mt-4 z-10">
-          <div class="bg-gray-100 rounded-lg py-4 px-2 grid justify-center md:py-20" *ngIf="results.length == 0">
-               <h2 class="text-center font-bold text-lg my-2 ">You have no result yet</h2>
-               <a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3 text-center " style="color: #FBAE3C; background: #001220">Click here to take an assessment</a>
-          </div>
-          <div *ngIf="results.length > 0" class="z-10">
-              <div class="flex justify-start gap-6">
-                   <div class="bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left" *ngFor="let result of results; let i = index; trackBy: trackByFn">
-                        <p class="uppercase"> title {{result.topic.title}}</p>
-                        <p class="uppercase">Score: {{result.score}}</p>
-                        <p class="uppercase" > Grade: {{result.grade}}</p>
-                        <p class="uppercase mb-7">Date: {{result.date}}</p>
-                        <p class="uppercase text-sm absolute bottom-0 py-2 px-3 rounded-[12px] mt-0 text-gray-200 w-full left-0 " style="background: #001220; color: white">Inscription: {{result.opinion}}</p>
+<div class="flex flex-col md:flex-col-reverse">
+     <section class="mt-8 md:mt-12">
+          <h2 class="text-md font-bold">Your last Assesments Results</h2>
+          <div class="w-full overflow-x-scroll mt-4 z-10">
+               <div class="bg-gray-100 rounded-lg py-4 px-2 grid justify-center md:py-20" *ngIf="results.length == 0">
+                    <h2 class="text-center font-bold text-lg my-2 ">You have no result yet</h2>
+                    <a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3 text-center " style="color: #FBAE3C; background: #001220">Click here to take an assessment</a>
+               </div>
+               <div *ngIf="results.length > 0" class="z-10">
+                   <div class="flex justify-start gap-6">
+                        <div class="bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left" *ngFor="let result of results; let i = index; trackBy: trackByFn">
+                             <p class="uppercase"> title {{result.topic.title}}</p>
+                             <p class="uppercase">Score: {{result.score}}</p>
+                             <p class="uppercase" > Grade: {{result.grade}}</p>
+                             <p class="uppercase mb-7">Date: {{result.date}}</p>
+                             <p class="uppercase text-sm absolute bottom-0 py-2 px-3 rounded-[12px] mt-0 text-gray-200 w-full left-0 " style="background: #001220; color: white">Inscription: {{result.opinion}}</p>
+                        </div>
                    </div>
-              </div>
-          </div>
-     </div>
-</section>
-
-<div class="mt-5 md:mt-12">
-     <h2 class="text-md font-bold mb-5">Your usage statistics</h2>
-     <div class="overflow-x-scroll flex justify-start gap-3 md:gap-12 md:overflow-x-hidden">
-          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-1/4 md:h-[240px]">
-               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto md:mt-[55px]" style="background: #FBAE3C; color: #001220">
-                    <h1 class="text-center">{{countedResult}}</h1>
                </div>
-               <p class="text-md mt-2 overflow-hidden text-center font-bold">Results</p>
           </div>
+     </section>
 
-          <div class=" h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-1/4 md:h-[240px]">
-               <div class="font-bold text-4xl  mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto md:mt-[55px]" style="background: #FBAE3C; color: #001220">
-                    <h1 class="text-center">{{topics.length}}</h1>
+     <div class="mt-5 md:mt-12">
+          <h2 class="text-md font-bold mb-5 md:text-lg md:text-black/60">Your usage statistics</h2>
+          <div class="overflow-x-scroll flex justify-start gap-3 md:gap-12 md:overflow-x-hidden md:overflow-x-hidden">
+               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#ff6b6c]">
+                    <div class="md:w-full mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto  bg-[#FBAE3C] md:flex md:justify-start md:gap-12 md:items-center md:bg-transparent">
+                         <svg fill="none" class="px-2 py-2 w-16 h-16 bg-white/30 bg-blur hidden md:block" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"></path></svg>
+                         <div>
+                              <h1 class="text-[#001220] text-4xl text-center md:font-bold md:text-5xl md:text-white md:text-left">{{countedResult}}</h1>
+                              <p class="hidden md:block text-md mt-2 overflow-hidden text-center font-bold md:text-md">Results</p>
+                         </div>
+                    </div>
+                    <p class=" text-[#001220] text-md mt-2 overflow-hidden text-center font-bold md:hidden font-bold">Results</p>
                </div>
-               <p class="text-md mt-2 overflow-hidden text-center font-bold">Topics</p>
-          </div>
-     </div>
 
+               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#5b5f97]">
+                    <div class="md:w-full mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto  bg-[#FBAE3C] md:flex md:justify-start md:gap-12 md:items-center md:bg-transparent">
+                         <svg fill="none" stroke="currentColor" class="px-2 py-2 w-16 h-16 bg-white/30 bg-blur hidden md:block"  stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+                         <div>
+                              <h1 class="text-[#001220] text-4xl text-center md:font-bold md:text-5xl md:text-white md:text-left">{{countedResult}}</h1>
+                              <p class="hidden md:block text-md mt-2 overflow-hidden text-center font-bold md:text-md">Topics</p>
+                         </div>
+                    </div>
+                    <p class=" text-[#001220] text-md mt-2 overflow-hidden text-center font-bold md:hidden font-bold">Topics</p>
+               </div>
+
+          </div>
+
+     </div>
 </div>
 
 <section class="mt-10 md:mt-16 md:mb-10">

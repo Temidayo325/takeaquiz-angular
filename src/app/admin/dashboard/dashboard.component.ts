@@ -58,7 +58,6 @@ export class DashboardComponent implements OnInit {
        const day = (this.currentTime.getDate() < 10) ? '0'+this.currentTime.getDate() : this.currentTime.getDate()
        const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
        this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
-       console.log(this.mytime)
        this.newTopic = this.topicService.get().subscribe(
             ( response ) => {
                  this.topics = response.data

@@ -11,3 +11,16 @@ p,h1,h2,h3,h4,h5,h6
 {
   background-color: #FBAE3C;
 }
+@media only screen and (min-width: 900px)
+{
+     h1,p{
+          color: black
+     }
+     .overview div div h1, .overview div div p
+     {
+          color: white
+     }
+     h2{
+          color:inherit;
+     }
+}

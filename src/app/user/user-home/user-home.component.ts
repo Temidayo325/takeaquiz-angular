@@ -32,11 +32,17 @@ export class UserHomeComponent implements OnInit {
   public topics: Array<any> = JSON.parse(sessionStorage.getItem('topics')!)
   public results: Array<any> = JSON.parse(sessionStorage.getItem('results')!)
   public user = JSON.parse(sessionStorage.getItem('user')!)
+  public mytime : string = ''
+  public currentTime: Date = new Date()
 
   ngOnInit(): void
   {
      this.title.setTitle('Your dashboard home')
      this.shareService.newHeader.next(`Hello ${this.user.nickname} !`)
+     const today = new Intl.DateTimeFormat("en-US", {weekday: "long"}).format(this.currentTime)
+     const day = (this.currentTime.getDate() < 10) ? '0'+this.currentTime.getDate() : this.currentTime.getDate()
+     const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
+     this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
   }
   trackByFn(index: number, result: any)
   {
