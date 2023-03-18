@@ -91,7 +91,6 @@ export class QuestionComponent implements OnInit {
   }
   filePicked(event: any)
   {
-       console.log(event.target.files)
        this.fileName = event.target.files[0].name
        this.excelFile = event.target.files[0]
        this.formByFile.patchValue({file: this.fileName})

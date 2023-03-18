@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
             (resp) => {
                  this.topics.push(resp)
                  this.storeService.setTopics(this.topics)
-                 this.router.navigate(['/admin/dashboard'])
+                 this.router.navigate(['/admin/dashboard/home'])
             }
        )
 

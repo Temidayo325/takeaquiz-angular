@@ -8,21 +8,23 @@ import { StoreService } from './../service/store.service';
   providedIn: 'root'
 })
 export class QuestionService {
-     public baseUrl =  'http://127.0.0.1:8000';
-     // public baseUrl = "https://quizly-api.luminaace.com/api/";
+     // public baseUrl =  'http://127.0.0.1:8000';
+     token: string = this.store.getToken().slice(1,-1)
+     public baseUrl = "https://quizly-api.luminaace.com/api/";
      public options = {
           headers : new HttpHeaders({
                'Content-Type': 'application/json',
                'Accept': 'application/json',
-               'Authorization': 'Bearer '+ this.store.token,
+               'Authorization': 'Bearer '+ this.token,
           }),
      }
+
 
      public form = {
           headers: new HttpHeaders({
                // 'Content-Type': 'multipart/form-data',
                'Accept': 'application/json',
-               'Authorization': 'Bearer '+ this.store.token,
+               'Authorization': 'Bearer '+ this.token,
           })
      }
      constructor(

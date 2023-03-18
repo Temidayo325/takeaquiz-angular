@@ -37,11 +37,14 @@ export class OutlineComponent implements OnInit {
   {
        this.loader.start()
        if (this.topic_id === 0) {
+            this.loader.complete()
             this.toast.error("Outline cannot be added to Invalid topic")
        }
        this.content.post({topic_id: this.topic_id, content: this.form.value.outline}).subscribe(
             (response) => {
+                 this.loader.complete()
                  this.AddedOutline.emit(this.form.value.outline!)
+                 this.form.reset()
             },
             (error) => {
                  this.loader.complete()
