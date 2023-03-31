@@ -46,6 +46,7 @@ export class PrepComponent implements OnInit, OnDestroy {
       showLoader: boolean = false
       showSuccess: boolean = false
       totalAvailableQuestions: number = 0
+      enableButton: boolean = false
 
       ngOnInit(): void
       {
@@ -104,6 +105,7 @@ export class PrepComponent implements OnInit, OnDestroy {
       chosenDepartment($event:any)
       {
            // console.log($event.target.value)
+           this.titles = []
            this.topics.forEach((item, index) => {
                 if (item.department.toLowerCase() === $event.target.value.toLowerCase() ) {
                      this.titles.push(item)
@@ -114,15 +116,20 @@ export class PrepComponent implements OnInit, OnDestroy {
       chosenTopic($event: any)
       {
            this.loader.start()
+           this.enableButton = false
            this.assesementService.countTotalQuestion($event.target.value).subscribe(
                 (response: any) => {
                      this.loader.complete()
                      this.totalAvailableQuestions = response.data.totalQuestions
+                     this.enableButton =  true
                 },
 
-                (error) => {
+                (error: any) => {
                      this.loader.complete()
                      this.toast.error("Unable to retrieve the total number of questions for the chosen topic")
+                     setTimeout(() => {
+                          this.enableButton = true
+                     }, 2000)
                 }
            )
 

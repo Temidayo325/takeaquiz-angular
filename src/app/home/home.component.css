@@ -54,17 +54,26 @@ p,h2,h3,a, li
 
 @media only screen and (min-width: 1000px)
 {
-     .banner, .banner-2{
-          background-image: url("../../assets/images/banner-tryout.jpg");
+     .banner-2
+     {
+          background-image: url("../../assets/images/banner-2.jpg");
           background-size: cover;
           background-color: rgba(0, 18, 32, 0.6);
           background-blend-mode: multiply;
           background-repeat: no-repeat;
-          background-attachment: fixed;
-     }
-     .banner-2
-     {
-          background-image: url("../../assets/images/banner-2.jpg");
           background-attachment: scroll;
+     }
+     .heroside1, .heroside2
+     {
+          background-image: url("../../assets/images/hero1.png");
+          background-size: cover;
+          /* background-color: rgba(0, 18, 32, 0.6);
+          background-blend-mode: multiply; */
+          background-repeat: no-repeat;
+          background-attachment: scroll;
+     }
+     .heroside2
+     {
+          background-image: url("../../assets/images/hero2.jpg");
      }
 }

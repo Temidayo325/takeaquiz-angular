@@ -19,6 +19,7 @@
                <select name="faculty" id="faculty" formControlName="faculty" class="w-full border border-gray-700 text-md text-black py-2 rounded-lg px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:py-2 focus:bg-white">
                     <option value="" disabled></option>
                     <option value="Pharmaceutical sciences">Pharmaceutical sciences</option>
+                    <option value="Pharmaceutical sciences">Physical sciences</option>
                </select>
           </div>
           <div class="mt-6">
@@ -64,7 +65,7 @@
           </div>
 
           <div class="mt-10">
-               <button type="submit" class="text-md font-bold px-4 py-3 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 rounded-lg hover:shadow-lg" [disabled]="!form.valid">Start assesment</button>
+               <button type="submit" class="text-md font-bold px-4 py-3 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 rounded-lg hover:shadow-lg" [disabled]="!enableButton">Start assesment</button>
           </div>
      </form>
 </div>

@@ -22,6 +22,7 @@
     "@ngrx/store": "^14.3.2",
     "@ngx-loading-bar/core": "^6.0.2",
     "angular-toastify": "^1.0.4",
+    "animate.css": "^4.1.1",
     "flowbite": "^1.5.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

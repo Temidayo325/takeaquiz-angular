@@ -42,6 +42,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
   showConfirm: boolean =  false
   priority: any = {yes: '', no: '', text: ''}
   confirmAction: any = {cancel: false, submit: false}
+  
   ngOnInit(): void
   {
           this.loader.start()
