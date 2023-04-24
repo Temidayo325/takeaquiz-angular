@@ -72,8 +72,14 @@ p,h2,h3,a, li
           background-repeat: no-repeat;
           background-attachment: scroll;
      }
-     .heroside2
+     .pc-hero
      {
           background-image: url("../../assets/images/hero2.jpg");
+          background-size: cover;
+          background-color: rgba(0, 0, 0,0.7);
+          /* backdrop-filter: blur(50px); */
+          background-blend-mode: overlay;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
      }
 }
