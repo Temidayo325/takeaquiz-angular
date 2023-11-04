@@ -25,6 +25,7 @@ import { RecoverPasswordComponent } from './user/recover-password/recover-passwo
 import { ChangePasswordComponent } from './forms/change-password/change-password.component';
 import { SharedResultComponent } from './user/shared-result/shared-result.component';
 import { ContentComponent } from './admin/content/content.component';
+import { UserComponent } from './admin/user/user.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -71,6 +72,10 @@ const routes: Routes = [
                {
                     path: 'topic/:id',
                     component: VerifyQuestionComponent
+               },
+               {
+                    path: 'user',
+                    component: UserComponent
                },
                {
                     path: 'content',

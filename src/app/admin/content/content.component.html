@@ -3,6 +3,10 @@
           <p>Loading topics ....</p>
      </div>
      <div *ngIf="topics.length > 0">
+          <div class="flex justify-end gap-3">
+               <button *ngIf="navButtons.prev != null" (click)="paginateContent(navButtons.prev)" class="px-4 py-2 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300"><span>&#171;</span>Prev page</button>
+               <button *ngIf="navButtons.next != null" (click)="paginateContent(navButtons.next)" class="px-4 py-2 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300">Next page <span>&#187;</span></button>
+          </div>
           <div class="grid grid-cols-4 gap-3 py-3 font-bold text-lg">
                <h5>Title</h5>
                <h5>Faculty</h5>

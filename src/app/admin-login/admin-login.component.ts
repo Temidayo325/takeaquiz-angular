@@ -38,12 +38,17 @@ export class AdminLoginComponent implements OnInit {
        this.loader.start()
        this.userService.adminLogin({email: this.form.value.email!, password: this.form.value.password!}).subscribe(
             (response) => {
-                 console.log(response)
                  this.loader.complete()
-                 this.toast.success(response.message)
-                 this.storeService.setuser(response.user, response.token)
-                 this.storeService.setAdmin(response.questions, response.topics)
-                 this.router.navigate(['/admin/dashboard/home'])
+                 if(response.status)
+                 {
+                      this.toast.success(response.message)
+                      this.storeService.setuser(response.user, response.token)
+                      this.storeService.setAdmin(response.questions, response.topics)
+                      this.storeService.setUserRoles(response.user.role)
+                      this.router.navigate(['/admin/dashboard/home'])
+                 }else{
+                      this.toast.warn(response.message)
+                 }
             },
 
             (error) => {

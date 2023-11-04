@@ -10,7 +10,8 @@ import { StoreService } from './../service/store.service';
 export class QuestionService {
      // public baseUrl =  'http://127.0.0.1:8000';
      token: string = this.store.getToken().slice(1,-1)
-     public baseUrl = "https://quizly-api.luminaace.com/api/";
+     // public baseUrl = "https://quizly-api.luminaace.com/api/";
+     public baseUrl = "https://quizly.aeesdamilola.com/api/author/";
      public options = {
           headers : new HttpHeaders({
                'Content-Type': 'application/json',

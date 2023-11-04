@@ -48,6 +48,7 @@ export class ContentComponent implements OnInit {
   currentTopicId: number = 0
   chosenTopic: string = ''
   classes = {show: '', hide: '', form: false}
+  navButtons = {prev: null, next: null}
 
   ngOnInit(): void
   {
@@ -58,7 +59,11 @@ export class ContentComponent implements OnInit {
        this.loader.start()
        this.subscriptions = this.content.index().subscribe(
             (response) => {
-                 this.topics = response.data
+                 this.topics = response.data.data
+                 this.navButtons.prev = response.data.prev_page_url
+                 this.navButtons.next = response.data.next_page_url
+                 console.log(response)
+                 this.loader.complete()
             },
             (error) => {
                 this.loader.complete()
@@ -109,6 +114,25 @@ export class ContentComponent implements OnInit {
         // })
         this.contents.push({content: $event})
    }
+
+   paginateContent(url: string)
+   {
+        this.loader.start()
+        this.subscriptions = this.content.paginate(url).subscribe(
+             (response) => {
+                  this.topics = response.data.data
+                  this.navButtons.prev = response.data.prev_page_url
+                  this.navButtons.next = response.data.next_page_url
+                  console.log(response)
+                  this.loader.complete()
+             },
+             (error) => {
+                 this.loader.complete()
+                 this.toast.error("Unable to load your topics")
+             }
+        )
+   }
+
   ngOnDestroy(): void
   {
        //Called once, before the instance is destroyed.

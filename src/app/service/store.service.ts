@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserRoles, Roles } from './../models/roles.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,35 @@ export class StoreService {
        sessionStorage.setItem('topics', JSON.stringify(topics))
       sessionStorage.setItem('results', JSON.stringify(results))
   }
+
+  setUserRoles(roles: Roles)
+  {
+        sessionStorage.setItem('roles', JSON.stringify(roles))
+  }
+
+  getUserRoles():UserRoles
+  {
+       let user_roles: Array<Roles> = JSON.parse(sessionStorage.getItem('roles')!);
+       let possible_roles: UserRoles = {editor: false, admin: false, author: false};
+       for(let role of user_roles)
+       {
+            if(role.role == 'admin')
+            {
+                 possible_roles.admin = true
+            }
+
+            if(role.role == 'editor')
+            {
+                 possible_roles.editor = true
+            }
+            if(role.role == 'author')
+            {
+                 possible_roles.author = true
+            }
+       }
+       return possible_roles;
+  }
+
   setTopics(topics: Array<any>)
   {
        sessionStorage.setItem('topics', JSON.stringify(topics));

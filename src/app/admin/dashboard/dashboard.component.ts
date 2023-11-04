@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { ShareService } from './../../services/share.service'
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {Title} from '@angular/platform-browser';
+import { UserRoles } from './../../models/roles.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
      public mytime : string = ''
+     public roles: UserRoles = this.storeService.getUserRoles()
      public currentTime: Date = new Date()
   ngOnInit(): void
   {
@@ -58,29 +60,36 @@ export class DashboardComponent implements OnInit {
        const day = (this.currentTime.getDate() < 10) ? '0'+this.currentTime.getDate() : this.currentTime.getDate()
        const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
        this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
-       this.newTopic = this.topicService.get().subscribe(
-            ( response ) => {
-                 this.topics = response.data
-                 this.totalUsers = response.users
-                 this.totalDepartments = response.faculties
-                 let questionTotalsArray: Array<number> = []
-                 this.topics.forEach((current, index) => {
-                      questionTotalsArray.push(current.question)
-                 })
-                 this.totalQuestions = questionTotalsArray.reduce((total, current, index) => {
-                     return total + current
-                }, 0)
-                 this.storeService.setTopics(this.topics)
-                 this.router.navigate(['/admin/dashboard/home'])
-            },
 
-            (error) => {
-            }
-       )
+
+       // this.newTopic = this.topicService.get().subscribe(
+       //      ( response ) => {
+       //           if(response.status)
+       //           {
+       //                // console.log(response.data.available_topics.data)
+       //                this.topics = response.data.available_topics.data
+       //                // this.totalUsers = response.users
+       //                this.totalDepartments = response.faculties
+       //                let questionTotalsArray: Array<number> = []
+       //                this.topics.forEach((current, index) => {
+       //                     questionTotalsArray.push(current.questions_count)
+       //                })
+       //                this.totalQuestions = questionTotalsArray.reduce((total, current, index) => {
+       //                    return total + current
+       //               }, 0)
+       //                this.storeService.setTopics(this.topics)
+       //                this.router.navigate(['/admin/dashboard/home'])
+       //           }
+       //      },
+       //
+       //      (error) => {
+       //      }
+       // )
 
        this.newTopic = this.shared.getAddedTopic().subscribe(
             (resp) => {
                  this.topics.push(resp)
+                 // console.log(this.topics)
                  this.storeService.setTopics(this.topics)
                  this.router.navigate(['/admin/dashboard/home'])
             }
@@ -92,9 +101,11 @@ export class DashboardComponent implements OnInit {
   {
        this.navigation = !this.navigation
   }
-  trackByFn(index: number, topic: any) {
+
+  trackByFn(index: number, topic: any)
+  {
         return topic ? topic.id : undefined;
-    }
+  }
 
     editTopic(topic_id: number)
     {
@@ -147,7 +158,27 @@ export class DashboardComponent implements OnInit {
         this.toggleNavigation()
 
    }
-  ngOnDestroy(): void {
+
+   sortUserRoles()
+   {
+        for(let info of this.user.role)
+        {
+             if(info.role == 'admin')
+             {
+                  this.roles.admin = true;
+             }
+             if(info.role == 'editor')
+             {
+               this.roles.admin = true;
+             }
+             if(info.role == 'author')
+             {
+               this.roles.admin = true;
+             }
+        }
+   }
+  ngOnDestroy(): void
+  {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
        this.newTopic.unsubscribe();

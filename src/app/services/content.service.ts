@@ -14,7 +14,8 @@ export class ContentService {
        private http: HttpClient,
        private store: StoreService,
   ) { }
-  private baseUrl: string = "https://quizly-api.luminaace.com/api/"
+  // private baseUrl: string = "https://quizly-api.luminaace.com/api/"
+  public baseUrl = "https://quizly.aeesdamilola.com/api/author/";
   private token: string = this.store.getToken().slice(1,this.store.getToken().length - 1)
   options: Object = {
        headers : new HttpHeaders({
@@ -32,5 +33,10 @@ export class ContentService {
   public post(content: object): Observable<any>
   {
        return this.http.post(this.baseUrl+"content", content, this.options)
+  }
+
+  public paginate(url: string): Observable<any>
+  {
+       return this.http.get(url, this.options);
   }
 }

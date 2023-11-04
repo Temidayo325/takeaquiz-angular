@@ -27,7 +27,10 @@ export class AdminHomeComponent implements OnInit {
        private userService: UserService,
        private title: Title
  ) { }
+
+     private subscriptions!: Subscription
      public topics: Array<any> = this.storeService.topics
+     public myTopics: Array<any> = []
      public totalQuestions: number = 0
      public totalUsers: number = 0
      public totalDepartments: number = 0
@@ -35,42 +38,81 @@ export class AdminHomeComponent implements OnInit {
      public newTopic!: Subscription
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
-
+     public roles = this.storeService.getUserRoles()
+     public monthlyStat = {topics: 0, questions: 0, assessments: 0, active_users: 0, users: 0 }
+     public allTimeStat = {topics: 0, questions: 0, assessments: 0, active_users: 0, users: 0 }
+     public editorStats = {total_topic_count: 0, monthly_topic_count: 0, total_questions_count: 0, monthly_questions_count: 0 }
+     public topicsNavigation = {next: null, prev: null}
+     public myTopicsNavigation = {next: null, prev: null}
+     public current_month: string = ''
 
      ngOnInit(): void
      {
-          this.newTopic = this.topicService.get().subscribe(
-               ( response ) => {
-                    this.topics = response.data
-                    this.totalUsers = response.users
-                    this.totalDepartments = response.faculties
-                    this.totalAssesments = response.results
-                    let questionTotalsArray: Array<number> = []
-                    this.topics.forEach((current, index) => {
-                         questionTotalsArray.push(current.question)
-                    })
-                    this.totalQuestions = questionTotalsArray.reduce((total, current, index) => {
-                        return total + current
-                   }, 0)
-                    this.storeService.setTopics(this.topics)
-               },
+          // console.log(this.topics)
 
-               (error) => {
-                    this.toast.error(error.error.message)
-                    console.log(error)
-               }
-          )
+          if(this.roles.admin)
+          {
+               this.loader.start()
+               this.topicService.getMonthlyStatistics().subscribe(
+                    (response: any) => {
+                         if(response.status)
+                         {
+                              this.monthlyStat = response.monthly_data
+                              this.allTimeStat = response.all_time_data
+                              // this.topics = response.available_topics
+                              this.current_month = response.current_month
+                              this.loader.complete()
+                              // console.log(response)
+                         }
+                    },
+                    (error) => {
+                         console.log(error)
+                         this.loader.complete()
+                    }
+               )
+          }
 
-          this.newTopic = this.shared.getAddedTopic().subscribe(
-               (resp) => {
-                    this.topics.push(resp)
-                    console.log(this.topics)
-                    this.storeService.setTopics(this.topics)
-                    this.router.navigate(['/admin/dashboard'])
-               }
-          )
+          if (this.roles.editor || this.roles.author) {
+               this.loader.start()
+               this.newTopic = this.topicService.get().subscribe(
+                    ( response ) => {
+                         if(response.status)
+                         {
+                              // if(!this.roles.admin)
+                              // {
+                                   this.topics = response.data.available_topics.data
+                              // }
+                              this.editorStats = response.editor
+                              this.current_month = response.current_month
+                              this.topicsNavigation.prev = response.data.available_topics.prev_page_url
+                              this.topicsNavigation.next = response.data.available_topics.next_page_url
+                              this.myTopics = response.data.my_topics.data
+                              this.myTopicsNavigation.prev = response.data.my_topics.prev_page_url
+                              this.myTopicsNavigation.next = response.data.my_topics.next_page_url
+                              this.storeService.setTopics(this.topics)
+                         }
+                         this.loader.complete()
+                    },
+
+                    (error) => {
+                         this.toast.error(error.error.message)
+                         this.loader.complete()
+                         console.log(error)
+                    }
+               )
+
+               this.newTopic = this.shared.getAddedTopic().subscribe(
+                    (resp) => {
+                         this.topics.push(resp)
+                         console.log(this.topics)
+                         this.storeService.setTopics(this.topics)
+                         this.router.navigate(['/admin/dashboard/home'])
+                    }
+               )
+          }
 
      }
+
      trackByFn(index: number, topic: any) {
            return topic ? topic.id : undefined;
        }
@@ -83,18 +125,38 @@ export class AdminHomeComponent implements OnInit {
       deleteTopic(id: number, index: number)
       {
            this.loader.start()
-           this.newTopic = this.topicService.delete(id).subscribe(
-                () => {
-                     this.loader.complete()
-                     this.toast.info("Topic removed succesfully")
-                     this.topics.splice(index, 1);
+           if(confirm("Are you sure you want to delete topic ? "))
+           {
+                this.newTopic = this.topicService.delete(id).subscribe(
+                     (response) => {
+                          this.loader.complete()
+                          this.toast.info("Topic removed succesfully")
+                          this.topics.splice(index, 1);
                 },
 
-                (error) => {
-                     this.loader.complete()
-                     this.toast.error(error.error.message)
-                }
-           )
+                     (error) => {
+                          this.loader.complete()
+                          this.toast.error(error.error.message)
+                     }
+                )
+           }
+
       }
 
+      paginateTopics(url: string)
+     {
+          this.loader.start()
+          this.subscriptions = this.topicService.paginate(url).subscribe(
+               (response: any) => {
+                    this.topics = response.data.data
+                    this.topicsNavigation.prev = response.data.available_topics.prev_page_url
+                    this.topicsNavigation.next = response.data.available_topics.next_page_url
+                    this.loader.complete()
+               },
+               (error : any) => {
+                   this.loader.complete()
+                   this.toast.error("Unable to load your topics")
+               }
+          )
+     }
 }

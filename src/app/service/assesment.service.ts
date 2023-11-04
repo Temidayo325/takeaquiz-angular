@@ -14,8 +14,9 @@ export class AssesmentService {
        private http: HttpClient,
        private store: StoreService
   ) { }
-  
-     public baseUrl = "https://quizly-api.luminaace.com/api/";
+
+  // public baseUrl = "https://quizly-api.luminaace.com/api/";
+     public baseUrl = "https://quizly.aeesdamilola.com/api/";
     public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
 
   options = {

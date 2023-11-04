@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit()
   {
+        // this.showLoader = true
        this.loader.start()
        this.showLoader = true
        let user: NewUser = {email: this.form.value.email!, password: this.form.value.password!, nickname: this.form.value.nickname!, institution: this.form.value.institution!, name: this.form.value.name!}

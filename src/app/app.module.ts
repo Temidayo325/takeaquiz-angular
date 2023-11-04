@@ -35,6 +35,7 @@ import { ChangePasswordComponent } from './forms/change-password/change-password
 import { SharedResultComponent } from './user/shared-result/shared-result.component';
 import { ContentComponent } from './admin/content/content.component';
 import { OutlineComponent } from './forms/outline/outline.component';
+import { UserComponent } from './admin/user/user.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { OutlineComponent } from './forms/outline/outline.component';
     ChangePasswordComponent,
     SharedResultComponent,
     ContentComponent,
-    OutlineComponent
+    OutlineComponent,
+    UserComponent
   ],
   imports: [
     LoadingBarModule,

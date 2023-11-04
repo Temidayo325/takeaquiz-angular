@@ -11,7 +11,8 @@ import { StoreService } from './store.service';
   providedIn: 'root'
 })
 export class UserService {
-     public baseUrl = "https://quizly-api.luminaace.com/api/";
+     // public baseUrl = "https://quizly-api.luminaace.com/api/";
+     public baseUrl = "https://quizly.aeesdamilola.com/api/";
      // public baseUrl =  'http://127.0.0.1:8000';
      constructor(
             private http: HttpClient,
@@ -21,6 +22,7 @@ export class UserService {
       headers : new HttpHeaders({
            'Content-Type': 'application/json',
            'Accept': 'application/json',
+           'Access-Control-Allow-Origin': '*'
       }),
  }
   login(user: Login): Observable<any>
@@ -90,5 +92,75 @@ export class UserService {
        }
       // console.log(this.storeService.getToken(), token)
        return this.http.post(this.baseUrl+"profile/edit", profile, options )
+  }
+
+  getAllUsers():Observable<any>
+  {
+     let token: string = this.storeService.getToken().slice(1,-1)
+      // this.options.headers.append('Authorization', `Bearer ${token}`)
+     let options = {
+           headers : new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+token
+           }),
+      }
+     return this.http.get("https://quizly.aeesdamilola.com/api/admin/users", options);
+  }
+
+  paginateUsers(url: string):Observable<any>
+  {
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+     return this.http.get(url, options);
+  }
+
+  AddRoleToUser(role: {role: string, user_id: number}):Observable<any>
+  {
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+      return this.http.post("https://quizly.aeesdamilola.com/api/admin/users/addRole", role , options);
+  }
+
+  removeRoleFromUser(role: {role: string, user_id: number}):Observable<any>
+  {
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+      return this.http.post("https://quizly.aeesdamilola.com/api/admin/users/removeRole", role , options);
+  }
+
+  searchForUser(search: string):Observable<any>
+  {
+       let token: string = this.storeService.getToken().slice(1,-1)
+       // this.options.headers.append('Authorization', `Bearer ${token}`)
+      let options = {
+            headers : new HttpHeaders({
+                 'Content-Type': 'application/json',
+                 'Accept': 'application/json',
+                 'Authorization': 'Bearer '+token
+            }),
+       }
+      return this.http.post("https://quizly.aeesdamilola.com/api/admin/users/search", {search: search}, options);
   }
 }

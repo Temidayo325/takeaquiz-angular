@@ -7,8 +7,10 @@ module.exports = {
     extend: {},
     theme: {
          colors: {
-              yellow: '#FBAE3C',
-              dark: '#001220'
+              yellow: '#ffc300',
+              dark: '#000814',
+              dark_blue: '#001D3D',
+              light_yellow: '#ffd60a'
          },
          backgroundImage: theme => ({
               'register-bg': "url('../src/assets/images/blob-scene-haikei.svg')",
