@@ -36,6 +36,11 @@ export class QuestionComponent implements OnInit {
     public topics = JSON.parse(sessionStorage.getItem('topics')!)
     public createByForm = false
     public methodType: boolean = false
+    public text: string = ''
+    public modules = { toolbar: {
+                container: '#toolbar',  // Selector for toolbar container
+                toolbar:  ['bold', 'italic', 'underline', 'strike']
+          }}
     // public_
   constructor(
        private questionService: QuestionService,
@@ -115,10 +120,12 @@ export class QuestionComponent implements OnInit {
             }
        )
   }
-  trackByFn(index: number, topic: any) {
+  trackByFn(index: number, topic: any)
+  {
         return topic ? topic.id : undefined;
     }
-  ngOnDestroy(): void {
+  ngOnDestroy(): void
+  {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
        if (this.subs) {

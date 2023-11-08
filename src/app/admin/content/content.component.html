@@ -1,11 +1,11 @@
-<div class="w-2/4 mx-auto mt-10 overflow-hidden relative">
+<div class="w-3/4 md:min-h-screen mx-auto mt-10 overflow-hidden relative">
      <div *ngIf="topics == null">
           <p>Loading topics ....</p>
      </div>
      <div *ngIf="topics.length > 0">
           <div class="flex justify-end gap-3">
-               <button *ngIf="navButtons.prev != null" (click)="paginateContent(navButtons.prev)" class="px-4 py-2 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300"><span>&#171;</span>Prev page</button>
-               <button *ngIf="navButtons.next != null" (click)="paginateContent(navButtons.next)" class="px-4 py-2 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300">Next page <span>&#187;</span></button>
+               <button *ngIf="navButtons.prev != null" (click)="paginateContent(navButtons.prev)" class="px-6 py-3 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300 bg-gray-700 hover:bg-gray-800 text-slate-50"><span>&#171;</span>Prev page</button>
+               <button *ngIf="navButtons.next != null" (click)="paginateContent(navButtons.next)" class="px-6 py-3 border-2 border-gray-200 shadow-sm hover:shadow-md hover:border-gray-300 bg-gray-700 hover:bg-gray-800 text-slate-50">Next page <span>&#187;</span></button>
           </div>
           <div class="grid grid-cols-4 gap-3 py-3 font-bold text-lg">
                <h5>Title</h5>
@@ -18,7 +18,7 @@
                <p>{{item.faculty}}</p>
                <p>{{item.department}}</p>
                <div class="flex justify-start">
-                    <button class="bg-blue-600 text-white px-4 py-3 " (click)="viewContent(item.contents, item.topic_id, item.title)">View content</button>
+                    <button class="bg-blue-600 text-white px-4 py-3 " (click)="viewContent(item.content, item.topic_id, item.title)">View content</button>
                </div>
           </div>
      </div>

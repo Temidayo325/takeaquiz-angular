@@ -36,6 +36,10 @@ import { SharedResultComponent } from './user/shared-result/shared-result.compon
 import { ContentComponent } from './admin/content/content.component';
 import { OutlineComponent } from './forms/outline/outline.component';
 import { UserComponent } from './admin/user/user.component';
+import { SkeletonModule } from 'primeng/skeleton';
+import { CarouselModule } from 'primeng/carousel';
+import { EditorModule } from 'primeng/editor';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -74,7 +78,13 @@ import { UserComponent } from './admin/user/user.component';
     ReactiveFormsModule,
     FormsModule,
     AngularToastifyModule,
-    HttpClientModule
+    HttpClientModule,
+    SkeletonModule,
+    CarouselModule,
+    EditorModule,
+    DialogModule
+    // TableModule
+    // ButtonModule
   ],
   providers: [ToastService],
   bootstrap: [AppComponent]

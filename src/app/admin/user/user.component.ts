@@ -69,13 +69,11 @@ export class UserComponent implements OnInit {
                       this.users = response.data.data
                       this.navButtons.prev = response.data.prev_page_url
                       this.navButtons.next = response.data.next_page_url
-                      console.log(response)
                       this.loader.complete()
                  },
                  (error) => {
                      this.loader.complete()
                      this.toast.error("Unable to load your topics")
-                     console.log(error)
                      if(error.status == 401 )
                      {
                           this.router.navigate(["/admin"])
@@ -92,7 +90,6 @@ export class UserComponent implements OnInit {
                       this.users = response.data.data
                       this.navButtons.prev = response.data.prev_page_url
                       this.navButtons.next = response.data.next_page_url
-                      console.log(response)
                       this.loader.complete()
                  },
                  (error) => {
@@ -115,7 +112,6 @@ export class UserComponent implements OnInit {
                       (error) => {
                           this.loader.complete()
                           this.toast.error("Unable to Add role to user")
-                          console.log(error)
                           // if(error.status == 401 )
                           // {
                           //      this.router.navigate(["/admin"])
@@ -138,7 +134,6 @@ export class UserComponent implements OnInit {
                       (error) => {
                           this.loader.complete()
                           this.toast.error("Unable to Add role to user")
-                          console.log(error)
                           // if(error.status == 401 )
                           // {
                           //      this.router.navigate(["/admin"])
@@ -162,7 +157,6 @@ export class UserComponent implements OnInit {
                  (error) => {
                      this.loader.complete()
                      this.toast.error("Cannot find a user with the search term")
-                     console.log(error)
                      if(error.status == 401 )
                      {
                           this.router.navigate(["/admin"])

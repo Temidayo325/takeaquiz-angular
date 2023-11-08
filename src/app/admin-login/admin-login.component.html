@@ -1,20 +1,24 @@
 <ngx-loading-bar></ngx-loading-bar>
-     <div class="flex justify-center items-center text-lg w-full h-screen bg-gray-100 md:bg-no-repeat bg-cover" style="background-image: url('../../assets/images/blob-scene-haikei.svg')">
-          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white md:w-1/3 h-96 shadow-2xl py-4 px-6">
-               <h2 class="font-bold text-center mt-10 text-xl md:text md:mt-6 md:text-xl">Admin Login</h2>
-               <div class="mt-10">
-                    <label for="email" class="font-bold text-sm">Email</label>
-                    <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.email}}</p>
-                    <input type="email" formControlName="email" id="email" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-               </div>
-               <div class="mt-6">
-                    <label for="password" class="font-bold text-sm">Password</label>
-                    <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.password}}</p>
-                    <input type="password" formControlName="password" id="password" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-               </div>
+     <div class="flex justify-center items-center text-lg w-full h-screen md:bg-admin-logo md:bg-cover md:bg-repeat" style="background-image: url('../../assets/images/scattered-forcefields.svg')">
+          <!-- style="background-image: url('../../assets/images/blob-scene-haikei.svg')" -->
+          <div class="w-full mx-8">
+               <img src="../../assets/images/logo.svg" alt="Quizly logo" class="h-7 mx-auto my-3">
+               <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white md:w-1/3 md:mx-auto h-96 shadow-2xl py-4 px-6">
+                    <h2 class="font-bold text-center mt-10 text-xl md:text md:mt-6 md:text-xl">Admin Login</h2>
+                    <div class="mt-10">
+                         <label for="email" class="font-bold text-sm">Email</label>
+                         <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.email}}</p>
+                         <input type="email" formControlName="email" id="email" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    </div>
+                    <div class="mt-6">
+                         <label for="password" class="font-bold text-sm">Password</label>
+                         <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.password}}</p>
+                         <input type="password" formControlName="password" id="password" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                    </div>
 
-               <div class="mt-8 flex justify-center">
-                    <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center w-full shadow-md hover:-translate-x-1 hover:shadow-lg">Login</button>
-               </div>
-          </form>
+                    <div class="mt-8 flex justify-center">
+                         <button type="submit" [disabled]="!form.valid" class="px-4 py-2 text-center w-full shadow-md hover:shadow-lg">Login</button>
+                    </div>
+               </form>
+          </div>
      </div>

@@ -11,7 +11,7 @@ import { StoreService } from './../service/store.service';
 export class TopicService {
 
      // public baseUrl =  'http://127.0.0.1:8000';
-  public token: string = this.store.getToken().slice(1,this.store.getToken().length - 1)
+  public token: string = ''
 
   // public baseUrl = "https://quizly-api.luminaace.com/api/";
   public baseUrl = "https://quizly.aeesdamilola.com/api/";
@@ -49,17 +49,6 @@ export class TopicService {
           return this.http.get(url, this.options)
      }
 
-     publicGet(): Observable<any>
-     {
-          let guest = {
-               headers : new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer '+ this.token,
-               }),
-          }
-          return this.http.get("https://quizly.aeesdamilola.com/api/public/topics", guest)
-     }
      delete(id: number): Observable<any>
      {
           return this.http.delete(this.baseUrl+"editor/topics/"+id, this.options)

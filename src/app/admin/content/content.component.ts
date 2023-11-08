@@ -43,7 +43,7 @@ export class ContentComponent implements OnInit {
  ) { }
   subscriptions!: Subscription
   navigation: boolean =  false
-  topics: Array<{topic_id: number, title: string, faculty: string, department: string, contents: Array<object>}> = []
+  topics: Array<{topic_id: number, title: string, faculty: string, department: string, content: Array<object>}> = []
   contents: Array<any> = []
   currentTopicId: number = 0
   chosenTopic: string = ''
@@ -62,7 +62,7 @@ export class ContentComponent implements OnInit {
                  this.topics = response.data.data
                  this.navButtons.prev = response.data.prev_page_url
                  this.navButtons.next = response.data.next_page_url
-                 console.log(response)
+                 // console.log(response)
                  this.loader.complete()
             },
             (error) => {

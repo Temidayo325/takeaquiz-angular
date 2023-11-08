@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TopicService } from './../services/topic.service';
+import { PubllicService } from './../services/publlic.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,25 +10,17 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit {
 
   constructor(
-       private topicService: TopicService,
+       private publicService: PubllicService,
  ) { }
 
   public statistics: any = {topics: 0, users: 0, assessments: 0}
   public sub!: Subscription
   ngOnInit(): void
   {
-       this.sub  = this.topicService.publicGet().subscribe(
+       this.sub  = this.publicService.domainStat().subscribe(
             (response) => {
-                 // console.log(response)
-                 this.statistics.users = response.users
-                 this.statistics.assessments = response.results
-                 let questionTotalsArray: Array<number> = []
-                 response.data.forEach((current: any, index: number) => {
-                      questionTotalsArray.push(current.question)
-                 })
-                 this.statistics.topics = questionTotalsArray.reduce((total, current, index) => {
-                    return total + current
-               }, 0)
+                 console.log(response)
+                 this.statistics = response.data
           },
           (error) => {
                console.log(error)
@@ -39,6 +31,6 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
-       this.sub.unsubscribe()
+       // this.sub.unsubscribe()
   }
 }

@@ -7,6 +7,7 @@ import { Subject, Observable, of, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ShareService } from './../../services/share.service';
 import { Title } from '@angular/platform-browser';
+import { StoreService } from './../../service/store.service';
 
 @Component({
   selector: 'app-verify-question',
@@ -31,6 +32,7 @@ export class VerifyQuestionComponent implements OnInit {
        private share: ShareService,
        private loader: LoadingBarService,
        private toast: ToastService,
+       private storeService: StoreService,
        private router: Router,
        private title: Title
  ) {
@@ -39,6 +41,7 @@ export class VerifyQuestionComponent implements OnInit {
      public subs!: Subscription
      public questions: Array<any> = []
      public error: any = []
+     public roles = this.storeService.getUserRoles()
      public topic: string = ''
      public showEditForm: any = {display: false, questionIndex: 0, question: {}}
      public topic_id: number = 0
@@ -64,14 +67,14 @@ export class VerifyQuestionComponent implements OnInit {
         return topic ? topic.id : undefined;
   }
 
-  toggleActivation(question_id: number, index: number)
+  toggleActivation(question_id: number, index: number, status: number)
   {
        this.loader.start()
        this.topicService.activateQuestion(question_id).subscribe(
             (response) => {
                  this.loader.complete()
                  this.toast.info("Question status updated")
-                 this.questions[index].status = 1
+                 this.questions[index].status = ( status === 0 ) ? 1 : 0
             },
             (error) => {
                  this.loader.complete()

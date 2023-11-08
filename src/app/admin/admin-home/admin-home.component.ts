@@ -39,17 +39,16 @@ export class AdminHomeComponent implements OnInit {
      public navigation: boolean = false
      public user = JSON.parse(sessionStorage.getItem('user')!)
      public roles = this.storeService.getUserRoles()
-     public monthlyStat = {topics: 0, questions: 0, assessments: 0, active_users: 0, users: 0 }
-     public allTimeStat = {topics: 0, questions: 0, assessments: 0, active_users: 0, users: 0 }
+     public monthlyStat: Array<any> = []
+     public allTimeStat: Array<any> = []
      public editorStats = {total_topic_count: 0, monthly_topic_count: 0, total_questions_count: 0, monthly_questions_count: 0 }
      public topicsNavigation = {next: null, prev: null}
      public myTopicsNavigation = {next: null, prev: null}
      public current_month: string = ''
+     public  responsiveOptions: Array<any> = []
 
      ngOnInit(): void
      {
-          // console.log(this.topics)
-
           if(this.roles.admin)
           {
                this.loader.start()
@@ -113,11 +112,12 @@ export class AdminHomeComponent implements OnInit {
 
      }
 
-     trackByFn(index: number, topic: any) {
+     trackByFn(index: number, topic: any)
+       {
            return topic ? topic.id : undefined;
        }
 
-       editTopic(topic_id: number)
+     editTopic(topic_id: number)
        {
 
        }

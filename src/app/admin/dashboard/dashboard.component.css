@@ -26,3 +26,8 @@
      display: flex;
      place-items: center
 }
+.activebutton
+{
+     background-color: white;
+     color: #000814;
+}

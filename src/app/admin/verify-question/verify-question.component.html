@@ -1,5 +1,5 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="mt-6 w-full ml-3">
+<div class="mt-6 w-full ml-3 min-h-screen">
      <h2 class="font-bold text-md">{{topic}}</h2>
      <div class="overflow-x-auto relative shadow-md sm:rounded-lg mt-3">
          <table class="w-full text-left text-gray-500 dark:text-gray-400">
@@ -41,116 +41,117 @@
              </tbody>
              <tbody *ngIf="questions.length > 0">
                  <tr class="bg-white border-b  text-black" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
-                      <td class="text-center">{{question.question}}</td>
+                      <td class="text-center py-3">{{question.question}}</td>
                       <td class="text-center">{{question.option1}}</td>
                       <td class="text-center">{{question.option2}}</td>
                       <td class="text-center">{{question.option3}}</td>
                       <td class="text-center">{{question.option4}}</td>
                       <td class="text-center">{{question.answer}}</td>
-                      <td class="text-center">
-                           <p class="text-blue-300 text-white px-2 py-2" *ngIf="question.status == 1">Active</p>
-                           <p class="text-red-300 text-black px-2 py-2" *ngIf="question.status == 0">Inactive</p>
+                      <td class="text-center font-bold">
+                           <p class="text-[#000814] text-white px-2 py-2" *ngIf="question.status == 1">Active</p>
+                           <p class="text-[#ffc300] text-black px-2 py-2" *ngIf="question.status == 0">Inactive</p>
                       </td>
-                     <td class="text-center">
-                          <button (click)="toggleActivation(question.id, questions.indexOf(question))" *ngIf="question.status == 1" class="bg-red-300 text-white px-2 py-2 mx-2">Inactivate</button>
-                          <button (click)="toggleActivation(question.id,  questions.indexOf(question))" *ngIf="question.status == 0" class="bg-blue-300 text-white px-2 py-2 mx-2">Activate</button>
+                     <td class="text-center" *ngIf="roles.editor">
+                          <button (click)="toggleActivation(question.id, questions.indexOf(question), question.status)" *ngIf="question.status == 1" class="bg-[#ffc300] text-white px-2 py-2 mx-2">Inactivate</button>
+                          <button (click)="toggleActivation(question.id,  questions.indexOf(question), question.status)" *ngIf="question.status == 0" class="bg-[#000814] text-white px-2 py-2 mx-2">Activate</button>
                      </td>
                      <td class="text-center">
-                          <button (click)="editQuestion(question.id,  question)" class="bg-blue-600 text-white px-2 py-2 mx-2">Edit</button>
+                          <p (click)="editQuestion(question.id,  question)" class="font-bold text-[#000814] px-2 py-2 mx-2 cursor-pointer hover:underline ">Edit</p>
                      </td>
                  </tr>
              </tbody>
          </table>
      </div>
-     <div *ngIf="showEditForm.display" aria-hidden="true" class="overflow-y-auto fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center bg-white/60 backdrop-blur-sm ">
-          <div class="relative p-4 w-full max-w-2xl h-full md:h-auto ">
-               <div class="relative bg-white overflow-y-scroll rounded-lg shadow dark:bg-gray-700">
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                              Edit selected question
-                          </h3>
-                          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="closeModal()">
-                              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                              <span class="sr-only">Close modal</span>
-                          </button>
-                      </div>
-                    <form [formGroup]="form" (ngSubmit)="submitEditForm()" class="p-6 space-y-6">
-                         <div class="">
-                              <label for="question">Question</label>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.question}}</p>
-                              <div *ngIf="question!.invalid && (question!.dirty || question!.touched)"
-                                  class="text-red-600 mt-1 text-sm">
 
-                                <p *ngIf="question!.errors?.['required']">
-                                  Question is required.
-                                </p>
-                                <p *ngIf="question!.errors?.['minlength']">
-                                  Question must be at least 5 characters long.
-                                </p>
-                              </div>
-                              <!-- <input type="text" formControlName="question" id="question" class="border"> -->
-                              <textarea  formControlName="question" id="question" class="w-full h-24 p-2 w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300"></textarea>
-                         </div>
-                         <div>
-                              <label for="option1">Option1</label>
-                              <div *ngIf="option1!.invalid && (option1!.dirty || option1!.touched)"
-                                  class="text-red-600 mt-1 text-sm">
+     <p-dialog [showHeader]="false" [modal]="true" [(visible)]="showEditForm.display" styleClass="z-50 w-full h-modal md:h-full flex justify-center items-center bg-white/60 backdrop-blur-sm">
+          <div class="relative overflow-y-auto p-4 w-full max-w-2xl md:h-auto ">
+              <div class="bg-white rounded-lg shadow dark:bg-gray-700">
+                   <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                         <h3 class="text-md md:text-xl font-semibold text-gray-900 dark:text-white">
+                             Edit selected question
+                         </h3>
+                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="closeModal()">
+                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                             <span class="sr-only">Close modal</span>
+                         </button>
+                     </div>
+                   <form [formGroup]="form" (ngSubmit)="submitEditForm()" class="p-6 space-y-6">
+                        <div class="">
+                             <label for="question">Question</label>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.question}}</p>
+                             <div *ngIf="question!.invalid && (question!.dirty || question!.touched)"
+                                 class="text-red-600 mt-1 text-sm">
 
-                                <p *ngIf="option1!.errors?.['required']">
-                                  Option 1 is required.
-                                </p>
-                                <p *ngIf="option1!.errors?.['minlength']">
-                                  Option 1 must be at least 5 characters long.
-                                </p>
-                              </div>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option1}}</p>
-                              <input type="text" formControlName="option1" id="option1" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-                         </div>
-                         <div>
-                              <label for="option2">Option2</label>
-                              <div *ngIf="option2!.invalid && (option2!.dirty || option2!.touched)"
-                                  class="text-red-600 mt-1 text-sm">
+                               <p *ngIf="question!.errors?.['required']">
+                                 Question is required.
+                               </p>
+                               <p *ngIf="question!.errors?.['minlength']">
+                                 Question must be at least 5 characters long.
+                               </p>
+                             </div>
+                             <!-- <input type="text" formControlName="question" id="question" class="border"> -->
+                             <textarea  formControlName="question" id="question" class="w-full h-24 p-2 w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300"></textarea>
+                        </div>
+                        <div>
+                             <label for="option1">Option1</label>
+                             <div *ngIf="option1!.invalid && (option1!.dirty || option1!.touched)"
+                                 class="text-red-600 mt-1 text-sm">
 
-                                <p *ngIf="option2!.errors?.['required']">
-                                  Option 2 is required.
-                                </p>
-                                <p *ngIf="option2!.errors?.['minlength']">
-                                  Option 2 must be at least 5 characters long.
-                                </p>
-                              </div>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option2}}</p>
-                              <input type="text" formControlName="option2" id="option2" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-                         </div>
-                         <div>
-                              <label for="option3">Option3</label>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option3}}</p>
-                              <input type="text" formControlName="option3" id="option3" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-                         </div>
-                         <div>
-                              <label for="option4">Option4</label>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option4}}</p>
-                              <input type="text" formControlName="option4" id="option4" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-                         </div>
-                         <div>
-                              <label for="answer">Answer</label>
-                              <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.answer}}</p>
-                              <div *ngIf="answer!.invalid && (answer!.dirty || answer!.touched)"
-                                  class="text-red-600 mt-1 text-sm">
+                               <p *ngIf="option1!.errors?.['required']">
+                                 Option 1 is required.
+                               </p>
+                               <p *ngIf="option1!.errors?.['minlength']">
+                                 Option 1 must be at least 5 characters long.
+                               </p>
+                             </div>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option1}}</p>
+                             <input type="text" formControlName="option1" id="option1" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                        </div>
+                        <div>
+                             <label for="option2">Option2</label>
+                             <div *ngIf="option2!.invalid && (option2!.dirty || option2!.touched)"
+                                 class="text-red-600 mt-1 text-sm">
 
-                                <p *ngIf="answer!.errors?.['required']">
-                                  Answer is required.
-                                </p>
-                                <p *ngIf="answer!.errors?.['minlength']">
-                                  Answer must be at least 5 characters long.
-                                </p>
-                              </div>
-                              <input type="text" formControlName="answer" id="answer" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
-                         </div>
-                         <div>
-                              <button type="submit" class="px-4 pt-2 text-center disabled:bg-gray-300 bg-blue-300">Submit question</button>
-                         </div>
-                    </form>
-               </div>
-          </div>
-     </div>
+                               <p *ngIf="option2!.errors?.['required']">
+                                 Option 2 is required.
+                               </p>
+                               <p *ngIf="option2!.errors?.['minlength']">
+                                 Option 2 must be at least 5 characters long.
+                               </p>
+                             </div>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option2}}</p>
+                             <input type="text" formControlName="option2" id="option2" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                        </div>
+                        <div>
+                             <label for="option3">Option3</label>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option3}}</p>
+                             <input type="text" formControlName="option3" id="option3" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                        </div>
+                        <div>
+                             <label for="option4">Option4</label>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.option4}}</p>
+                             <input type="text" formControlName="option4" id="option4" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                        </div>
+                        <div>
+                             <label for="answer">Answer</label>
+                             <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.answer}}</p>
+                             <div *ngIf="answer!.invalid && (answer!.dirty || answer!.touched)"
+                                 class="text-red-600 mt-1 text-sm">
+
+                               <p *ngIf="answer!.errors?.['required']">
+                                 Answer is required.
+                               </p>
+                               <p *ngIf="answer!.errors?.['minlength']">
+                                 Answer must be at least 5 characters long.
+                               </p>
+                             </div>
+                             <input type="text" formControlName="answer" id="answer" class="w-full bg-blue-50 text-md text-black py-1 px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:bg-gray-300">
+                        </div>
+                        <div class="flex justify-center">
+                             <button type="submit" class="px-4 py-2 text-center disabled:bg-gray-400 disabled:text-[#000814] bg-[#000814] text-white">Submit question</button>
+                        </div>
+                   </form>
+              </div>
+         </div>
+     </p-dialog>
 </div>
