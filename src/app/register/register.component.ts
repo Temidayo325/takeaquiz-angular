@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
                      this.showSuccess = true
                      setTimeout(() => {
                           this.showSuccess = false
-                          this.router.navigate(['/verify-account'])
+                          this.router.navigate(['/login'])
                      }, 2000)
                 }
                 this.message = response.message

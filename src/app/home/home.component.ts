@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   {
        this.sub  = this.publicService.domainStat().subscribe(
             (response) => {
-                 console.log(response)
+                 // console.log(response)
                  this.statistics = response.data
           },
           (error) => {
@@ -31,6 +31,6 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(): void {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
-       // this.sub.unsubscribe()
+       this.sub.unsubscribe()
   }
 }

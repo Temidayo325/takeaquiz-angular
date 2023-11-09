@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ContentService } from './../../services/content.service';
+import { ShareService } from './../../services/share.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import { Router } from '@angular/router';
@@ -38,12 +39,14 @@ export class ContentComponent implements OnInit {
        private content: ContentService,
        private loader: LoadingBarService,
        private toast: ToastService,
+       private share: ShareService,
        private router: Router,
        private title: Title
  ) { }
+
   subscriptions!: Subscription
   navigation: boolean =  false
-  topics: Array<{topic_id: number, title: string, faculty: string, department: string, content: Array<object>}> = []
+  topics: Array<{id: number, title: string, faculty: string, department: string, content: Array<object>}> = []
   contents: Array<any> = []
   currentTopicId: number = 0
   chosenTopic: string = ''
@@ -53,6 +56,7 @@ export class ContentComponent implements OnInit {
   ngOnInit(): void
   {
        this.getAvailableTopics()
+       // console.log(this.topics)
   }
   getAvailableTopics()
   {
@@ -80,6 +84,7 @@ export class ContentComponent implements OnInit {
         if (contents$ !== null) {
              this.contents = contents$
         }
+        this.share.topic_id.next(topic_id)
         this.currentTopicId = topic_id
         this.chosenTopic = topic
         this.navigation = !this.navigation

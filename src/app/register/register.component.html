@@ -2,7 +2,7 @@
 <app-loader [display]="showLoader"></app-loader>
 <app-success [display]="showSuccess" [text]="'Account successfully created'"></app-success>
 <!-- [#ffdb66] -->
-<div class="flex justify-between items-center hidden md:flex text-[#000814] px-6 py-2 sticky top-0 bg-slate-50 md:px-20 py-3">
+<div class="flex justify-between items-center md:flex text-[#000814] px-6 py-2 sticky top-0 bg-gray-100 md:px-20 py-3 shadow-md border-slate-50 border-b-2">
      <h1 class="font-bold text-xl font-header ">Quizly</h1>
      <nav>
           <ul class="flex justify-start gap-3 text-md font-sans">
@@ -11,11 +11,13 @@
           </ul>
      </nav>
 </div>
-<h2 class="font-bold text-2xl mt-10 px-6 text-[#000814] md:hidden">Welcome to quizly</h2>
-<p class="text-md mt-2 mb-8 px-6 text-[#000814] md:hidden">create your account to get started</p>
-<div class="tracking-wider md:flex md:justify-around md:items-center md:bg-slate-50 md:h-screen overflow-hidden">
+<div class="bg-gray-100 pt-10 pb-8 md:hidden">
+     <h2 class="font-bold text-2xl px-6 text-[#000814] ">Welcome to quizly</h2>
+     <p class="text-md mt-2 px-6 text-[#000814]">create your account to get started</p>
+</div>
+<div class="tracking-wider md:flex md:justify-around md:items-center bg-gray-100 md:bg-slate-50 md:h-screen overflow-hidden">
       <div class="md:w-[28vw] w-full md:flex md:justify-center md:items-center hidden md:block px-5">
-        <img src="../../assets/images/Sign-up-amico.svg" alt="smiling people loging in" class=" w-full h-full mx-auto">
+        <img src="../../assets/images/Sign-up-amico.svg" alt="smiling people loging in" class=" w-3/4 h-full mx-auto">
       </div>
      <div class="grid justify-center px-2 md:gap-2 md:items-center md:-mt-14 md:shadow-xl md:border md:border-gray-100 md:bg-gray-200 md:rounded-[70px] md:py-6 md:block md:w-2/6">
           <h2 class="font-bold text-center mt-4 text-lg md:text md:text-xl font-header md:block hidden">Register</h2>
@@ -107,6 +109,6 @@
           <p class="mt-4 text-sm md:text-center md:text-md mb-4">Have an account? <a routerLink="/login" class="text-blue-500 font-bold">Login here</a></p>
      </div>
      <div class="md:w-2/6 hidden md:block ">
-          <img src="../../assets/images/devices.svg" alt="smiling people loging in" class="w-full h-full">
+          <img src="../../assets/images/devices.svg" alt="smiling people loging in" class="w-3/4 h-full">
      </div>
 </div>

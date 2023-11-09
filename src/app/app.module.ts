@@ -40,7 +40,27 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { EditorModule } from 'primeng/editor';
 import { DialogModule } from 'primeng/dialog';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCcUNSCsZ5W_VfE3p2rjxtAaa1hZUJ6Be4",
+  authDomain: "quizly-86c7f.firebaseapp.com",
+  projectId: "quizly-86c7f",
+  storageBucket: "quizly-86c7f.appspot.com",
+  messagingSenderId: "1040374552721",
+  appId: "1:1040374552721:web:e01399f2012bf2db39c730",
+  measurementId: "G-4E89JF06M5"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 @NgModule({
   declarations: [
     AppComponent,

@@ -4,6 +4,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
 import { ContentService } from './../../services/content.service';
+import { ShareService } from './../../services/share.service';
 
 @Component({
   selector: 'app-outline',
@@ -20,17 +21,25 @@ export class OutlineComponent implements OnInit {
        private loader: LoadingBarService,
        private toast: ToastService,
        private title: Title,
+       private share: ShareService,
        private content: ContentService
  ) {
       this.title.setTitle("Add Topic outline")
  }
 
   get outline() { return this.form.get('outline'); }
-  @Input() topic_id: number = 0
+  @Input() topic_id :number = 0
   @Output() AddedOutline = new EventEmitter<string>()
 
   ngOnInit(): void
   {
+       this.share.getTopicId().subscribe(
+            (response: any) => {
+                 this.topic_id = response
+                 console.log(response)
+                 console.log(this.topic_id)
+            }
+       )
   }
 
   onSubmit():void

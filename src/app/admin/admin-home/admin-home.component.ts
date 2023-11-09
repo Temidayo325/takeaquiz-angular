@@ -45,6 +45,7 @@ export class AdminHomeComponent implements OnInit {
      public topicsNavigation = {next: null, prev: null}
      public myTopicsNavigation = {next: null, prev: null}
      public current_month: string = ''
+     public loadingInfoSkeleton: boolean = true
      public  responsiveOptions: Array<any> = []
 
      ngOnInit(): void
@@ -89,6 +90,7 @@ export class AdminHomeComponent implements OnInit {
                               this.myTopicsNavigation.prev = response.data.my_topics.prev_page_url
                               this.myTopicsNavigation.next = response.data.my_topics.next_page_url
                               this.storeService.setTopics(this.topics)
+                              this.loadingInfoSkeleton = false
                          }
                          this.loader.complete()
                     },

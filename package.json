@@ -23,6 +23,7 @@
     "@ngx-loading-bar/core": "^6.0.2",
     "angular-toastify": "^1.0.4",
     "animate.css": "^4.1.1",
+    "firebase": "^10.5.2",
     "flowbite": "^1.5.3",
     "primeicons": "^6.0.1",
     "primeng": "^14.2.0",

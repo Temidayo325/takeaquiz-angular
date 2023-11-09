@@ -10,6 +10,7 @@ export class ShareService {
 
   newTopicAdded = new Subject()
   newHeader = new Subject()
+  topic_id = new Subject()
 
   getAddedTopic():Observable<any>
   {
@@ -19,5 +20,10 @@ export class ShareService {
   getNewHeader():Observable<any>
   {
        return this.newHeader.asObservable()
+  }
+
+  getTopicId():Observable<any>
+  {
+     return this.topic_id.asObservable()
   }
 }
