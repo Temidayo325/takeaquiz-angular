@@ -32,6 +32,7 @@ export class UserHomeComponent implements OnInit {
   public topics: Array<any> = JSON.parse(sessionStorage.getItem('topics')!)
   public results: Array<any> = JSON.parse(sessionStorage.getItem('results')!)
   public user = JSON.parse(sessionStorage.getItem('user')!)
+    public imageSource: string = `https://api.dicebear.com/7.x/initials/svg?seed=`+this.user.name
   public mytime : string = ''
   public currentTime: Date = new Date()
 
