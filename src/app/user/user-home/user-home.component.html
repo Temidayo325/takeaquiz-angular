@@ -39,7 +39,7 @@
                <div *ngIf="results.length > 0" class="z-10">
                    <div class="flex justify-start gap-6">
                         <div class="md:hidden bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left md:bg-[#ffc145] md:w-56 " *ngFor="let result of results; let i = index; trackBy: trackByFn">
-                             <p class="uppercase"><span class="md:hidden">title</span>  {{result.topic.title}}</p>
+                             <p class="uppercase"><span class="md:hidden">title</span>  {{result.topic}}</p>
                              <p class="uppercase"><span class="md:hidden">Score:</span> {{result.score}}</p>
                              <p class="uppercase" > <span class="md:hidden">Grade:</span> {{result.grade}}</p>
                              <p class="uppercase mb-7"><span class="md:hidden">Date:</span> {{result.date}}</p>

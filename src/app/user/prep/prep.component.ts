@@ -63,7 +63,8 @@ export class PrepComponent implements OnInit, OnDestroy {
                      if (response.status) {
                           sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
                           sessionStorage.setItem('duration', response.data.duration)
-                          this.sharedService.topic_id.next(topic_id)
+                          // this.sharedService.topic_id.next(topic_id)
+                          sessionStorage.setItem("assessment_topic_id", topic_id)
                           setTimeout(() => {
                                this.router.navigate(['/user/dashboard/assessment'])
                           }, 5000)

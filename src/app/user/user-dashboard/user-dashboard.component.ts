@@ -55,7 +55,7 @@ export class UserDashboardComponent implements OnInit {
   public navigation: boolean = false
   public user = JSON.parse(sessionStorage.getItem('user')!)
   public fields = {faculty: "", department: ""}
-  public imageSource: string = `https://avatars.dicebear.com/api/initials/${this.user.nickname}.svg?mood[]=happy`
+  public imageSource: string = `https://api.dicebear.com/7.x/initials/svg?seed=`+this.user.name
   headerMessage: Subject<string> =  new Subject
   showLoader: boolean = false
   showConfirm: boolean = false

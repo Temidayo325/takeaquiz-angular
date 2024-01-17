@@ -77,11 +77,14 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             //     }
             // });
             //Get Topic Id
-            this.sharedService.getTopicId().subscribe(
-                 (response) => {
-                      this.topic_id = response
-                 }
-            )
+            this.topic_id = parseInt(sessionStorage.getItem("assessment_topic_id")!)
+            // this.sharedService.getTopicId().subscribe(
+            //      (response) => {
+            //           console.log(response)
+            //           console.log("THis works")
+            //           this.topic_id = parseInt(response)
+            //      }
+            // )
 
           this.loader.complete()
   }
