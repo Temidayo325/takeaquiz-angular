@@ -8,17 +8,18 @@ import {Title} from '@angular/platform-browser';
 import { ShareService } from './../../services/share.service';
 import { LoaderComponent } from './../../components/loader/loader.component';
 import { SuccessComponent } from './../../components/success/success.component';
-import { ConfirmComponent } from './../../components/confirm/confirm.component';
+// import { ConfirmComponent } from './../../components/confirm/confirm.component';
 
 @Component({
   selector: 'app-assessment',
   templateUrl: './assessment.component.html',
-  styleUrls: ['./assessment.component.css']
+  styleUrls: ['./assessment.component.css'],
+  providers: []
 })
 export class AssessmentComponent implements OnInit, OnDestroy {
 
   constructor(
-       private assesementService: AssesmentService,
+      private assesementService: AssesmentService,
       private title: Title,
       private loader: LoadingBarService,
       private router: Router,
@@ -42,7 +43,8 @@ export class AssessmentComponent implements OnInit, OnDestroy {
   showConfirm: boolean =  false
   priority: any = {yes: '', no: '', text: ''}
   confirmAction: any = {cancel: false, submit: false}
-  
+  topic_id: number = 0
+
   ngOnInit(): void
   {
           this.loader.start()
@@ -65,26 +67,43 @@ export class AssessmentComponent implements OnInit, OnDestroy {
                   }, 1000)
             }, 1000)
             let grace = 0
-            document.addEventListener("visibilitychange", () => {
-                if (document.visibilityState !== 'visible') {
-                    this.toast.info("Your test has been submitted")
-                    if (!this.stat.submissionStatus) {
-                         this.submit()
-                    }
+            // document.addEventListener("visibilitychange", () => {
+            //     if (document.visibilityState !== 'visible') {
+            //         this.toast.info("Your test has been submitted")
+            //         if (!this.stat.submissionStatus) {
+            //              this.submit()
+            //         }
+            //
+            //     }
+            // });
+            //Get Topic Id
+            this.sharedService.getTopicId().subscribe(
+                 (response) => {
+                      this.topic_id = response
+                 }
+            )
 
-                }
-            });
           this.loader.complete()
   }
 
-  cancel()
+  reject()
+  {
+
+  }
+
+  accept()
+  {
+
+  }
+
+  Confirm()
   {
        this.loader.start()
-       this.priority.no = 'bg-yellow-600'
-       this.priority.text = "Do you want to cancel ?"
-       this.confirmAction.submit = false
-       this.confirmAction.cancel = true
-       this.showConfirm = true;
+       if ( confirm("Are you sure you want to cancel ?") ) {
+             sessionStorage.setItem('questions', '')
+             this.loader.complete()
+              this.router.navigate(['/user/dashboard/home'])
+       }
   }
 
   confirmStatus(event: boolean)
@@ -107,15 +126,15 @@ export class AssessmentComponent implements OnInit, OnDestroy {
   initsubmission()
   {
        this.loader.start()
-       this.priority.yes = 'bg-yellow-600'
-       this.priority.text = "Do you want to submit ?"
-       this.confirmAction.submit = true
-       this.confirmAction.cancel = false
-       this.showConfirm = true;
+       if (confirm("Are you sure you want to submit your Assessment ?")) {
+            this.loader.complete()
+            this.submit()
+       }
   }
 
   submit()
   {
+       this.loader.start()
        this.showLoader = true
        clearInterval(this.timervalues.ongoing)
        this.stat.submitted = true
@@ -124,7 +143,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
        // this.closeFullscreen()
        this.stat.correctScore = score
        const user = JSON.parse(sessionStorage.getItem('user')!)
-       this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  Number(this.route.snapshot.paramMap.get('topic_id'))}).subscribe(
+       this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  this.topic_id}).subscribe(
             (response) => {
                  this.loader.complete()
                  // this.toast.info(response.message)
@@ -232,7 +251,8 @@ export class AssessmentComponent implements OnInit, OnDestroy {
              }
       }
 
-  ngOnDestroy(): void {
+  ngOnDestroy(): void
+  {
        //Called once, before the instance is destroyed.
        //Add 'implements OnDestroy' to the class.
        if (this.subs) {

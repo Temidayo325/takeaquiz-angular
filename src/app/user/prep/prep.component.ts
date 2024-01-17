@@ -2,13 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { AssesmentService } from './../../service/assesment.service';
-// import { StoreService } from './../../service/store.service';
 import { Router,  ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import {Title} from '@angular/platform-browser';
 import { ShareService } from './../../services/share.service';
-import { LoaderComponent } from './../../components/loader/loader.component';
-import { SuccessComponent } from './../../components/success/success.component';
+
 
 @Component({
   selector: 'app-prep',
@@ -25,7 +23,6 @@ export class PrepComponent implements OnInit, OnDestroy {
 
      constructor(
        private assesementService: AssesmentService,
-    // private storeService: StoreService,
          private loader: LoadingBarService,
          private router: Router,
          private toast: ToastService,
@@ -43,8 +40,6 @@ export class PrepComponent implements OnInit, OnDestroy {
       topics: Array<any> = []
       departments: Array<string> = []
       titles: Array<any> = []
-      showLoader: boolean = false
-      showSuccess: boolean = false
       totalAvailableQuestions: number = 0
       enableButton: boolean = false
 
@@ -61,19 +56,16 @@ export class PrepComponent implements OnInit, OnDestroy {
       {
            this.loader.start()
            const topic_id: any = this.form.value.topic_id
-           this.showLoader = true
            this.assesementService.requestAssesment(topic_id).subscribe(
                 (response) => {
                      this.loader.complete()
-                     this.showLoader = false
-                     this.showSuccess = true
-                     // this.toast.info(response.message)
+                     this.toast.info("You'll be redirected to your assessment")
                      if (response.status) {
                           sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
                           sessionStorage.setItem('duration', response.data.duration)
+                          this.sharedService.topic_id.next(topic_id)
                           setTimeout(() => {
-                               this.showSuccess = false
-                               this.router.navigate(['/user/assessment', {topic_id: topic_id}])
+                               this.router.navigate(['/user/dashboard/assessment'])
                           }, 5000)
                      }
                 },
@@ -134,6 +126,7 @@ export class PrepComponent implements OnInit, OnDestroy {
            )
 
       }
+
       ngOnDestroy(): void
       {
            //Called once, before the instance is destroyed.

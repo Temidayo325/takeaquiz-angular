@@ -1,7 +1,7 @@
 <ngx-loading-bar></ngx-loading-bar>
 <app-loader [display]="showLoader"></app-loader>
 <app-success [display]="showSuccess" [text]="'Assessment submitted succesfully'"></app-success>
-<app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm>
+<!-- <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm> -->
 <div class="container" onmousedown="return false" onselectstart="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" oncontextmenu="return false">
      <div *ngIf="!stat.submitted" class="py-4 px-6">
           <div class="flex justify-center my-5 fixed right-[45%] translate-x-4">
@@ -36,7 +36,7 @@
                     <button (click)="next()" class="px-6 py-2 border-2 border-gray-700 rounded-lg shadow-md cursor-pointer rounded-lg text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" style="color: #001220;">Next</button>
                </div>
                <div class="w-full mt-12 mb-3 md:ml-12 flex justify-between font-bold">
-                    <button (click)="cancel()" class="px-12 py-2 border-2 rounded-lg hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg bg-white" style="color: #001220; border: 2px solid #FBAE3C;">Cancel</button>
+                    <button (click)="Confirm()" class="px-12 py-2 border-2 rounded-lg hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg bg-white" style="color: #001220; border: 2px solid #FBAE3C;">Cancel</button>
                     <button (click)="initsubmission()" class="px-12 py-2 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg text-white" style="background: #001220; color: #FBAE3C;">Submit</button>
                </div>
      </div>

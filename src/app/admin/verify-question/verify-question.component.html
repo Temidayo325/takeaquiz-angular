@@ -41,15 +41,15 @@
              </tbody>
              <tbody *ngIf="questions.length > 0">
                  <tr class="bg-white border-b  text-black" *ngFor="let question of questions; let i = index; trackBy: trackByFn">
-                      <td class="text-center py-3">{{question.question}}</td>
+                      <td class="text-center py-3 px-2">{{question.question}}</td>
                       <td class="text-center">{{question.option1}}</td>
                       <td class="text-center">{{question.option2}}</td>
                       <td class="text-center">{{question.option3}}</td>
                       <td class="text-center">{{question.option4}}</td>
                       <td class="text-center">{{question.answer}}</td>
                       <td class="text-center font-bold">
-                           <p class="text-[#000814] text-white px-2 py-2" *ngIf="question.status == 1">Active</p>
-                           <p class="text-[#ffc300] text-black px-2 py-2" *ngIf="question.status == 0">Inactive</p>
+                           <p class="text-[#000814] px-2 py-2" *ngIf="question.status == 1">Active</p>
+                           <p class="text-[#ffc300] px-2 py-2" *ngIf="question.status == 0">Inactive</p>
                       </td>
                      <td class="text-center" *ngIf="roles.editor">
                           <button (click)="toggleActivation(question.id, questions.indexOf(question), question.status)" *ngIf="question.status == 1" class="bg-[#ffc300] text-white px-2 py-2 mx-2">Inactivate</button>

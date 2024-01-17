@@ -36,8 +36,6 @@ export class OutlineComponent implements OnInit {
        this.share.getTopicId().subscribe(
             (response: any) => {
                  this.topic_id = response
-                 console.log(response)
-                 console.log(this.topic_id)
             }
        )
   }

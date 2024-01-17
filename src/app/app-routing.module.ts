@@ -56,9 +56,13 @@ const routes: Routes = [
                     path: 'take-assessment',
                     component: PrepComponent,
                     // data: { animation: 'insertRemovePage' }
+               },
+               {
+                    path: 'assessment',
+                    component: AssessmentComponent
                }
           ]},
-     {path: 'user/assessment', component: AssessmentComponent},
+     // {path: 'user/assessment', component: AssessmentComponent},
      {path: 'admin/dashboard', component: DashboardComponent,
           children: [
                {

@@ -40,6 +40,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { EditorModule } from 'primeng/editor';
 import { DialogModule } from 'primeng/dialog';
+// import { ButtonModule } from 'primeng/button';
+// import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -102,7 +104,8 @@ const analytics = getAnalytics(app);
     SkeletonModule,
     CarouselModule,
     EditorModule,
-    DialogModule
+    DialogModule,
+    // ConfirmDialogModule,
     // TableModule
     // ButtonModule
   ],
