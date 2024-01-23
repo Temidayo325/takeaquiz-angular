@@ -26,10 +26,12 @@ import { ChangePasswordComponent } from './forms/change-password/change-password
 import { SharedResultComponent } from './user/shared-result/shared-result.component';
 import { ContentComponent } from './admin/content/content.component';
 import { UserComponent } from './admin/user/user.component';
+import { ChooseAssessmentStatusComponent } from './choose-assessment-status/choose-assessment-status.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
      {path: 'login', component: LoginComponent},
+     {path:  'assessment-status', component: ChooseAssessmentStatusComponent},
      {path: 'register', component: RegisterComponent},
      {path: 'verify-account', component: VerifyAccountComponent},
      {path: 'recover-password', component: RecoverPasswordComponent},

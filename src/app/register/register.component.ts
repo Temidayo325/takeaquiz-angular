@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
           "name": new FormControl("", [Validators.required, Validators.minLength(5)]),
           "nickname": new FormControl("", [Validators.required,Validators.minLength(4)]),
           "institution": new FormControl("", [Validators.required, Validators.minLength(3)]),
+          "is_proffessional": new FormControl(localStorage.getItem("isProffessional"), [Validators.required]),
           "password": new FormControl("", [Validators.required, Validators.minLength(5)]),
     });
 
@@ -45,9 +46,14 @@ export class RegisterComponent implements OnInit {
       error: any = []
       message: string = ''
       showLoader: boolean = false
+      assessment_status: string = localStorage.getItem("isProffessional")!
       showSuccess: boolean = false
   ngOnInit(): void
   {
+       // if(localStorage.getItem("isProffessional") == "proffesional")
+       // {
+       //      this.toast.info("Kindly note that we only have PeP exam mock assessments. If you require more than, reach out to us via our contact page and we'll be happy to get you started on your desired mock assesment");
+       // }
   }
 
   onSubmit()
@@ -55,7 +61,8 @@ export class RegisterComponent implements OnInit {
         // this.showLoader = true
        this.loader.start()
        this.showLoader = true
-       let user: NewUser = {email: this.form.value.email!, password: this.form.value.password!, nickname: this.form.value.nickname!, institution: this.form.value.institution!, name: this.form.value.name!}
+       let proffesional = this.form.value.is_proffessional == 'student' ? false : true
+       let user: NewUser = {email: this.form.value.email!, password: this.form.value.password!, nickname: this.form.value.nickname!, institution: this.form.value.institution!, name: this.form.value.name!, is_proffessional: proffesional}
       this.userService.register(user).subscribe(
            (response) => {
                 this.loader.complete()

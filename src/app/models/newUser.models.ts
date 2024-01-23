@@ -3,7 +3,8 @@ export interface NewUser {
      nickname: string,
      email: string,
      password: string,
-     institution: string
+     institution: string,
+     is_proffessional: boolean
 }
 
 export interface Profile {

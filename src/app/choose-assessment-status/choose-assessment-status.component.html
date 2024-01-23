@@ -1,0 +1,27 @@
+<section class="text-[#000814] bg-gray-100 pb-12 md:pt-5 md:min-h-screen">
+     <div class="flex justify-between items-center px-6 py-3 shadow-md border-slate-50 border-b-2 md:hidden">
+          <h1 class="font-bold text-xl font-header ">Quizly</h1>
+          <nav>
+               <ul class="flex justify-start gap-3 text-md md:font-bold font-sans">
+                    <li class="inline"><a routerLink="/login">Login</a></li>
+                    <li><a routerLink="/register" class="pl-7 py-3">Sign up</a></li>
+               </ul>
+          </nav>
+     </div>
+     <h2 class="px-6 font-bold mt-10 md:text-2xl">Choose which best that describes your assessment needs ??</h2>
+     <div class="px-6 mt-6 md:mt-10 grid gap-10 items-center md:flex md:justify-start md:items-center">
+          <button type="button" class="shadow-md w-full p-3 border border-gray-300 hover:scale-105 hover:border-2-black hover:shadow-xl duration-500 ease-out transition-all" (click)="chooseStatus('student')">
+               <figure>
+                    <img src="./../../assets/images/college-students-bro.svg" alt="" class="">
+                    <figcaption class="font-bold py-4">A Student</figcaption>
+               </figure>
+          </button>
+          <p class="text-2xl font-bolder text-dark_yellow text-center ">Or</p>
+          <button type="button" class="shadow-md w-full p-3 border border-gray-300 hover:scale-105 hover:border-2-black hover:shadow-xl duration-500 ease-out transition-all" (click)="chooseStatus('proffessional')">
+               <figure>
+                    <img src="./../../assets/images/Pharmacist-bro.svg" alt="" class="md:h-3/12 md:w-8/12 md:mx-auto">
+                    <figcaption class="font-bold py-4">A Proffessional</figcaption>
+               </figure>
+          </button>
+     </div>
+</section>
