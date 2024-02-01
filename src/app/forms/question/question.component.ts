@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import { QuestionService } from './../../services/question.service';
+import { StoreService } from './../../service/store.service';
 import { Router } from '@angular/router';
 import { Subject, Observable, of, Subscription } from 'rxjs';
 // import { ShareService } from './../../services/share.service';
@@ -35,7 +36,9 @@ export class QuestionComponent implements OnInit {
     public subs!: Subscription;
     public topics = JSON.parse(sessionStorage.getItem('topics')!)
     public createByForm = false
+    public roles = this.storeService.getUserRoles()
     public methodType: boolean = false
+    public questionAudience: string = ''
     public text: string = ''
     public modules = { toolbar: {
                 container: '#toolbar',  // Selector for toolbar container
@@ -44,6 +47,7 @@ export class QuestionComponent implements OnInit {
     // public_
   constructor(
        private questionService: QuestionService,
+       private storeService: StoreService,
        // private share: ShareService,
        private loader: LoadingBarService,
        private toast: ToastService,
@@ -56,6 +60,8 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void
   {
        this.form.patchValue({type: "word"});
+       this.questionAudience = ( !this.roles.admin ) ? 'student' : '' 
+       console.log(this.roles)
   }
   get question() { return this.form.get('question'); }
   get topic_id() { return this.form.get('topic_id'); }
@@ -71,15 +77,19 @@ export class QuestionComponent implements OnInit {
 
   chooseQuestionType(event: any)
   {
-       // console.log(event.target.value)
        this.methodType = event.target.value == 'true' ? true : false
-
   }
+
+  chooseQuestionAudience(event: any)
+  {
+       this.questionAudience = event.target.value
+  }
+
   onSubmit()
   {
        this.loader.start()
        const topic_id = this.form.value.topic_id
-       this.subs = this.questionService.createFromForm({...this.form.value}).subscribe(
+       this.subs = this.questionService.createFromForm({...this.form.value}, this.questionAudience).subscribe(
             (response: any) => {
                  this.loader.complete()
                  this.toast.info(response.message)
@@ -104,7 +114,7 @@ export class QuestionComponent implements OnInit {
   ngSubmitfile()
   {
        this.loader.start()
-       this.subs = this.questionService.createFromFile(this.excelFile, this.formByFile.value.topic_id, {topic_id:this.formByFile.value.topic_id, question: this.excelFile }).subscribe(
+       this.subs = this.questionService.createFromFile(this.excelFile, this.formByFile.value.topic_id, {topic_id:this.formByFile.value.topic_id, question: this.excelFile }, this.questionAudience).subscribe(
             (response: any) => {
                  this.loader.complete()
                  this.toast.info(response.message)

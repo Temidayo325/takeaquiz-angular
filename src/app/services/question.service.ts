@@ -33,12 +33,13 @@ export class QuestionService {
           private store: StoreService,
      ) { }
 
-     createFromForm(question: object): Observable<any>
+     createFromForm(question: object, audience: string): Observable<any>
      {
-       return this.http.post(this.baseUrl+"question", question, this.options )
+          let ending_url = (audience == 'proffessional' ) ? "pep/question": "question";
+          return this.http.post(this.baseUrl+ending_url, question, this.options )
      }
 
-     createFromFile(question: File, topic_id: any, data: object):Observable<any>
+     createFromFile(question: File, topic_id: any, data: object, audience: string):Observable<any>
      {
           const file:File = question;
           const formData = new FormData();
@@ -46,7 +47,7 @@ export class QuestionService {
           formData.append("question", file);
           formData.append("topic_id", topic_id);
 
-            // const upload$ = this.http.post("/api/thumbnail-upload", formData);
-          return this.http.post(this.baseUrl+"importquestion", formData, this.form )
+          let ending_url = (audience == 'proffessional' ) ? "pep/importquestion": "importquestion";
+          return this.http.post(this.baseUrl+ending_url, formData, this.form )
      }
 }

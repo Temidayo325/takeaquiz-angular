@@ -89,7 +89,10 @@ export class AdminHomeComponent implements OnInit {
                               this.myTopics = response.data.my_topics.data
                               this.myTopicsNavigation.prev = response.data.my_topics.prev_page_url
                               this.myTopicsNavigation.next = response.data.my_topics.next_page_url
-                              this.storeService.setTopics(this.topics)
+                              let all_topics = new Set([...response.data.available_topics.data, ...response.data.my_topics.data])
+                              let topics_to_set = [...all_topics]
+                              console.log(topics_to_set)
+                              this.storeService.setTopics(topics_to_set)
                               this.loadingInfoSkeleton = false
                          }
                          this.loader.complete()
