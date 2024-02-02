@@ -53,7 +53,12 @@ export class RegisterComponent implements OnInit {
        // if(localStorage.getItem("isProffessional") == "proffesional")
        // {
        //      this.toast.info("Kindly note that we only have PeP exam mock assessments. If you require more than, reach out to us via our contact page and we'll be happy to get you started on your desired mock assesment");
-       // }
+       // }localStorage.setItem("isProffessional", status)
+       console.log(this.assessment_status)
+       if(localStorage.getItem("isProffessional") == undefined || localStorage.getItem('isProffessional') == null)
+       {
+            this.router.navigate(['/assessment-status'])
+       }
   }
 
   onSubmit()

@@ -11,7 +11,7 @@ export class QuestionService {
      // public baseUrl =  'http://127.0.0.1:8000';
      token: string = this.store.getToken().slice(1,-1)
      // public baseUrl = "https://quizly-api.luminaace.com/api/";
-     public baseUrl = "https://quizly.aeesdamilola.com/api/author/";
+     public baseUrl = "https://quizly.aeesdamilola.com/api/";
      public options = {
           headers : new HttpHeaders({
                'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export class QuestionService {
 
      createFromForm(question: object, audience: string): Observable<any>
      {
-          let ending_url = (audience == 'proffessional' ) ? "pep/question": "question";
+          let ending_url = ( audience == 'Proffessional' ) ? "admin/pep/question" : "author/question";
           return this.http.post(this.baseUrl+ending_url, question, this.options )
      }
 
@@ -47,7 +47,12 @@ export class QuestionService {
           formData.append("question", file);
           formData.append("topic_id", topic_id);
 
-          let ending_url = (audience == 'proffessional' ) ? "pep/importquestion": "importquestion";
+          let ending_url = (audience == 'Proffessional' ) ? "admin/pep/importquestion": "author/importquestion";
           return this.http.post(this.baseUrl+ending_url, formData, this.form )
+     }
+
+     deleteQuestion(id: number): Observable<any>
+     {
+          return this.http.delete(this.baseUrl+"editor/question/"+id, this.options)
      }
 }

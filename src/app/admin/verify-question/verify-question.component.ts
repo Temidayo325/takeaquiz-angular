@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { ToastService } from 'angular-toastify';
 import { TopicService } from './../../services/topic.service';
+import { QuestionService } from './../../services/question.service';
 import { Router } from '@angular/router';
 import { Subject, Observable, of, Subscription } from 'rxjs';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -29,6 +30,7 @@ export class VerifyQuestionComponent implements OnInit {
 
   constructor(
        private topicService: TopicService,
+       private questionService: QuestionService,
        private share: ShareService,
        private loader: LoadingBarService,
        private toast: ToastService,
@@ -102,6 +104,29 @@ export class VerifyQuestionComponent implements OnInit {
        this.showEditForm.display = true
        this.loader.complete()
   }
+  public deleteQuestion(question_id: number,  question: any)
+  {
+       // create a new form and display the form
+       this.loader.start()
+       if(confirm("Are you sure you want to delete question??"))
+       {
+            this.questionService.deleteQuestion(question_id).subscribe(
+                 (response) => {
+                      let questionIndex = this.questions.indexOf(question)
+                      this.questions.splice(questionIndex, 1);
+                      this.loader.complete()
+                      this.toast.info(response.message)
+                 },
+                 (error) => {
+                      this.loader.complete()
+                      this.toast.warn(error.error.message)
+                      this.error = error.error.errors
+                 }
+            )
+       }
+
+  }
+
   public closeModal()
   {
       this.showEditForm.display = false

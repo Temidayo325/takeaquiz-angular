@@ -91,7 +91,6 @@ export class AdminHomeComponent implements OnInit {
                               this.myTopicsNavigation.next = response.data.my_topics.next_page_url
                               let all_topics = new Set([...response.data.available_topics.data, ...response.data.my_topics.data])
                               let topics_to_set = [...all_topics]
-                              console.log(topics_to_set)
                               this.storeService.setTopics(topics_to_set)
                               this.loadingInfoSkeleton = false
                          }

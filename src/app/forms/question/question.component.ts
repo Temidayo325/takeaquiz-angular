@@ -60,8 +60,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void
   {
        this.form.patchValue({type: "word"});
-       this.questionAudience = ( !this.roles.admin ) ? 'student' : '' 
-       console.log(this.roles)
+       this.questionAudience = ( !this.roles.admin ) ? 'student' : ''
   }
   get question() { return this.form.get('question'); }
   get topic_id() { return this.form.get('topic_id'); }

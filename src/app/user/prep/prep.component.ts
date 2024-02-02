@@ -41,7 +41,10 @@ export class PrepComponent implements OnInit, OnDestroy {
       departments: Array<string> = []
       titles: Array<any> = []
       totalAvailableQuestions: number = 0
+      examDetails = {"duration": 0, "quantity": 0}
+      examDetailsLoader: Boolean = false
       enableButton: boolean = false
+      public user = JSON.parse(sessionStorage.getItem('user')!)
 
       ngOnInit(): void
       {
@@ -49,6 +52,12 @@ export class PrepComponent implements OnInit, OnDestroy {
            const topics = sessionStorage.getItem('topics')
            this.topics = topics === null ? [] : JSON.parse(topics)
            this.departments = this.distinctValues(this.topics)
+           if(this.user.is_proffessional == 1)
+           {
+                let topic_id_element = document.querySelector('#topic_id');
+               // topic_id_element.target.value = 0
+                this.chosenTopic({"target": {"value": 1}})
+           }
            this.loader.complete()
       }
 
@@ -114,7 +123,9 @@ export class PrepComponent implements OnInit, OnDestroy {
                 (response: any) => {
                      this.loader.complete()
                      this.totalAvailableQuestions = response.data.totalQuestions
+                     this.examDetails = response.data.details
                      this.enableButton =  true
+                     this.examDetailsLoader = true
                 },
 
                 (error: any) => {
