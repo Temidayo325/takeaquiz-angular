@@ -16,6 +16,7 @@
                </div>
                <select name="faculty" id="faculty" formControlName="faculty" class="w-full border border-gray-700 text-md text-black py-2 rounded-lg px-2 focus:shadow-xl focus:border-0 focus:outline-none focus:py-2 focus:bg-white">
                     <option value="" disabled></option>
+                    <option value="Life sciences">Life sciences</option>
                     <option value="Pharmaceutical sciences">Pharmaceutical sciences</option>
                     <option value="Pharmaceutical sciences">Physical sciences</option>
                </select>
@@ -59,7 +60,7 @@
 
           <div class="mt-0" *ngIf="user.is_proffessional == '1'">
                <p class="text-blue-900 mt-1 text-sm text-center">Kindly be aware that <strong> PeP </strong> is currently the only Proffessional exam available. If you need other proffessional exams, jindly reach out to us via our contact page and we'll get accross to you.</p>
-               <h3 class="text-xl text-center font-bold mt-3 leading-10">PeP Exams</h3>
+               <h3 class="text-xl text-center font-bold mt-3 leading-10">Pre-Registration Exam for Pharmacists</h3>
           </div>
 
           <div class="mt-4  text-blue-900 text-sm" *ngIf="examDetailsLoader">

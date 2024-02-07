@@ -17,7 +17,8 @@ export class AssesmentService {
 
   // public baseUrl = "https://quizly-api.luminaace.com/api/";
      public baseUrl = "https://quizly.aeesdamilola.com/api/";
-    public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
+     public token: string = this.store.getToken().substring(1,this.store.getToken().length - 1)
+     public user = JSON.parse(sessionStorage.getItem('user')!)
 
   options = {
        headers : new HttpHeaders({
@@ -36,7 +37,8 @@ export class AssesmentService {
   }
   requestAssesment(topic_id: number): Observable<any>
   {
-    return this.http.get(this.baseUrl+`quiz?topic_id=`+topic_id, this.options )
+       console.log(topic_id)
+    return this.http.post(this.baseUrl+`start-quiz`, {topic_id: topic_id, proffessional_status: ( this.user.is_proffessional  == 1 ) ? true : false}, this.options )
   }
 
   submitAssesment(data: Result): Observable<any>

@@ -43,6 +43,7 @@ export class PrepComponent implements OnInit, OnDestroy {
       totalAvailableQuestions: number = 0
       examDetails = {"duration": 0, "quantity": 0}
       examDetailsLoader: Boolean = false
+      topicId: number =  1
       enableButton: boolean = false
       public user = JSON.parse(sessionStorage.getItem('user')!)
 
@@ -54,9 +55,8 @@ export class PrepComponent implements OnInit, OnDestroy {
            this.departments = this.distinctValues(this.topics)
            if(this.user.is_proffessional == 1)
            {
-                let topic_id_element = document.querySelector('#topic_id');
-               // topic_id_element.target.value = 0
                 this.chosenTopic({"target": {"value": 1}})
+                this.topicId = 1
            }
            this.loader.complete()
       }
@@ -64,12 +64,12 @@ export class PrepComponent implements OnInit, OnDestroy {
       onSubmit()
       {
            this.loader.start()
-           const topic_id: any = this.form.value.topic_id
+           const topic_id: any = ( this.form.value.topic_id != '' ) ? this.form.value.topic_id : this.topicId
            this.assesementService.requestAssesment(topic_id).subscribe(
                 (response) => {
                      this.loader.complete()
-                     this.toast.info("You'll be redirected to your assessment")
-                     if (response.status) {
+                     if (response.status && response.data.questions != null) {
+                          this.toast.info("You'll be redirected to your assessment")
                           sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
                           sessionStorage.setItem('duration', response.data.duration)
                           // this.sharedService.topic_id.next(topic_id)
@@ -77,6 +77,8 @@ export class PrepComponent implements OnInit, OnDestroy {
                           setTimeout(() => {
                                this.router.navigate(['/user/dashboard/assessment'])
                           }, 5000)
+                     }else{
+                           this.toast.error("No questions are approves yet for this topic, kindly check out other topics while that is being done or contact the admin via the contact page")
                      }
                 },
 

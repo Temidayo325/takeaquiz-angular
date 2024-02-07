@@ -58,6 +58,7 @@ import { SuccessComponent } from './../components/success/success.component';
                      this.storeService.setuser(response.user, response.token)
                      this.storeService.setTopicAndResult(response.topics, response.results)
                      sessionStorage.setItem('totalResults', response.countedResult)
+                     sessionStorage.setItem('top3results', JSON.stringify(response.top3results))
                      sessionStorage.setItem('totalTopics', response.countTopics)
                      sessionStorage.setItem('top3Topics', JSON.stringify(response.top3))
                      this.showLoader = false

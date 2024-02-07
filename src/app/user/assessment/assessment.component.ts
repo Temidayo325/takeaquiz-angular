@@ -6,6 +6,7 @@ import { ToastService } from 'angular-toastify';
 import { Subject, Observable, of } from 'rxjs';
 import {Title} from '@angular/platform-browser';
 import { ShareService } from './../../services/share.service';
+import { MarkedResult } from './../../models/uploadrresult.models';
 import { LoaderComponent } from './../../components/loader/loader.component';
 import { SuccessComponent } from './../../components/success/success.component';
 // import { ConfirmComponent } from './../../components/confirm/confirm.component';
@@ -32,9 +33,11 @@ export class AssessmentComponent implements OnInit, OnDestroy {
    }
 
   questions: Array<any> = []
+  wrongQuestions: Array<any> = []
   duration: number = 0
   subs!: Subject<any>
-  stat: any = {completed: 0, total: 0, submitted: false, correctScore: 0, submissionStatus: false}
+  stat: any = {completed: 0, total: 0, submitted: false, correctScore: 0, submissionStatus: false, displayResult: false, question_ids: []}
+  result: MarkedResult = {score: 0, grade: '', opinion: '', date: '', topic: ''}
   timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
   currentIndex = 0
   screen  = document.documentElement
@@ -44,7 +47,8 @@ export class AssessmentComponent implements OnInit, OnDestroy {
   priority: any = {yes: '', no: '', text: ''}
   confirmAction: any = {cancel: false, submit: false}
   topic_id: number = 0
-
+  public user = JSON.parse(sessionStorage.getItem('user')!)
+  private is_proffessional : Boolean = ( this.user.is_proffessional == 1 ) ? true : false;
   ngOnInit(): void
   {
           this.loader.start()
@@ -54,6 +58,9 @@ export class AssessmentComponent implements OnInit, OnDestroy {
           }
 
           this.questions = JSON.parse(sessionStorage.getItem('questions')!)
+          this.questions.forEach((question, index) => {
+               this.stat.question_ids.push(question.id)
+          })
           sessionStorage.setItem('questions', '')
           this.duration = parseInt(sessionStorage.getItem('duration')!)
           this.stat.total = this.questions.length
@@ -78,14 +85,6 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             // });
             //Get Topic Id
             this.topic_id = parseInt(sessionStorage.getItem("assessment_topic_id")!)
-            // this.sharedService.getTopicId().subscribe(
-            //      (response) => {
-            //           console.log(response)
-            //           console.log("THis works")
-            //           this.topic_id = parseInt(response)
-            //      }
-            // )
-
           this.loader.complete()
   }
 
@@ -133,6 +132,7 @@ export class AssessmentComponent implements OnInit, OnDestroy {
             this.loader.complete()
             this.submit()
        }
+       this.loader.complete()
   }
 
   submit()
@@ -146,18 +146,30 @@ export class AssessmentComponent implements OnInit, OnDestroy {
        // this.closeFullscreen()
        this.stat.correctScore = score
        const user = JSON.parse(sessionStorage.getItem('user')!)
-       this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  this.topic_id}).subscribe(
+       this.assesementService.submitAssesment({user_id: parseInt(user.id), score: score, topic_id:  this.topic_id, proffessional_status: this.is_proffessional, question_ids : JSON.stringify(this.stat.question_ids )}).subscribe(
             (response) => {
                  this.loader.complete()
                  // this.toast.info(response.message)
                  this.stat.submissionStatus = true
                  sessionStorage.setItem('results', JSON.stringify(response.results))
+                 this.toast.success("Assessement result marked and saved succesfully")
                  this.showLoader = false
-                 this.showSuccess = true
-                 setTimeout(() => {
+                 if(this.is_proffessional)
+                 {
+                      console.log(this.wrongQuestions)
+                      this.questions = this.wrongQuestions;
+                      this.stat.displayResult = true
+                      this.result = response.recent_result
                       this.showSuccess = false
-                      this.router.navigate(['/user/dashboard/results'])
-                 }, 3000)
+                 }else{
+
+                      this.showSuccess = true
+                      setTimeout(() => {
+                           this.showSuccess = false
+                           this.router.navigate(['/user/dashboard/results'])
+                      }, 3000)
+                 }
+                 this.loader.complete()
             },
             (error) => {
                  this.loader.complete()
@@ -174,9 +186,23 @@ export class AssessmentComponent implements OnInit, OnDestroy {
        this.questions.forEach((question, index) => {
           if (question.chosen != '' && question.answer.toLowerCase() == question.chosen.toLowerCase()) {
                correctScore += 1
+          }else{
+               this.wrongQuestions.push(question)
           }
        });
        return correctScore
+  }
+
+  startReview()
+  {
+       this.stat.displayResult = false;
+       this.stat.submissionStatus = true
+       this.stat.submitted = false
+  }
+
+  redirect():void
+  {
+       this.router.navigate(['/user/dashboard/results'])
   }
 
   public timer()

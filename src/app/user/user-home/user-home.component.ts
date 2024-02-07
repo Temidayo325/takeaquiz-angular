@@ -31,6 +31,7 @@ export class UserHomeComponent implements OnInit {
    public countedTopics: number = sessionStorage.getItem('totalTopics') === null ? 0 : Number(sessionStorage.getItem('totalTopics'))
   public topics: Array<any> = JSON.parse(sessionStorage.getItem('topics')!)
   public results: Array<any> = JSON.parse(sessionStorage.getItem('results')!)
+  public top3results: Array<any> = JSON.parse(sessionStorage.getItem("top3results")!)
   public user = JSON.parse(sessionStorage.getItem('user')!)
     public imageSource: string = `https://api.dicebear.com/7.x/initials/svg?seed=`+this.user.name
   public mytime : string = ''

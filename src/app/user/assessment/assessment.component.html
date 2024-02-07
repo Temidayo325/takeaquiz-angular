@@ -4,15 +4,16 @@
 <!-- <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm> -->
 <div class="container" onmousedown="return false" onselectstart="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" oncontextmenu="return false">
      <div *ngIf="!stat.submitted" class="py-4 px-6">
-          <div class="flex justify-center my-5 fixed right-[45%] translate-x-4">
+          <div class="flex justify-center my-5 fixed right-[45%] translate-x-4" *ngIf="!stat.submissionStatus">
                <div class="border border-gray-700 rounded-lg py-1 px-4 shadow-xl border-b-2">
                     <h1 class="font-bold text-lg">{{timervalues.minutes}} : {{timervalues.seconds}}</h1>
                </div>
           </div>
+          <h1 class="text-left text-xl font-bold " *ngIf="stat.submissionStatus">Here is the review of the questions you missed</h1>
           <div *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="w-full tracking-wide leading-7 my-20" style="color:#001220">
                     <div *ngIf="!question.hidden" class="w-full">
                          <div class="flex justify-start items-center mb-4">
-                              <p class="text-justify text-xl my-2 font-bold">{{question.question}}</p>
+                              <p class="text-justify text-md my-2 font-bold">{{question.question}}</p>
                          </div>
                          <div class="grid gap-10 text-lg">
                               <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option1.length > 0">
@@ -27,6 +28,10 @@
                               <label for="option4{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option4.length > 0">
                                    <input type="radio" [value]="question.option4" id="option4{{i}}" name="option4{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5"> <span>{{question.option4}}</span>
                               </label>
+
+                              <label for="answer{{i}}" class="text-xl cursor-pointer tracking-wider" *ngIf="stat.submissionStatus"> Correct Answer: <span class="font-bold"> {{ question.answer}} </span></label>
+
+                              <label for="answer{{i}}" class="text-sm cursor-pointer tracking-wider" *ngIf="stat.submissionStatus && question.explaination != null">{{ question.explaination}}</label>
                          </div>
                     </div>
                </div>
@@ -36,8 +41,25 @@
                     <button (click)="next()" class="px-6 py-2 border-2 border-gray-700 rounded-lg shadow-md cursor-pointer rounded-lg text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" style="color: #001220;">Next</button>
                </div>
                <div class="w-full mt-12 mb-3 md:ml-12 flex justify-between font-bold">
-                    <button (click)="Confirm()" class="px-12 py-2 border-2 rounded-lg hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg bg-white" style="color: #001220; border: 2px solid #FBAE3C;">Cancel</button>
-                    <button (click)="initsubmission()" class="px-12 py-2 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg text-white" style="background: #001220; color: #FBAE3C;">Submit</button>
+                    <button (click)="Confirm()" class="px-12 py-2 border-2 rounded-lg hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg bg-white" *ngIf="!stat.submissionStatus" style="color: #001220; border: 2px solid #FBAE3C;">Cancel</button>
+                    <button (click)="initsubmission()" class="px-12 py-2 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg text-white" *ngIf="!stat.submissionStatus" style="background: #001220; color: #FBAE3C;">Submit</button>
                </div>
+               <div *ngIf="stat.submissionStatus" class="flex justify-center">
+                    <button (click)="redirect()" class="px-12 py-3 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl cursor-pointer rounded-lg text-white"  style="background: #001220; color: #FBAE3C;">Close assessment</button>
+               </div>
+     </div>
+     <div *ngIf="stat.displayResult" class="flex justify-center items-center shadow-2xl border border-gray-300 ">
+          <div class="w-2/4 md:w-1/4 h-auto py-3 px-4">
+               <div class="bg-white border w-2/4 md:w-8/12 h-auto py-3 px-4">
+                    <p class="uppercase mt-6"> title {{result.topic}}</p>
+                    <p class="uppercase">Score: {{result.score}}</p>
+                    <p class="uppercase" > Grade: {{result.grade}}</p>
+                    <p class="uppercase mb-7 mb-9">Date: {{result.date}}</p>
+                    <p class="uppercase text-sm absolute bottom-0 py-2 px-3 rounded-[12px] mt-0 text-gray-200 w-full left-0 " style="background: #001220; color: white">Inscription: {{result.opinion}}</p>
+                    <!-- <img src="../../../assets/images/share-icon.svg" alt="share icon from icons8" class="absolute top-0 right-0 mr-2 mt-2 h-6 w-6" (click)="shareAssessment(result.topic.id)"> -->
+               </div>
+               <p>You scored {{result.score }} out of {{stat.total}}</p>
+               <button class="px-4 py-2 bg-yellow-600 text-black" (click)="startReview()">Review questions</button>
+          </div>
      </div>
 </div>
