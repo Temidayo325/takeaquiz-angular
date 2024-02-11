@@ -1,6 +1,6 @@
 <ngx-loading-bar></ngx-loading-bar>
 <div class="md:mx-auto md:w-1/4 md:flex md:justify-start md:items-center md:h-screen ">
-     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white shadow-5xl px-6 py-12 rounded-lg border border-gray-400">
           <div class="" *ngIf="user.is_proffessional == '0'">
                <label for="faculty" class="font-bold ">Faculty</label>
                <p class="text-red-600 mt-1 text-sm" *ngIf="error != null">{{error.faculty}}</p>
@@ -63,7 +63,7 @@
                <h3 class="text-xl text-center font-bold mt-3 leading-10">Pre-Registration Exam for Pharmacists</h3>
           </div>
 
-          <div class="mt-4  text-blue-900 text-sm" *ngIf="examDetailsLoader">
+          <div class="mt-12 text-blue-900 text-sm" *ngIf="examDetailsLoader">
                <p class="text-center ">
                     <span>Each assessment would have <strong>{{examDetails.quantity}}</strong> questions, and would last for <strong>{{examDetails.duration}}</strong> minutes</span>
                </p>
@@ -71,7 +71,7 @@
 
           </div>
 
-          <div class="mt-10">
+          <div class="mt-7">
                <button type="submit" class="text-md font-bold px-4 py-3 text-center disabled:bg-gray-300 bg-blue-500 w-full shadow-md hover:-translate-x-1 rounded-lg hover:shadow-lg" [disabled]="!enableButton">Start assesment</button>
           </div>
      </form>

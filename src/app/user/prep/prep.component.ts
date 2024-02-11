@@ -68,17 +68,22 @@ export class PrepComponent implements OnInit, OnDestroy {
            this.assesementService.requestAssesment(topic_id).subscribe(
                 (response) => {
                      this.loader.complete()
-                     if (response.status && response.data.questions != null) {
-                          this.toast.info("You'll be redirected to your assessment")
-                          sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
-                          sessionStorage.setItem('duration', response.data.duration)
-                          // this.sharedService.topic_id.next(topic_id)
-                          sessionStorage.setItem("assessment_topic_id", topic_id)
-                          setTimeout(() => {
-                               this.router.navigate(['/user/dashboard/assessment'])
-                          }, 5000)
+                     if( !response.status && response.statusCode == 426)
+                     {
+                          this.toast.info(response.message)
                      }else{
-                           this.toast.error("No questions are approves yet for this topic, kindly check out other topics while that is being done or contact the admin via the contact page")
+                          if (response.status && response.data.questions != null) {
+                              this.toast.info("You'll be redirected to your assessment")
+                              sessionStorage.setItem('questions', JSON.stringify(response.data.questions))
+                              sessionStorage.setItem('duration', response.data.duration)
+                              // this.sharedService.topic_id.next(topic_id)
+                              sessionStorage.setItem("assessment_topic_id", topic_id)
+                              setTimeout(() => {
+                                   this.router.navigate(['/user/dashboard/assessment'])
+                              }, 5000)
+                         }else{
+                               this.toast.error("No questions are approves yet for this topic, kindly check out other topics while that is being done or contact the admin via the contact page")
+                         }
                      }
                 },
 

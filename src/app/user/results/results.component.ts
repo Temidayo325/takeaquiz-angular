@@ -30,10 +30,17 @@ export class ResultsComponent implements OnInit {
  }
   public results: Array<any> = []
   public user: any = JSON.parse(sessionStorage.getItem('user')!)
+  public imageSource: string = `https://api.dicebear.com/7.x/initials/svg?seed=`+this.user.name
+  public mytime : string = ''
+  public currentTime: Date = new Date()
 
   ngOnInit(): void
   {
        this.headerEvent.emit(`Results`)
+       const today = new Intl.DateTimeFormat("en-US", {weekday: "long"}).format(this.currentTime)
+      const day = (this.currentTime.getDate() < 10) ? '0'+this.currentTime.getDate() : this.currentTime.getDate()
+      const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
+      this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
        this.loader.start()
        this.results = JSON.parse(sessionStorage.getItem('results')!)
        this.userService.getResults(this.user.id).subscribe(

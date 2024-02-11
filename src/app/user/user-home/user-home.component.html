@@ -1,7 +1,7 @@
-<div class="hidden md:block bg-white z-20 md:sticky md:top-0 md:py-4 md:flex md:justify-start md:w-full">
+<div class="hidden md:block bg-[#E2E3DE] z-50 md:sticky md:top-0 md:py-4 md:flex md:justify-start md:w-full">
       <div class="w-2/5">
-           <h1 class="font-bold text-2xl text-black">Dashboard</h1>
-           <p class="text-gray-200" style="">{{mytime}}</p>
+           <h1 class="font-bold text-2xl text-[#001D3D]">Dashboard</h1>
+           <p class="text-[#001D3D]" style="">{{mytime}}</p>
      </div>
      <div class="w-full flex justify-end gap-12 items-center dark-blue mt-[-20px] mr-8">
           <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -21,11 +21,12 @@
      <button routerLink="/user/dashboard/take-assessment" class="text-center w-full rounded-full py-2 px-6 bg-gray-300 mt-6 font-bold animate-bounce">Take assessment</button>
 </div>
 
-<div class="rounded-[12px] py-10 px-5 mt-16 hidden md:block h-[250px] mr-8  relative" style="background: #b8b8d1">
-     <h2 class="text-4xl font-bold mt-10">Hi, {{user.nickname}}</h2>
-     <p class="mt-2 text-md text-gray-200">Repetition is the name of the game we playing. take the assessments it till you get a perfect score</p>
-    <img src="./../../assets/images/user/undraw_blooming_re_2kc4.svg" alt="home icon" class="h-[250px] absolute right-32 top-0 -mt-[60px]">
-     <button routerLink="/user/dashboard/take-assessment" class="text-center py-3 px-6 bg-gray-300 mt-6 font-bold absolute bottom-10 bg-[#ffc145] ">Take assessment</button>
+<div class="rounded-[12px] mt-10 hidden text-white md:block h-[400px] mr-8 bg-[#001D3D] grid justify-end user-dashboard-hero-image relative overflow-hidden">
+     <img src="./../../assets/images/register-md.jpg" alt="user-hero-image" class="w-full h-[300%] z-10">
+     <h2 class="text-4xl font-bold mt-10 z-20 absolute bottom-20 bg-black/50 px-12 py-3 left-10">Hi, {{user.nickname}}</h2>
+     <!-- <p class="mt-2 text-lg text-white">Don't underestimate the power of repetition. take the assessments it till you get a perfect score</p> -->
+    <!-- <img src="./../../assets/images/user/undraw_blooming_re_2kc4.svg" alt="home icon" class="h-[250px] absolute right-32 top-0 -mt-[60px]"> -->
+     <button routerLink="/user/dashboard/take-assessment" class="text-center text-lg text-[#001D3D] px-12 py-3 mt-9 font-bold bg-[#ffc145] z-20 absolute bottom-7 left-10">Take assessment</button>
 </div>
 
 <div class="flex flex-col md:flex-col-reverse">
@@ -36,27 +37,14 @@
                     <h2 class="text-center font-bold text-lg my-2 ">You have no result yet</h2>
                     <a routerLink="/user/dashboard/take-assessment" class="text-sm py-2 px-3 text-center " style="color: #FBAE3C; background: #001220">Click here to take an assessment</a>
                </div>
-               <div *ngIf="results.length > 0" class="z-10">
+               <div *ngIf="top3results.length > 0" class="z-10">
                    <div class="flex justify-start gap-6">
-                        <div class="md:hidden bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left md:bg-[#ffc145] md:w-56 " *ngFor="let result of top3results; let i = index; trackBy: trackByFn">
+                        <div class="bg-white border border-gray-400 shadow-inner shadow-outline shadow-xl w-4/5 shrink-0 h-auto rounded-[12px] py-3 px-3 relative text-left md:bg-gray-100 md:w-56 " *ngFor="let result of top3results; let i = index; trackBy: trackByFn">
                              <p class="uppercase"><span class="md:hidden">title</span>  {{result.topic}}</p>
-                             <p class="uppercase"><span class="md:hidden">Score:</span> {{result.score}}</p>
-                             <p class="uppercase" > <span class="md:hidden">Grade:</span> {{result.grade}}</p>
-                             <p class="uppercase mb-7"><span class="md:hidden">Date:</span> {{result.date}}</p>
+                             <p class="uppercase"><span class="">Score:</span> {{result.score}}</p>
+                             <p class="uppercase" > <span class="">Grade:</span> {{result.grade}}</p>
+                             <p class="uppercase mb-7"><span class="">Date:</span> {{result.date}}</p>
                              <p class="uppercase text-sm absolute bottom-0 py-2 px-3 rounded-[12px] mt-0 text-gray-200 w-full left-0 " style="background: #001220; color: white">Inscription: {{result.opinion}}</p>
-                        </div>
-                        <div class="w-96 hidden md:block grid justify-between md:bg-[#ffc145] rounded-[20px] overflow-hidden " *ngFor="let result of results; let i = index; trackBy: trackByFn">
-                             <div class="flex justify-between items-center py-2 px-3">
-                                  <p>{{result.date}}</p>
-                                  <div class="result-grade flex gap-5 px-1 py-[.5] rounded-[7px] text-white justify-between items-center text-lg bg-red-600 ">
-                                       <p>{{result.score}}</p>
-                                       <p class="">{{result.grade}}</p>
-                                  </div>
-                             </div>
-                             <p class="py-2 px-3 text-center text-2xl font-bold tracking-wider">{{result.topic.title}}</p>
-                             <div class="bg-white/50 px-3 slogan py-1 h-16 mb-[-25px]">
-                                  <p class="text-lg text-black font-bold">{{result.opinion}}</p>
-                             </div>
                         </div>
                    </div>
                </div>
@@ -66,7 +54,7 @@
      <div class="mt-5 md:mt-12">
           <h2 class="text-md font-bold mb-5 md:text-lg md:text-black/60">Your usage statistics</h2>
           <div class="overflow-x-scroll flex justify-start gap-3 md:gap-12 md:overflow-x-hidden md:overflow-x-hidden">
-               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#ff6b6c]">
+               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#A02F05]">
                     <div class="md:w-full mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto  bg-[#FBAE3C] md:flex md:justify-start md:gap-12 md:items-center md:bg-transparent">
                          <svg fill="none" class="px-2 py-2 w-16 h-16 bg-white/30 bg-blur hidden md:block" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"></path></svg>
                          <div>
@@ -77,7 +65,7 @@
                     <p class=" text-[#001220] text-md mt-2 overflow-hidden text-center font-bold md:hidden font-bold">Results</p>
                </div>
 
-               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#5b5f97]">
+               <div class="overview h-[140px] w-2/4 rounded-lg py-2 px-2 text-white border border-gray-400 shadow-inner shadow-outline md:w-72 md:h-32 md:bg-[#F55E0D]">
                     <div class="md:w-full mt-2 h-20 w-20 rounded-full flex justify-center items-center mx-auto  bg-[#FBAE3C] md:flex md:justify-start md:gap-12 md:items-center md:bg-transparent">
                          <svg fill="none" stroke="currentColor" class="px-2 py-2 w-16 h-16 bg-white/30 bg-blur hidden md:block"  stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
                          <div>
@@ -99,7 +87,7 @@
           <h2 class="text-xl font-bold text-center py-3 ">Loading available topics...</h2>
      </div>
      <div *ngIf="topTopics.length > 0" class="md:flex md:justify-start md:gap-12">
-          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full md:w-1/4 border border-gray-400 shadow-inner shadow-outline shadow-xl text-left rounded-xl py-3 md:py-16 px-3 mb-3">
+          <div *ngFor="let topic of topTopics; let i = index; trackBy: trackByFn" class="w-full md:w-1/4 border-2 bg-gray-100 border-black/10 shadow-outline shadow-xl text-left rounded-xl py-3 md:py-16 px-3 mb-3">
                <p class="font-bold">{{topic.title || 'NA'}}</p>
                <p class="">Department of {{topic.department}}</p>
                <!-- <p class="text-center" >{{topic.faculty}}</p> -->

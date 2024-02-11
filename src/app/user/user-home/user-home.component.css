@@ -11,8 +11,13 @@ p,h1,h2,h3,h4,h5,h6
 {
   background-color: #FBAE3C;
 }
+.user-dashboard-hero-image
+{
+     /* background-image: url("./../../assets/images/register-md.jpg"); */
+}
 @media only screen and (min-width: 900px)
 {
+
      h1,p{
           color: black
      }

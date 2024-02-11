@@ -27,6 +27,7 @@ import { SharedResultComponent } from './user/shared-result/shared-result.compon
 import { ContentComponent } from './admin/content/content.component';
 import { UserComponent } from './admin/user/user.component';
 import { ChooseAssessmentStatusComponent } from './choose-assessment-status/choose-assessment-status.component';
+import { SubscriptionComponent } from './user/subscription/subscription.component';
 
 const routes: Routes = [
      { path: 'index', component: HomeComponent },
@@ -57,6 +58,11 @@ const routes: Routes = [
                {
                     path: 'take-assessment',
                     component: PrepComponent,
+                    // data: { animation: 'insertRemovePage' }
+               },
+               {
+                    path: 'pricing',
+                    component: SubscriptionComponent,
                     // data: { animation: 'insertRemovePage' }
                },
                {

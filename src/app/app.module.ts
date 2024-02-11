@@ -46,6 +46,7 @@ import { DialogModule } from 'primeng/dialog';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { ChooseAssessmentStatusComponent } from './choose-assessment-status/choose-assessment-status.component';
+import { SubscriptionComponent } from './user/subscription/subscription.component';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -92,7 +93,8 @@ const analytics = getAnalytics(app);
     ContentComponent,
     OutlineComponent,
     UserComponent,
-    ChooseAssessmentStatusComponent
+    ChooseAssessmentStatusComponent,
+    SubscriptionComponent
   ],
   imports: [
     LoadingBarModule,
