@@ -25,7 +25,7 @@ import { SuccessComponent } from './../../components/success/success.component';
          state('off', style({
               transform: 'translateX(100%)',
          })),
-         transition("on <=> off", animate("300ms linear"))
+         transition("on <=> off", animate("300ms ease-in-out"))
      ]),
      trigger("openClose", [
            state('open', style({
@@ -34,7 +34,7 @@ import { SuccessComponent } from './../../components/success/success.component';
            state('close', style({
                 transform: 'translateX(-100%)',
            })),
-           transition("open <=> close", animate("400ms linear"))
+           transition("open <=> close", animate("400ms ease-in-out"))
      ])
   ]
 })

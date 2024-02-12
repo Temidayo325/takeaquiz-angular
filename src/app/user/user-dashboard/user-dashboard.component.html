@@ -9,7 +9,7 @@
                <div class="rounded-full h-1 w-full bg-black mb-1"></div>
           </button>
           <h2 class="text-lg font-bold font-header">{{ headerMessage }}</h2>
-          <img [src]="imageSource" alt="user avater" class="w-10 h-10 rounded-full " (click)="showProfile()" >
+          <img [src]="imageSource" alt="user avater" class="w-10 h-10 rounded-full bg-[#ffc300]" (click)="showProfile()" >
      </header>
 
      <!-- profile page -->
@@ -72,12 +72,15 @@
                       </a>
                   </li>
                   <li>
+                      <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer" (click)='location("/user/dashboard/pricing")'><svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"></path></svg><span>Subscriptions</span></a>
+                 </li>
+                  <li>
                        <a class="py-3 px-4 block flex justify-start gap-4 items-center cursor-pointer" (click)="initLogout()"><img src="./../../assets/images/logout.png" alt="Assessment icon"><span>Logout</span></a>
                   </li>
              </ul>
         </nav>
      </div>
-     <div class="px-3 py-4 md:py-0 md:px-0 md:flex md:justify-start md:items-start">
+     <div class="md:py-0 md:px-0 md:flex md:justify-start md:items-start">
         <nav class="font-mono hidden md:block h-screen sticky top-0 md:w-3/12 md:grid md:justify-between bg-[#001D3D]" style="color: white;">
              <h1 class="font-bold text-2xl text-left ml-8 mt-14 text-white">Quizly</h1>
           <!-- <img [src]="imageSource" alt="user avater" class="w-10 h-10 rounded-full mx-auto md:w-16 md:h-16 md:mt-12"> -->
@@ -104,15 +107,15 @@
             </li>
           </ul>
           <!-- <img src="./../../assets/images/user/undraw_screen_time_vkev.svg" alt="Repetition is key" class="w-2/3 mx-auto mt-12"> -->
-          <div class="bg-white w-2/3 mx-auto py-3 px-4 rounded-2xl mb-10 mt-10 ">
+          <div class="bg-white w-2/3 mx-auto py-3 px-4 rounded-2xl mb-10 mt-10">
                <img src="./../../assets/images/Lock.svg" alt="Repetition is key" class="mx-auto mt-6">
                <p class="text-[#001D3D] text-center text-lg my-4 font-bold">Unlock unlimited trials and upgrades</p>
                <div class="flex justify-center items-center">
-                    <button class="bg-[#001D3D] py-4 px-20 rounded-full text-center text-white" (click)='largeScreenLocation("/user/dashboard/pricing")'>Upgrade</button>
+                    <button class="bg-[#001D3D] py-4 px-16 rounded-full text-center text-white" (click)='largeScreenLocation("/user/dashboard/pricing")'>Upgrade</button>
                </div>
           </div>
         </nav>
-          <div class="pt-6 px-8 md:w-full bg-[#E2E3DE]" >
+          <div class="py-10 px-8 md:w-full bg-[#E2E3DE]" >
                <router-outlet></router-outlet>
           </div>
      </div>

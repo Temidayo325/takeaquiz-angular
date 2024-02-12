@@ -1,5 +1,5 @@
 <ngx-loading-bar></ngx-loading-bar>
-<div class="md:mx-auto md:w-1/4 md:flex md:justify-start md:items-center md:h-screen ">
+<div class="md:mx-auto md:w-1/4 flex justify-center md:justify-start items-center min-h-screen ">
      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white shadow-5xl px-6 py-12 rounded-lg border border-gray-400">
           <div class="" *ngIf="user.is_proffessional == '0'">
                <label for="faculty" class="font-bold ">Faculty</label>
@@ -58,16 +58,19 @@
                </select>
           </div>
 
-          <div class="mt-0" *ngIf="user.is_proffessional == '1'">
-               <p class="text-blue-900 mt-1 text-sm text-center">Kindly be aware that <strong> PeP </strong> is currently the only Proffessional exam available. If you need other proffessional exams, jindly reach out to us via our contact page and we'll get accross to you.</p>
+          <div class="md:mt-0" *ngIf="user.is_proffessional == '1'">
+               <!-- <p class="text-blue-900 mt-1 text-sm text-center">Kindly be aware that <strong> PeP </strong> is currently the only Professional exam available. If you need other professional exams, Kindly reach out to us via our contact page and we'll get accross to you.</p> -->
                <h3 class="text-xl text-center font-bold mt-3 leading-10">Pre-Registration Exam for Pharmacists</h3>
           </div>
 
-          <div class="mt-12 text-blue-900 text-sm" *ngIf="examDetailsLoader">
-               <p class="text-center ">
-                    <span>Each assessment would have <strong>{{examDetails.quantity}}</strong> questions, and would last for <strong>{{examDetails.duration}}</strong> minutes</span>
+          <div class="mt-8 md:mt-12 text-blue-900 text-md text-center grid gap-3 justify-center" *ngIf="examDetailsLoader">
+               <p>
+                    <span>Each assessment: <strong class="text-xl">{{examDetails.quantity}}</strong></span>
                </p>
-               <p class="text-md mt-3 text-blue-900 text-center">Total available questions <span class=" ml-3 mt-1 font-bold text-md">{{totalAvailableQuestions}}</span></p>
+               <p>
+                    <span>Estimated time: <strong class="text-xl">{{examDetails.duration}}</strong></span>
+               </p>
+               <!-- <p class="text-md mt-3 text-blue-900 text-center">Total available questions <span class=" ml-3 mt-1 font-bold text-md">{{totalAvailableQuestions}}</span></p> -->
 
           </div>
 

@@ -1,1 +1,34 @@
-<p>subscription works!</p>
+<div class="hidden md:block bg-[#E2E3DE] z-50 md:sticky md:top-0 md:py-2 md:flex md:justify-start md:w-full">
+      <div class="w-2/5">
+           <h1 class="font-bold text-2xl text-[#001D3D]">Dashboard</h1>
+           <p class="text-[#001D3D]" style="">{{mytime}}</p>
+     </div>
+     <div class="w-full flex justify-end gap-12 items-center dark-blue mt-[-20px] mr-8">
+          <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"></path>
+          </svg>
+          <svg fill="none" class="h-7 w-7" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"></path>
+          </svg>
+          <div class="flex flex-row gap-5 items-center">
+               <img [src]="imageSource" alt="User image" class="rounded-[20px] w-12 h-16">
+               <h2 class="font-bold text-md tracking-wide">{{user.nickname}}</h2>
+          </div>
+     </div>
+</div>
+<section class="min-h-screen py-12 px-3 md:flex md:justify-center">
+     <div class="md:w1/4">
+          <img src="./../../assets/images/Scan-to-pay.svg" alt="Subscribe to the service" class="mx-auto mt-6 md:w-[300px] md:mt-0 md:h-[300px]">
+          <h1 class="text-3xl font-bold my-5">Subcribe to enjoy full service</h1>
+          <ul class="grid gap-4 justify-start text-[#001D3D] my-10 text-lg">
+               <li class="flex justify-start gap-4"><svg class="text-green-500 h-8 w-10" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Unlimited mock assessment</span></li>
+               <li class="flex justify-start gap-4"><svg class="text-green-500 h-8 w-10" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>Continous updates of questions and explainations</span></li>
+               <li class="flex justify-start gap-4"><svg class="text-green-500 h-8 w-10" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"></path></svg><span>First to get updates and features</span></li>
+          </ul>
+          <div class="border-2 border-blue-900 py-4 px-3 rounded-3xl my-3 mb-16">
+               <h2 class="font-bold text-2xl">One time fee</h2>
+               <p class="text-lg my-2">Free first 3 assessment. Then <span class="font-bold text-lg">&#8358; 4000</span> stat</p>
+               <button class="w-full rounded-full py-4 bg-[#ffc300] text-[#001D3D] mx-auto text-lg font-bold mt-3">Make payment</button>
+          </div>
+     </div>
+</section>
