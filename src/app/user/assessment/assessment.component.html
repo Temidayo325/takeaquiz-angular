@@ -4,7 +4,7 @@
 <!-- <app-confirm [display]="showConfirm" [yes]="priority.yes" [no]='priority.no' [text]="priority.text" (actionEvent)="confirmStatus($event)"></app-confirm> -->
 <div class="container pb-20 min-h-screen" onmousedown="return false" onselectstart="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" oncontextmenu="return false">
      <div *ngIf="!stat.submitted" class="py-4 px-6">
-          <div class="flex justify-center my-2 fixed right-[45%] translate-x-4" *ngIf="!stat.submissionStatus">
+          <div class="flex justify-center my-2 absolute right-[45%] translate-x-4" *ngIf="!stat.submissionStatus">
                <div class="border border-gray-700 rounded-lg py-1 px-4 shadow-xl border-b-2">
                     <h1 class="font-bold text-lg">{{timervalues.minutes}} : {{timervalues.seconds}}</h1>
                </div>
@@ -17,16 +17,16 @@
                          </div>
                          <div class="grid gap-10 text-lg">
                               <label for="option1{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option1.length > 0">
-                                   <input type="radio" [value]="question.option1" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5 "> <span>{{question.option1}}</span>
+                                   <input type="radio" [value]="question.option1" id="option1{{i}}" name="option1{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5 " *ngIf="stat.submissionStatus"> <span>{{question.option1}}</span>
                               </label>
                               <label for="option2{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option2.length > 0">
-                                   <input type="radio" [value]="question.option2" id="option2{{i}}" name="option2{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5"> <span>{{question.option2}}</span>
+                                   <input type="radio" [value]="question.option2" id="option2{{i}}" name="option2{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5" *ngIf="stat.submissionStatus"> <span>{{question.option2}}</span>
                               </label>
                               <label for="option3{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option3.length > 0">
-                                   <input type="radio" [value]="question.option3" id="option3{{i}}" name="option3{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5"> <span> {{question.option3}} </span>
+                                   <input type="radio" [value]="question.option3" id="option3{{i}}" name="option3{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5" *ngIf="stat.submissionStatus"> <span> {{question.option3}} </span>
                               </label>
                               <label for="option4{{i}}" class="text-md cursor-pointer tracking-wider flex justify-start gap-3 items-center" *ngIf="question.option4.length > 0">
-                                   <input type="radio" [value]="question.option4" id="option4{{i}}" name="option4{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5"> <span>{{question.option4}}</span>
+                                   <input type="radio" [value]="question.option4" id="option4{{i}}" name="option4{{i}}" [(ngModel)]="question.chosen" class="w-5 h-5" *ngIf="stat.submissionStatus"> <span>{{question.option4}}</span>
                               </label>
 
                               <label for="answer{{i}}" class="text-md cursor-pointer tracking-wider" *ngIf="stat.submissionStatus"> Correct Answer: <span class="font-bold"> {{ question.answer}} </span></label>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareService } from './../../services/share.service';
 import {Title} from '@angular/platform-browser';
+// import PaystackPop from '@paystack/inline-js';
 
 @Component({
   selector: 'app-subscription',
@@ -17,7 +18,7 @@ export class SubscriptionComponent implements OnInit {
   public currentTime: Date = new Date()
   public user = JSON.parse(sessionStorage.getItem('user')!)
   public imageSource: string = `https://api.dicebear.com/7.x/initials/svg?seed=`+this.user.name
-  
+
   ngOnInit(): void
   {
        this.title.setTitle('Your dashboard home')
@@ -27,5 +28,8 @@ export class SubscriptionComponent implements OnInit {
        const month = (this.currentTime.getMonth() < 10) ? '0'+(this.currentTime.getMonth() + 1) : this.currentTime.getMonth() + 1
        this.mytime = `${today}, ${day} ${month} ${this.currentTime.getFullYear()}`
   }
+  makePayment():void
+  {
 
+  }
 }
