@@ -22,7 +22,7 @@
                               <img src="../../assets/eye-open.png" alt="Show password" class="w-6 h-6 cursor-pointer right-0 bottom-2 absolute" (click)="showpassword()" *ngIf="!togglePassword">
                          </div>
                          <p class="text-right cursor-pointer " (click)="forgotPassword()">Forgot password</p>
-                         <button type="button" (click)="login()" class="py-2 px-40 bg-orange-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg" [disabled]="!loginForm.valid" >Login</button>
+                         <button type="button" (click)="login()" class="py-2 px-40 bg-orange-500 text-white text-lg font-bold tracking-wider hover:shadow-lg border-0 rounded-lg cursor-pointer disabled:cursor-wait" [disabled]="!loginForm.valid" >Login</button>
                     </form>
 
                     <p class="text-center text-lg">Don't have an account? <span class="font-bold mx-2 cursor-pointer" (click)="switchForm()">Create one here</span></p>

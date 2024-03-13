@@ -15,7 +15,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 export class LoginComponent implements OnInit {
      loginForm = this.fb.group({
          email: ['', [Validators.required, Validators.email]],
-         password: ['', [Validators.required, Validators.minLength(9)]]
+         password: ['', [Validators.required, Validators.minLength(5)]]
      });
      registerForm = this.fb.group({
           name: ['', [Validators.required, Validators.minLength(6)]],
