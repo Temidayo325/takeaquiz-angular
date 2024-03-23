@@ -98,14 +98,14 @@
              <tbody class="font-word">
                  <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn">
                      <td class="px-3 py-3 text-lg">{{course.course}}</td>
-                     <td class="px-3 py-3">{{course.display_token}}</td>
+                     <td class="px-3 py-3 font-bold" title="This is the code you will provide to your students as course identifier for their assessmentS">{{course.display_token}}</td>
                      <td class="px-3 py-3">{{ course.duration || "NA"}}</td>
                      <td class="px-3 py-3">{{course.amount || "NA"}}</td>
                      <td class="px-3 py-3">{{course.start_time || "NA" }}</td>
                      <td class="px-3 py-3">{{course.end_time || "NA" }}</td>
                      <td class="px-3 py-3">{{course.created_at || "NA" }}</td>
                      <td class="px-3 py-3">{{course.type || "NA"}}</td>
-                     <td class="px-3 py-3">{{course.assesments.length}}</td>
+                     <!-- <td class="px-3 py-3">{{course.assesments.length || "NA"}}</td> -->
                      <td class="px-3 py-3" title="Create CA"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="checkCa(course, i)">Check CAs</p></td>
                      <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="editCourse(course)">Edit</p></td>
                      <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="downloadResult(course)">Download</p></td>

@@ -4,6 +4,7 @@ import { QuestionsService } from '../Services/questions.service';
 import { ToastService } from 'angular-toastify';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { Title } from '@angular/platform-browser';
+import { CourseService } from '../Services/course.service';
 // import { slideInRightAnimation, slideOutRightAnimation } from 'angular-animations';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,7 +21,7 @@ export class GermanComponent implements OnInit {
 
   constructor(
        private questionService: QuestionsService,
-       // private course: CourseService,
+       private course: CourseService,
        private toast: ToastService,
        private loading: LoadingBarService,
        private title: Title,
@@ -43,6 +44,7 @@ export class GermanComponent implements OnInit {
   public answers: Array<[]> = []
   public marks: Array<number> = []
   public display: any =  {questionForm: false, showForm: false, display_token: '', edit: false, question: ''}
+  public CourseTitle: string = ''
   public assesment_ids: Array<number> = []
   private options = {
       headers : new HttpHeaders({
@@ -60,28 +62,28 @@ export class GermanComponent implements OnInit {
   getCourse()
   {
        this.loading.start()
-       this.sub = this.questionService.germanCoursesAndQuestions().subscribe(
+       this.sub = this.course.getTyped('german').subscribe(
             (res: any) => {
                  if (res.statusCode == 200) {
                      this.courses = res.courses
-                     this.generateAssesmentId(res.courses)
-                     this.questions = res.questions[0];
-                     if (this.questions.length >= 1) {
-                          this.questions.map((value: any, index: number) => {
-                              this.answers.push(JSON.parse(value.answer))
-                          })
-                          this.questions.map( (value: any, index: number) => {
-                               const answers = JSON.parse(value.answer)
-                               let total = 0
-                               answers.map( (currentValue: any, currentIndex: number) => {
-                                    total += parseInt(currentValue.mark)
-                               })
-                               this.marks.push(total)
-                          })
-                     }else{
-                          this.marks.push(0)
-                          this.answers.push([])
-                     }
+                     // this.generateAssesmentId(res.courses)
+                     // this.questions = res.questions[0];
+                     // if (this.questions.length >= 1) {
+                     //      this.questions.map((value: any, index: number) => {
+                     //          this.answers.push(JSON.parse(value.answer))
+                     //      })
+                     //      this.questions.map( (value: any, index: number) => {
+                     //           const answers = JSON.parse(value.answer)
+                     //           let total = 0
+                     //           answers.map( (currentValue: any, currentIndex: number) => {
+                     //                total += parseInt(currentValue.mark)
+                     //           })
+                     //           this.marks.push(total)
+                     //      })
+                     // }else{
+                     //      this.marks.push(0)
+                     //      this.answers.push([])
+                     // }
 
                      this.loading.complete()
                  }
@@ -168,13 +170,14 @@ export class GermanComponent implements OnInit {
             this.saveGerman()
        }
   }
-  public addQuestion(index: number, display_token: string)
+  public addQuestion(index: number, display_token: string, course:any)
   {
        this.display.display_token = display_token
        this.question = (this.questions.length > 0) ? this.questions[index].question : ''
        this.totalMarks = this.marks[index]
        this.finalCopy = (this.questions.length > 0) ? JSON.parse(this.questions[index].answer) : []
        this.display.questionForm = !this.display.questionForm
+       this.CourseTitle = course.course
   }
   public viewQuestion(index: number)
   {

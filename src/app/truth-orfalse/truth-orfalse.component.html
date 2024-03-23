@@ -91,8 +91,8 @@
                       <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn">
                           <td class="px-3 py-3 text-md">{{course.course}}</td>
                           <td class="px-3 py-3">{{course.display_token}}</td>
-                          <td class="px-3 py-3">{{ questions[i]}}</td>
-                          <td class="px-3 py-3">{{ marks[i]}}</td>
+                          <td class="px-3 py-3">{{ course.question_count}}</td>
+                          <td class="px-3 py-3">{{ course.questions.length}}</td>
                           <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md font-bold text-blue-500" (click)="viewQuestion(i)">View</p></td>
                           <!-- <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-md font-bold text-blue-500" >Edit</p></td> -->
                           <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-md text-blue-500 font-bold" (click)="addQuestionToggle(i, course.display_token)">Add</p></td>

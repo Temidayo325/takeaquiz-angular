@@ -32,7 +32,7 @@ export class QuestionsService {
 
      typedcoursesAndQuestions(type: string): Observable<any>
      {
-          return this.http.get(this.baseUrl+`courseQuestion?type=${type}`, this.options )
+          return this.http.get(this.baseUrl+`typedCourse/${type}`, this.options )
      }
      germanCoursesAndQuestions():Observable<any>
      {

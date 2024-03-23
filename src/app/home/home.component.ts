@@ -58,7 +58,8 @@ export class HomeComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                     this.courses = res.course
+                     this.courses = res.courses
+                     sessionStorage.setItem('courses', JSON.stringify(res.courses))
                      this.sortCourses(this.courses)
                  }
             },

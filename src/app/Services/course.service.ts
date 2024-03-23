@@ -42,7 +42,7 @@ export class CourseService  {
      }
      getTyped(type: string):Observable<any>
      {
-          return this.http.get(this.baseUrl+`typedCourse?type=${type}`, this.options )
+          return this.http.get(this.baseUrl+`typedCourse/${type}`, this.options )
      }
      getTheory():Observable<any>
      {

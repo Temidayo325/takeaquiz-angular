@@ -39,7 +39,7 @@ export class QuestionComponent implements OnInit {
        this.loading.start()
        this.getCourse()
        this.countQuestion()
-       this.coursesAndQuestions()
+       // this.coursesAndQuestions()
        this.loading.complete()
   }
   public edit: boolean = false
@@ -50,19 +50,22 @@ export class QuestionComponent implements OnInit {
   ]
   public view: any = {edit: false, view: false, add: false, questions: []}
   public courseDetail: any = {course: '', display_token: '', button: false, index: 0}
-  public courses: any = []
-  public questions: any = []
+  public courses: Array<any> = []
+  public questions: Array<any> = []
   public assesment_ids: Array<number> = []
   public errors: any = []
+  private typeOfAssessment: string = 'mcq'
+
   getCourse()
   {
        this.loading.start()
        this.sub = this.course.getTyped('mcq').subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      this.courses = res.course
+                      this.courses = res.courses
+                      console.log(res)
                       this.loading.complete()
-                      this.overview[0].number = res.course.length
+                      this.overview[0].number = res.courses.length
                  }
             },
             (err) => {
@@ -85,21 +88,22 @@ export class QuestionComponent implements OnInit {
            }
       )
   }
-  coursesAndQuestions()
-  {
-       this.loading.start()
-       this.sub = this.question.typedcoursesAndQuestions('mcq').subscribe(
-            (res) => {
-                 this.loading.complete()
-                 this.courses = res.courses
-                 this.questions = res.questions
-                 this.generateAssesmentId(res.courses)
-            },
-            (err) => {
-                 this.loading.complete()
-            }
-       )
-  }
+  // coursesAndQuestions()
+  // {
+  //      this.loading.start()
+  //      this.sub = this.question.typedcoursesAndQuestions('mcq').subscribe(
+  //           (res) => {
+  //                this.loading.complete()
+  //                this.courses = res.courses
+  //                console.log(res)
+  //                this.questions = res.questions
+  //                // this.generateAssesmentId(res.courses)
+  //           },
+  //           (err) => {
+  //                this.loading.complete()
+  //           }
+  //      )
+  // }
   public generateAssesmentId(values: Array<any>)
   {
        values.forEach((item: any, index: number) => {
@@ -118,7 +122,7 @@ export class QuestionComponent implements OnInit {
        }
   }
 
-  viewQuestions(questions: number, option: string, course: string, display_token: string)
+  viewQuestions(questions: Array<any>, option: string, course: string, display_token: string)
   {
        if (option === 'edit') {
 
@@ -130,6 +134,7 @@ export class QuestionComponent implements OnInit {
             this.courseDetail.course = course
             this.courseDetail.display_token = display_token
             this.view.questions = questions
+            console.log(this.view)
             this.edit = true
        }
 
@@ -154,7 +159,7 @@ export class QuestionComponent implements OnInit {
   addQuestion()
   {
        this.loading.start()
-       this.sub = this.question.addQuestion(this.addQuestionForm.value).subscribe(
+       this.sub = this.question.addQuestion({...this.addQuestionForm.value, type: this.typeOfAssessment}).subscribe(
             (res) => {
                  this.loading.complete()
                  this.toast.success(res.message)
@@ -171,7 +176,8 @@ export class QuestionComponent implements OnInit {
   closeSideBar()
   {
       this.countQuestion()
-      this.coursesAndQuestions()
+      this.getCourse()
+      // this.coursesAndQuestions()
       this.edit = !this.edit
   }
   editQuestion(question: any)

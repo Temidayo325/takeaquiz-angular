@@ -3,6 +3,7 @@ import { ToastService } from 'angular-toastify';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { TrueorfalseService } from '../Services/trueorfalse.service'
 import { FormBuilder, Validators } from '@angular/forms';
+import { CourseService } from '../Services/course.service';
 
 @Component({
   selector: 'app-truth-orfalse',
@@ -23,8 +24,10 @@ export class TruthOrfalseComponent implements OnInit {
        private toast: ToastService,
        private loading: LoadingBarService,
        private questionService: TrueorfalseService,
-       private fb: FormBuilder
+       private fb: FormBuilder,
+       private course: CourseService,
  ) { }
+
    public display: any =  {questionForm: false, showForm: false, display_token: '', edit: false, question: []}
    public courseDetail: any = {course: '', display_token: '', button: false, index: 0, question: {}}
    public sub : any
@@ -43,10 +46,10 @@ export class TruthOrfalseComponent implements OnInit {
   getCourse()
   {
        this.loading.start()
-       this.sub = this.questionService.coursesAndQuestions().subscribe(
+       this.sub = this.course.getTyped('trueorfalse').subscribe(
             (res: any) => {
                  this.loading.complete()
-                 if (res.success) {
+                 if (res.statusCode < 300 ) {
                       if (res.courses.length > 0) {
                            this.courses = res.courses
                            this.generateAssesmentId(res.courses)
@@ -83,6 +86,7 @@ export class TruthOrfalseComponent implements OnInit {
             }
        )
   }
+
   public generateAssesmentId(values: Array<any>)
   {
        values.forEach((item: any, index: number) => {

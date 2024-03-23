@@ -1,0 +1,29 @@
+<section class="px-10 py-6">
+
+     <h1 class="mb-1">Set Essay questions</h1>
+     <h3>Essay questions includes question such as explainations, justifications, describe <span class="text-xl">but not list</span></h3>
+     <div class="md:flex md:justify-start md:items-start">
+          <form action="" method="" class="grid text-md mt-3 w-2/3" [formGroup]="questionForm" (submit)="submitQuestion()">
+               <label for="question">Question</label>
+               <textarea name="question" id="question" class="h-28 p-3" formControlName="question"></textarea>
+
+               <label for="scheme" class="mt-4 ">Marking scheme</label>
+               <textarea name="scheme" id="scheme" class="h-48 p-3" formControlName="scheme"></textarea>
+
+               <label for="allotted_mark" class="mt-4 ">Alloted mark for the Question </label>
+               <input type="tel" name="allotted_mark" class="p-2 outline-none border-gray-200 focus:shadow-md focus:outline-none" formControlName="allotted_mark">
+
+               <button class="mx-auto py-6 px-10 bg-blue-800 text-white border-none my-3 shadow-md disabled:shadow-none disabled:bg-gray-400 disabled:text-black cursor-pointer diabled:cursor-diabled" [disabled]="!questionForm.valid" >Add question</button>
+          </form>
+          <div class="w-full">
+               <ol>
+                    <li *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="shadow-md border border-gray-800 p-3 grid gap-1 my-3 tracking-wide">
+                         <p class="my-1"><span>Question:</span>  {{question.question}}</p>
+                         <p class="my-1"><span>Marking scheme:</span>  {{question.scheme}}</p>
+                         <p class="my-1"><span>Alotted mark:</span>  {{question.allotted_mark}}</p>
+                    </li>
+               </ol>
+          </div>
+     </div>
+
+</section>

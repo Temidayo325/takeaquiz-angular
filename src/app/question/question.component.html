@@ -11,22 +11,22 @@
                <div *ngIf="view.questions.length == 0">
                     <h3 class="text-lg text-center text-gray-700 font-headline">You do not have any questions under this course yet.</h3>
                </div>
-               <div *ngIf="view.questions.length > 1">
+               <div *ngIf="view.questions.length > 0">
                     <ol>
-                         <li *ngFor="let question of view.questions" class="mx-3 text-lg ">
-                              <p>Question: {{ question.question}}</p>
-                              <details>
+                         <li *ngFor="let question of view.questions" class="mx-3 text-lg text-black">
+                              <p class="text-sm font-bold">Question: {{ question.question}}</p>
+                              <details class="text-sm">
                                    <summary>Answers</summary>
                                    <p>Option 1: {{question.option1}}</p>
                                    <p>Option 2: {{question.option2}}</p>
                                    <p>Option 3: {{question.option3}}</p>
                                    <p>Option 4: {{question.option4}}</p>
                                    <p>Answer: {{question.answer}}</p>
-                                   <p>Continous Assesment {{question.assesment_id}}</p>
+                                   <!-- <p>Continous Assesment {{question.assesment_id}}</p> -->
                               </details>
-                              <div class="flex justify-start gap-4">
-                                   <p class="text-blue-500 tracking-wide cursor-pointer" (click)="editQuestion(question)">Edit</p>
-                                   <p class="text-red-500 cursor-pointer" (click)="deleteQuestion(question, view.questions.indexOf(question))">Delete</p>
+                              <div class="flex justify-start gap-4 font-bold text-sm tracking-widest">
+                                   <p class="text-blue-700 tracking-wide cursor-pointer" (click)="editQuestion(question)">Edit</p>
+                                   <p class="text-red-700 cursor-pointer" (click)="deleteQuestion(question, view.questions.indexOf(question))">Delete</p>
                               </div>
                          </li>
                     </ol>
@@ -90,6 +90,8 @@
           </div>
      </div>
      <div class="relative overflow-x-auto  mt-20 ml-10 mr-10 shadow-lg py-10" >
+           <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h1>
+
          <table class="w-full text-sm text-center text-gray-500 border-collapse" *ngIf="courses.length > 0">
              <thead class=" text-gray-700 uppercase font-headline">
                  <tr>
@@ -111,12 +113,12 @@
                  <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn;">
                      <td class="px-3 py-3 text-lg">{{course.course}}</td>
                      <td class="px-3 py-3">{{course.display_token}}</td>
-                     <td class="px-3 py-3">{{ questions[i].length }}</td>
-                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(questions[i], 'view', course.course, course.display_token)">View</p></td>
+                     <td class="px-3 py-3">{{ course.question_count}}</td>
+                     <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500" (click)="viewQuestions(course.questions, 'view', course.course, course.display_token)">View</p></td>
                      <td class="px-3 py-3" title="Add question"><p class="my-0 cursor-pointer no-underline text-lg text-blue-500 font-bold" (click)="addQuestionToggle(course.display_token, course.course)">Add</p></td>
                  </tr>
              </tbody>
          </table>
-         <h1 *ngIf="courses.length == 0" class="text-center my-4 text-gray-700 tracking-wider leading-9 text-xl font-headline">You do not have any course yet, Click the course button on your right to create a course</h1>
+
      </div>
 </div>

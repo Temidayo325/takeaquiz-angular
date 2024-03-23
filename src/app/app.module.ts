@@ -32,6 +32,7 @@ import { CouseformComponent } from './couseform/couseform.component';
 import { TestComponent } from './test/test.component';
 import { InputComponent } from './input/input.component';
 import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
+import { EssayComponentComponent } from './essay-component/essay-component.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -59,7 +60,8 @@ import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
     CouseformComponent,
     TestComponent,
     InputComponent,
-    TruthOrfalseComponent
+    TruthOrfalseComponent,
+    EssayComponentComponent
   ],
   imports: [
     BrowserModule,

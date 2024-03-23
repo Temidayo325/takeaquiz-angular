@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { GermanComponent } from './german/german.component';
 import { TestComponent } from './test/test.component';
 import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
+import { EssayComponentComponent } from './essay-component/essay-component.component';
 
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
                {path: 'set-theory', component: AddCalculationComponent},
                {path: 'set-german', component: GermanComponent},
                {path: 'true-or-false', component: TruthOrfalseComponent},
+               {path: 'set-essay', component: EssayComponentComponent},
      ]},
      {path: 'forgot-password', component: ForgotPasswordComponent},
      {path: 'prep', component: PrepComponent},

@@ -28,6 +28,7 @@ export class CourseComponent implements OnInit {
          start_time: ['', [Validators.required, Validators.minLength(9)]],
          end_time: ['', [Validators.required, Validators.minLength(2)]],
      });
+
      public errors: any = []
      public courses: any = []
      public overview: any = [
@@ -35,10 +36,12 @@ export class CourseComponent implements OnInit {
           {number: 0, text: 'Ongoing courses'},
           {number: 0, text: 'Completed courses'}
      ]
+
      public sub: any
      public showCourse: boolean = false
      public edit: boolean = false
      public modal: any = {display: false, assesments: [], display_token: '', index: 0}
+
   constructor(
        private fb : FormBuilder,
        private course: CourseService,
@@ -71,7 +74,9 @@ export class CourseComponent implements OnInit {
        this.sub = this.course.get().subscribe(
             (res) => {
                  if (res.statusCode == 200) {
-                      this.courses = res.course
+                      console.log(res)
+                      this.courses = res.courses
+                      sessionStorage.setItem('courses', JSON.stringify(res.courses))
                       this.loading.complete()
                       this.sortCourses(this.courses)
                  }
@@ -81,17 +86,18 @@ export class CourseComponent implements OnInit {
                  this.toast.warn(err.error.message)
             }
        )
+       this.loading.complete()
   }
-  sortCourses(arrays: any)
+  sortCourses(courses: Array<any>)
   {
-       if (arrays.length !== 0) {
-            this.overview[0].number = arrays.length
-            this.overview[1].number = this.ongoingCourses(arrays)
-            this.overview[2].number = this.completedCourses(arrays)
+       if (courses.length !== 0) {
+            this.overview[0].number = courses.length
+            this.overview[1].number = this.ongoingCourses(courses)
+            this.overview[2].number = this.completedCourses(courses)
        }
   }
 
-  ongoingCourses(arrays: []):number
+  ongoingCourses(arrays: Array<any>):number
   {
        const now = new Date()
        let newArray = arrays.filter(function(element: any, index: any){
@@ -99,7 +105,7 @@ export class CourseComponent implements OnInit {
        })
        return newArray.length
   }
-  completedCourses(arrays: []):number
+  completedCourses(arrays: Array<any>):number
   {
        const now = new Date()
        let newArray = arrays.filter(function(element: any, index: any){
