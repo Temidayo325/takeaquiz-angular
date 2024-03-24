@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StoreService } from './store.service';
 import {CourseService } from './course.service';
+import { QuestionModel } from './../models/QuestionModel';
 
 @Injectable({
   providedIn: 'root'
@@ -56,4 +57,10 @@ export class QuestionsService {
      {
           return this.http.post(this.baseUrl+"germanQuestion", question, this.options )
      }
+     // ==== Essay question type =======
+     addEssayQuestion(question: QuestionModel): Observable<any>
+     {
+          return this.http.post(this.baseUrl+"essay_question", question, this.options )
+     }
+     // ===== Essay ends here ========
 }

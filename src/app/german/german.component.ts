@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../Services/questions.service';
-// import { QuestionsService } from '../Services/question.service';
 import { ToastService } from 'angular-toastify';
 import { LoadingBarService } from '@ngx-loading-bar/core';
 import { Title } from '@angular/platform-browser';

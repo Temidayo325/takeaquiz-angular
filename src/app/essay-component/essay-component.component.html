@@ -4,23 +4,31 @@
      <h3>Essay questions includes question such as explainations, justifications, describe <span class="text-xl">but not list</span></h3>
      <div class="md:flex md:justify-start md:items-start">
           <form action="" method="" class="grid text-md mt-3 w-2/3" [formGroup]="questionForm" (submit)="submitQuestion()">
+
+               <label for="course">Course</label>
+               <p class="text-red-700 text-sm font-bold" *ngIf="courses.length == 0 && !isLoaded">You have not created a course with the Essay type. Click here to <a routerLink="/dashboard/course" class="font-bold text-md cursor-pointer underline text-red-700">create a course!</a></p>
+               <select name="course" id="course" *ngIf="courses.length > 0 && isLoaded" class="w-1/3 py-2 px-3 mb-4" formControlName="display_token" (change)="selectedCourse($event)">
+                    <option disabled></option>
+                    <option [value]="course.display_token" *ngFor="let course of courses;  index as i; trackBy: trackByFn" class="py-2 px-3">{{course.course}}</option>
+               </select>
+
                <label for="question">Question</label>
                <textarea name="question" id="question" class="h-28 p-3" formControlName="question"></textarea>
 
-               <label for="scheme" class="mt-4 ">Marking scheme</label>
+               <label for="scheme" class="mt-4 mb-2 flex justify-between items-center"><span>Marking scheme </span><p type="button" class="cursor-pointer font-bold my-0 py-3 px-4 text-right " (click)="generateAnswerWithAi()">Generate answer</p></label>
                <textarea name="scheme" id="scheme" class="h-48 p-3" formControlName="scheme"></textarea>
 
                <label for="allotted_mark" class="mt-4 ">Alloted mark for the Question </label>
                <input type="tel" name="allotted_mark" class="p-2 outline-none border-gray-200 focus:shadow-md focus:outline-none" formControlName="allotted_mark">
 
-               <button class="mx-auto py-6 px-10 bg-blue-800 text-white border-none my-3 shadow-md disabled:shadow-none disabled:bg-gray-400 disabled:text-black cursor-pointer diabled:cursor-diabled" [disabled]="!questionForm.valid" >Add question</button>
+               <button type="submit" class="mx-auto py-4 px-10 bg-blue-800 text-white border-none my-3 shadow-md disabled:shadow-none disabled:bg-gray-400 disabled:text-black cursor-pointer diabled:cursor-diabled" [disabled]="!questionForm.valid" >Add question</button>
           </form>
           <div class="w-full">
                <ol>
-                    <li *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="shadow-md border border-gray-800 p-3 grid gap-1 my-3 tracking-wide">
-                         <p class="my-1"><span>Question:</span>  {{question.question}}</p>
-                         <p class="my-1"><span>Marking scheme:</span>  {{question.scheme}}</p>
-                         <p class="my-1"><span>Alotted mark:</span>  {{question.allotted_mark}}</p>
+                    <li *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="shadow-md text-sm border border-gray-800 p-3 grid gap-1 my-3 tracking-wide font-word">
+                         <p class="my-1"><span class="font-bold">Question:</span>  {{question.question}}</p>
+                         <p class="my-1"><span class="font-bold">Marking scheme:</span>  {{question.scheme}}</p>
+                         <p class="my-1"><span class="font-bold">Alotted mark:</span>  {{question.allotted_mark}}</p>
                     </li>
                </ol>
           </div>

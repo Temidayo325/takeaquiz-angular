@@ -51,7 +51,7 @@
 
           </div>
           <div class="ml-3">
-               <button class="py-4 px-6 bg-orange-500 border-0 rounded-lg text-white shadow-2xl hover:shadow-4xl hover:bg-orange-600 hover:transition-all hover:-translate-y-1" (click)="showCourse = !showCourse">Add Course</button>
+               <button class="py-4 px-6 bg-orange-500 border-0 rounded-lg text-white shadow-2xl hover:shadow-4xl hover:bg-orange-600 hover:transition-all hover:-translate-y-1 cursor-pointer" (click)="showCourse = !showCourse">Add Course</button>
           </div>
      </div>
      <div *ngIf="showCourse" class="w-4/12 py-3 px-3 rounded-lg shadow-md bg-white/80 mt-10 ml-10">
@@ -97,7 +97,7 @@
              </thead>
              <tbody class="font-word">
                  <tr class="odd:bg-gray-100 even:bg-white/80" *ngFor="let course of courses; index as i; trackBy: trackByFn">
-                     <td class="px-3 py-3 text-lg">{{course.course}}</td>
+                     <td class="px-3 py-3 text-md">{{course.course}}</td>
                      <td class="px-3 py-3 font-bold" title="This is the code you will provide to your students as course identifier for their assessmentS">{{course.display_token}}</td>
                      <td class="px-3 py-3">{{ course.duration || "NA"}}</td>
                      <td class="px-3 py-3">{{course.amount || "NA"}}</td>
