@@ -25,9 +25,9 @@ export class PrepService {
           }),
      }
 
-     get(display_token: string, matric: string, assesment_id: number):Observable<any>
+     get(display_token: string, matric: string, assesment_id: number, email: string):Observable<any>
      {
-          return this.http.get(this.baseUrl+`test?display_token=${display_token}&matric=${matric}&assesment_id=${assesment_id}`, this.options )
+          return this.http.get(this.baseUrl+`test?display_token=${display_token}&matric=${matric}&assesment_id=${assesment_id}&email=${email}`, this.options )
      }
 
      store(questions: [], time: number, display_token: string, matric: string, type: string, assessment_id:number)

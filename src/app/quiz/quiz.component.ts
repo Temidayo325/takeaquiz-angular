@@ -32,6 +32,13 @@ export class QuizComponent implements OnInit {
        if (questions == null || questions == undefined || questions == '') {
             this.router.navigate(['/prep'])
        }else{
+            if(this.details.type == 'essay')
+            {
+                 this.questions = this.prep.questions
+                 this.stat.total = this.questions.length
+                 this.questions[this.currentIndex].hidden = false
+            }
+
             if (this.details.type == 'mcq' || this.details.type == 'trueorfalse') {
                  this.questions = this.prep.questions
                  this.stat.total = this.questions.length
@@ -56,13 +63,17 @@ export class QuizComponent implements OnInit {
                       this.timer()
                   }, 1000)
             }, 1000)
-            let grace = 0
-            document.addEventListener("visibilitychange", () => {
-                if (document.visibilityState !== 'visible') {
-                    this.toast.info("Your test has been submitted")
-                    this.submit()
-                }
-            });
+
+            if( !this.stat.submitted )
+            {
+                 let grace = 0
+                 document.addEventListener("visibilitychange", () => {
+                     if (document.visibilityState !== 'visible') {
+                         this.toast.info("Your test has been submitted")
+                         this.submit()
+                     }
+                 });
+            }
        }
   }
   submit()
@@ -74,7 +85,7 @@ export class QuizComponent implements OnInit {
             if (this.details.type == 'german') {
                  this.questions = this.submitGerman()
             }
-            this.quiz.submitTest({questions: JSON.stringify(this.questions), matric: this.details.matric, display_token: this.details.display_token, assesment_id: this.details.assessment_id, type: this.details.type}).subscribe(
+            this.quiz.submitTest({questions: JSON.stringify(this.questions), matric: this.details.matric, display_token: this.details.display_token, assesment_id: this.details.assessment_id, type: this.details.type, email: sessionStorage.getItem("email")}).subscribe(
                  (res) => {
                       this.toast.info(res.message)
                       setTimeout(() => {
@@ -83,8 +94,12 @@ export class QuizComponent implements OnInit {
                  },
                  (err) => {
                       this.toast.error(err.error.message)
+                      console.log(err)
                  }
             )
+            setTimeout(() => {
+                 this.router.navigate(['prep'])
+            }, 5000)
        }
   }
   public prev()

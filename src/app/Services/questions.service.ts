@@ -62,5 +62,9 @@ export class QuestionsService {
      {
           return this.http.post(this.baseUrl+"essay_question", question, this.options )
      }
+     generateEssayAnswer(question: object): Observable<any>
+     {
+          return this.http.post(this.baseUrl+"essay_question/generateAnswer", question, this.options )
+     }
      // ===== Essay ends here ========
 }

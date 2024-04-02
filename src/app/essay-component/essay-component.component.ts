@@ -30,6 +30,7 @@ export class EssayComponentComponent implements OnInit {
        private toast: ToastService,
  ) { }
      public questions: Array<QuestionModel> = []
+     public selectedCourse: any = {}
      public generatedAnswer: string = ''
      public sub: any
      public isLoaded: boolean = false
@@ -45,8 +46,8 @@ export class EssayComponentComponent implements OnInit {
        this.questions.push({...this.questionForm.value, generated_answer: this.generatedAnswer})
        this.questionService.addEssayQuestion( {...this.questionForm.value, generated_answer: this.generatedAnswer} ).subscribe(
             (response) => {
-                 console.log(response)
                  this.questionForm.reset()
+                 this.questionForm.patchValue({display_token: this.selectedCourse.display_token})
             },
 
             (error) => {
@@ -63,7 +64,16 @@ export class EssayComponentComponent implements OnInit {
 
   generateAnswerWithAi()
   {
-
+       this.questionService.generateEssayAnswer({question: this.questionForm.value.question, context: this.selectedCourse.courseDescription}).subscribe(
+            (response) => {
+                 this.generatedAnswer = response.scheme
+                 this.questionForm.patchValue({scheme: response.scheme })
+                 // console.log(this.questionForm.value);
+            },
+            (error) => {
+                 console.log(error)
+            }
+       )
   }
 
   getCourse()
@@ -83,16 +93,19 @@ export class EssayComponentComponent implements OnInit {
             }
        )
   }
-  selectedCourse($event:any)
+  selectCourse($event:any)
   {
        // Get the selected courseS
-       const selectedCourse: Array<any> = this.courses.map( (course) => {
+       // let selectedCourse: Array<any> = []
+       let selectedCourse: Array<any> = []
+       this.courses.map( (course) => {
             if(course.display_token === $event.target.value)
             {
-                 return course;
+                 this.selectedCourse = course
+                selectedCourse.push(course.questions);
             }
        })
-       this.questions = selectedCourse[0].questions
-      console.log(selectedCourse)
+       this.questions = selectedCourse[0]
+      console.log(this.questions, selectedCourse)
   }
 }

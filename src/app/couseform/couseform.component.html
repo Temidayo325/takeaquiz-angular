@@ -6,6 +6,11 @@
             <input type="text" required formControlName="course" class="text-md rounded-lg px-3 py-3 bg-gray-100 border-white/20 w-3/4 focus:border-0 focus:outline-none focus:shadow-lg">
         </div>
         <div>
+            <label for="courseDescription" class="text-md tracking-wide leading-9 block">Course Description <span class="text-sm text-orange-500">(e.g what the course is all about)</span></label>
+            <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.courseDescription }}</p>
+            <input type="text" required formControlName="courseDescription" class="text-md rounded-lg px-3 py-3 bg-gray-100 border-white/20 w-3/4 focus:border-0 focus:outline-none focus:shadow-lg">
+        </div>
+        <div>
             <label for="type" class="text-md tracking-wide leading-9 block">Type of the Course</label>
             <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.type }}</p>
             <!-- <input type="text" required formControlName="type" class="text-md rounded-lg px-3 py-3 bg-gray-200 border-white/20 w-3/4 focus:border-0 focus:outline-none focus:shadow-lg"> -->

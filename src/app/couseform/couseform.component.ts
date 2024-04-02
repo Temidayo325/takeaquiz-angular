@@ -12,6 +12,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 export class CouseformComponent implements OnInit {
   courseForm = this.fb.group({
          course: ['', [Validators.required, Validators.minLength(3)]],
+         courseDescription: ['', [Validators.required, Validators.minLength(10)]],
          type: ['', [Validators.required, Validators.minLength(3)]]
   });
   @Output() addedCourseEvent = new EventEmitter<boolean>();
@@ -28,7 +29,7 @@ export class CouseformComponent implements OnInit {
   ngOnInit(): void
   {
   }
-  
+
   createForm()
   {
        this.loading.start()
