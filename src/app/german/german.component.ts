@@ -31,7 +31,7 @@ export class GermanComponent implements OnInit {
 
   public sub: any
   public question: string = ''
-  public answer: any = {word: '', mark: 0, synonyms: false, assesment_id: 1}
+  public answer: any = {word: '', mark: 0, synonyms: '', assesment_id: 1, }
   public correction: any = {word: '', mark: 0, synonyms: false, assesment_id: 1}
   public available_marks: Array<number> = [0,1,2,3,4,5]
   public createNewQuestion: boolean = false
@@ -123,52 +123,14 @@ export class GermanComponent implements OnInit {
   }
   public addScheme()
   {
-       if (this.answer.synonyms) {
-            this.http.get(`http://127.0.0.1:8000/api/v1/getSynonym?word=${this.answer.word}`, this.options).subscribe(
-                 (response: any) => {
-                      this.toast.info("Retrieving synonyms...")
-                      console.log(response)
-                      if (response.data.result.length > 1) {
-                           let words = ''
-                           response.data.result.map((item: any, index: number) => {
-                                words.concat('', item.synonyms)
-                           })
-                           let wordArray = words.split(',')
-                           let newWordArray = ''
-                           wordArray.map( (item: string, index:number) => {
-                                if (!newWordArray.includes(item)) {
-                                     newWordArray = newWordArray + ',' + item
-                                }
-                           })
-                           this.answer.word = newWordArray
-                      }
-
-                      if (response.data.result.length == 1) {
-                           this.answer.word.concat(',', response.data.result[0].synonyms)
-                      }
-
-                      if (response.data.result.length < 1) {
-                           this.toast.info("No Synonyms found ...")
-                      }
-                      this.finalCopy.push({...this.answer, edited: false})
-                      this.totalMarks += parseInt(this.answer.mark)
-                      this.createNewQuestion = false;
-                      this.clearForm()
-                      this.saveGerman()
-                 },
-                 (err) => {
-                      this.toast.warn("Unable to retrieve synonyms.")
-                 }
-            )
-       }
-       else{
             this.finalCopy.push({...this.answer, edited: false})
             this.totalMarks += parseInt(this.answer.mark)
             this.createNewQuestion = false;
+            const answer : string  = (this.answer.synonym != '') ? this.answer.word + ',' + this.answer.synonyms : this.answer.word;
+            this.saveGerman(answer)
             this.clearForm()
-            this.saveGerman()
-       }
   }
+
   public addQuestion(index: number, display_token: string, course:any)
   {
        this.display.display_token = display_token
@@ -210,15 +172,16 @@ export class GermanComponent implements OnInit {
   clearForm():void
   {
        this.answer.word = ''
+       this.answer.synonyms = ''
        this.answer.mark = 0
        this.correction.word = ''
        this.correction.mark = 0
        this.answer.synonyms = false
        this.correction.synonyms = false
   }
-  saveGerman():void
+  saveGerman(answer: string):void
   {
-       this.sub = this.questionService.addGermanQuestion({question: this.question, answer: JSON.stringify(this.finalCopy), display_token: this.display.display_token, assesment_id: this.answer.assesment_id}).subscribe(
+       this.sub = this.questionService.addGermanQuestion({question: this.question, answer: JSON.stringify(answer), display_token: this.display.display_token, assesment_id: this.answer.assesment_id}).subscribe(
             (res) => {
                  this.toast.info(res.message)
                  this.getCourse()
@@ -232,6 +195,24 @@ export class GermanComponent implements OnInit {
   {
        this.display.questionForm = false
        this.getCourse()
+  }
+
+  public generateSynonym()
+  {
+       // console.log(this.answer)
+       if(this.answer.word.length > 2)
+       {
+            alert(this.answer);
+            this.course.generateSynonym({word: this.answer.word, display_token: this.display.display_token}).subscribe(
+                 (response) => {
+                      this.answer.synonyms = response.synonyms
+                 },
+                 (error) => {
+                      alert("there was an error in your script")
+                      console.log(error)
+                 }
+            )
+       }
   }
   ngOnDestroy(): void
   {

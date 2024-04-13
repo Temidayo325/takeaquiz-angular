@@ -75,4 +75,9 @@ export class CourseService  {
      {
           return this.http.patch(this.baseUrl+"assesment", details, this.options )
      }
+
+     generateSynonym(word: object):Observable<any>
+     {
+          return this.http.post(this.baseUrl+"generate/synonyms", word, this.options)
+     }
 }
