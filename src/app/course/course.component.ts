@@ -5,6 +5,7 @@ import { StoreService } from '../Services/store.service';
 import { ToastService } from 'angular-toastify';
 import { Title } from '@angular/platform-browser';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { Router } from '@angular/router';
 import { slideInRightAnimation, slideOutRightAnimation } from 'angular-animations';
 
 @Component({
@@ -44,6 +45,7 @@ export class CourseComponent implements OnInit {
 
   constructor(
        private fb : FormBuilder,
+       private router: Router,
        private course: CourseService,
        private store: StoreService,
        private toast: ToastService,
@@ -68,6 +70,11 @@ export class CourseComponent implements OnInit {
        this.getCourse()
        this.showCourse = false
   }
+  displayStudents(display_token: string)
+  {
+       this.router.navigate(['dashboard/course/'+display_token]);
+  }
+
   getCourse()
   {
        this.loading.start()

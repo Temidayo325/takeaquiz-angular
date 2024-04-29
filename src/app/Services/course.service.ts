@@ -80,4 +80,14 @@ export class CourseService  {
      {
           return this.http.post(this.baseUrl+"generate/synonyms", word, this.options)
      }
+
+     assessmentTakers(display_token: string):Observable<any>
+     {
+          return this.http.get(this.baseUrl+"course/"+display_token, this.options )
+     }
+
+     paginateAssessmentTakers(url: string):Observable<any>
+     {
+          return this.http.get(url, this.options )
+     }
 }

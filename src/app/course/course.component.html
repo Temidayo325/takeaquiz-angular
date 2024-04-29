@@ -106,7 +106,8 @@
                      <td class="px-3 py-3">{{course.created_at || "NA" }}</td>
                      <td class="px-3 py-3">{{course.type || "NA"}}</td>
                      <!-- <td class="px-3 py-3">{{course.assesments.length || "NA"}}</td> -->
-                     <td class="px-3 py-3" title="Create CA"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="checkCa(course, i)">Check CAs</p></td>
+                     <!-- <td class="px-3 py-3" title="Create CA"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="checkCa(course, i)">Check CAs</p></td> -->
+                     <td class="px-3 py-3" title="Create CA"><a routerLink="{{course.display_token}}" class="my-0 cursor-pointer no-underline text-md text-blue-500" >Students</a></td>
                      <td class="px-3 py-3" title="Edit course detail"><p class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="editCourse(course)">Edit</p></td>
                      <td class="px-3 py-3" title="Download Result"><p  class="my-0 cursor-pointer no-underline text-md text-blue-500" (click)="downloadResult(course)">Download</p></td>
                      <td class="px-3 py-3" title="Delete course"><p class="my-0 cursor-pointer no-underline text-md text-orange-500" (click)="deleteCourse(course)">Delete</p></td>

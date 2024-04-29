@@ -21,6 +21,7 @@ import { GermanComponent } from './german/german.component';
 import { TestComponent } from './test/test.component';
 import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
 import { EssayComponentComponent } from './essay-component/essay-component.component';
+import { AssessmentTakersComponent } from './assessment-takers/assessment-takers.component';
 
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
           children: [
                {path: 'home', component: HomeComponent},
                {path: 'course', component: CourseComponent},
+               {path: 'course/:display_token', component: AssessmentTakersComponent},
                {path: 'question', component: QuestionComponent},
                {path: 'change-password', component: ChangePasswordComponent},
                {path: 'student', component: StudentComponent},
