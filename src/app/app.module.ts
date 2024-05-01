@@ -34,6 +34,7 @@ import { InputComponent } from './input/input.component';
 import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
 import { EssayComponentComponent } from './essay-component/essay-component.component';
 import { AssessmentTakersComponent } from './assessment-takers/assessment-takers.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -63,12 +64,14 @@ import { AssessmentTakersComponent } from './assessment-takers/assessment-takers
     InputComponent,
     TruthOrfalseComponent,
     EssayComponentComponent,
-    AssessmentTakersComponent
+    AssessmentTakersComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AngularToastifyModule,
     NgxEchartsModule.forRoot({

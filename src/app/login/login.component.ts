@@ -88,7 +88,8 @@ export class LoginComponent implements OnInit {
                     email: this.registerForm.value.email,
                     name: this.registerForm.value.name,
                     institution: this.registerForm.value.institution,
-                    password: this.registerForm.value.password
+                    password: this.registerForm.value.password,
+                    origin: null
                }
                this.user.register(user).subscribe(
                     (res) => {

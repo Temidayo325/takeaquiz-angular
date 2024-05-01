@@ -22,9 +22,12 @@ import { TestComponent } from './test/test.component';
 import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
 import { EssayComponentComponent } from './essay-component/essay-component.component';
 import { AssessmentTakersComponent } from './assessment-takers/assessment-takers.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
      {path: 'homepage', component: HomepageComponent},
+     {path: 'landing-page', component: LandingPageComponent},
+     // {path: 'landing-page#sign_up_for_waitlist', component: LandingPageComponent},
      {path: 'login', component: LoginComponent},
      {path: 'verify-password', component: VerifyPasswordComponent},
      {path: 'dashboard', component: DashboardComponent,
@@ -47,7 +50,8 @@ const routes: Routes = [
      {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      { path: 'tryTestForm', component: TestComponent },
-     { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+     // { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+     { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
      { path: '**', component: PageNotFoundComponent },
 
 ];
