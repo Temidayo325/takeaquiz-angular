@@ -76,6 +76,7 @@ export class QuizComponent implements OnInit {
             }
        }
   }
+
   submit()
   {
        if (confirm("Are you sure you want to submit?")) {
@@ -102,6 +103,7 @@ export class QuizComponent implements OnInit {
             }, 5000)
        }
   }
+
   public prev()
   {
        if (this.currentIndex > 0) {
@@ -111,6 +113,7 @@ export class QuizComponent implements OnInit {
             this.getCompleted()
        }
   }
+
   public next()
   {
        if (this.currentIndex >= this.questions.length - 1) {
@@ -126,6 +129,7 @@ export class QuizComponent implements OnInit {
        }
 
   }
+
   public trackByFn(index: any, item: any):number
   {
     return index;
@@ -141,6 +145,7 @@ export class QuizComponent implements OnInit {
        });
        this.stat.completed = done
   }
+
   public timer()
   {
        this.timervalues.minutes = Math.floor(this.timervalues.currentTime / 60)
@@ -159,6 +164,7 @@ export class QuizComponent implements OnInit {
           this.submit()
        }
    }
+
    public submitGerman():Array<any>
    {
         let spans = document.querySelectorAll('.spans')
@@ -166,5 +172,10 @@ export class QuizComponent implements OnInit {
              this.german.answer[index].value = element.value
         });
         return this.german.answer
+   }
+
+   ngOnDestroy(): void
+   {
+        
    }
 }

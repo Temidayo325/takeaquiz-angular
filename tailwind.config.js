@@ -9,7 +9,7 @@ module.exports = {
               'my-header-gradient': 'linear-gradient(to-r, #8e24aa 56%, #3d1b4a 80%)'
          },
          fontFamily: {
-             'headline': 'Amaranth',
+             'headline': 'Commissioner',
              'word': 'Poppins'
         },
         colors: {

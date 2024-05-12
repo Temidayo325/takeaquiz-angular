@@ -5,6 +5,7 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../Services/user.service';
 import { trigger, transition, state, style, animate } from '@angular/animations';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-landing-page',
@@ -40,6 +41,7 @@ export class LandingPageComponent implements OnInit {
        private user: UserService,
        private toast: ToastService,
        private titleservice : Title,
+       private testToast: HotToastService,
        private loading : LoadingBarService
  ) { }
 
@@ -59,7 +61,7 @@ export class LandingPageComponent implements OnInit {
   {
        this.loading.start()
        this.registerForm.disable()
-
+       const loadingToast = this.testToast.loading("preparing your Information")
        let user =
        {
             email: this.registerForm.value.email,
@@ -67,11 +69,15 @@ export class LandingPageComponent implements OnInit {
             institution: this.registerForm.value.institution,
             origin: "landing-page"
        }
+       setTimeout( () => {
+            loadingToast.updateMessage("Adding you to our list")
+       }, 1000)
        this.user.register(user).subscribe(
             (res) => {
-                 this.toast.success("You have been succesfully added to our waitlist.")
                  this.signUpSuccessful = true
                  this.loading.complete()
+                 loadingToast.close()
+                 this.testToast.success("Your spot has been succesfully secured")
                  setTimeout(() => {
                     this.signUpSuccessful = false
                     this.registerForm.enable()
@@ -82,7 +88,8 @@ export class LandingPageComponent implements OnInit {
                  this.errors = err.error.errors
                  this.loading.complete()
                  this.registerForm.enable()
-                 this.toast.error(err.error.message)
+                 loadingToast.close()
+                 this.testToast.error(err.error.message)
             }
        )
   }

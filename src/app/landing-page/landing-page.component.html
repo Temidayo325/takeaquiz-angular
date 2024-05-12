@@ -1,13 +1,13 @@
 <main class="">
      <header class="md:max-h-screen overflow-hidden px-5 pb-10 md:pb-0 md:px-28 py-2 bg-blueish tracking-wide text-left relative " id="sign_up_for_waitlist">
           <nav class="flex md:justify-between items-center pt-2 md:pt-8 text-white/90">
-               <h3 class="text-md text-orange-300 md:text-white/90 md:text-2xl font-bold my-0">Takeaquiz</h3>
+               <h3 class="text-md text-white/80 md:text-white/90 md:text-2xl font-bold my-0">Takeaquiz</h3>
                <p class="my-0 hidden md:block">The No 1 Assessment platform in Nigeria</p>
           </nav>
           <div class="md:flex md:justify-between md:items-center md:mt-14 ">
                <div class="md:max-w-2xl">
-                    <h1 class="font-bold text-4xl mt-10 md:mt-0 md:text-6xl tracking-wider md:leading-[60px] text-grayish my-0">Grade Essays in Minutes, Not Hours: Automate Assessments with Takeaquiz</h1>
-                    <p class="hidden md:block md:text-md tracking-widest text-white/80 my-6">Takeaquiz is the all-in-one assessment platform with Nigeria's most robust automated grading features, freeing you up to focus on what matters most - your students</p>
+                    <h1 class="font-bold font-headline text-4xl leading-[45px] mt-10 md:mt-0 md:text-6xl tracking-wider md:leading-[60px] text-grayish my-0">Grade Essays in Minutes, Not Hours: Automate Assessments with Takeaquiz</h1>
+                    <p class="hidden md:block md:text-md tracking-widest text-white/80 my-6 ">Takeaquiz is the all-in-one assessment platform with Nigeria's most robust automated grading features, freeing you up to focus on what matters most - your students</p>
                     <div class="flex gap-0 justify-start hidden md:block">
                          <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="" class="h-10 w-10 rounded-full">
                          <img src="https://xsgames.co/randomusers/avatar.php?g=female" alt="" class="h-10 w-10 rounded-full">
@@ -16,25 +16,26 @@
                          <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="" class="h-10 w-10 rounded-full">
                          <img src="https://xsgames.co/randomusers/avatar.php?g=female" alt="" class="h-10 w-10 rounded-full">
                     </div>
-                    <div class="flex justify-between">
-                         <p class="text-sm font-bold mt-5 text-grayish">Free for the First 50! Limited Spots Available</p>
+                    <div class="">
+                         <p class="text-sm font-bold md:mt-5 mt-8 text-grayish">Free for the First 50! Limited Spots Available</p>
+                         <p class="my-1 decoration-4 underline underline-offset-8 decoration-orangish text-white ">Launching on the 27 <sup>th</sup> of June, 2024</p>
                     </div>
                </div>
-               <form [formGroup]="registerForm" (submit)="registerUser()" class="bg-grayish md:mt-0 mt-4 px-3 py-4 px-4 md:w-[300px]  overflow-hidden z-30">
-                    <h2 class="font-bold text-center text-blue">Book your own slot</h2>
+               <form [formGroup]="registerForm" (submit)="registerUser()" class="bg-grayish md:mt-0 mt-8 px-3 py-4 px-4 md:w-[300px]  overflow-hidden z-30">
+                    <h2 class="font-bold font-headline text-center text-orangish md:text-blueish">Book your own slot</h2>
                     <div class="mb-4 overflow-hidden mx-2 ">
                          <!-- <label for="name" class="block text-lg">Full name</label> -->
-                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
+                         <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
                          <input type="text" id="name" autofocus class="text-blueish placeholder-blueish font-bold border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Full name" formControlName="name" required />
                     </div>
                     <div class="mb-4 overflow-hidden mx-2 ">
                          <!-- <label for="email" class="block text-lg">Email</label> -->
-                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.email }}</p>
+                         <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.email }}</p>
                          <input type="email" id="email" class="text-blueish placeholder-blueish font-bold border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Email address" formControlName="email" required />
                     </div>
                     <div class="mb-8 overflow-hidden mx-2 ">
                          <!-- <label for="institution" class="block text-lg">Institution</label> -->
-                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.institution }}</p>
+                         <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.institution }}</p>
                          <input type="text" id="institution" class="text-blueish placeholder-blueish font-bold border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="University of Ilorin" formControlName="institution" required />
                     </div>
                     <div class="overflow-hidden mx-2 ">
@@ -80,10 +81,10 @@
      <section class="bg-[#f9f4ed] pt-10 md:pt-20 pb-32 px-10 md:px-28 text-blueish">
           <h2 class="text-center mx-auto max-w-2xl font-bolder text-4xl block md:mb-0 mb-16 leading-10 tracking-wider">Free for the First 50! Limited Slots Available</h2>
           <div class="md:flex grid grid-10 md:justify-center md:items-center md:gap-20 md:max-w-4xl mx-auto">
-               <p class="leading-8 tracking-wide text-xl text-justify font-normal max-w-xl">
+               <p class="leading-8 tracking-wide text-xl text-left font-normal max-w-xl">
                     Grading your Essays for 120 students would take you about 5 hours of intensive work, would it surprise you to know Takeaquiz gets that done in <span class="bg-[#FFC09F] px-3 py-2 text-blueish">less than 10 minutes</span> without sacrificing quality. Interestingly, you have access to the script of each student which allows you to double check in scenarios of complaints.
                </p>
-               <a href="landing-page#sign_up_for_waitlist" class="no-underline px-12 py-6 text-xl font-bold shadow-lg cursor-pointer bg-orangish text-grayish">Sign up Anchor</a>
+               <a href="landing-page#sign_up_for_waitlist" class="no-underline px-12 py-6 text-xl font-bold shadow-lg cursor-pointer bg-orangish text-grayish">Save My Spot</a>
           </div>
      </section>
 
@@ -118,7 +119,7 @@
           </div>
      </div>
 
-     <footer class="bg-black">
+     <footer class="bg-blueish pt-10 border-t-2 border-orange-400">
           <p class="py-4 font-bold text-lg text-white/80 my-0 text-center py-12">&copy; Copyright of Luminaace 2024</p>
      </footer>
 </main>

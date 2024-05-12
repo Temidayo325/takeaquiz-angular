@@ -35,6 +35,7 @@ import { TruthOrfalseComponent } from './truth-orfalse/truth-orfalse.component';
 import { EssayComponentComponent } from './essay-component/essay-component.component';
 import { AssessmentTakersComponent } from './assessment-takers/assessment-takers.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HotToastModule } from '@ngneat/hot-toast';
 // import { HttpErrorInterceptor } from './http-error.interceptor';
 
 @NgModule({
@@ -74,6 +75,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AngularToastifyModule,
+    HotToastModule.forRoot({
+         dismissible: true,
+         autoClose: true,
+         position: 'top-right',
+    }),
     NgxEchartsModule.forRoot({
      echarts: () => import('echarts')
      }),
