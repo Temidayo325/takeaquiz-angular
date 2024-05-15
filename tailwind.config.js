@@ -10,7 +10,7 @@ module.exports = {
          },
          fontFamily: {
              'headline': 'Commissioner',
-             'word': 'Poppins'
+             'word': 'Fira sans'
         },
         colors: {
              'blueish': '#011064',
