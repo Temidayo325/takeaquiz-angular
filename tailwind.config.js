@@ -1,6 +1,7 @@
 module.exports = {
   content: [
-       "./src/**/*.{html,ts}"
+       "./src/**/*.{html,ts}",
+       "./node_modules/flowbite/**/*.js"
  ],
   theme: {
     extend: {
@@ -20,7 +21,9 @@ module.exports = {
     },
   },
   mode: 'jit',
-  plugins: [],
+  plugins: [
+       require('flowbite/plugin')
+ ],
   corePlugins: {
     preflight: false,
   },

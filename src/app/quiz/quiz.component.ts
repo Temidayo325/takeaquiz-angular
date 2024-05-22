@@ -26,6 +26,8 @@ export class QuizComponent implements OnInit {
      public timervalues: any = {minutes: 0, seconds: 0, currentTime: 0, ongoing: 0}
      public details = this.prep.getDetails();
      public german: any = {question: '', answer: [], total: 0}
+     public controller = new AbortController()
+
   ngOnInit(): void
   {
        const questions = this.prep.retrieveQuestions()
@@ -72,7 +74,7 @@ export class QuizComponent implements OnInit {
                          this.toast.info("Your test has been submitted")
                          this.submit()
                      }
-                 });
+                }, { signal: this.controller.signal });
             }
        }
   }
@@ -176,6 +178,6 @@ export class QuizComponent implements OnInit {
 
    ngOnDestroy(): void
    {
-        
+        this.controller.abort()
    }
 }
