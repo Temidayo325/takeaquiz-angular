@@ -1,30 +1,32 @@
-<div class="w-full h-screen overflow-hidden py-4 px-4 flex justify-center items-center relative">
-     <ngx-loading-bar></ngx-loading-bar>
-     <div class="md:w-4/12 md:bg-gray-100 px-4 py-3 shadow-md rounded-lg bg-gray-200 ">
-          <h2 class="text-xl font-headline">Welcome to your test platform</h2>
-          <p class="font-word">fill the form to proceed to your test</p>
+<div class="w-full relative bg-blueish overflow-x-hidden">
+     <header class="px-4 md:px-10 bg-grayish ">
+          <h4 class="font-headline text-lg md:text-xl text-blueish py-3 my-0">Assess me</h4>
+     </header>
+     <div class="md:w-3/12 bg-grayish px-4 md:px-10 py-2 text-blueish mx-auto">
+          <h2 class="text-4xl font-headline mb-3">Welcome to<span class="text-orangish md:text-blueish"> your Assessment platform</span> </h2>
+          <p class="font-headline text-sm my-1 ">Fill the form to proceed to your test</p>
           <div class="w-full font-word">
-               <form [formGroup]="prepForm">
-                    <div class="mb-3 ">
-                         <label for="display_token" class="block text-lg">Course Access Code</label>
-                         <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.display_token }}</p>
-                         <input type="text" id="email" required formControlName="display_token" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+               <form [formGroup]="prepForm" class="mt-3 font-word py-3 overflow-hidden">
+                    <div class="mb-5 ">
+                         <label for="display_token" class="block text-sm">Course Access Code</label>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.display_token }}</p>
+                         <input type="text" id="email" required formControlName="display_token" class="text-md bg-white/70 px-3 py-2 bg-grayish outline-none w-full md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md focus:bg-grayish" autocomplete="off">
                     </div>
-                    <div class="mb-3 ">
-                         <label for="matric" class="block text-lg">Matric number</label>
-                         <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
-                         <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                    <div class="mb-5 ">
+                         <label for="matric" class="block text-sm">Matric number</label>
+                         <p class="text-orange-500 text-sm text-left my-2" *ngIf="errors != null">{{ errors.matric }}</p>
+                         <input type="text" id="matric" required formControlName="matric" class="text-md bg-white/70 px-3 py-2 bg-grayish outline-none w-full md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md focus:bg-grayish" autocomplete="off">
                     </div>
-                    <div class="mb-3 ">
-                         <label for="email" class="block text-lg">Email address</label>
+                    <div class="">
+                         <label for="email" class="block text-sm">Email address</label>
                          <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.email }}</p>
-                         <input type="email" id="email" required formControlName="email" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="on">
+                         <input type="email" id="email" required formControlName="email" class="text-md bg-white/70 px-3 py-2 bg-grayish outline-none w-full md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md focus:bg-grayish" autocomplete="on">
                     </div>
-                    <div class="mb-3 ">
+                    <!-- <div class="mb-3 ">
                          <label for="matric" class="block text-lg">Continous Assessment</label>
                          <p class="text-orange-500 text-sm text-left my-3" *ngIf="errors != null">{{ errors.assesment_id }}</p>
-                         <!-- <input type="text" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off"> -->
-                         <select name="" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md">
+                         <!-- <input type="text" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-3 bg-white outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
+                         <select name="" id="matric" required formControlName="assesment_id" class="text-md rounded-lg px-3 py-2 bg-grayish outline-none w-3/4 md:w-2/4 border-0 focus:shadow-xl focus:border-0 shadow-md">
                               <option value=""></option>
                               <option value="1">1</option>
                               <option value="2">2</option>
@@ -32,45 +34,85 @@
                               <option value="4">4</option>
                               <option value="5">5</option>
                          </select>
-                    </div>
+                    </div> -->
                     <div class="flex justify-center my-5">
-                         <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-orange-500 text-white disabled:bg-gray-400 disabled:text-white cursor-pointer" (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
+                         <button class="px-8 py-4 text-grayish text-center border-0 shadow-md hover:shadow-lg bg-orangish disabled:bg-gray-400 disabled:text-blueish cursor-pointer" (click)=" preQuestion()" [disabled]="!prepForm.valid">Proceed</button>
                     </div>
                </form>
-               <p class="text-center text-orange-500 cursor-pointer font-bold" (click)="complaint = !complaint">Lodge a complaint</p>
-               <a class="text-center block text-blue-500 cursor-pointer no-underline font-bold" routerLink="/instructions">Don't do the following</a>
+               <p class="text-center block text-white/80 md:text-blueish cursor-pointer no-underline font-bold" (click)="lodgeComplaint('rules')">Don't do the following</p>
+               <p class="text-center text-orange-500 cursor-pointer font-bold" (click)="lodgeComplaint('lodge')">Lodge a complaint</p>
+               <!-- <p class="text-center text-orange-500 cursor-pointer font-bold" (click)="complaint = !complaint">Lodge a complaint</p> -->
           </div>
      </div>
-     <div class="z-20 w-10/12 md:w-4/12 h-full bg-gray-400 absolute md:top-0 right-0 font-word" *ngIf="complaint">
-          <div class="sticky mt-8 mx-4">
-               <button class="py-2 px-4 shadow-lg text-xl border-0 rounded-full" (click)="complaint = !complaint">x</button>
-          </div>
-          <div class="flex justify-center my-4 md:my-0">
-               <form [formGroup]="complaintForm">
-                    <div class="mb-3 ">
-                         <label for="display_token" class="block text-lg text-white">Course Access Code</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.display_token }}</p>
-                         <input type="text" id="email" required formControlName="display_token" class="text-md rounded-lg px-3 py-3 bg-white/80 outline-none w-3/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
-                    </div>
-                    <div class="mb-3 ">
-                         <label for="matric" class="block text-lg text-white">Matric number</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
-                         <input type="text" id="matric" required formControlName="matric" class="text-md rounded-lg px-3 py-3 bg-white/80 outline-none w-3/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
-                    </div>
-                    <div class="mb-3 ">
-                         <label for="email" class="block text-lg text-white">Email Address</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
-                         <input type="email" id="email" required formControlName="email" class="text-md rounded-lg px-3 py-3 bg-white/80 outline-none w-3/4 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off">
-                    </div>
-                    <div class="mb-3 ">
-                         <label for="matric" class="block text-lg text-white">Complaint</label>
-                         <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
-                         <textarea id="matric" required formControlName="complaint" class="text-md rounded-lg px-3 py-3 bg-white/80 outline-none w-3/4 h-40 border-0 focus:shadow-xl focus:border-0 shadow-md" autocomplete="off"></textarea>
-                    </div>
-                    <div class="flex justify-center my-5">
-                         <button class="px-6 py-3 text-white text-center border-0 shadow-md hover:shadow-lg rounded-lg bg-blue-500 text-white disabled:bg-gray-200 disabled:text-black" (click)="sendComplaint()" [disabled]="!complaintForm.valid">Send</button>
-                    </div>
-               </form>
-          </div>
+     <!-- drawer component -->
+     <div id="drawer-right-example" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-grayish w-3/4 dark:bg-gray-800 md:w-[500px]" tabindex="-1" aria-labelledby="drawer-right-label">
+        <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer" (click)="closeSidebar()">
+           <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+           </svg>
+           <span class="sr-only">Close menu</span>
+        </button>
+        <div class="">
+             <div class="font-word" *ngIf="complaint">
+                  <h1 class="text-blueish text-left tracking-wider leading-8 text-4xl font-headline mt-10">Make complaint</h1>
+                  <p class="my-2 font-word">Let us know of any inconveniences you experienced while attempting the assessment</p>
+                  <div class="my-4 md:my-0 text-blueish overflow-hidden">
+                       <form [formGroup]="complaintForm">
+                            <div class="mb-5 ">
+                                 <label for="display_token" class="block text-md">Course Access Code</label>
+                                 <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.display_token }}</p>
+                                 <input type="text" id="email" required formControlName="display_token" class="text-md px-2 py-2 bg-white/80 outline-none w-full border border-gray-100 focus:shadow-md focus:border-0 shadow" autocomplete="off">
+                            </div>
+                            <div class="mb-5 ">
+                                 <label for="matric" class="block text-md">Matric number</label>
+                                 <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.matric }}</p>
+                                 <input type="text" id="matric" required formControlName="matric" class="text-md px-2 py-2 bg-white/80 outline-none w-full border border-gray-100 focus:shadow-md focus:border-0 shadow" autocomplete="off">
+                            </div>
+                            <div class="mb-5 ">
+                                 <label for="email" class="block text-md">Email Address</label>
+                                 <p class="text-red-600 text-sm text-left my-2" *ngIf="errors != null">{{ errors.matric }}</p>
+                                 <input type="email" id="email" required formControlName="email" class="text-md px-2 py-2 bg-white/80 outline-none w-full border border-gray-100 focus:shadow-md focus:border-0 shadow" autocomplete="off">
+                            </div>
+                            <div class="mb-3 ">
+                                 <label for="matric" class="block text-md">Complaint</label>
+                                 <p class="text-red-600 text-sm text-left my-3" *ngIf="errors != null">{{ errors.matric }}</p>
+                                 <textarea id="matric" required formControlName="complaint" class="text-md rounded-lg px-3 py-2 bg-white/80 outline-none w-full h-40 border border-gray-200 focus:shadow-md focus:border-0 shadow" autocomplete="off"></textarea>
+                            </div>
+                            <div class="flex justify-center my-5">
+                                 <button class="px-8 py-4 text-grayish text-center border-0 shadow-md hover:shadow-lg bg-orangish disabled:bg-gray-400 disabled:text-blueish cursor-pointer" (click)="sendComplaint()" [disabled]="!complaintForm.valid">Send</button>
+                            </div>
+                       </form>
+                  </div>
+             </div>
+             <div *ngIf="rules" class="w-full">
+                  <h1 class="text-blueish text-left tracking-wider leading-8 text-4xl font-headline mt-10">Take note of the  following instructions.</h1>
+                  <div class="my-3 font-word ">
+                       <ul class="list-none text-md grid gap-7 my-4 px-0">
+                            <li class="bg-white shadow-md p-2 border border-gray-300">
+                                 Do not attempt to leave the tab of the Quiz Once you have started as your quiz would be automatically submitted if you choose to do so.
+                            </li>
+                            <li class="bg-white shadow-md p-2 border border-gray-300">
+                                 Ensure you have adequate charge on your device before the commencement of your Quiz.
+                            </li>
+                            <li class="bg-white shadow-md p-2 border border-gray-300">
+                                 Ensure you have a stable internet connection before you commence your quiz.
+                            </li>
+                            <li class="bg-white shadow-md p-2 border border-gray-300">
+                                 You should not attempt the quiz more than once with a single device.
+                            </li>
+                       </ul>
+                  </div>
+             </div>
+        </div>
      </div>
+
+
+     <footer class="bg-grayish font-word px-4 md:px-10">
+          <h4 class="py-8 md:py-5 font-headline text-md text-blueish my-0 text-center font-word">&copy; Copyright of Luminaace 2024</h4>
+          <ul class="w-full text-blueish list-none flex md:justify-start gap-6 text-md mx-auto pb-10 pt-4 my-0">
+               <li><a routerLink="/" class="no-underline text-blueish">Home</a></li>
+               <li><a routerLink="/contact" class="no-underline text-blueish">Contact</a></li>
+               <li><a routerLink="/about" class="no-underline text-blueish">About</a></li>
+          </ul>
+     </footer>
 </div>

@@ -1,21 +1,26 @@
-<div class="flex justify-center items-center font-word">
+<div class="bg-grayish px-4 py-7 min-h-screen font-word tracking-wide">
      <div *ngIf="stat.submitted " class="flex items-center justify-center">
           <div class="w-full ">
                <h3 class="font-headline">You have reached the ends of your Test. Goodluck</h3>
                <img src="../../assets/weldone.svg" alt="All the best in your test" class="md:w-full md:h-1/4 mt-4">
           </div>
      </div>
-     <div class="" *ngIf="!stat.submitted">
+
+     <div class="md:w-1/4 md:mx-auto" *ngIf="!stat.submitted">
+          <h2 class="text-center my-0 font-headline ">Assessment</h2>
+          <p class="text-left md:text-center md:text-lg"><strong>Topic:</strong> {{topic}}</p>
+
           <div class="mx-4 flex justify-center mt-4">
-               <div>
-                    <p>{{stat.completed}} of {{stat.total}}</p>
-                    <h1 class="">{{timervalues.minutes}}<span>min</span> {{timervalues.seconds}} <span>sec</span></h1>
+               <div class="flex justify-center items-center gap-2 py-3 px-6 bg-white shadow-md border border-gray-100 rounded-full">
+                    <img src="../../assets/clock.svg" alt="timer" class="h-5 w-5">
+                    <h4 class="text-lg my-0">{{timervalues.minutes}}:{{timervalues.seconds}}</h4>
                </div>
           </div>
+
           <div class="overflow-hidden" *ngIf="details.type == 'mcq'">
                <div *ngFor="let question of questions;  index as i; trackBy: trackByFn">
                     <div *ngIf="!question.hidden">
-                         <div class="flex justify-start items-center">
+                         <div class="flex justify-start items-center font-bold font-headline">
                               <p class="mx-4">{{i+1}}.</p>
                               <p class="ml-2 text-xl my-2">{{question.question}}</p>
                          </div>
@@ -35,16 +40,20 @@
                          </div>
                     </div>
                </div>
-               <div class="mt-20 mb-3 ml-12 flex justify-center gap-3">
-                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
-                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
-                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               <div class="mt-20 mb-3 grid justify-center">
+                    <div class="flex justify-center items-center gap-8 py-3 px-3 font-bold text-md">
+                         <img src="../../assets/left-arrow.svg" alt="left-arrow depicting prev" class="h-9 w-9 cursor-pointer disabled:bg-gray-300 disabled:text-white text-blueish" (click)="prev()" >
+                         <p>{{stat.completed}} of {{stat.total}}</p>
+                         <img src="../../assets/right-arrow.svg" alt="right-arrow depicting next" class="h-9 w-9 cursor-pointer disabled:bg-gray-300 disabled:text-white text-blueish" (click)="next()" >
+                    </div>
+                    <button class="px-20 py-5 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-orangish text-grayish font-bold" (click)="submit()">Submit</button>
                </div>
           </div>
+
           <div *ngIf="details.type == 'trueorfalse'" class="grid gap-2 ml-12">
                <div *ngFor="let question of questions;  index as i; trackBy: trackByFn">
                     <div *ngIf="!question.hidden">
-                         <div class="flex justify-start items-center">
+                         <div class="flex justify-start items-center font-bold font-headline">
                               <p class="mx-4">{{i+1}}.</p>
                               <p class="ml-2 text-xl my-2">{{question.question}}</p>
                          </div>
@@ -58,36 +67,37 @@
                          </div>
                     </div>
                </div>
-               <div class="mt-20 mb-3 ml-12 flex justify-center gap-3">
-                    <button (click)="prev()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
-                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
-                    <button (click)="next()" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               <div class="mt-20 mb-3 grid justify-center">
+                    <div class="flex justify-center items-center gap-8 py-3 px-3 font-bold text-md">
+                         <img src="../../assets/left-arrow.svg" alt="left-arrow depicting prev" class="h-9 w-9 cursor-pointer disabled:bg-gray-300 disabled:text-white text-blueish" (click)="prev()">
+                         <p>{{stat.completed}} of {{stat.total}}</p>
+                         <img src="../../assets/right-arrow.svg" alt="right-arrow depicting next" class="h-9 w-9 cursor-pointer disabled:bg-gray-300 disabled:text-white text-blueish" (click)="next()">
+                    </div>
+                    <button class="px-20 py-5 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-orangish text-grayish font-bold" (click)="submit()">Submit</button>
                </div>
           </div>
+
           <div *ngIf="details.type == 'german'" class="md:mx-20 mx-8 md:">
                <p class="leading-10 tracking-wider mx-3" [innerHTML]=german.question>{{german.question}}</p>
                <div class="mt-20 mb-3 ml-12 flex justify-center">
-                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
+                    <button class="px-20 py-5 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-orangish text-grayish font-bold" (click)="submit()">Submit</button>
                </div>
           </div>
-          <div class="overflow-hidden" *ngIf="details.type == 'essay'">
-               <div *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="shadow-md grid gap-10 items-center justify-center py-3 px-3 ">
-                    <div class="border border-gray-300 ">
-                         <div class="flex justify-start items-center">
+
+          <div class="overflow-hidden" *ngIf="details.type == 'essay'" class="grid gap-5 mt-4">
+               <div *ngFor="let question of questions;  index as i; trackBy: trackByFn" class="">
+                    <div class="">
+                         <div class="flex justify-start items-start font-bold font-headline tracking-wider">
                               <p class="mx-4">{{i+1}}.</p>
-                              <p class="ml-2 text-xl my-2">{{question.question}}</p>
+                              <p class="ml-2 text-md my-2 ">{{question.question}}</p>
                          </div>
-                         <div class="grid gap-2 ml-12">
-                              <label for="answer{{i}}" class="text-md cursor-pointer tracking-wider ">Your answer goes here
-                              </label>
-                              <textarea name="answer{{i}}" id="answer{{i}}" class="h-40 w-full py-2 px-3 " [(ngModel)]="question.chosen_answer"></textarea>
+                         <div class="overflow-x-hidden">
+                              <textarea name="answer{{i}}" id="answer{{i}}" class="mt-1 h-44 w-full py-2 px-3 border-0 focus:border-0 focus:outline-none focus:shadow focus:border focus:border-gray-100 md:px-6 md:py-5" [(ngModel)]="question.chosen_answer"></textarea>
                          </div>
                     </div>
                </div>
-               <div class="mt-20 mb-3 ml-12 flex justify-center gap-3">
-                    <button (click)="prev()" *ngIf="details.type != 'essay'" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1 disabled:bg-gray-300 disabled:text-white" [disabled]="currentIndex == 0" >Prev</button>
-                    <button (click)="submit()" class="px-6 py-4 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-red-500 text-white">Submit</button>
-                    <button (click)="next()" *ngIf="details.type != 'essay'" class="px-4 py-2 border-0 shadow-md cursor-pointer rounded-lg bg-blue-500 text-white hover:transition-all hover:-translate-y-1">Next</button>
+               <div class="mt-20 mb-3 grid justify-center">
+                    <button class="px-20 py-5 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-orangish text-grayish font-bold" (click)="submit()">Submit</button>
                </div>
           </div>
      </div>

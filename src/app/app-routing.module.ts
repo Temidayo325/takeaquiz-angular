@@ -48,7 +48,7 @@ const routes: Routes = [
      {path: 'quiz', component: QuizComponent},
      {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
-     { path: 'tryTestForm', component: TestComponent },
+     { path: 'test', component: TestComponent },
      { path: '', redirectTo: '/homepage', pathMatch: 'full' },
      // { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
      { path: '**', component: PageNotFoundComponent },

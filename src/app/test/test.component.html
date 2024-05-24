@@ -1,2 +1,28 @@
-<p class="leading-10 tracking-wider mx-3" [innerHTML]=question>{{question}}</p>
-<button (click)="Submitted()">Submit</button>
+<!-- <p class="leading-10 tracking-wider mx-3" [innerHTML]=question>{{question}}</p>
+<button (click)="Submitted()">Submit</button> -->
+<main class="bg-grayish px-4 py-7 min-h-screen">
+     <h2 class="text-center my-0 ">Assessment</h2>
+     <p class="text-left md:text-center md:text-lg"><strong>Topic:</strong> Pharmacotherapy of Luminaace team</p>
+     <div class="mx-4 flex justify-center mt-4">
+          <div class="flex justify-center items-center gap-2 py-3 px-6 bg-white shadow-md border border-gray-100 rounded-full">
+               <img src="../../assets/clock.svg" alt="timer" class="h-5 w-5">
+               <h4 class="text-lg my-0">30:40</h4>
+          </div>
+     </div>
+     <div class="overflow-x-hidden">
+          <div class="flex justify-start items-center font-bold font-headline tracking-wider">
+               <p class="">1.</p>
+               <p class="ml-2 text-md my-2 ">This is the first question</p>
+          </div>
+          <textarea class="mt-2 h-40 w-full py-2 px-3 border-0 focus:border-0 focus:outline-none focus:shadow focus:border focus:border-gray-100" ></textarea>
+     </div>
+     <div class="mt-20 mb-3 grid justify-center">
+          <div class="flex justify-center items-center gap-8 py-3 px-3 font-bold text-md">
+               <img src="../../assets/left-arrow.svg" alt="left-arrow depicting prev" class="h-9 w-9">
+               <p>4 of 10</p>
+               <img src="../../assets/right-arrow.svg" alt="right-arrow depicting next" class="h-9 w-9">
+          </div>
+          <button class="px-20 py-5 border-0 shadow-xl hover:transition-all hover:-translate-y-1 hover:shadow-2xl mx-5 cursor-pointer rounded-lg bg-orangish text-grayish font-bold">Submit</button>
+
+     </div>
+</main>
