@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace App\Models;
 
@@ -7,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
@@ -20,6 +22,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'nickname',
+        'phone',
         'password',
     ];
 
@@ -42,4 +46,39 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role()
+    {
+         return $this->belongsToMany(Role::class);
+    }
+
+    public function ratings():HasMany
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    public function review():HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+    
+    public function hasAnyRole($role):bool
+    {
+        return null !== $this->role()->where('role', $role)->first();
+    }
+
+    public function hasAnyRoles(array $role):bool
+    {
+        return null !== $this->role()->whereIn('role', $role)->first();
+    }
 }
