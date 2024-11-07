@@ -18,6 +18,7 @@ class EventFactory extends Factory
     {
         return [
             'name' => 'House party',
+            'user_id' => random_int(1, 50),
             'event_date' => fake()->dateTimeBetween('now', '+2 months'),
             'starting_time' => fake()->time(), 
             'state' => 'Lagos',

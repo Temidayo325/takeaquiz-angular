@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class IsPromoter
 {
@@ -18,7 +19,10 @@ class IsPromoter
         $promoter = \App\Models\User::query()->where('id', Auth::id())->first();
         if( !$promoter->hasAnyRole('promoter') ) 
         {
-           redirect('/user/dashboard');
+           return response()->json([
+                'error' => true,
+                'errorMessage' => "Unauthorized access, kindly contact admin"
+           ]);
         }
         return $next($request);
     }

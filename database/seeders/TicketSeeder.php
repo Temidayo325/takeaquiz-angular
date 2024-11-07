@@ -17,7 +17,9 @@ class TicketSeeder extends Seeder
         				->sequence(
         					['type' => 'Early bird'],
         					['type' => 'General Admission'],
-        					['type' => 'VIP']
+                            ['type' => 'VIP'],
+                            ['access_type' => 'Purchase'],
+        					['access_type' => 'Gift'],
         				)
         				->create();
     }

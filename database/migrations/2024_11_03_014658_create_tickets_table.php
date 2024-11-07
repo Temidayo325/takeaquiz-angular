@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('total_seat');
             $table->integer('available_seat');
             $table->set('type', ['Early bird', 'General admission', 'VIP']);
+            $table->set('access_type', ['Purchase', 'Gift']);
             $table->text('type_copy');
             $table->timestamps();
         });

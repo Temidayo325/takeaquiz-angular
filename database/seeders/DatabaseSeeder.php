@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             EventSeeder::class,
             RatingSeeder::class,
-            SaleSeeder::class
+            SaleSeeder::class,
+            TicketSeeder::class
         ]);
     }
 }

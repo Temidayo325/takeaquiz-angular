@@ -15,9 +15,15 @@ class Event extends Model
     	'starting_time',
     	'state',
     	'coordinate',
-    	'isPremium',
+        'user_id',
+    	// 'isPremium',
     	'promotional_copy'
     ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class);
+    }
 
     public function ratings()
     {

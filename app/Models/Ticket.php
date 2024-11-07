@@ -15,7 +15,8 @@ class Ticket extends Model
     	'total_seat',
     	'available_seat',
     	'type',
-    	'type_copy'
+    	'type_copy',
+        'access_type'
     ];
 
     public function event()
