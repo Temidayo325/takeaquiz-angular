@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->integer('event_id')
                     ->references('id')
-                    ->on('events')->onDelete('cascade');
+                    ->on('events')
+                    ->onDelete('cascade');
             $table->integer('price');
             $table->integer('total_seat');
             $table->integer('available_seat');
             $table->set('type', ['Early bird', 'General admission', 'VIP']);
-            $table->set('access_type', ['Purchase', 'Gift']);
+            $table->set('access_type', ['Free', 'Purchase', 'Gift']);
             $table->text('type_copy');
             $table->timestamps();
         });

@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         // {
         //     return redirect()->route('admin.dashboard');
         // }
-        if( $user->hasAnyRole('promoter') ) 
+        if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
         {
             # code...
             return redirect()->intended(route('promoter.dashboard', absolute: false));
@@ -58,6 +58,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

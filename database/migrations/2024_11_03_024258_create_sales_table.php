@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->integer('event_id')
                     ->references('id')
-                    ->on('events')->onDelete('cascade');
+                    ->on('events')
+                    ->onDelete('cascade');
             $table->integer('user_id')
                     ->references('id')
-                    ->on('users')->onDelete('cascade');
+                    ->on('users')
+                    ->onDelete('cascade');
             $table->integer('ticket_id')
                     ->references('id')
-                    ->on('tickets')->onDelete('cascade');
+                    ->on('tickets')
+                    ->onDelete('cascade');
             $table->integer("purchased_tickets");
             $table->integer("amount_paid");
             $table->set('status', ['Pending', 'Failed', 'Success']);

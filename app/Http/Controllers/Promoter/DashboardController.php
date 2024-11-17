@@ -9,6 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-    	return view("dashboard.promoter.index");
+    	$user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	return view("dashboard.promoter.index", ['user' => $user]);
     }
 }

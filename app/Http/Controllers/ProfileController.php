@@ -16,6 +16,9 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        if ( $request->user()->hasAnyRoles( ['promoter', 'admin'] ) ) {
+            return view('dashboard.profile', [ 'user' => $request->user()]);
+        }
         return view('profile.edit', [
             'user' => $request->user(),
         ]);

@@ -16,14 +16,14 @@ class IsPromoter
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $promoter = \App\Models\User::query()->where('id', Auth::id())->first();
-        if( !$promoter->hasAnyRole('promoter') ) 
+        $promoter = \App\Models\User::with('role')->where('id', Auth::id())->first();
+        if( $promoter->hasAnyRole('promoter') || $promoter->hasAnyRole('admin') ) 
         {
-           return response()->json([
-                'error' => true,
-                'errorMessage' => "Unauthorized access, kindly contact admin"
-           ]);
+            return $next($request);
         }
-        return $next($request);
+        return response()->json([
+            'error' => true,
+            'errorMessage' => "Unauthorized access, kindly contact admin"
+        ]);
     }
 }

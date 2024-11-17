@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers\Promoter;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class TicketController extends Controller
+{
+    public function index()
+    {
+    	$events = \App\Models\Event::with('tickets')
+    			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date')
+    			->where('user_id', auth()->id())
+    			->latest()
+    			->orderBy('id')
+    			->cursorPaginate(5);
+    	return view("dashboard.promoter.ticket.index", ['events' => $events]);
+    }
+
+    public function create()
+    {
+    	$events = \App\Models\Event::with('tickets')
+    						->select('id', 'user_id', 'name', 'event_date')
+    						->where('event_date', '>=',\Carbon\Carbon::now())
+    						->where('id', auth()->id())
+    						->latest()
+			    			->orderBy('id')
+			    			->cursorPaginate(5);
+        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	return view("dashboard.promoter.ticket.create", [ 'events' => $events, 'user' => $user ]);
+    }
+
+    public function store(\App\Http\Requests\Ticket\CreateTicketRequest $request)
+    {
+    	try {
+    		$event = \App\Models\Ticket::create([
+    				'event_id' => $request->event_id,
+			    	'price' => $request->price,
+			    	'total_seat' => $request->total_seat,
+			    	'available_seat' => $request->total_seat,
+			    	'type' => $request->ticket_type,
+			    	'type_copy' => $request->type_copy,
+			        'access_type' => $request->access_type
+    		]);
+			$events = \App\Models\Event::with('tickets')
+						->select('id', 'user_id', 'name', 'event_date')
+						->where('event_date', '>=',\Carbon\Carbon::now())
+						->where('id', auth()->id())
+						->latest()
+		    			->orderBy('id')
+		    			->cursorPaginate(5);
+    		return response()->json([
+	    		'error' => false,
+	    		'errorMessage' => 'Ticket succesfully created',
+	    		'events' => $events
+	    	]);
+    	} catch (\Exception $e) {
+    		return response()->json([
+	    		'error' => true,
+	    		'errorMessage' => $e->getMessage()
+	    	]);
+    	}
+    	
+    }
+
+    public function delete(Request $request)
+    {
+    	$ticket = \App\Models\Ticket::find($request->id);
+    	$ticket->delete();
+    	$events = \App\Models\Event::with('tickets')
+    			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date')
+    			->where('user_id', auth()->id())
+    			->latest()
+    			->orderBy('id')
+    			->cursorPaginate(5);
+    	return response()->json([
+    		'error' => false,
+    		'errorMessage' => 'Ticket succesfully deleted',
+    		'events' => $events
+    	]);
+    }
+}

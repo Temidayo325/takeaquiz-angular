@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->integer('event_id')
                     ->references('id')
-                    ->on('events')->onDelete('cascade');
+                    ->on('events')
+                    ->onDelete('cascade');
             $table->integer('user_id')
                     ->references('id')
-                    ->on('users')->onDelete('cascade');
+                    ->on('users')
+                    ->onDelete('cascade');
             $table->text('video_gallery');
             $table->text('image_gallery');
             $table->string('flier');

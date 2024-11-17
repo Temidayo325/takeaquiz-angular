@@ -11,7 +11,8 @@ class EventController extends Controller
     public function index()
     {
     	$events = \App\Models\Event::with('tickets')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
-    	return view("dashboard.promoter.event.index", ['events' => $events]);
+        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	return view("dashboard.promoter.event.index", ['events' => $events, 'user' => $user]);
     }
 
     public function store(CreateEventRequest $event)
@@ -52,6 +53,7 @@ class EventController extends Controller
 
     public function create()
     {
-        return view("dashboard.promoter.event.create");
+        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        return view("dashboard.promoter.event.create", ['user' => $user]);
     }
 }

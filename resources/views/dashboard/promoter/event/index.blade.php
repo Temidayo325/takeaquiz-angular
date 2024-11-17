@@ -99,7 +99,7 @@
 					<p x-text="event.starting_time"></p>
 	            	<p>
 	            		<template x-if="Date.parse(event.event_date) > Date.now()">
-						    <span class="text-green-600 font-bold">Active</span>
+						    <span class="text-green-600 font-bold">Upcoming</span>
 						</template>
 						<template x-if="Date.now() > Date.parse(event.event_date)">
 						    <span class="text-red-600 font-bold">Done & Dusted</span>
