@@ -67,13 +67,23 @@
 						},
 						searchTerm()
 						{
-
+							axios.post("/admin/dashboard/events/search", {searchTerm: this.searchterm})
+							.then( ( response ) => {
+								if(!response.error)
+								{
+									this.events = JSON.parse(response.events)
+								}
+								$nextTick()
+								console.log(response)
+							})
+							.catch(error => console.log(error))
 						}
 		}'>
 		<div class="flex justify-between items-center my-10">
 			<h1 class="font-bold text-2xl">Event dashboard</h1>
 			<div>
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
+					@csrf
 					<input type="text" class="w-64 p-2" x-model="searchterm">
 					<button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button>
 				</form>

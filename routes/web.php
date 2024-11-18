@@ -59,6 +59,7 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\Admin\EventController::class, 'index'])->name('admin.event.index');
     Route::post('/events/paginate', [\App\Http\Controllers\Admin\EventController::class, 'paginateEvents']);
+    Route::post('/events/search', [\App\Http\Controllers\Admin\EventController::class, 'search']);
     Route::post('/event/delete', [\App\Http\Controllers\Admin\EventController::class, 'delete']);
     Route::post('/event/premium/toggle', [\App\Http\Controllers\Admin\EventController::class, 'togglePremium']);
     // ========== Event routes goes here ======== \\
