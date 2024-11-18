@@ -27,6 +27,7 @@ class CreateEventRequest extends FormRequest
             'starting_time' => ['required', 'string', 'bail'],
             'state' => ['required', 'string', 'bail'],
             'coordinate' => ['required', 'string', 'bail'],
+            'location' => ['required', 'string', 'bail'],
             'promotional_copy' => ['required', 'string', 'bail'],
             'id' => ['integer', 'min:1', 'nullable']
         ];

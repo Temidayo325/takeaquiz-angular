@@ -16,6 +16,8 @@ class Event extends Model
     	'state',
     	'coordinate',
         'user_id',
+        'location',
+        'flier',
     	// 'isPremium',
     	'promotional_copy'
     ];

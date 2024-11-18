@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('starting_time'); 
             $table->string('state', 30);
             $table->string('coordinate', 150);
+            $table->text('location');
+            $table->string('flier')->nullable();
             $table->boolean('isPremium')->default(false);
             $table->text('promotional_copy');
             $table->timestamps();

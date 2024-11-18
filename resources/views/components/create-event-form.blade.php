@@ -5,7 +5,8 @@
 <form action="" 
 		method="post"
 		@submit.prevent="submitForm()" 
-		x-data='{ data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, submitForm(){
+		x-data='{ data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "" }, 
+				submitForm(){
 					axios.post("/promoter/dashboard/events/create", this.data)
 					.then( ( response ) => {
 						console.log(response)
@@ -35,6 +36,14 @@
 		<div class="">
 			<label for="starting_time">Time of the event</label>
 			<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time">
+		</div>
+		<div class="">
+			<label for="location">Event location</label>
+			<input type="text" name="location" id="location" required x-model="data.location">
+		</div>
+		<div class="">
+			<label for="flier">Event flier</label>
+			<input type="file" name="flier" id="flier" required x-ref="flier">
 		</div>
 		<div class="">
 			<label for="promotional_copy">Promotional copy</label>

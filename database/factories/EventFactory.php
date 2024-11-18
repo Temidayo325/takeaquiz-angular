@@ -21,6 +21,8 @@ class EventFactory extends Factory
             'user_id' => random_int(1, 50),
             'event_date' => fake()->dateTimeBetween('now', '+2 months'),
             'starting_time' => fake()->time(), 
+            'location' => fake()->address(),
+            'flier' => '/images/gelgas.jpg',
             'state' => 'Lagos',
             'coordinate' => fake()->longitude($min = -180, $max = 180) . " : " .fake()->latitude($min = -90, $max = 90),
             'promotional_copy' => fake()->paragraph(),
