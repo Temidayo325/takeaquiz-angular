@@ -20,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tickets', function () {
+    return view('tickets');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -64,4 +68,5 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::post('/event/premium/toggle', [\App\Http\Controllers\Admin\EventController::class, 'togglePremium']);
     // ========== Event routes goes here ======== \\
 });
+
 require __DIR__.'/auth.php';
