@@ -3,7 +3,7 @@
 @section('title', 'View all Scheduled events')
 
 @section('content')
-	<div 	class="text-black pb-32" 
+	<div 	class="text-black pb-32 md:px-10 md:mx-auto " 
 			x-data='{ events: @json($events),
 						open: false,
 						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, 
@@ -82,7 +82,7 @@
 				</tbody>
 			</table>
 		</div> --}}
-		<div class="text-sm text-gray-700 w-full text-sm text-left rtl:text-right dark:text-gray-400">
+		<div class="text-sm text-gray-700 w-full text-sm text-left rtl:text-right dark:text-gray-400 mt-10">
 			<div class="grid grid-cols-6 gap-2 mt-2">
 				<h2 class="font-bold text-left px-3 py-3">Name</h2>
 				<h2 class="font-bold text-left px-3 py-3">State</h2>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Promoter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Event\CreateEventRequest;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -32,7 +33,15 @@ class EventController extends Controller
     		}
     	}
         try {
-            $event = ( new \App\Actions\Event\CreateEvent() )((object) $event->validated());
+            // $file = $event->file('flier');
+            // // Store the file in the desired storage location
+            // if (Storage::size($file) > 2048) {
+            //     return response()->json([
+            //         'error' => true,
+            //         'message' => "Filesize cannot exceed 2MB"
+            //     ]);
+            // }
+            $event = ( new \App\Actions\Event\CreateEvent() )((object) $event);
             return response()->json([
                 'error' => false,
                 'message' => "Event successfully created"

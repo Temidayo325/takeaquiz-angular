@@ -32,8 +32,11 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
-            'throw' => false,
+            // 'root' => storage_path('app'),
+            // 'throw' => false,
+            'root' => public_path(). '/images/fliers',
+            'url' => env('APP_URL').'/images/fliers',
+            'visibility' => 'public'
         ],
 
         'public' => [

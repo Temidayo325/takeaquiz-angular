@@ -28,6 +28,7 @@ class CreateEventRequest extends FormRequest
             'state' => ['required', 'string', 'bail'],
             'coordinate' => ['required', 'string', 'bail'],
             'location' => ['required', 'string', 'bail'],
+            'flier' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
             'promotional_copy' => ['required', 'string', 'bail'],
             'id' => ['integer', 'min:1', 'nullable']
         ];

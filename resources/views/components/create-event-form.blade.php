@@ -4,10 +4,15 @@
 </div>
 <form action="" 
 		method="post"
+		x-ref="form"
 		@submit.prevent="submitForm()" 
-		x-data='{ data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "" }, 
+		x-data='{ data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "" }, 
 				submitForm(){
-					axios.post("/promoter/dashboard/events/create", this.data)
+
+					console.log(this.data)
+					let formdata = new FormData($refs.form)
+					formdata.append("event_flier", $refs.flier.files[0]);
+					axios.post("/promoter/dashboard/events/create", formdata)
 					.then( ( response ) => {
 						console.log(response)
 						this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }
@@ -19,7 +24,16 @@
 		<div class="my-2">
 			<label for="event_name" class="font-bold text-gray-950">Name of the event</label>
 			<p class="text-gray-600 text-sm ">Hint: Make it as awesome as possible</p>
-			<input type="text" name="event_name" id="event_name" required="required" minLength="5" x-model="data.name" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+			<input type="text" name="name" id="event_name" required="required" minLength="5" x-model="data.name" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+		</div>
+		<div class="my-2">
+			<label for="event_tags" class="font-bold text-gray-950">Event tags</label>
+			<p class="text-gray-600 text-sm ">Hint: Hashtags for the events e.g. party, blockParty. You can separate multiple hashtags with a comma</p>
+			<input type="text" name="event_tags" id="event_tags" required="required" minLength="5" x-model="data.tags" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+		</div>
+		<div class="">
+			<label for="location">Event location</label>
+			<input type="text" name="location" id="location" required x-model="data.location">
 		</div>
 		<div class="">
 			<label for="state">State of the event</label>
@@ -37,18 +51,14 @@
 			<label for="starting_time">Time of the event</label>
 			<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time">
 		</div>
-		<div class="">
-			<label for="location">Event location</label>
-			<input type="text" name="location" id="location" required x-model="data.location">
-		</div>
+		
 		<div class="">
 			<label for="flier">Event flier</label>
 			<input type="file" name="flier" id="flier" required x-ref="flier">
 		</div>
 		<div class="">
 			<label for="promotional_copy">Promotional copy</label>
-			<p>Hint: Provide a summary of the expected outcome </p>
-			{{-- <input type="text" name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy"> --}}
+			<p>Hint: Make some promises </p>
 			<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy"></textarea>
 		</div>
 		<div class="">
