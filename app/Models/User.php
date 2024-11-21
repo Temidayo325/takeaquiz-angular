@@ -86,4 +86,9 @@ class User extends Authenticatable
     {
         return null !== $this->role()->whereIn('role', $role)->first();
     }
+
+    public function attendance()
+    {
+        // return $this->hasManyTh
+    }
 }
