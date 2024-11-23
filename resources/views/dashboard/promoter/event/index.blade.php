@@ -111,7 +111,7 @@
 	                	<span class="cursor-pointer text-blue-800 underline px-3">Tickets</span>
 	                </p>
 	                <template x-if="event.tickets.length == 0">
-	                	<p class="col-span-full text-center py-2">There are tickets for this event yet, proceed to the Ticket section to create a one.</p>
+	                	<p class="col-span-full text-center py-2">There are no tickets for this event yet, proceed to the Ticket section to create a one.</p>
 	                </template>
 	                <template x-if="event.tickets.length > 0">
 	                	<div class="w-full col-span-full col-start-2">

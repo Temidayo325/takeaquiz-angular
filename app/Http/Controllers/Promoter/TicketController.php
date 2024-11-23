@@ -10,12 +10,13 @@ class TicketController extends Controller
     public function index()
     {
     	$events = \App\Models\Event::with('tickets')
-    			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date')
+    			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date', 'location', 'flier', 'isPremium', 'promotional_copy')
     			->where('user_id', auth()->id())
     			->latest()
     			->orderBy('id')
     			->cursorPaginate(5);
-    	return view("dashboard.promoter.ticket.index", ['events' => $events]);
+        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	return view("dashboard.promoter.ticket.index", ['events' => $events, 'user' => $user]);
     }
 
     public function create()
@@ -80,4 +81,5 @@ class TicketController extends Controller
     		'events' => $events
     	]);
     }
+
 }
