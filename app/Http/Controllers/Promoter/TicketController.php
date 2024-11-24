@@ -9,8 +9,9 @@ class TicketController extends Controller
 {
     public function index()
     {
-    	$events = \App\Models\Event::with('tickets')
-    			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date', 'location', 'flier', 'isPremium', 'promotional_copy')
+    	$events = \App\Models\Event::with(['tickets.attendance.user' => function ($query){
+                $query->select('id','nickname', 'email', 'updated_at'); 
+            }])->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date', 'location', 'flier', 'isPremium', 'promotional_copy')
     			->where('user_id', auth()->id())
     			->latest()
     			->orderBy('id')

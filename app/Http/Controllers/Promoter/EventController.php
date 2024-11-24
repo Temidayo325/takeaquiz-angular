@@ -11,7 +11,7 @@ class EventController extends Controller
 {
     public function index()
     {
-    	$events = \App\Models\Event::with('tickets.attendances')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = \App\Models\Event::with('tickets.attendance')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.promoter.event.index", ['events' => $events, 'user' => $user]);
     }

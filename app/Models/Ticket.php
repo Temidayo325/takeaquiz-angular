@@ -29,7 +29,7 @@ class Ticket extends Model
         return $this->hasMany(Sale::class);
     }
 
-    public function attendances()
+    public function attendance()
     {
         return $this->hasMany(Attendance::class);
     }

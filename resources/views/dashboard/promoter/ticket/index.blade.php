@@ -9,6 +9,7 @@
 						viewToggle: false,
 						editToggle: false,
 						chosenTicket: null,
+						chosenAttendance: [],
 						chosenEvent: null,
 						typeLength: 0,
 						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, 
@@ -61,6 +62,8 @@
 						{
 							this.chosenTicket = ticket
 							this.chosenEvent = event
+							this.chosenAttendance = ticket.attendance
+							console.log(event)
 							this.viewToggle = true
 							this.editToggle = false
 							this.typeLength = parseInt(ticket.type.trim().length)
@@ -141,9 +144,9 @@
 			        <li class="me-2" role="presentation">
 			            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-styled-tab" data-tabs-target="#styled-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Presentation</button>
 			        </li>
-			        <li class="me-2" role="presentation">
+			       {{--  <li class="me-2" role="presentation">
 			            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Edit</button>
-			        </li>
+			        </li> --}}
 			        <li class="me-2" role="presentation">
 			            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Attendance</button>
 			        </li>
@@ -170,11 +173,11 @@
             			</div>
             		</template>		
 			    </div>
-			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+			    {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
 			        Ticket form would be here
-			    </div>
+			    </div> --}}
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
-			       Attendace would pop up here
+			       <x-attendance></x-attendance>
 			    </div>
 			</div>
 	        </div>

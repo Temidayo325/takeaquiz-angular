@@ -53,6 +53,10 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::post('/events/create', [EventController::class, 'store']);
     Route::get('/events/create', [EventController::class, 'create'])->name('promoter.event.create');
     // ========== Event routes goes here ======== \\
+    // ========== Attendancec route goes here ======= \\
+    Route::post('/ticket/attendance/search', [\App\Http\Controllers\Promoter\AttendanceController::class, 'search']);
+    Route::post('/ticket/attendance/mark', [\App\Http\Controllers\Promoter\AttendanceController::class, 'markUserAsPresent']);
+    // ========== Ends here ============\\
 });
 
 Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function () {
