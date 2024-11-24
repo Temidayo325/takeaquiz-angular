@@ -29,6 +29,11 @@ class Ticket extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function attendance()
     {
         return $this->hasMany(Attendance::class);

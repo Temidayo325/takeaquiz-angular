@@ -61,8 +61,11 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
 
 Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
-    // ========== Ticket routes goes here ======== \\
-    // ========== Ticket routes ends here ======== \\
+    // ========== User routes goes here ======== \\
+    Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
+    Route::post('/users/paginate', [\App\Http\Controllers\Admin\UserController::class, 'paginateUsers']);
+    Route::post('/users/search', [\App\Http\Controllers\Admin\UserController::class, 'search']);
+    // ========== User routes ends here ======== \\
     
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\Admin\EventController::class, 'index'])->name('admin.event.index');
