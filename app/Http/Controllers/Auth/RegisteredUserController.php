@@ -41,7 +41,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
+        {
+            # code...
+            return redirect()->intended(route('promoter.dashboard', absolute: false));
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

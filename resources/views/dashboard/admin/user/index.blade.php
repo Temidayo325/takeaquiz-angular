@@ -5,6 +5,8 @@
 @section('content')
 	<div class="text-black px-10" x-data='{ user: @json($user),
 		users: @json($users),
+		originalRoles: @json($roles),
+		rolesToAssign: [],
 		searchTerm: "",
 		safeKeepUsersList: [],
 		chosenUser: null,
@@ -55,12 +57,54 @@
 		viewTicket(user)
 		{
 			console.log(user)
+			this.rolesToAssign = this.sortRoles(user.role)
 			this.chosenUser = user
 			$refs.sideBarButton.dispatchEvent(new Event("click"))
 		},
-		addRole(role)
+		sortRoles(userRoles)
 		{
-			alert("I hear")
+			let unassigedRoles = [];
+			this.originalRoles.forEach((role) => {
+			    if (!userRoles.some((originalRole) => originalRole.role === role.role)) {
+			        unassigedRoles.push(role);
+			    }
+			});
+			return unassigedRoles
+		},
+		AddRole(role)
+		{
+			try {
+                axios.post("/admin/dashboard/users/roles/assign", {role: role.role, user_id: this.chosenUser.id})
+                .then( ( response ) => {
+                	{{-- Adapt the changes to the current dataset --}}
+                	this.chosenUser.role = response.data.user.role
+                	{{-- this.rolesToAssign = sortRoles(this.chosenUser.role) --}}
+                	let roleIndex = this.rolesToAssign.findIndex( (roled) => roled.role == role.role)
+                	this.rolesToAssign.splice(roleIndex, 1)
+                	let userIndex = this.users.data.findIndex( (user) => user.id == this.chosenUser.id )
+                	this.users.data.splice(userIndex, 1, this.chosenUser);
+            	})
+                .catch(error => console.log(error))
+            } catch (error) {
+                console.error(error)
+            }
+		},
+		removeRole(role)
+		{
+			{{-- Send request --}}
+			try {
+                axios.post("/admin/dashboard/users/roles/unassign", {role: role.role, user_id: this.chosenUser.id})
+                .then(response => {
+                	{{-- Adapt the changes to the current dataset --}}
+                	this.rolesToAssign = this.sortRoles(response.data.user.role)
+                	this.chosenUser.role = response.data.user.role
+                	let userIndex = this.users.data.findIndex( (user) => user.id == this.chosenUser.id )
+                	this.users.data.splice(userIndex, 1, this.chosenUser);
+            	})
+                .catch(error => console.log(error))
+            } catch (error) {
+                console.error(error)
+            }
 		}
 	}'>
 		<div class="my-6 flex justify-between items-center">
@@ -137,22 +181,51 @@
 			</div>
 			<div id="default-styled-tab-content">
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+			    	
             		<template x-if="chosenUser != null">
 						<ul>
-							<p class="grid grid-cols-2 font-bold gap-5">
+							<h2 class="font-bold text-md mt-3 mb-2" x-text="chosenUser.nickname + '  s current roles'"></h2>
+							<p class="grid grid-cols-3 font-bold gap-3">
 								<span>Current role</span>
+								<span></span>
 								<span>Action</span>
 							</p>
 							<template x-for="role in chosenUser.role">
-								<li class="grid grid-cols-2 items-center py-3">
-									<p x-text="role.role"></p>
-									<div class="flex justify-start items-center">
-										<button x-show="role.role == 'admin'" class="bg-red-600 text-gray-300 px-4 py-2 border-none underline" @click="addRole(role.role)">Add promoter role</button>
-										<button x-show="role.role == 'promoter'" class="text-green-700 px-4 py-2 underline border-none" @click="addRole(role.role)">Add admin role</button>
+								<li class="grid grid-cols-3 gap-3 justify-evenly items-center py-3">
+									<p x-text="role.role.toUpperCase()"></p>
+									<span class="text-green-700 tracking-tightest font-bold text-sm border-none"><span >&#10003; <span>&#10003;</span></span></span>
+									<div class="flex justify-start items-center font-bold text-sm tracking-wider">
+										<button x-show="role.role != 'user'" @click="removeRole(role)" class="text-red-600 hover:underline hover:underline-offset-2">Remove role</button>
+										
 									</div>
 								</li>
 							</template>
 						</ul>
+					</template>
+					<h2 class="font-bold text-md mt-10 mb-2">Unassigned roles possible for the user</h2>
+					<template x-if="chosenUser != null">
+						<div>
+							<template x-if="rolesToAssign.length === 0">
+								<p class="text-center font-bold text-md text-gray-950 py-8">User has all the possible roles already</p>
+							</template>
+							<template x-if="rolesToAssign.length > 0">
+								<ul>
+									<p class="grid grid-cols-2 gap-1">
+										<span>Unassigned role</span>
+										<span></span>
+									</p>
+									<template x-for="role in rolesToAssign">
+										<li class="grid grid-cols-2 gap-3 justify-evenly items-center py-3">
+											<p x-text="role.role.toUpperCase()"></p>
+											<div class="flex justify-start items-center font-bold text-sm tracking-wider">
+												<button x-show="role.role != 'user'" @click="AddRole(role)" class="text-green-600 hover:underline hover:underline-offset-2">Add role</button>
+												
+											</div>
+										</li>
+									</template>
+								</ul>
+							</template>
+						</div>
 					</template>
 			    </div>
 			    {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">

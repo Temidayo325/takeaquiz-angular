@@ -65,6 +65,8 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
     Route::post('/users/paginate', [\App\Http\Controllers\Admin\UserController::class, 'paginateUsers']);
     Route::post('/users/search', [\App\Http\Controllers\Admin\UserController::class, 'search']);
+    Route::post('/users/roles/unassign', [\App\Http\Controllers\Admin\RoleController::class, 'RemoveRoleFromUser']);
+    Route::post('/users/roles/assign', [\App\Http\Controllers\Admin\RoleController::class, 'AddRoleToUser']);
     // ========== User routes ends here ======== \\
     
     // ========== Event routes goes here ======== \\

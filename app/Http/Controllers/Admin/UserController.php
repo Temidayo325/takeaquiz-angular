@@ -12,8 +12,13 @@ class UserController extends Controller
     public function index()
     {
     	$user = User::with('role')->where('id', auth()->id())->first();
+    	$roles = \App\Models\Role::get();
     	$users = User::with('role', 'sales')->latest()->orderBy('id')->cursorPaginate(10);
-    	return view("dashboard.admin.user.index", ['user' => $user, 'users' => $users]);
+    	return view("dashboard.admin.user.index", [
+    			'user' => $user, 
+    			'users' => $users,
+    			'roles' => $roles
+    	]);
     }
 
     public function paginateUsers(Request $request)
@@ -22,11 +27,6 @@ class UserController extends Controller
     	return response()->json($users);
     }
 
-    public function AddRoleToUser(Request $request)
-    {
-    	
-    }
-    
     public function search(Request $request)
     {
     	$users = Search::add(User::class, ['name', 'nickname', 'email'])

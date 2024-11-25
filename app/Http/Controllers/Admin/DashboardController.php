@@ -12,6 +12,9 @@ class DashboardController extends Controller
     {
     	$user = User::with('role')->where('id', auth()->id())->first();
     	$users = User::with('role', 'sales')->latest()->orderBy('id')->cursorPaginate(5);
-    	return view("dashboard.admin.index", ['user' => $user, 'users' => $users]);
+    	return view("dashboard.admin.index", [
+    		'user' => $user, 
+    		'users' => $users
+    	]);
     }
 }
