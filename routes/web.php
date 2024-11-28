@@ -76,6 +76,15 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::post('/event/delete', [\App\Http\Controllers\Admin\EventController::class, 'delete']);
     Route::post('/event/premium/toggle', [\App\Http\Controllers\Admin\EventController::class, 'togglePremium']);
     // ========== Event routes goes here ======== \\
+    // 
+    
+    // ========== Game routes goes here ======== \\
+    Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
+    Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);
+    Route::post('/games/search', [\App\Http\Controllers\Admin\GameController::class, 'search']);
+    Route::get('/games/create', [\App\Http\Controllers\Admin\GameController::class, 'create']);
+    Route::post('/games/create', [\App\Http\Controllers\Admin\GameController::class, 'store']);
+    // ========== Event routes goes here ======== \\
 });
 
 require __DIR__.'/auth.php';

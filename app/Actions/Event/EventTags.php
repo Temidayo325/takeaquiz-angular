@@ -1,6 +1,7 @@
 <?php 
 declare(strict_types = 1);
 namespace App\Actions\Event;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * 
@@ -8,14 +9,14 @@ namespace App\Actions\Event;
 class EventTags
 {
 	
-	public function add(string $tags, \App\Models\Event $event)
+	public function add(string $tags, Model $event)
 	{
 		$tagsArray = $this->cleanTags($tags);
 		// Attach the tags
 		$event->attachTags($tagsArray);
 	}
 
-	public function edit(string $tags, \App\Models\Event $event)
+	public function edit(string $tags, Model $event)
 	{
 		$tagsArray = $this->cleanTags($tags);
 		$event->syncTags($tagsArray);

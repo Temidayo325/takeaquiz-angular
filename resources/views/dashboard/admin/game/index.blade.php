@@ -1,0 +1,118 @@
+@extends('layouts.admin')
+
+@section('title', 'View all games')
+
+@section('content')
+	<div 	class="text-black px-10" 
+			x-data='{ user: @json($user),
+					games: @json($games),
+					searchterm: "",
+					chosenGame: null,
+					init(){
+						
+					},
+					fetchData(cursor)
+					{
+						try {
+			                axios.post("/admin/dashboard/games/paginate", {cursor: cursor})
+			                .then(response => {
+			                	console.log(response)
+			                	this.games = response.data
+			            	})
+			                .catch(error => console.log(error))
+			            } catch (error) {
+			                console.error(error)
+			            }
+					},
+					searchTerm()
+					{
+						axios.post("/admin/dashboard/games/search", {searchTerm: this.searchterm})
+						.then( ( response ) => {
+							if(!response.error)
+							{
+								this.games = response.data.games
+							}
+						})
+						.catch(error => console.log(error))
+					},
+					viewGameDetails(game)
+					{
+						this.chosenGame = game
+						$refs.sideBarButton.dispatchEvent(new Event("click"))
+					},
+	}'>
+		<div class="flex justify-between items-center my-10">
+			<h1 class="font-bold text-2xl">View available games</h1>
+			<div>
+				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
+					@csrf
+					<input type="text" class="w-64 p-2" x-model="searchterm" @input.debounce.500ms="searchTerm">
+					<button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button>
+				</form>
+			</div>
+		</div>
+		<div>
+			<a href="/admin/dashboard/games/create" class="bg-gray-950 px-10 py-3 text-gray-300 shadow-md">Create game</a>
+		</div>
+		<div>
+			<template x-if="games.data.length > 0 ">
+				<div >
+					<div class="w-full pb-20 py-10 grid md:grid-cols-4 md:gap-10 px-6">
+						<template x-for="game in games.data">
+							<div class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
+								<img :src="`{{ asset('.') }}${game.image}`" alt="Image depicting the game" class="w-full h-auto">
+								<div class="px-4 py-2">
+									<h2 class="font-bold leading-9 text-center" x-text="game.name">Name of the game</h2>
+								</div>
+							</div>
+						</template>
+					</div>
+					<div class="flex justify-end gap-10 my-4">
+						<template x-if="games.prev_cursor != null">
+							<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(games.prev_cursor)" >Prev</button>
+						</template>
+						<template x-if="games.next_cursor != null">
+							<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(games.next_cursor)">Next</button>
+						</template>
+					</div>
+				</div>
+			</template>
+			<template x-if="games.data.length <= 0">
+				<h2>You have not created any games yet, Click here to add some games</h2>
+			</template>
+			<x-sidebar-toggle-button></x-sidebar-toggle-button>
+			  
+			<!-- drawer component -->
+		    <div id="drawer-right-example" class="fixed top-0 right-0 z-40 w-64 md:w-96 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-gray-200 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
+		        <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+		            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+		            <span class="sr-only">Close menu</span>
+		        </button>
+		        <div class="py-4 overflow-y-auto text-black my-10">
+					<template x-if="chosenGame != null">
+						<div class="game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer pb-10" title="Click to view more information" >
+							<img :src="`{{ asset('.') }}${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
+							<div class="px-4 py-2">
+								<h2 class="font-bold leading-9 text-center mb-4" x-text="chosenGame.name">Name of the game</h2>
+								<h4 class="font-bold text-md">Game summary</h4>
+								<p x-text="chosenGame.summary"></p>
+								<p class="mt-4">
+									<strong>Minimum required players : </strong>
+									<span x-text="chosenGame.minimum_player"></span>
+								</p>
+								<p class="mt-2">
+									<strong>Maximum required players : </strong>
+									<span x-text="chosenGame.maximum_player"></span>
+								</p>
+								<h4 class="mt-4 font-bold text-md">How to play game</h4>
+								<p x-text="chosenGame.stepByStep"></p>
+							</div>
+						</div>
+					</template>
+		        </div>
+		    </div>
+		</div>
+	</div>
+
+@endsection
+
