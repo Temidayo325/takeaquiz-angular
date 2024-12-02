@@ -16,7 +16,7 @@
 				<p x-text="new Date(chosenEvent.event_date).toDateString()">Sunday 10th of August, 2024 @ 4:00 PM</p>
 				<p x-text="chosenEvent.location">31270 Rahul Roads Beckerview, KS 94569-2627</p>
 				<p x-text="chosenEvent.state + ' '+ chosenEvent.state">Lagos state</p>
-				<p class="pb-4">Event Organized by: <span x-text="user.nickname"></span></p>
+				<p class="pb-4">Event Organized by: <span x-text="chosenEvent.user.nickname"></span></p>
 			</div>
 			<div class="mt-10">
 					<p>Price : 

@@ -23,7 +23,7 @@ class Sale extends Model
     	return $this->belongsTo(Event::class);
     }
 
-    public function tickets()
+    public function ticket()
     {
         return $this->belongsTo(Sale::class);
     }

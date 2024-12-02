@@ -87,4 +87,29 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     // ========== Event routes goes here ======== \\
 });
 
+Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/', [\App\Http\Controllers\User\Usercontroller::class, 'index'])->name('user.dashboard.home');    
+    // ========== Event routes goes here ======== \\
+    Route::get('/events', [\App\Http\Controllers\User\EventController::class, 'index']);
+    Route::post('/events/search', [\App\Http\Controllers\User\UserController::class, 'search']);
+    // ========== Event routes goes here ======== \\
+
+    
+     // ========== Ticket routes goes here ======== \\
+    Route::get('/tickets', [\App\Http\Controllers\User\TicketController::class, 'index'])->name('user.dashboard.tickets');
+    Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);
+    Route::post('/tickets/checkout', [\App\Http\Controllers\User\TicketController::class, 'toCheckout']);
+    Route::get('/ticket/checkout', [\App\Http\Controllers\User\TicketController::class, 'Checkout'])->name('user.dashboard.ticket.checkout');
+    // ========== Ticket routes goes here ======== \\
+    
+    // ========== Game routes goes here ======== \\
+    Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
+    Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);
+    Route::post('/games/search', [\App\Http\Controllers\Admin\GameController::class, 'search']);
+    // ========== Event routes goes here ======== \\
+});
 require __DIR__.'/auth.php';

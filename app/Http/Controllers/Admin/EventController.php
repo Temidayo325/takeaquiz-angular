@@ -11,14 +11,14 @@ class EventController extends Controller
 {
     public function index()
     {
-    	$events = Event::with('tickets')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
     	$user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.admin.event.index", ['events' => $events, 'user' => $user]);
     }
 
     public function paginateEvents(Request $request)
     {
-    	$events = Event::with('tickets')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
     	return response()->json($events);
     }
 
@@ -27,7 +27,7 @@ class EventController extends Controller
     	$event = Event::find($request->id);
     	$event->isPremium = ! $event->isPremium;
     	$event->save();
-    	$events = Event::with('tickets')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
     	return response()->json([
     		'error' => false,
     		'errorMessage' => 'Event premium status successfully updated',
@@ -53,7 +53,7 @@ class EventController extends Controller
     {
     	$event = Event::find($request->id);
     	$event->delete();
-    	$events = Event::with('tickets')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
     	return response()->json([
     		'error' => false,
     		'errorMessage' => 'Ticket succesfully deleted',

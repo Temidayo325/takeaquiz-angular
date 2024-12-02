@@ -3,7 +3,11 @@
 				id: 13, user_id: 1, name: "Buju Phenomena gathering", state: "Lagos", starting_time: "04:11:24", event_date: "2024-11-25"}, 
 				ticket: {price: 0, type_copy: "", total_seat: 0, available_seat: 0, type: ""},
 				user: JSON.parse(sessionStorage.getItem("user")),
-				ticket: JSON.parse(sessionStorage.getItem("ticket"))
+				ticket: JSON.parse(sessionStorage.getItem("ticket")),
+				init()
+				{
+					console.log(this.chosenEvent)
+				}
 			}'
 			x-modelable="event"
 			x-model="chosenEvent"
@@ -30,7 +34,7 @@
 					</div>
 					<div class="pb-3 border-b border-gray-300">
 						<p class="text-gray-600 text-sm">Promoter</p>
-						<p class="font-bold text-lg text-black" x-text="user.nickname">CruiseHq</p>
+						<p class="font-bold text-lg text-black" x-text="chosenEvent.user.nickname">CruiseHq</p>
 					</div>
 					<div class="pb-3 border-b border-gray-300">
 						<p class="text-gray-600 text-sm">Date</p>
