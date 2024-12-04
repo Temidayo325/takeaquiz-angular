@@ -7,7 +7,7 @@
 		events: @json($events),
 		upcoming_events: @json($upcoming_events),
 		init() {
-        	sessionStorage.setItem("user", JSON.stringify(this.user))
+        	localStorage.setItem("user", JSON.stringify(this.user))
         	console.log(this.events)
    		}
 	}'>

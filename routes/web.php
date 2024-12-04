@@ -16,17 +16,20 @@ use App\Http\Controllers\Promoter\TicketController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage']);
+Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
 
 Route::get('/tickets', function () {
     return view('tickets');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -92,7 +95,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/', [\App\Http\Controllers\User\Usercontroller::class, 'index'])->name('user.dashboard.home');    
+    Route::get('/', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.dashboard.home');    
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\User\EventController::class, 'index']);
     Route::post('/events/search', [\App\Http\Controllers\User\UserController::class, 'search']);

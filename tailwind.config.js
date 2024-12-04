@@ -13,11 +13,25 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                display: ['Bangers, system-ui'],
+                body: ['Poppins, sans-serif']
             },
             backgroundImage: {
                 'vip-pattern': "url('../../public/images/architect.svg')",
+                'hero': "url('../../public/images/hero.jpg')",
+                'login': "url('../../public/images/login.jpg')",
+            },
+            colors: {
+                purple: {
+                  1000: '#1d1128'
+                },
+                red: {
+                    1000: '#DB162F'
+                },
+                lightpurple: '#E88EED',
+                greyish: '#878E76'
             }
-        },
+        }
     },
 
     plugins: [
