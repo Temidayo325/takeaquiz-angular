@@ -91,7 +91,7 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
 });
 
 Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('user.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
@@ -110,9 +110,9 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     // ========== Ticket routes goes here ======== \\
     
     // ========== Game routes goes here ======== \\
-    Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
-    Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);
-    Route::post('/games/search', [\App\Http\Controllers\Admin\GameController::class, 'search']);
+    Route::get('/games', [\App\Http\Controllers\User\GameController::class, 'index'])->name('admin.games.index');
+    Route::post('/games/paginate', [\App\Http\Controllers\User\GameController::class, 'paginateGames']);
+    Route::post('/games/search', [\App\Http\Controllers\User\GameController::class, 'search']);
     // ========== Event routes goes here ======== \\
 });
 require __DIR__.'/auth.php';

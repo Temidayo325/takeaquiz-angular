@@ -25,7 +25,7 @@ class Sale extends Model
 
     public function ticket()
     {
-        return $this->belongsTo(Sale::class);
+        return $this->belongsTo(Ticket::class);
     }
 
     public function user()

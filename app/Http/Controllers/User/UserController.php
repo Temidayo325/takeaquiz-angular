@@ -17,4 +17,9 @@ class UserController extends Controller
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.user.index", ['events' => $events, 'user' => $user, 'upcoming_events' => $upcoming_events]);
     }
+
+    public function edit()
+    {
+    	
+    }
 }

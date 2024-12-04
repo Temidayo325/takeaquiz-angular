@@ -10,7 +10,7 @@ class TicketController extends Controller
 {
     public function index()
     {
-    	$events = Sale::with('ticket', 'event.user')->latest()->where('user_id', auth()->id())->limit(5)->get();
+    	$events = Sale::with('ticket', 'event.user')->latest()->where('user_id', auth()->id())->get();
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.user.ticket.all", ['events' => $events, 'user' => $user]);
     }

@@ -143,7 +143,7 @@
 							<li>
 								<button type="button" @click="showTickets(day)" x-text="day.day"
 									:class="{'bg-cover bg-purple-1000 bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}" 
-									class="text-center h-full w-full py-2 rounded-full bg-gray-300 "
+									class="text-center px-2 py-1 rounded-full bg-gray-300 text-sm"
 									:style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('.') }}${day.events[0].flier}')` : ''"></button>
 							</li>
 						</template>

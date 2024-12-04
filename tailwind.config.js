@@ -20,6 +20,8 @@ export default {
                 'vip-pattern': "url('../../public/images/architect.svg')",
                 'hero': "url('../../public/images/hero.jpg')",
                 'login': "url('../../public/images/login.jpg')",
+                'sidebar': "url('../../public/images/sidebar.jpg')",
+                'gamebar': "url('../../public/images/game.jpg')",
             },
             colors: {
                 purple: {

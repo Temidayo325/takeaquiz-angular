@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.user-dashboard')
 
-@section('title', 'View all games')
+@section('title', 'Checkout games for events')
 
 @section('content')
-	<div 	class="text-black px-10" 
+	<div 	class="text-purple" 
 			x-data='{ user: @json($user),
 					games: @json($games),
 					searchterm: "",
@@ -41,33 +41,38 @@
 						$refs.sideBarButton.dispatchEvent(new Event("click"))
 					},
 	}'>
-		<div class="my-10">
-			<h1 class="font-bold text-2xl">View available games</h1>
-			<div>
+		<div class="">
+			<div class="py-7 px-2 text-purple-1000 bg-gamebar bg-cover bg-no-repeat bg-greyish bg-blend-multiply">
+				<h1 class=" text-6xl font-normal font-display text-white/70 px-5 py-3">Fun party games!!</h1>
+				{{-- <p class="mt-3 text-md bg-white/50 px-5 py-3">We curated some games to light up your gatherings and events</p> --}}
+			</div>
+			<h1 class="font-bold font-body text-md mt-4">View available games</h1>
+			<div class="mt-2">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
-					<input type="text" class="w-64 p-2" x-model="searchterm" @input.debounce.500ms="searchTerm">
-					<button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button>
+					<input type="text" class="w-full text-sm px2 py-1 focus:outline-0 focus:border-lightpurple focus:ring-0" x-model="searchterm" placeholder="e.g. spin the bottle" @input.debounce.500ms="searchTerm">
+					{{-- <button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button> --}}
 				</form>
 			</div>
 		</div>
 		<div>
-			<a href="/admin/dashboard/games/create" class="bg-gray-950 px-10 py-3 text-gray-300 shadow-md">Create game</a>
-		</div>
-		<div>
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="w-full pb-20 py-10 grid md:grid-cols-4 md:gap-10 px-6">
+					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-10">
 						<template x-for="game in games.data">
-							<div class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
-								<img :src="`{{ asset('.') }}${game.image}`" alt="Image depicting the game" class="w-full h-auto">
-								<div class="px-4 py-2">
-									<h2 class="font-bold leading-9 text-center" x-text="game.name">Name of the game</h2>
+							<button class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
+								<img :src="`{{ asset('.') }}${game.image}`" alt="Image depicting the game" class="w-full h-32">
+								<div class="px-2 py-1 text-sm">
+									<h2 class="font-bold text-center" x-text="game.name">Name of the game</h2>
+									<p>
+										<span>Min:<span class="font-bold" x-text="game.minimum_player"></span></span>
+										<span>Max:<span class="font-bold" x-text="game.maximum_player"></span></span>
+									</p>
 								</div>
-							</div>
+							</button>
 						</template>
 					</div>
-					<div class="flex justify-end gap-10 my-4">
+					<div class="flex justify-end gap-10 my-1 pb-20">
 						<template x-if="games.prev_cursor != null">
 							<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(games.prev_cursor)" >Prev</button>
 						</template>
@@ -93,19 +98,19 @@
 						<div class="game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer pb-10" title="Click to view more information" >
 							<img :src="`{{ asset('.') }}${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
 							<div class="px-4 py-2">
-								<h2 class="font-bold leading-9 text-center mb-4" x-text="chosenGame.name">Name of the game</h2>
+								<h2 class="font-display leading-9 text-center mb-4" x-text="chosenGame.name">Name of the game</h2>
 								<h4 class="font-bold text-md">Game summary</h4>
-								<p x-text="chosenGame.summary"></p>
+								<p x-text="chosenGame.summary" class="text-sm leading-8"></p>
 								<p class="mt-4">
-									<strong>Minimum required players : </strong>
+									<strong>Min players : </strong>
 									<span x-text="chosenGame.minimum_player"></span>
 								</p>
 								<p class="mt-2">
-									<strong>Maximum required players : </strong>
+									<strong>Max players : </strong>
 									<span x-text="chosenGame.maximum_player"></span>
 								</p>
-								<h4 class="mt-4 font-bold text-md">How to play game</h4>
-								<p x-text="chosenGame.stepByStep"></p>
+								<h4 class="mt-8 font-bold text-md">How to play game</h4>
+								<p x-text="chosenGame.stepByStep" class="text-sm leading-8"></p>
 							</div>
 						</div>
 					</template>
