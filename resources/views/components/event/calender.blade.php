@@ -1,5 +1,5 @@
 @props(['events', 'events_today', 'premium_events'])
-<div class="text-gray-950" x-data='{ user: {},
+<div class="text-purple-1000" x-data='{ user: {},
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),
@@ -73,21 +73,22 @@
    		}
 	}'>
 		<section {{ $attributes->merge(['class' => 'text-gray-950']) }}>
-			<div class="px-4  md:px-10">
+			<div class="md:py-10 md:px-10">
 				<template x-if="events_today.length > 0">
-					<div class="mt-10">
-						<h2 class="font-bold text-xl">Today's update</h2>
-						<ul class="mt-3 text-greyish">
+					<div class="mt-5 md:mt-10 text-purple-1000">
+						<h2 class="font-normal font-body text-xl">Today's update</h2>
+						<ul class="mt-7 mb-10 grid gap-5 text-greyish md:mt-12 md:px-12">
 							<template x-for="event in events_today">
-								<li class="border-t-4 border-greyish py-5">
-									<div class="grid gap-2 md:flex md:justify-start md:items-start ">
-										<p x-text="new Date().toDateString()" class=""></p>
-										<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
+								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:text-purple-1000">
+									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
+										<p x-text="new Date().toDateString()" class="md:hidden"></p>
+										<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
 										<div>
 											<h2 x-text="event.name" class="text-2xl"></h2>
+											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
 											<div class="flex justify-start items-center gap-5 mt-1">
 												<p class="flex justify-start items-center gap-1">
-													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">  <path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
 													<span x-text="event.state"></span>
 												</p>
 												<p class="flex justify-start items-center gap-1">
@@ -95,6 +96,10 @@
 													<span x-text="event.starting_time"></span>
 												</p>
 											</div>
+											<p class="flex justify-start items-center gap-1 mt-2">
+												<svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+												<span x-text="event.location" class="text-sm"></span>
+											</p>
 										</div>
 									</div>
 								</li>
@@ -104,7 +109,7 @@
 				</template>
 				<template x-if="premium_events.length > 0">
 					<div class="mt-8">
-						<h2 class="font-bold text-lg">Premium events</h2>
+						<h2 class="font-body font-normal text-lg">Premium events</h2>
 						<ul class="">
 							<template x-for="event in premium_events">
 								<li>
@@ -115,19 +120,19 @@
 					</div>
 				</template>
 			</div>
-			<div class="w-full px-4 md:px-10 bg-gray-200 py-6 pb-20">
-				<h2 class="font-bold text-2xl pt-10 font-body text-purple-1000">Upcoming events</h2>
-				<div class="mt-3 text-purple-1000 font-body">
-					<h4 class="font-bold text-sm mb-3">Filters</h4>
+			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-transparent md:pt-3 text-purple-1000 md:py-6 pb-20">
+				<h2 class="font-body font-normal text-2xl pt-5 md:pt-10 text-purple-1000">Upcoming events</h2>
+				<div class="mt-3 text-purple-1000 font-body md:mt-6 md:px-10">
+					<h4 class="font-body font-normal md:hidden text-sm mb-3">Filters</h4>
 					<div>
 						{{-- <form @submit.prevent="sortByName()" class="">
 							<label for="search" class="font-bold text-sm">Search event name or promoter name</label>
 							<input type="search" placeholder="e.g pool party or Abey city" @change.debouce="sortByName()" name="search" id="search" class="focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg border-none focus:border focus:border-gray-100 mt-2 w-full" x-model="searchParameter">
 						</form> --}}
 
-						<form @submit.prevent="sortByState()" class="mt-8">
-							<label for="state" class="font-bold text-sm">Filter by state</label>
-							<select name="state" id="state" @change="sortByState()" class="focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg border-none focus:border focus:border-gray-100 mt-2 w-full" x-model="state">
+						<form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3">
+							<label for="state" class="font-body text-sm">Filter by state</label>
+							<select name="state" id="state" @change="sortByState()" class="focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg border-0 focus:border focus:border-gray-100 mt-2 w-full md:w-2/6 md:border md:border-gray-300" x-model="state">
 								<option value="" disabled>Select desired state</option>
 								<option value="all">All states</option>
 								<option value="abuja">Abuja</option>
@@ -137,13 +142,13 @@
 						</form>
 					</div>
 				</div>
-				<div class="mt-10">
+				<div class="mt-10 md:px-10 md:w-3/6">
 					<ul class="grid grid-cols-6 gap-x-3 gap-y-5">
 						<template x-for="day in calender_days">
 							<li>
 								<button type="button" @click="showTickets(day)" x-text="day.day"
 									:class="{'bg-cover bg-purple-1000 bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}" 
-									class="text-center px-2 py-1 rounded-full bg-gray-300 text-sm"
+									class="text-center px-2 md:px-3 md:py-2 py-1 rounded-full bg-gray-300 text-sm"
 									:style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('.') }}${day.events[0].flier}')` : ''"></button>
 							</li>
 						</template>
@@ -181,17 +186,18 @@
             			<p class="text-center py-4 ">There is no event currently scheduled for this day, you can refresh later in the day to see if an event has been scheduled for that day</p>
             		</template>
             		<template x-if="chosenEvents.length > 0">
-            			<ul class="grid gap-4">
+            			<ul class="grid gap-10 pb-12">
             				<template x-for="event in chosenEvents" :key="event.id">
-	            				<li class="border-t-4 border-greyish py-5 cursor-pointer" @click="showEventTickets(event, event.tickets)">
+	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded" @click="showEventTickets(event, event.tickets)">
 									<div class="grid gap-2 md:flex md:justify-start md:items-start ">
-										<p x-text="new Date().toDateString()" class=""></p>
+										<p x-text="new Date(event.event_date).toDateString()" class="text-sm md:text-md"></p>
 										<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
 										<div>
-											<h2 x-text="event.name" class="text-2xl"></h2>
-											<div class="flex justify-start items-center gap-5 mt-1">
+											<h2 x-text="event.name" class="text-xl md:text-2xl"></h2>
+											<div class="flex justify-start text-sm md:text-md items-center gap-5 mt-1">
 												<p class="flex justify-start items-center gap-1">
-													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
+
 													<span x-text="event.state"></span>
 												</p>
 												<p class="flex justify-start items-center gap-1">
@@ -199,6 +205,10 @@
 													<span x-text="event.starting_time"></span>
 												</p>
 											</div>
+											<p class="flex justify-start items-center gap-1 mt-3">
+												<svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+												<span x-text="event.location" class="text-sm "></span>
+											</p>
 										</div>
 									</div>
 								</li>
@@ -215,102 +225,102 @@
 			       </template>
 			       <template x-if="chosenTickets.length > 0">
 			       		<template x-for="ticket in chosenTickets">
-			       			<div >
+			       			<div class="grid gap-8">
 			       				<template x-if="ticket.type.length == 10">
 			            			<div class="">
 										{{-- <img src="" alt=""> --}}
-										<div class="bg-white px-4 py-10 pb-5 rounded w-64 text-gray-950 mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg ">
+										<div class="bg-white px-4 py-10 pb-5 rounded w-48 md:w-64 text-purple-1000 font-body mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg ">
 											<div>
 												<div class="border-b border-black">
-													<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>
-													<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
+													<h2 class="text-3xl font-display" x-text="chosenEvent.name"></h2>
+													<p class="text-sm py-3" x-text="chosenEvent.starting_time + ' , ' + chosenEvent.event_date"></p>
 												</div>
 												<div class="grid grid-cols-2 gap-6 text-left mt-5">
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">Ticket owner</p>
-														<p class="font-bold text-lg text-black" x-text="user.nickname || 'Your nickname'">CruiseHq</p>
+														<p class="text-greyish text-sm">Ticket owner</p>
+														<p class="text-lg text-purple-1000" x-text="user.nickname || 'Your nickname'">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">Promoter</p>
-														<p class="font-bold text-lg text-black" x-text="chosenEvent.user.nickname">CruiseHq</p>
+														<p class="text-greyish text-sm">Promoter</p>
+														<p class="text-lg text-purple-1000" x-text="chosenEvent.user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">Date</p>
-														<p class="font-bold text-black" x-text="new Date(chosenEvent.event_date).toDateString()"></p>
+														<p class="text-greyish text-sm">Date</p>
+														<p class="text-purple-1000" x-text="new Date(chosenEvent.event_date).toDateString()"></p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">Time</p>
-														<p class="font-bold text-black" x-text="chosenEvent.starting_time">4:00 PM</p>
+														<p class="text-greyish text-sm">Time</p>
+														<p class="text-purple-1000" x-text="chosenEvent.starting_time">4:00 PM</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">Location</p>
-														<p class="font-bold text-black" x-text="chosenEvent.location"></p>
+														<p class="text-greyish text-sm">Location</p>
+														<p class="text-purple-1000" x-text="chosenEvent.location"></p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-gray-600 text-sm">State</p>
-														<p class="font-bold text-black" x-text="chosenEvent.state"></p>
+														<p class="text-greyish text-sm">State</p>
+														<p class="text-purple-1000" x-text="chosenEvent.state"></p>
 													</div>
 												</div>
 												<div class="mt-10">
-													<p>Price : 
-														<span class="font-bold text-xl">&#8358; </span>
-														<span x-text="new Intl.NumberFormat().format(ticket.price)"></span>
+													<p>	
+														<span class="font-bold text-xl text-purple-1000">&#8358; </span>
+														<span class="font-bold text-xl text-purple-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
 													</p>
 												</div>
 											</div>
 										</div>
-										<div class="mt-12">
-											<h2 class="font-bold text-left py-2 text-xl">USP of <span x-text="ticket.type"></span></h2>
-											<p x-text="ticket.type_copy" class="text-left text-gray-950 tracking-wider leading-8"></p>
+										<div class="mt-6 md:mt-10 text-purple-1000">
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 										</div>
 										<div class="flex justify-center items-center mb-10 mt-4">
-											<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-gray-950 text-gray-300">Get ticket</button>
+											<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-red-1000 text-gray-100">Get ticket</button>
 										</div>
 									</div>
 			            		</template>		
 			            		<template x-if="ticket.type.length == 17">
 			            			<div>
-										<div class="bg-gray-500 pt-4 pb-10 rounded w-64 mx-auto text-gray-300 mt-2 text-center">
-											<p class="text-md text-gray-200 py-2 block bg-transparent" x-text="user.nickname">Light</p>
-											<h2 class="font-bold text-xl py-3 text-gray-200 block bg-gray-950">General admission</h2>
+										<div class="bg-greyish pt-4 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-2 text-center text-purple-1000">
+											<p class="text-md py-2 block bg-transparent" x-text="user.nickname">Light</p>
+											<h2 class="text-md py-3 block text-greyish bg-purple-1000">General admission</h2>
 											<div class="px-4">
-												<h2 class="text-3xl font-bold text-gray-200" x-text="chosenEvent.name">Name of the event</h2>
+												<h2 class="text-4xl font-display text-red-1000 my-2" x-text="chosenEvent.name">Name of the event</h2>
 												<p class="mt-4 text-sm" x-text="chosenEvent.event_date">10th of August, 2024</p>
-												<p x-text="new Date(chosenEvent.event_date).toDateString()">Sunday 10th of August, 2024 @ 4:00 PM</p>
-												<p x-text="chosenEvent.location">31270 Rahul Roads Beckerview, KS 94569-2627</p>
-												<p x-text="chosenEvent.state + ' '+ chosenEvent.state">Lagos state</p>
+												<p x-text="new Date(chosenEvent.event_date).toDateString()" class="my-3">Sunday 10th of August, 2024 @ 4:00 PM</p>
+												<p x-text="chosenEvent.location" class="my-2">31270 Rahul Roads Beckerview, KS 94569-2627</p>
+												<p x-text="chosenEvent.state">Lagos state</p>
 												<p class="pb-4">Event Organized by: <span x-text="chosenEvent.user.nickname"></span></p>
 											</div>
 											<div class="mt-10">
-													<p>Price : 
-														<span class="font-bold text-xl">&#8358; </span>
-														<span x-text="new Intl.NumberFormat().format(ticket.price)"></span>
-													</p>
-												</div>
+												<p>	
+													<span class="font-bold text-xl text-red-1000">&#8358; </span>
+													<span class="font-bold text-xl text-red-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
+												</p>
+											</div>
 										</div>
 
-										<div class="mt-10">
-											<h2 class="font-bold text-left py-2 text-xl">USP of <span x-text="ticket.type"></span></h2>
-											<p x-text="ticket.type_copy" class="text-left text-gray-950 tracking-wider leading-8"></p>
+										<div class="mt-6 md:mt-10 text-purple-1000">
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 										</div>
 										<div class="flex justify-center items-center mb-10 mt-4">
-											<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-gray-950 text-gray-300">Get ticket</button>
+											<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-red-1000 text-gray-100">Get ticket</button>
 										</div>
 									</div>
 			            		</template>
 			            		<template x-if="ticket.type.length == 3">
 			            			<div class="">
-										<div class="px-4 bg-gray-950 bg-vip-pattern py-6 pb-10 rounded w-64 mx-auto text-gray-300 mt-2 text-center shadow-md border border-gray-200 hover:shadow-3xl hover:border-gray-100 relative ">
+										<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-2 text-center shadow-md border border-gray-200 text-greyish hover:shadow-3xl hover:border-gray-100 relative ">
 											<div class="grid gap-4">
 												<div>
-													<p class="text-sm text-gray-400" x-text="user.nickname">Light's</p>
-													<h2 class="font-bold text-4xl py-2 text-amber-800">VIP</h2>
-													<p class="text-sm text-gray-400">ticket</p>
+													<p class="text-sm " x-text="user.nickname">Light's</p>
+													<h2 class="font-bold text-4xl py-2 text-red-1000">VIP</h2>
+													<p class="text-sm">ticket</p>
 												</div>
 												<div>
-													<p x-text="chosenEvent.user.nickname" class="text-gray-200">Name of the promoter</p>
-													<p class="text-gray-500">presents</p>
-													<h2 class="text-4xl font-bold text-amber-600 py-3" x-text="chosenEvent.name">Name of the event</h2>
+													<p x-text="chosenEvent.user.nickname" class="">Name of the promoter</p>
+													<p class="">presents</p>
+													<h2 class="text-4xl font-display text-red-1000 py-3" x-text="chosenEvent.name">Name of the event</h2>
 												</div>
 												<div class="">
 													<p class="mt-4 text-sm" x-text="chosenEvent.event_date">10th of August, 2024</p>
@@ -323,19 +333,19 @@
 												</div>
 											</div>
 											<div class="mt-10">
-												<p>Price : 
-													<span class="font-bold text-xl">&#8358; </span>
-													<span x-text="new Intl.NumberFormat().format(ticket.price)"></span>
+												<p>	
+													<span class="font-bold text-xl text-red-1000 font-body">&#8358; </span>
+													<span class="font-bold text-xl text-red-1000 font-body" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
 												</p>
 											</div>
 										</div>
-									</div>
-									<div class="mt-10">
-										<h2 class="font-bold text-left py-2 text-xl">USP of <span x-text="ticket.type"></span></h2>
-										<p x-text="ticket.type_copy" class="text-left text-gray-950 tracking-wider leading-8"></p>
-									</div>
-									<div class="flex justify-center items-center mb-10 mt-4">
-										<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-gray-950 text-gray-300">Get ticket</button>
+										<div class="mt-6 md:mt-10 text-purple-1000">
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
+										</div>
+										<div class="flex justify-center items-center mb-10 mt-4">
+											<button @click="initiateTicketPurchase(ticket.id)" class="py-3 px-8 bg-red-1000 text-gray-100">Get ticket</button>
+										</div>
 									</div>
 			            		</template>	
 			       			</div>

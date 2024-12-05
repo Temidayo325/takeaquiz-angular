@@ -12,7 +12,7 @@ class EventController extends Controller
 {
     public function index()
     {
-    	$events = Event::with('tickets', 'user')->whereBetween('event_date', [Carbon::now(), \Carbon\Carbon::parse('+30 day')])->orderBy('event_date', 'ASC')->get();
+    	$events = Event::with('tickets', 'user')->whereBetween('event_date', [Carbon::today(), Carbon::parse('+30 day')])->orderBy('event_date', 'ASC')->get();
     	$premium_events = $events->filter( function($event){
     		return $event->isPremium === true;
     	});
@@ -50,6 +50,10 @@ class EventController extends Controller
     	]);
     }
 
+    public function searchByTags(Request $request)
+    {
+      
+    }
    //  public function searchByEventName()
    //  {
    //  	$now = \Carbon\Carbon::now()->format('Y-m-d');

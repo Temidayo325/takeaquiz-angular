@@ -3,7 +3,7 @@
 @section('title', 'All my tickets')
 
 @section('content')
-	<div class="text-gray-950" x-data='{ user: @json($user),
+	<div class="text-purple-1000 md:mt-10 md:mb-3 md:px-10" x-data='{ user: @json($user),
 		events: @json($events),
 		init() {
         	sessionStorage.setItem("user", JSON.stringify(this.user))
@@ -12,10 +12,17 @@
 	}'>
 		<section class="grid gap-10">
 			<div>
-				<div class="">
-					<h2 class="font-bold text-lg">My tickets</h2>
+				<div class="shadow-md md:shadow-sm md:flex pb-10  px-4 md:py-10 bg-purple-300 items-center justify-between md:px-12">
+					<div class="max-w-lg">
+						<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-5 mb-3 md:mt-0 block md:hidden">
+						<h1 class="font-body font-bold text-4xl font-normal">OG <span x-text="user.nickname"></span></h1>
+						<p class="text-md leading-7 my-4">We've curated all your purchased event tickets. Get tickets to more events to boost your collection</p>
+						<a href="/user/dashboard/events" class="bg-red-1000 text-white px-9 py-3 mt-2 md:mt-0">Browse events</a>
+					</div>
+					<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-10 md:mt-0 hidden md:block">
 				</div>
-				<div class="mt-8">
+				<h2 class="text-xl font-body mt-10">My tickets</h2>
+				<div class="mt-4 md:mt-8">
 					<template x-if="events.length <= 0">
 						<div>
 							<p class="leading-8 py-4 text-sm tracking-wider">You haven't had any event tickets yet, get tickets for upcoming events to see them here</p>
@@ -23,7 +30,7 @@
 						</div>
 					</template>
 					<template x-if="events.length > 0">
-						<ul>
+						<ul class="md:grid md:grid-cols-3 md:gap-x-6 md:gap-y-10 md:pb-12">
 							<template x-for="event in events">
 								<div>
 									<template x-if="event.ticket.type == 'VIP'">
