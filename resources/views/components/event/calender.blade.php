@@ -1,5 +1,5 @@
 @props(['events', 'events_today', 'premium_events'])
-<div class="text-purple-1000" x-data='{ user: {},
+<div class="text-purple-1000 px-4" x-data='{ user: {},
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),
@@ -72,18 +72,18 @@
    			alert("Search by name")
    		}
 	}'>
-		<section {{ $attributes->merge(['class' => 'text-gray-950']) }}>
+		<section {{ $attributes->merge(['class' => 'pb-12']) }}>
 			<div class="md:py-10 md:px-10">
 				<template x-if="events_today.length > 0">
 					<div class="mt-5 md:mt-10 text-purple-1000">
-						<h2 class="font-normal font-body text-xl">Today's update</h2>
-						<p>Pure Vibes: Because every day should feel like Detty December</p>
+						<h2 class="font-normal text-greyish font-body text-xl">Today's update</h2>
+						<p class="text-greyish">Pure Vibes: Because every day should feel like Detty December</p>
 						<ul class="mt-7 mb-10 grid gap-5 text-greyish md:mt-12 md:px-12">
 							<template x-for="event in events_today">
 								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:text-purple-1000">
 									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
 										<p x-text="new Date().toDateString()" class="md:hidden"></p>
-										<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
+										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
 										<div>
 											<h2 x-text="event.name" class="text-2xl"></h2>
 											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
@@ -121,7 +121,7 @@
 					</div>
 				</template>
 			</div>
-			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-transparent md:pt-3 text-purple-1000 md:py-6 pb-20">
+			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-transparent md:pt-3 text-purple-1000 md:py-6 pb-12">
 				<h2 class="font-body font-normal text-2xl pt-5 md:pt-10 text-purple-1000">Upcoming events</h2>
 				<div class="mt-3 text-purple-1000 font-body md:mt-6 md:px-10">
 					<h4 class="font-body font-normal md:hidden text-sm mb-3">Filters</h4>
@@ -192,7 +192,7 @@
 	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded" @click="showEventTickets(event, event.tickets)">
 									<div class="grid gap-2 md:flex md:justify-start md:items-start ">
 										<p x-text="new Date(event.event_date).toDateString()" class="text-sm md:text-md"></p>
-										<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
+										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
 										<div>
 											<h2 x-text="event.name" class="text-xl md:text-2xl"></h2>
 											<div class="flex justify-start text-sm md:text-md items-center gap-5 mt-1">

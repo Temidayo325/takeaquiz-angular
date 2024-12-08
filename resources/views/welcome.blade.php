@@ -25,11 +25,11 @@
 			</div>
 		</header>
 		<section class="text-greyish">
-			<x-event.calender :events="$events" :events_today="$events_today" :premium_events="$premium_events" class="text-lightpurple"></x-event.calender>
+			<x-event.calender :events="$events" :events_today="$events_today" :premium_events="$premium_events" class="text-greyish"></x-event.calender>
 		</section>
-		<section class="py-4 pb-10 px-4 md:px-10 bg-lightpurple tracking-wider">
+		<section class="py-4 pb-10 px-4 md:px-10 bg-lightpurple md:bg-purple-200 tracking-wider md:pb-24 md:pt-12">
 			<h2 class="font-display text-6xl py-6 pb-12">Become a promoter in 3 easy steps</h2>
-			<div class="grid gap-6">
+			<div class="grid gap-6 md:grid-cols-3">
 				<div class="bg-gray-200 p-3 rounded shadow-md">
 					<h4 class="font-display text-purple-1000 mb-2 text-6xl">01</h4>
 					<p>Create an account using using the registration form on the website</p>

@@ -104,7 +104,7 @@
 </aside>
 
 <div class="sm:ml-64">
-   <div class="dark:border-gray-700 bg-gray-200 md:bg-blue-50 md:px-10">
+   <div class="dark:border-gray-700 bg-gray-200 md:bg-slate-200 md:px-10">
       <header class="px-10 py-6 flex justify-between hidden md:flex">
          <h3 class="font-body tracking-wider text-left text-md">{{config('app.name')}}</h3>
          <div class="flex justify-end gap-3 text-md">
