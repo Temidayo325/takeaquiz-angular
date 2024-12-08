@@ -23,6 +23,7 @@ class EventFactory extends Factory
             'starting_time' => fake()->time(), 
             'location' => fake()->address(),
             'flier' => '/images/gelgas.jpg',
+            'tags' => 'Ish, Consesual, Multiple, Fun, Dressparty',
             'state' => 'Lagos',
             'coordinate' => fake()->longitude($min = -180, $max = 180) . " : " .fake()->latitude($min = -90, $max = 90),
             'promotional_copy' => fake()->paragraph(),

@@ -14,6 +14,7 @@ class Event extends Model
     	'event_date',
     	'starting_time',
     	'state',
+        'tags',
     	'coordinate',
         'user_id',
         'location',

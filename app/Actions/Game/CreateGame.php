@@ -20,6 +20,7 @@ class CreateGame extends EventTags
 	    	'stepByStep' => $gameToBeCreated->stepByStep,
 	    	'minimum_player' => $gameToBeCreated->minimum_player,
 	    	'maximum_player' => $gameToBeCreated->maximum_player,
+	    	'tags' => $gameToBeCreated->tags,
 	    	'image' => $image_path
 		]);
 		$tag = new EventTags();

@@ -3,18 +3,44 @@
 @section('title', 'View all Scheduled events')
 
 @section('content')
-	<div 	class="text-black pb-32 md:px-10 md:mx-auto " 
-			x-data='{ events: @json($events),
-						open: false,
-						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, 
-						submitForm(){
-							axios.post("/promoter/dashboard/events/create", this.data)
-							.then(response => console.log(response))
-							.catch(error => console.log(error))
+	<div 	class="text-purple-1000 pb-32 px-4 md:px-10 md:mx-auto min-h-screen font-body" 
+			x-data='{   events: @json($events),
+						user: @json($user),
+						chosenEvent: null,
+						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "" }, 
+						spinner: false,
+						errorMessage: null,
+						createTicketButtonText: "Save edit",
+						init(){
+							console.log(this.events)
 						},
-						editEvent(event)
-						{
-							$dispatch("notify", {event: event})
+						submitForm(){
+							$refs.createTicketButton.setAttribute("disabled", "")
+							this.spinner = true
+							this.createTicketButtonText = "Saving edit ..."
+							this.toast("Saving edit ...", "#fff", "blue")
+							let formdata = new FormData($refs.form)
+							if(!this.data.flier)
+							{
+								formdata.append("event_flier", $refs.flier.files[0]);
+							}
+							formdata.append("id", this.data.id);
+							formdata.append("tags", this.data.tags);
+							axios.post("/promoter/dashboard/events/create", formdata)
+							.then( (response) => {
+								$refs.createTicketButton.removeAttribute("disabled")
+								this.spinner = true
+								this.createTicketButtonText = "Save edit"
+								this.toast("Edit saved Succesfully", "#fff", "green")
+								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "" }
+							})
+							.catch( (error) => {
+								this.spinner = false
+								this.createTicketButtonText = "Create ticket"
+								$refs.createTicketButton.removeAttribute("disabled")
+								this.toast(error.response.data.message, "#fff", "#DB162F")
+								this.errorMessage = error.response.data.message
+							})
 						},
 						fetchData(cursor)
 						{
@@ -32,157 +58,163 @@
 				                console.error(error)
 				            }
 						},
-						displaySideBar($event)
+						editEvent(event)
 						{
-							console.log($event.detail.event, this.data)
-							this.open =  !this.open
-							if(this.open)
-							{
-								this.data = $event.detail.event
-							}
-							
-						} 
+	    					this.chosenEvent = event
+	    					this.data = event
+	    				},
+						toast(text, color, background)
+						{
+	    					Toastify({
+							  text: text, 
+							  style: {
+							    background: background,
+							    color: color
+							  }
+							}).showToast();
+	    				},
+	    				findNReplace(pin, haystack, replacement)
+	    				{
+	    					let index = haystack.findIndex(pin)
+	    					haystack.splice(index, 1, replacement)
+	    				}
 		}'>
-		<div class="flex justify-between items-center my-4">
-			<h1>Event dashboard</h1>
-			<a href="/promoter/dashboard/events/create" class="px-6 py-2 bg-gray-950 text-gray-300">Create event</a>
-		</div>
-
-		{{-- <div>
-			<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-					<th scope="col" class="px-6 py-3">Name</th>
-					<th scope="col" class="px-6 py-3">State</th>
-					<th scope="col" class="px-6 py-3">Date</th>
-					<th scope="col" class="px-6 py-3">Time</th>
-					<th scope="col" class="px-6 py-3">Status</th>
-					<th scope="col" class="px-6 py-3">Action</th>
-				</thead>
-				<tbody>
-					<template x-for="event in events.data" :key="event.id">
-				        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-				        	<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" x-text="event.name"></th>
-			                <td class="px-6 py-4" x-text="event.state"></td>
-			                <td class="px-6 py-4" x-text="event.event_date"></td>
-			                <td class="px-6 py-4" x-text="event.starting_time"></td>
-			                <td class="px-6 py-4">
-			                	<template x-if="Date.parse(event.event_date) > Date.now()">
-								    <span class="text-green-600 font-bold">Active</span>
-								</template>
-								<template x-if="Date.now() > Date.parse(event.event_date)">
-								    <span class="text-red-600 font-bold">Done & Dusted</span>
-								</template>
-			                </td>
-			                <td class="px-2 py-4 font-bold" >
-			                	<span class="cursor-pointer text-blue-800 underline px-3" @click="editEvent(event)">Edit</span>
-			                	<span class="cursor-pointer text-blue-800 underline px-3">Tickets</span>
-			                </td>
-						</tr>
-				    </template>	
-				</tbody>
-			</table>
-		</div> --}}
-		<div class="text-sm text-gray-700 w-full text-sm text-left rtl:text-right dark:text-gray-400 mt-10">
-			<div class="grid grid-cols-6 gap-2 mt-2">
-				<h2 class="font-bold text-left px-3 py-3">Name</h2>
-				<h2 class="font-bold text-left px-3 py-3">State</h2>
-				<h2 class="font-bold text-left px-3 py-3">Date</h2>
-				<h2 class="font-bold text-left px-3 py-3">Time</h2>
-				<h2 class="font-bold text-left px-3 py-3">Status</h2>
-				<h2 class="font-bold text-left px-3 py-3">Action</h2>
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
+			<div class="max-w-lg">
+				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back <span x-text="user.nickname"></span></h1>
+				<p class="text-md leading-7 my-4">View all your events, tap on the edit button on each event card to edit the details of the events as required</p>
+				<a href="/promoter/dashboard/events/create" class="px-4 py-2 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
 			</div>
-			<template x-for="event in events.data" :key="event.id">
-				<div class="grid grid-cols-6 gap-3 odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 py-2">
-					<h2 x-text="event.name"></h2>
-					<p x-text="event.state"></p>
-					<p x-text="event.event_date"></p>
-					<p x-text="event.starting_time"></p>
-	            	<p>
-	            		<template x-if="Date.parse(event.event_date) > Date.now()">
-						    <span class="text-green-600 font-bold">Upcoming</span>
-						</template>
-						<template x-if="Date.now() > Date.parse(event.event_date)">
-						    <span class="text-red-600 font-bold">Done & Dusted</span>
-						</template>
-	            	</p>
-
-	                <p class="px-2 font-bold" >
-	                	<span class="cursor-pointer text-blue-800 underline px-3" @click="editEvent(event)">Edit</span>
-	                	<span class="cursor-pointer text-blue-800 underline px-3">Tickets</span>
-	                </p>
-	                <template x-if="event.tickets.length == 0">
-	                	<p class="col-span-full text-center py-2">There are no tickets for this event yet, proceed to the Ticket section to create a one.</p>
-	                </template>
-	                <template x-if="event.tickets.length > 0">
-	                	<div class="w-full col-span-full col-start-2">
-	                		<div class="font-bold text-sm  w-full grid grid-cols-4 gap-3">
-		                		<h4>Ticket type</h4>
-		                		<h4>Ticket Access</h4>
-		                		<h4 class="text-center">Total Seats</h4>
-		                		<h4 class="text-center">Remaining seats</h4>
-		                	</div>
-		                	<template x-for="ticket in event.tickets">
-			                	<div class="col-span-full col-start-2 w-full grid grid-cols-4 gap-2">
-			                		<p x-text="ticket.type" class="py-2"></p>
-			                		<p x-text="ticket.access_type"></p>
-			                		<p x-text="ticket.total_seat" class="text-center"></p>
-			                		<p x-text="ticket.available_seat" class="text-center"></p>
-			                	</div>
-			                </template>
-	                	</div>
-	                </template> 
-				</div>
-			</template>
+			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
-		<div @notify.window="displaySideBar"
-			x-show="open"
-			x-transition:enter.duration.50ms
-	    	x-transition:leave.duration.200ms
-	    >
-			<x-sidebar-container >
-				<form action="" method="post" >
-				@csrf
-				<div class="">
-					<label for="event_name">Name of the event</label>
-					<p>Hint: Make it as awesome as possible</p>
-					<input type="text" name="event_name" id="event_name" required minLength="5" x-model="data.name" class="text-gray-950">
-				</div>
-				<div class="">
-					<label for="state">State of the event</label>
-					<select name="state" id="state" required x-model="data.state">
-						<option value="kwara">Kwara</option>
-						<option value="lagos">Lagos</option>
-						<option value="abuja">Abuja</option>
-					</select>
-				</div>
-				<div class="">
-					<label for="event_date">Date of the event</label>
-					<input type="date" name="event_date" id="event_date" required x-model="data.event_date">
-				</div>
-				<div class="">
-					<label for="starting_time">Time of the event</label>
-					<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time">
-				</div>
-				<div class="">
-					<label for="promotional_copy">Promotional copy</label>
-					<p>Hint: Provide a summary of the expected outcome </p>
-					<input type="text" name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy">
-				</div>
-				<div class="">
-					<label for="coordinate">Coordinate</label>
-					<input type="text" name="coordinate" id="coordinate" required x-model="data.coordinate">
-				</div>
-
-				<button class="px-6 py-3 bg-gray-500 border-none text-gray-950" type="submit" @click.prevent="submitForm()">Save changes</button>
-			</form>
-			</x-sidebar-container>
+		<div class="flex justify-between items-center py-6 md:pt-12 md:pb-4">
+			<h1 class="font-bold text-md md:text-lg">My Events</h1>
+			<a href="/promoter/dashboard/events/create" class="md:hidden px-4 py-2 text-red-1000 font-bold md:font-normal md:bg-red-1000 md:text-gray-200">Create event</a>
 		</div>
 
+		<div class="text-sm text-gray-700 w-full text-sm text-left rtl:text-right dark:text-gray-400 mt-6 md:mt-8">
+			
+			<ul class="grid gap-10 md:grid-cols-4 md:gap-12">
+				<template x-for="event in events.data" :key="event.id">
+					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer relative" >
+						<div class="grid gap-2">
+							<div class="flex justify-between items-center">
+								<p x-text="new Date().toDateString(event.event_date)" class=""></p>
+								<template x-if="event.isPremium == 1">
+								    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
+								</template>
+							</div>
+							<img :src="`{{ asset('/images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+							<div>
+								<h2 x-text="event.name" class="text-xl font-display tracking-wider"></h2>
+								<div class="flex justify-start items-center gap-5 mt-1">
+									<p class="flex justify-start items-center gap-1">
+										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+										<span x-text="event.state"></span>
+									</p>
+									<p class="flex justify-start items-center gap-1">
+										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+										<span x-text="event.starting_time"></span>
+									</p>
+								</div>
+								<p class="mt-2">
+									<svg class="w-5 h-5 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+									<span x-text="event.location" class="text-sm"></span>
+								</p>
+							</div>
+						</div>
+						<p class="mt-2 flex justify-between items-baseline">
+		            		<template x-if="Date.parse(event.event_date) > Date.now()">
+							    <span class="text-green-600 font-bold">Upcoming</span>
+							</template>
+							<template x-if="Date.now() > Date.parse(event.event_date)">
+							    <span class="text-red-600 font-bold">Done & Dusted</span>
+							</template>
+							 <button class="cursor-pointer text-red-1000 underline-offset-4 underline px-3" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example" id="right-drawer-button" @click="editEvent(event)">Edit</button>
+		            	</p>
+
+		                
+					</li>
+				</template>
+			</ul>
+		</div>
+		
 		{{-- Pagination link --}}
 		<div class="flex justify-end gap-10 my-4">
-			<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(events.prev_cursor)">Prev</button>
-			<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(events.next_cursor)">Next</button>
+			<template x-if="events.data.prev_cursor">
+				<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(events.prev_cursor)">Prev</button>
+			</template>
+			<template x-if="events.data.next_cursor">
+				<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(events.next_cursor)">Next</button>
+			</template>
 		</div>
+
+		<!-- drawer component -->
+	    <div id="drawer-right-example" class="fixed top-0 right-0 z-40 w-64 md:w-96 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-gray-200 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
+	        <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+	            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+	            <span class="sr-only">Close menu</span>
+	        </button>
+	        <div class="py-4 overflow-y-auto text-black">
+	        	<form action="" method="post" class="bg-white p-3 mx-auto mt-3 overflow-hidden text-purple-1000 grid gap-3" x-ref="form">
+	        		<h2 class="font-display font-normal text-center text-purple-1000 text-lg py-3">Create a new event</h2>
+					@csrf
+					<template x-if="errorMessage != null">
+			       		<p x-text="errorMessage" class="text-purple-1000 p-2 text-sm leading-7 bg-red-300"></p>
+			       		</template>
+					<div class="">
+						<label for="name" class="font-bold text-sm block mb-1">Name of the event</label>
+						<p class="text-sm text-greyish py-1">Hint: Make the name sharp</p>
+						<input type="text" name="name" id="name" required minLength="5" x-model="data.name" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+					<div class="">
+						<label for="state" class="font-bold text-sm block mb-1">State of the event</label>
+						<select name="state" id="state" required x-model="data.state" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+							<option value="kwara">Kwara</option>
+							<option value="lagos">Lagos</option>
+							<option value="abuja">Abuja</option>
+						</select>
+					</div>
+					<div class="">
+						<label for="event_date" class="font-bold text-sm block mb-1">Date of the event</label>
+						<input type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+					<div class="">
+						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event</label>
+						<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+					<div class="">
+						<label for="location" class="font-bold text-sm block mb-1">Location</label>
+						<p class="text-sm text-greyish py-1">Provide a succint and clear direction to the venue using popular landmarks for easy comprehension</p>
+						<input type="text" name="location" id="location" required x-model="data.location" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+					<div class="">
+						<label for="promotional_copy" class="font-bold text-sm">Promotional copy</label>
+						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from this including artists performing, ballers present etc</p>
+						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
+					</div>
+					<div class="">
+						<label for="tags" class="font-bold text-sm">Event tags</label>
+						<p class="text-sm text-greyish py-1">Add some tags to help in search like you'll do in twitter, separate using a comma.</p>
+						<input type="text" name="tags" id="tags" required x-model="data.tags" placeholder="blockparty, party, shayo, badman, vibesAndChill" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full placeholder:text-gray-200">
+					</div>
+					<div class="">
+						<label for="flier" class="font-bold text-sm block mb-1">Event flier</label>
+						<input type="file" name="flier" id="flier" required x-ref="flier" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<div class="">
+						<label for="coordinate" class="font-bold text-sm block mb-1">Coordinate</label>
+						<input type="text" name="coordinate" id="coordinate" required x-model="data.coordinate" class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<button class="w-full py-3 bg-red-1000 border-none text-gray-200 mt-4 " type="submit" @click.prevent="submitForm()" x-ref="createTicketButton">
+						<svg x-show="spinner" aria-hidden="true" role="status" class="inline w-4 h-4 me-3 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/></svg>
+						<span x-text="createTicketButtonText"></span>
+					</button>
+				</form>
+	        </div>
+	    </div>
 	</div>
 
 @endsection

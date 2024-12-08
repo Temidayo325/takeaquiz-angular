@@ -20,8 +20,10 @@ return new class extends Migration
             $table->date('event_date');
             $table->string('starting_time'); 
             $table->string('state', 30);
-            $table->string('coordinate', 150);
+            $table->string('coordinate', 150)->nullable()->default(null);
             $table->text('location');
+            $table->text('tags');
+            $table->set('status', ['Draft', 'Published'])->default('Draft');
             $table->string('flier')->nullable();
             $table->boolean('isPremium')->default(false);
             $table->text('promotional_copy');

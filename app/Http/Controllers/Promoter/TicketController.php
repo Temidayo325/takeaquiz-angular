@@ -23,9 +23,8 @@ class TicketController extends Controller
     public function create()
     {
     	$events = \App\Models\Event::with('tickets')
-    						->select('id', 'user_id', 'name', 'event_date')
+                            ->where('user_id', auth()->id())
     						->where('event_date', '>=',\Carbon\Carbon::now())
-    						->where('id', auth()->id())
     						->latest()
 			    			->orderBy('id')
 			    			->cursorPaginate(5);
@@ -36,7 +35,7 @@ class TicketController extends Controller
     public function store(\App\Http\Requests\Ticket\CreateTicketRequest $request)
     {
     	try {
-    		$event = \App\Models\Ticket::create([
+    		$ticket = \App\Models\Ticket::create([
     				'event_id' => $request->event_id,
 			    	'price' => $request->price,
 			    	'total_seat' => $request->total_seat,
@@ -45,17 +44,10 @@ class TicketController extends Controller
 			    	'type_copy' => $request->type_copy,
 			        'access_type' => $request->access_type
     		]);
-			$events = \App\Models\Event::with('tickets')
-						->select('id', 'user_id', 'name', 'event_date')
-						->where('event_date', '>=',\Carbon\Carbon::now())
-						->where('id', auth()->id())
-						->latest()
-		    			->orderBy('id')
-		    			->cursorPaginate(5);
     		return response()->json([
 	    		'error' => false,
 	    		'errorMessage' => 'Ticket succesfully created',
-	    		'events' => $events
+	    		'ticket' => $ticket
 	    	]);
     	} catch (\Exception $e) {
     		return response()->json([

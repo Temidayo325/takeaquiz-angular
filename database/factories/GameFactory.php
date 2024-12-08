@@ -22,6 +22,7 @@ class GameFactory extends Factory
             'stepByStep' => fake()->paragraph(3), 
             'minimum_player' => random_int(1, 6), 
             'maximum_player' => random_int(6, 20),
+            'tags' => 'retro, non-sexual, chill',
             'image' => '/images/games/talk.jpg'
         ];
     }

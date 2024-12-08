@@ -23,7 +23,9 @@ class EventSeeder extends Seeder
         					['state' => 'Kwara'],
         					['state' => 'Abuja'],
         					['isPremium' => false],
-        					['isPremium' => true],
+                            ['tags' => 'Sexual', 'mature', 'milf', 'orgy'],
+                            ['tags' => 'Non-sexual, party, blockparty'],
+        					['tags' => 'retro, fun, dressup, chill'],
         				)
         				->create()
         				->each(function ($event){

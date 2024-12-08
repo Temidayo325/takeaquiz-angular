@@ -18,9 +18,11 @@ export default {
             },
             backgroundImage: {
                 'vip-pattern': "url('../../public/images/architect.svg')",
+                // 'admin-hero': "url('../../public/images/admin-hero.svg')",
                 'hero': "url('../../public/images/hero.jpg')",
                 'login': "url('../../public/images/login.jpg')",
                 'sidebar': "url('../../public/images/sidebar.jpg')",
+                'admin-sidebar': "url('../../public/images/admin-sidebar.jpg')",
                 'gamebar': "url('../../public/images/game.jpg')",
             },
             colors: {

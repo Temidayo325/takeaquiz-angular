@@ -21,6 +21,7 @@ class EventTags
 	public function edit(string $tags, Model $event)
 	{
 		$tagsArray = $this->cleanTags($tags);
+		$tagWithType = Tag::findOrCreate($tagsArray, strtolower(class_basename($event)));
 		$event->syncTags($tagsArray);
 	}
 

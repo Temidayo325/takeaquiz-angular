@@ -26,9 +26,6 @@
 				</div>
 				<div class="flex justify-between items-center md:mt-10">
 					<h2 class="font-normal font-body text-lg">My upcoming events</h2>
-					<template x-if="events.length > 2">
-						<a href="#" class="text-sm underline underline-offset-2 cursor-pointer">View all</a>
-					</template>
 				</div>
 				<div class="md:px-12">
 					<template x-if="upcoming_events.length <= 0">
@@ -68,9 +65,9 @@
 						<a href="/user/dashboard/events" class="text-sm underline underline-offset-2 cursor-pointer">View all</a>
 					</template>
 				</div>
-				<div class="py-10 md:px-12">
+				<div class="py-3 md:py-10 md:px-12">
 					<template x-if="events.length <= 0">
-						<p class="leading-8 py-4 font-bold text-sm tracking-wider">You haven't had any event tickets yet, get tickets for upcoming events to see them here. Click <a href="/user/dashboard/events">here</a> to see available events around you</p>
+						<p class="leading-8 py-2 md:py-4 font-bold text-sm tracking-wider">You haven't had any event tickets yet, get tickets for upcoming events to see them here. Click <a class="text-gray-100 bg-red-1000 px-3 py-1" href="/user/dashboard/events">here</a> to see available events around you</p>
 					</template>
 					<template x-if="events.length > 0">
 						<ul class="grid gap-3">

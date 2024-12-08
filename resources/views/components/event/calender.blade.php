@@ -77,6 +77,7 @@
 				<template x-if="events_today.length > 0">
 					<div class="mt-5 md:mt-10 text-purple-1000">
 						<h2 class="font-normal font-body text-xl">Today's update</h2>
+						<p>Pure Vibes: Because every day should feel like Detty December</p>
 						<ul class="mt-7 mb-10 grid gap-5 text-greyish md:mt-12 md:px-12">
 							<template x-for="event in events_today">
 								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:text-purple-1000">

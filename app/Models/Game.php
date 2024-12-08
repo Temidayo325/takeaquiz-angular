@@ -11,6 +11,6 @@ class Game extends Model
     use HasFactory, HasTags;
 
     protected $fillable = [
-    	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image'
+    	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image', 'tags'
     ];
 }

@@ -21,7 +21,7 @@
             </a>
 			<div class="my-24 text-center text-lightpurple">
 				<h1 class="text-7xl font-display  py-2">Updates HQ<h1>
-				<h3 class="font-body text-md ">Your one stop for confirm update</h3>
+				<h3 class="font-body text-md ">Welcome to CruiseHQ — the place where vibes and enjoyment are served hot. No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</h3>
 			</div>
 		</header>
 		<section class="text-greyish">
