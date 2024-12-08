@@ -33,14 +33,6 @@ class EventController extends Controller
     		}
     	}
         try {
-            // $file = $event->file('flier');
-            // // Store the file in the desired storage location
-            // if (Storage::size($file) > 2048) {
-            //     return response()->json([
-            //         'error' => true,
-            //         'message' => "Filesize cannot exceed 2MB"
-            //     ]);
-            // }
             $event = ( new \App\Actions\Event\CreateEvent() )((object) $event);
             return response()->json([
                 'error' => false,

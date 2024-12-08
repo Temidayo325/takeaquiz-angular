@@ -13,24 +13,31 @@ class GameSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Game::factory()
-        				->count(30)
+        				->count(10)
         				->sequence(
-        					['name' => 'Spin the bottle'],
         					['name' => 'Have you ever'],
         					['name' => 'Truth or Dare'],
-        					['name' => '2 truths and a lie'],
+                            ['name' => 'Never Have I Ever'],
+                            ['name' => 'Dance Battle'],
+                            ['name' => 'Whisper Challenge'],
+                            ['name' => 'Flip Cup Relay'],
+                            ['name' => 'Scavenger Hunt'],
+                            ['name' => 'Heads Up'],
+                            ['name' => 'Karaoke Roulette'],
+        					['name' => 'Charades: Vibes Edition'],
         					
         				)
         				->create()
                         ->each(function ($game){
-                            $tags = ['sexual', 'non-sexual', 'group', 'high-strung', 'no-stress', 'dangerous'];
+                            $tags = ['Chill', 'Vibe', 'group', 'high-strung', 'no-stress', 'dangerous', 'sexual', 'non-sexual', 'playful', 'running', 'football'];
                             $final_tags = [];
-                            for ($i=0; $i < 3; $i++) { 
+                            for ($i=0; $i < 4; $i++) { 
                                 # code...
                                 $random_int = random_int(0, 4);
                                 array_push($final_tags, $tags[$random_int]);
                             }
-                            $game->attachTags($final_tags);
-                        });;
+                            $game->tags = json_encode($final_tags);
+                            $game->save();
+                        });
     }
 }

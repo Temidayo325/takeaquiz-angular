@@ -1,13 +1,13 @@
 <section x-data='{ event: {
 				id: 13, user_id: 1, name: "Buju Phenomena gathering", state: "Lagos", starting_time: "04:11:24", event_date: "2024-11-25"}, 
 				ticket: {price: 0, type_copy: "", total_seat: 0, available_seat: 0, type: ""},
-				user: JSON.parse(sessionStorage.getItem("user")),
+				user: JSON.parse(localStorage.getItem("user")),
 				ticket: JSON.parse(sessionStorage.getItem("ticket"))
 			}'
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div>
-		<div class="bg-gray-500 pt-4 pb-10 rounded w-64 mx-auto text-gray-300 mt-2 text-center">
+		<div class="bg-gray-500 w-48 md:w-64 pt-4 pb-10 rounded mx-auto text-gray-300 mt-2 text-center">
 			<p class="text-md text-gray-200 py-2 block bg-transparent" x-text="user.nickname">Light</p>
 			<h2 class="font-bold text-xl py-3 text-gray-200 block bg-gray-950">General admission</h2>
 			<div class="px-4">
@@ -27,8 +27,8 @@
 		</div>
 
 		<div class="mt-10">
-			<h2 class="font-bold text-left py-2 text-xl">USP of <span x-text="ticket.type"></span></h2>
-			<p x-text="ticket.type_copy" class="text-left text-gray-950 tracking-wider leading-8"></p>
+			<h2 class="font-bold text-left py-2 text-md">USP of <span x-text="ticket.type"></span></h2>
+			<p x-text="ticket.type_copy" class="text-left text-purple-1000 tracking-wider leading-8"></p>
 		</div>
 	</div>
 </section>

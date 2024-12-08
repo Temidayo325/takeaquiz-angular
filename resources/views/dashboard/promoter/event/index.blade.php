@@ -96,7 +96,7 @@
 			
 			<ul class="grid gap-10 md:grid-cols-4 md:gap-12">
 				<template x-for="event in events.data" :key="event.id">
-					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer relative" >
+					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer relative " >
 						<div class="grid gap-2">
 							<div class="flex justify-between items-center">
 								<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -156,7 +156,7 @@
 	            <span class="sr-only">Close menu</span>
 	        </button>
 	        <div class="py-4 overflow-y-auto text-black">
-	        	<form action="" method="post" class="bg-white p-3 mx-auto mt-3 overflow-hidden text-purple-1000 grid gap-3" x-ref="form">
+	        	<form action="" method="post" class="bg-white p-3 mx-auto mt-3 overflow-hidden text-purple-1000 grid gap-3" x-ref="form" @submit.prevent="submit">
 	        		<h2 class="font-display font-normal text-center text-purple-1000 text-lg py-3">Create a new event</h2>
 					@csrf
 					<template x-if="errorMessage != null">

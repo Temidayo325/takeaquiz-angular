@@ -74,7 +74,7 @@
 			</template>
 		</div>
 		<div class="pb-20">
-			<ul class="grid gap-10 md:grid-cols-4 md:gap-12">
+			<ul class="grid gap-10 md:grid-cols-3 md:gap-12">
 				<template x-for="event in events.data" :key="event.id">
 					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer" @click="addEvent(event)" data-drawer-target="drawer-right-example" 
 					data-drawer-show="drawer-right-example" data-drawer-placement="right" 
@@ -87,10 +87,10 @@
 								    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
 								</template>
 							</div>
-							<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+							<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 							<div>
 								<h2 x-text="event.name" class="text-xl font-display tracking-wider"></h2>
-								<div class="flex justify-start items-center gap-5 mt-1">
+								<div class="flex justify-start items-center gap-5 mt-1 text-sm">
 									<p class="flex justify-start items-center gap-1">
 										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
 										<span x-text="event.state"></span>

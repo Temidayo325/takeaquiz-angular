@@ -51,17 +51,17 @@
 			.catch(error => console.log(error))
 		}
 	}' 
-		class="-tracking-wider text-gray-950" 
+		class="-tracking-wider text-purple-1000" 
 		x-modelable="attendance"
 		x-model="chosenAttendance"
 >
 	<form action="" method="post" @submit.prevent="searchForUserOnRecord()" class="flex justify-start items-center">
-		<input type="text" x-model="searchTerm" id="" placeholder="e.g. Yagami" class="focus:outline-none focus:border-none focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0" @input.debounce.500ms="searchForUserOnRecord">
-		<button type="submit" class="bg-gray-950 text-gray-300 py-2 border-4 border-gray-950 px-10 border-none shadow">Search</button>
+		<input type="text" x-model="searchTerm" id="" placeholder="e.g. Yagami" class="focus:outline-none focus:border-none focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0 w-48 md:w-full" @input.debounce.500ms="searchForUserOnRecord">
+		<button type="submit" class="bg-gray-950 text-gray-300 py-2 border-4 border-gray-950 hidden md:inline px-6 border-none shadow">Search</button>
 	</form>
 	<div x-show="showSearchResult" class="my-6">
 		<template x-if="searchResult.length == 0">
-			<h3 class="font-bold text-center">No user with that name or nickname bought a ticket for this event</h3>
+			<h3 class="leading-7 font-body text-center">No user with that name or nickname bought a ticket for this event</h3>
 		</template>
 		<template x-if="searchResult.length > 0">
 			<ul>
@@ -77,7 +77,7 @@
 	</div>
 	<div class="my-10">
 		<template x-if="attendance.length <= 0">
-			<p class="font-bold leading-9 text-md ">No one has been marked present yet</p>
+			<p class="font-body leading-9 text-md text-center">No one has been marked present yet</p>
 		</template>
 		<template x-if="attendance.length > 0">
 			<div class="relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-200">

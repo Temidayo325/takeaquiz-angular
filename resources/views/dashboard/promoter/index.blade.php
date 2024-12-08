@@ -37,9 +37,9 @@
 				<p class="leading-8 py-4 font-bold text-sm tracking-wider">You do not have an upcoming event yet, get tickets for upcoming events to see them here</p>
 			</template>
 			<template x-if="upcoming_events.length > 0">
-				<ul class="w-full overflow-x-auto grid gap-6 mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
+				<ul class="w-full grid gap-6 mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
 					<template x-for="event in upcoming_events">
-						<li class="p-3 bg-gray-100 shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 hover:border hover:border-gray-400" @click="showEventDetail(event)">
+						<li class="p-3 bg-white shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400" @click="showEventDetail(event)">
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -47,7 +47,7 @@
 									    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
 									</template>
 								</div>
-								<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 								<div>
 									<h2 x-text="event.name" class="font-display tracking-wider text-xl"></h2>
 									<div class="flex justify-start items-center gap-5 mt-1">
@@ -80,7 +80,7 @@
 			<template x-if="events.length > 0">
 				<ul class="grid gap-6 pb-12 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
 					<template x-for="event in events">
-						<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 shadow-2xl md:shadow-sm cursor-pointer" @click="showEventDetail(event)">
+						<li class="hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400 p-3 bg-white shadow-2xl md:shadow-sm cursor-pointer" @click="showEventDetail(event)">
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -88,7 +88,7 @@
 									    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
 									</template>
 								</div>
-								<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 								<div>
 									<h2 x-text="event.name" class="text-xl font-display tracking-wider"></h2>
 									<div class="flex justify-start items-center gap-5 mt-1">

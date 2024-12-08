@@ -1,14 +1,14 @@
-<section 	class="grid gap-6" 
+<section 	class="grid gap-6 text-purple-1000" 
 			x-data='{ event: {
 				id: 13, user_id: 1, name: "Buju Phenomena gathering", state: "Lagos", starting_time: "04:11:24", event_date: "2024-11-25"}, 
 				ticket: {price: 0, type_copy: "", total_seat: 0, available_seat: 0, type: ""},
-				user: JSON.parse(sessionStorage.getItem("user")),
+				user: JSON.parse(localStorage.getItem("user")),
 				ticket: JSON.parse(sessionStorage.getItem("ticket"))
 			}'
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div class="">
-		<div class="px-4 bg-gray-950 bg-vip-pattern py-6 pb-10 rounded w-64 mx-auto text-gray-300 mt-2 text-center shadow-md border border-gray-200 hover:shadow-3xl hover:border-gray-100 relative ">
+		<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-48 md:w-64 mx-auto text-gray-200 mt-2 text-center shadow-md border border-gray-200 duration-700 hover:shadow-3xl hover:border-gray-100 relative ">
 			<div class="grid gap-4">
 				<div>
 					<p class="text-sm text-gray-400" x-text="user.nickname">Light's</p>

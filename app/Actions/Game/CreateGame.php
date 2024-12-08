@@ -20,11 +20,24 @@ class CreateGame extends EventTags
 	    	'stepByStep' => $gameToBeCreated->stepByStep,
 	    	'minimum_player' => $gameToBeCreated->minimum_player,
 	    	'maximum_player' => $gameToBeCreated->maximum_player,
-	    	'tags' => $gameToBeCreated->tags,
+	    	'tags' => json_encode($this->turnStringTagsToArray( $gameToBeCreated->tags)),
 	    	'image' => $image_path
 		]);
 		$tag = new EventTags();
 		$tag->add($gameToBeCreated->tags, $game);
 		return $game;
+	}
+
+	private function turnStringTagsToArray(string $tags):Array
+	{
+		$tagArray = explode(',', $tags);
+		$newCleanedTagArray = [];
+		if ( count($tagArray) > 1 ) {
+			foreach ($tagArray as $tag) {
+				# code...
+				array_push($newCleanedTagArray, preg_replace('/[^a-zA-Z0-9-]/', '', strip_tags(trim($tag))));
+			}
+		}
+		return $newCleanedTagArray;
 	}
 }

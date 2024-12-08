@@ -13,8 +13,8 @@ class StoreEvent
 	{
 		$event = \App\Models\Event::find($editedEvent->id);
 		$event->save((array) $editedEvent->validated());
-		$tag = new EventTags();
-		$tag->edit($editedEvent->tags, $event);
+		// $tag = new EventTags();
+		// $tag->edit($editedEvent->tags, $event);
 		return $event;
 	}
 }

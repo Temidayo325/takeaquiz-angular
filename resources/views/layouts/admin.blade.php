@@ -63,7 +63,7 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2 md:pl-10 ml-10 md:ml-0">
                   <li>
-                     <a href="/promoter/dashboard/tickets" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700">All tickets</a>
+                     <a href="/promoter/dashboard/tickets" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700">Ticket performance</a>
                   </li>
                   <li>
                      <a href="/promoter/dashboard/tickets/create" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create ticket</a>
