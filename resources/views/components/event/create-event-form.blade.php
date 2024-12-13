@@ -8,7 +8,6 @@
 						this.createTicketButtonText = "Saving edit ..."
 						this.toast("Saving edit ...", "#fff", "blue")
 						let formdata = new FormData($refs.form)
-						formdata.append("event_flier", $refs.flier.files[0]);
 						formdata.append("tags", this.data.tags);
 						axios.post("/promoter/dashboard/events/create", formdata)
 						.then( (response) => {

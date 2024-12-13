@@ -11,9 +11,9 @@ use App\Actions\Event\EventTags;
 class CreateGame extends EventTags
 {
 	
-	function __invoke(object $gameToBeCreated)
+	function __invoke($gameToBeCreated)
 	{
-        $image_path = $gameToBeCreated->image->store('/games');
+        $image_path = $gameToBeCreated->picture->store('/images/games');
 		$game = \App\Models\Game::create([
 			'name' => $gameToBeCreated->name, 
 	    	'summary' => $gameToBeCreated->summary,
@@ -23,9 +23,9 @@ class CreateGame extends EventTags
 	    	'tags' => json_encode($this->turnStringTagsToArray( $gameToBeCreated->tags)),
 	    	'image' => $image_path
 		]);
-		$tag = new EventTags();
-		$tag->add($gameToBeCreated->tags, $game);
-		return $game;
+		// $tag = new EventTags();
+		// $tag->add($gameToBeCreated->tags, $game);
+		// return $game;
 	}
 
 	private function turnStringTagsToArray(string $tags):Array

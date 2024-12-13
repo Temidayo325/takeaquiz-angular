@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -14,14 +14,14 @@
 </head>
 <body>
 	<main class="bg-black pb-0 ">
-		<header class="py-3 px-4 md:px-10 shadow-sm bg-hero bg-purple-950 bg-blend-overlay h-[90vh] bg-cover tracking-wider">
-			<a href="/" class="sticky top-0 flex justify-start items-center gap-2 py-2">
-                <x-application-logo class="w-8 h-8 fill-current text-lightpurple" />
-                <h3 class="font-display  font-bold text-md text-lightpurple">CruiseHq</h3>
+		<header class="shadow-sm h-[110vh] bg-gray-100 bg-cover bg-no-repeat tracking-wider">
+			<a href="/" class="sticky top-0 flex justify-start items-center gap-2 py-3 px-4 md:px-12 bg-white">
+                <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
+                <h3 class="font-display tracking-widest font-bold text-lg text-purple-1000">CruiseHq</h3>
             </a>
-			<div class="my-24 text-center text-lightpurple">
-				<h1 class="text-7xl font-display  py-2">Updates HQ<h1>
-				<h3 class="font-body text-md ">Welcome to CruiseHQ — the place where vibes and enjoyment are served hot. No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</h3>
+			<div class="my-24 text-center text-purple-1000 md:my-36 px-4 md:w-3/6 md:px-12 ">
+				<h1 class="text-8xl font-display md:text-9xl py-2">Updates HQ<h1>
+				<h3 class="font-body text-sm ">Welcome to CruiseHQ — the place where vibes and enjoyment are served hot. No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</h3>
 			</div>
 		</header>
 		<section class="text-greyish">

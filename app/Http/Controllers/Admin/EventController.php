@@ -11,14 +11,14 @@ class EventController extends Controller
 {
     public function index()
     {
-    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(10);
     	$user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.admin.event.index", ['events' => $events, 'user' => $user]);
     }
 
     public function paginateEvents(Request $request)
     {
-    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(10);
     	return response()->json($events);
     }
 
@@ -40,12 +40,14 @@ class EventController extends Controller
     	$events = Search::add(Event::class, 'name')
 					    ->add(\App\Models\Ticket::class, 'type')
 					    ->beginWithWildcard()
-					    ->endWithWildcard(false)
+					    ->endWithWildcard(true)
 					    ->search($request->searchTerm);
     	return response()->json([
     		'error' => false,
     		'errorMessage' => 'Search results returned successfully',
-    		'events' => $events
+    		'events' => [
+                'data' => $events
+            ]
     	]);
     }
 

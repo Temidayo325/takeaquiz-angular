@@ -3,7 +3,7 @@
 @section('title', 'Users dashboard')
 
 @section('content')
-	<div class="text-black px-10" x-data='{ user: @json($user),
+	<div class="text-purple-1000 px-10 pb-20" x-data='{ user: @json($user),
 		users: @json($users),
 		originalRoles: @json($roles),
 		rolesToAssign: [],
@@ -15,6 +15,16 @@
 			{{-- console.log(this.users) --}}
         	sessionStorage.setItem("user", JSON.stringify(this.user))
    		},
+   		toast(text, background)
+		{
+			Toastify({
+			  text: text, 
+			  style: {
+			    background: background,
+			    color: "white"
+			  }
+			}).showToast();
+		},
    		fetchData(cursor)
 		{
 			if(typeof cursor == null)
@@ -22,14 +32,17 @@
 				return false;
 			}
 			try {
+				this.toast("fetching data", "blue")
                 axios.post("/admin/dashboard/users/paginate", {cursor: cursor})
                 .then(response => {
-                	console.log(response)
+                	this.toast("Users returned successfully", "green")
                 	this.users = response.data
             	})
-                .catch(error => console.log(error))
+                .catch( (error) => {
+                	this.toast("Error occured while trying to fetch data", "red")
+                })
             } catch (error) {
-                console.error(error)
+                this.toast("Error occured while trying to fetch data", "red")
             }
 		},
 		searchForUserOnRecord()
@@ -45,14 +58,18 @@
 		}, 
 		searchDatabaseForUser(searchTerm)
 		{
+			this.toast("Searching for user", "blue")
 			axios.post("/admin/dashboard/users/search", { searchTerm: searchTerm })
 			.then( ( response ) => {
 				if(!response.data.error)
 				{
+					this.toast("Possible users returned successfully", "green")
 					this.users = response.data.data
 				}
 			})
-			.catch(error => console.log(error))
+			.catch( (error) => {
+				this.toast("Error occured while searching for user", "red")
+			})
 		},
 		viewTicket(user)
 		{
@@ -73,6 +90,7 @@
 		},
 		AddRole(role)
 		{
+			this.toast("odifying user role", "blue")
 			try {
                 axios.post("/admin/dashboard/users/roles/assign", {role: role.role, user_id: this.chosenUser.id})
                 .then( ( response ) => {
@@ -83,15 +101,19 @@
                 	this.rolesToAssign.splice(roleIndex, 1)
                 	let userIndex = this.users.data.findIndex( (user) => user.id == this.chosenUser.id )
                 	this.users.data.splice(userIndex, 1, this.chosenUser);
+                	this.toast("User role adjusted ", "green")
             	})
-                .catch(error => console.log(error))
+                .catch( (error) => {
+                	 this.toast("An error occurred while making the change in role ", "red")
+                })
             } catch (error) {
-                console.error(error)
+                this.toast("An error occurred while making the change in role", "red")
             }
 		},
 		removeRole(role)
 		{
 			{{-- Send request --}}
+			this.toast("Modifying user role .... ", "blue")
 			try {
                 axios.post("/admin/dashboard/users/roles/unassign", {role: role.role, user_id: this.chosenUser.id})
                 .then(response => {
@@ -100,10 +122,13 @@
                 	this.chosenUser.role = response.data.user.role
                 	let userIndex = this.users.data.findIndex( (user) => user.id == this.chosenUser.id )
                 	this.users.data.splice(userIndex, 1, this.chosenUser);
+                	this.toast("User role successfully modified", "green")
             	})
-                .catch(error => console.log(error))
+                .catch((error) => {
+	                this.toast("An error occurred while making the change in role", "red")
+	            })
             } catch (error) {
-                console.error(error)
+               this.toast("An error occurred while making the change in role", "red")
             }
 		}
 	}'>
@@ -111,11 +136,11 @@
 			<h1 class="font-bold text-xl">User management dashboard</h1>
 			<form action="" method="post" @submit.prevent="searchForUserOnRecord" class="flex justify-start items-center">
 				<input type="text" x-model="searchTerm" id="" placeholder="e.g. Yagami" class="md:w-64 focus:outline-none focus:border focus:border-gray-300 focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0" @input.debounce.500ms="searchForUserOnRecord">
-				<button type="submit" class="bg-gray-950 text-gray-300 py-2 border-4 border-gray-950 px-10 border-none shadow">Search</button>
+				<button type="submit" class="bg-red-1000 text-gray-100 py-2 border-4 border-gray-950 px-10 border-none shadow">Search</button>
 			</form>
 		</div>
 		
-		<div class="flex justify-center items-center md:mt-12">
+		<div class="flex justify-center items-center md:mt-12 pb-12">
 			<template x-if="users.data.length <= 0">
 				<h3>No one yet</h3>
 			</template>
@@ -130,13 +155,13 @@
 				</thead>
 				<tbody>
 					<template x-for="user in users.data" :key="user.id">
-				        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+				        <tr class="odd:bg-white odd:dark:bg-gray-900 hover:bg-gray-200 duration-200 even:bg-gray-50 even:dark:bg-gray-00 border-b dark:border-gray-700">
 				        	<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" x-text="user.name"></th>
 			                <td class="px-6 py-4" x-text="user.nickname"></td>
 			                <td class="px-6 py-4" x-text="user.email"></td>
 			                <td class="px-6 py-4" x-text="user.phone"></td>
 			                <td>
-			                	<button class="font-bold underline text-blue-800" @click="viewTicket(user)">View</button>
+			                	<button class="font-bold underline text-blue-800" @click="viewTicket(user)">View roles</button>
 			                </td>
 						</tr>
 				    </template>	
@@ -147,8 +172,13 @@
 
 		{{-- Pagination link --}}
 		<div class="flex justify-end gap-10 my-4">
-			<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(users.prev_cursor)">Prev</button>
-			<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(users.next_cursor)">Next</button>
+			
+			<template x-if="users.prev_cursor != null">
+				<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(users.prev_cursor)">Prev</button>
+			</template>
+			<template x-if="users.next_cursor != null">
+				<button class="px-8 py-2 bg-gray-900 text-gray-400" @click="fetchData(users.next_cursor)">Next</button>
+			</template>
 		</div>
 
 		<div class="text-center hidden">

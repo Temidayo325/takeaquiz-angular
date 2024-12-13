@@ -32,7 +32,7 @@ class GameController extends Controller
 
     public function search(Request $request)
     {
-    	$games = Search::add(Game::class, ['name', 'summary', 'how-to', 'minimum_player'])
+    	$games = Search::add(Game::class, ['name', 'summary', 'stepByStep', 'minimum_player'])
 			              ->beginWithWildcard() 
 			              ->endWithWildcard(true)
 			              ->orderByRelevance()
@@ -50,7 +50,7 @@ class GameController extends Controller
     public function store(\App\Http\Requests\Game\CreateGameRequest $game)
     {
     	try {
-            $event = ( new \App\Actions\Game\CreateGame() )((object) $game);
+            $event = ( new \App\Actions\Game\CreateGame() )( $game);
             return response()->json([
                 'error' => false,
                 'message' => "Game successfully created"

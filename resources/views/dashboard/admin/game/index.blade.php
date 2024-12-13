@@ -3,7 +3,7 @@
 @section('title', 'View all games')
 
 @section('content')
-	<div 	class="text-black px-10" 
+	<div 	class="text-purple-1000 min-h-screen px-10" 
 			x-data='{ user: @json($user),
 					games: @json($games),
 					searchterm: "",
@@ -13,27 +13,46 @@
 					},
 					fetchData(cursor)
 					{
+						this.toast("Fetching data", "white", "blue")
 						try {
 			                axios.post("/admin/dashboard/games/paginate", {cursor: cursor})
 			                .then(response => {
-			                	console.log(response)
+			                	this.toast("Games successfully fetched", "white", "green")
 			                	this.games = response.data
 			            	})
-			                .catch(error => console.log(error))
+			                .catch( (error) => {
+			                	this.toast(error.response.data.message, "white", "red")
+			                	console.log(error)
+			                })
 			            } catch (error) {
 			                console.error(error)
+			                this.toast("An error occured while trying to fetch data", "white", "red")
 			            }
 					},
+					toast(text, color, background)
+					{
+    					Toastify({
+						  text: text, 
+						  style: {
+						    background: background,
+						    color: color
+						  }
+						}).showToast();
+    				},
 					searchTerm()
 					{
+						this.toast("Searching for games having "+ this.searchTerm, "white", "blue")
 						axios.post("/admin/dashboard/games/search", {searchTerm: this.searchterm})
 						.then( ( response ) => {
 							if(!response.error)
 							{
+								this.toast("Search result returned successfully", "white", "green")
 								this.games = response.data.games
 							}
 						})
-						.catch(error => console.log(error))
+						.catch( (error) => {
+							this.toast(error.response.data.messsage || "AN error while trying to search", "white", "red")
+						})
 					},
 					viewGameDetails(game)
 					{
@@ -41,18 +60,22 @@
 						$refs.sideBarButton.dispatchEvent(new Event("click"))
 					},
 	}'>
-		<div class="my-10">
-			<h1 class="font-bold text-2xl">View available games</h1>
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
+			<div class="max-w-lg">
+				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
+				<p class="text-md leading-7 my-4">View all the available games, to view more details about the game, click on the game card and a sidebar would pop out revealing more information ablut the game. Click the button below to create more games</p>
+				<a href="/admin/dashboard/games/create" class="px-4 py-2 font-bold md:font-normal bg-red-1000 text-gray-200">Create game</a>
+			</div>
+			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
+		</div>
+		<div class="mt-20 flex justify-end">
 			<div>
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
-					<input type="text" class="w-64 p-2" x-model="searchterm" @input.debounce.500ms="searchTerm">
+					<input type="text" class="w-72 p-2" placeholder="name of game goes here e.g. Spin the bottle" x-model="searchterm" @input.debounce.500ms="searchTerm">
 					<button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button>
 				</form>
 			</div>
-		</div>
-		<div>
-			<a href="/admin/dashboard/games/create" class="bg-gray-950 px-10 py-3 text-gray-300 shadow-md">Create game</a>
 		</div>
 		<div>
 			<template x-if="games.data.length > 0 ">

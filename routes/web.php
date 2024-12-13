@@ -22,10 +22,14 @@ use App\Http\Controllers\Promoter\TicketController;
 
 Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage']);
 Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
-
-Route::get('/tickets', function () {
-    return view('tickets');
-});
+// ========== Game routes goes here ======== \\
+Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('admin.games.index');
+Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
+Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'search']);
+    // ========== Event routes goes here ======== \\
+// Route::get('/tickets', function () {
+//     return view('tickets');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

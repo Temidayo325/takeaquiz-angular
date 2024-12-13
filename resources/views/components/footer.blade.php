@@ -1,6 +1,6 @@
 <footer class="border-t border-red-1000 font-body py-4 bg-black text-greyish px-4 md:px-10">
 	<p class="text-center pb-6 text-sm">Copyright of CruiseHq {{\Carbon\Carbon::now()->format('Y')}}</p>
-	<div class="grid gap-4">
+	<div class="grid gap-4 md:grid-cols-3">
 		<div>
 			<h3 class="font-bold">Contact us</h3>
 			<p class="my-2 flex justify-start items-center gap-3">
@@ -17,8 +17,14 @@
 			<a href="/register" class="text-sm block py-2">Create an account</a>
 			<a href="/login" class="text-sm block">Login your account</a>
 		</div>
-		<div class="border-t border-gray-100 py-2 text-sm mt-6">
-			<p class="text-center">Designed and developed by <a href="#" class="font-bold text-red-1000">Light</a> </p>
+		<div>
+			<h3 class="font-bold">Quick actions</h3>
+			<a href="/games" class="text-sm block py-2">checkout available Games</a>
+			<a href="/login" class="text-sm block">Login your account</a>
 		</div>
+		
+	</div>
+	<div class="border-t border-gray-100 py-2 text-sm mt-6 md:pb-12 md:mt-12">
+		<p class="text-center">Designed and developed by <a href="#" class="font-bold text-red-1000">Light</a> </p>
 	</div>
 </footer>

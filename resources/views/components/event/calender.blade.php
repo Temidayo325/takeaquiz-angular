@@ -1,5 +1,5 @@
 @props(['events', 'events_today', 'premium_events'])
-<div class="text-purple-1000 px-4" x-data='{ user: {},
+<div class="text-purple-1000 md:bg-gray-950 px-4" x-data='{ user: {},
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),
@@ -76,11 +76,11 @@
 			<div class="md:py-10 md:px-10">
 				<template x-if="events_today.length > 0">
 					<div class="mt-5 md:mt-10 text-purple-1000">
-						<h2 class="font-normal text-greyish font-body text-xl">Today's update</h2>
-						<p class="text-greyish">Pure Vibes: Because every day should feel like Detty December</p>
+						<h2 class="font-normal text-greyish font-body text-3xl">Today's update</h2>
+						<p class="text-greyish mt-3">Pure Vibes: Because every day should feel like Detty December</p>
 						<ul class="mt-7 mb-10 grid gap-5 text-greyish md:mt-12 md:px-12">
 							<template x-for="event in events_today">
-								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:text-purple-1000">
+								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300">
 									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
 										<p x-text="new Date().toDateString()" class="md:hidden"></p>
 										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
@@ -121,39 +121,42 @@
 					</div>
 				</template>
 			</div>
-			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-transparent md:pt-3 text-purple-1000 md:py-6 pb-12">
-				<h2 class="font-body font-normal text-2xl pt-5 md:pt-10 text-purple-1000">Upcoming events</h2>
-				<div class="mt-3 text-purple-1000 font-body md:mt-6 md:px-10">
-					<h4 class="font-body font-normal md:hidden text-sm mb-3">Filters</h4>
-					<div>
-						{{-- <form @submit.prevent="sortByName()" class="">
-							<label for="search" class="font-bold text-sm">Search event name or promoter name</label>
-							<input type="search" placeholder="e.g pool party or Abey city" @change.debouce="sortByName()" name="search" id="search" class="focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg border-none focus:border focus:border-gray-100 mt-2 w-full" x-model="searchParameter">
-						</form> --}}
-
-						<form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3">
-							<label for="state" class="font-body text-sm">Filter by state</label>
-							<select name="state" id="state" @change="sortByState()" class="focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg border-0 focus:border focus:border-gray-100 mt-2 w-full md:w-2/6 md:border md:border-gray-300" x-model="state">
-								<option value="" disabled>Select desired state</option>
-								<option value="all">All states</option>
-								<option value="abuja">Abuja</option>
-								<option value="kwara">Kwara</option>
-								<option value="lagos">Lagos</option>
-							</select>
-						</form>
+			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-gray-300 md:pt-3 pb-12 md:grid md:grid-cols-2 md:items-center md:py-12">
+				<h2 class="font-body font-normal text-2xl pt-5 text-purple-1000 md:text-greyish md:pt-10 md:hidden">Upcoming event calender</h2>
+				<div>
+					<div class="mt-3 text-greyish font-body md:mt-6 md:px-4">
+						<h4 class="font-body font-normal md:hidden text-sm mb-3 text-purple-1000 md:text-greyish ">Filters</h4>
+						<div class="md:flex md:justify-start">
+							<form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3 text-purple-1000 md:text-greyish">
+								<div class="">
+									<label for="state" class="font-body text-sm md:inline">Filter by state</label>
+									<select name="state" id="state" @change="sortByState()" class="border border-purple-100 focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg focus:border focus:border-gray-100 mt-2 w-full md:w-5/6 md:border-gray-300" x-model="state">
+										<option value="" disabled>Select desired state</option>
+										<option value="all">All states</option>
+										<option value="abuja">Abuja</option>
+										<option value="kwara">Kwara</option>
+										<option value="lagos">Lagos</option>
+									</select>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="mt-10 md:px-10 md:w-5/6">
+						<ul class="grid grid-cols-6 gap-x-3 gap-y-5">
+							<template x-for="day in calender_days">
+								<li>
+									<button type="button" @click="showTickets(day)" x-text="day.day"
+										:class="{'bg-cover bg-purple-1000 md:bg-gray-700  bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}" 
+										class="text-center px-2 md:px-3 md:py-2 py-1 rounded-full bg-gray-300 text-sm"
+										:style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('./images/fliers') }}/${day.events[0].flier}')` : ''"></button>
+								</li>
+							</template>
+						</ul>
 					</div>
 				</div>
-				<div class="mt-10 md:px-10 md:w-3/6">
-					<ul class="grid grid-cols-6 gap-x-3 gap-y-5">
-						<template x-for="day in calender_days">
-							<li>
-								<button type="button" @click="showTickets(day)" x-text="day.day"
-									:class="{'bg-cover bg-purple-1000 bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}" 
-									class="text-center px-2 md:px-3 md:py-2 py-1 rounded-full bg-gray-300 text-sm"
-									:style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('.') }}${day.events[0].flier}')` : ''"></button>
-							</li>
-						</template>
-					</ul>
+				<div class="hidden md:grid text-purple-1000">
+					<h1 class="text-7xl font-display ">Checkout Event Calender for the next 30 days</h1>
+					<p class="leading-8 tracking-wide font-body mt-4">We provide a 30 days view of events so as not to overwhelm you. Dates with events scheduled for them is highlighted while those with zero events yet are plain</p>
 				</div>
 			</div>
 		</section>
@@ -190,7 +193,7 @@
             			<ul class="grid gap-10 pb-12">
             				<template x-for="event in chosenEvents" :key="event.id">
 	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded" @click="showEventTickets(event, event.tickets)">
-									<div class="grid gap-2 md:flex md:justify-start md:items-start ">
+									<div class="grid gap-2">
 										<p x-text="new Date(event.event_date).toDateString()" class="text-sm md:text-md"></p>
 										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
 										<div>
@@ -206,8 +209,8 @@
 													<span x-text="event.starting_time"></span>
 												</p>
 											</div>
-											<p class="flex justify-start items-center gap-1 mt-3">
-												<svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+											<p class="flex justify-start items-start gap-1 mt-3">
+												<svg class="w-6 h-6 text-red-1000" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
 												<span x-text="event.location" class="text-sm "></span>
 											</p>
 										</div>

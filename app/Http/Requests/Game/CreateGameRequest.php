@@ -27,7 +27,7 @@ class CreateGameRequest extends FormRequest
             'stepByStep' => ['required', 'string', 'min:10'], 
             'minimum_player' => ['required', 'min:1', 'integer', 'bail'], 
             'maximum_player' => ['required', 'min:1', 'integer', 'bail'], 
-            'image' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048']
+            'picture' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048']
         ];
     }
 }

@@ -11,7 +11,7 @@ class CreateEvent extends EventTags
 	
 	function __invoke(object $eventToBeCreated)
 	{
-        $path = $eventToBeCreated->event_flier->store('fliers');
+        $path = $eventToBeCreated->flier->store('fliers');
 		$event = \App\Models\User::where('id', auth()->id())->first()->events()->create([
 			'name' => $eventToBeCreated->name, 
 	    	'event_date' => $eventToBeCreated->event_date,
