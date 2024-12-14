@@ -26,6 +26,7 @@ Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController
 Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('admin.games.index');
 Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
 Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'search']);
+Route::post('/games/search/tag', [\App\Http\Controllers\GameController::class, 'searchByTags']);
     // ========== Event routes goes here ======== \\
 // Route::get('/tickets', function () {
 //     return view('tickets');

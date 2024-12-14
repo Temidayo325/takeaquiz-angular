@@ -51,6 +51,7 @@
 		@csrf
 		<div>
             <x-input-label for="video" :value="__('Promotional video')" />
+            <p class="my-1 text-sm text-red-1000">Kindly ensure the file size does not exceed 40MB</p>
             <input type="file" name="video" id="video" required class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" x-ref="video">
             <x-input-error class="mt-2" :messages="$errors->get('video')" />
         </div>

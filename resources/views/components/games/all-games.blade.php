@@ -1,10 +1,11 @@
-@props(['games'])
-<div 	class="text-purple-1000 md:px-12" 
+@props(['games', 'tags'])
+<div 	class="text-purple-1000 px-4 md:px-12" 
 			x-data='{ games: @json($games),
+					tags: @json($tags),
 					searchterm: "",
 					chosenGame: null,
 					init(){
-						
+						console.log(this.tags)
 					},
 					fetchData(cursor)
 					{
@@ -37,6 +38,21 @@
 							this.toast("Encountered an error while retrieving games", "red")
 						})
 					},
+					searchByTag(tag)
+					{
+						this.toast("Searching for games with " + tag + " tag ... ", "blue")
+						axios.post("/games/search/tag", {tag: tag})
+						.then( ( response ) => {
+							if(!response.error)
+							{
+								this.games = response.data.games
+								this.toast("Games with " + tag + " tags returned", "green")
+							}
+						})
+						.catch((error) => {
+							this.toast("Encountered an error while retrieving games", "red")
+						})
+					},
 					viewGameDetails(game)
 					{
 						this.chosenGame = game
@@ -57,6 +73,14 @@
 			<div class="py-7 px-2 text-purple-1000 bg-gamebar bg-cover bg-no-repeat bg-greyish bg-blend-multiply md:h-56">
 				<h1 class=" text-6xl font-normal font-display md:py-12 text-white/70 px-5 py-3">Fun party games!!</h1>
 				{{-- <p class="mt-3 text-md bg-white/50 px-5 py-3">We curated some games to light up your gatherings and events</p> --}}
+			</div>
+			<div class="mt-8">
+				<h1 class="font-bold font-body text-md mt-4 md:hidden">Popular game tags</h1>
+				<div class="flex gap-6 justify-start items-center overflow-x-scroll py-6 px-3">
+					<template x-for="tag in tags">
+						<button x-text="tag" class="rounded-full no-wrap px-8 py-2 shadow-lg text-nowrap bg-purple-1000 text-gray-200" @click="searchByTag(tag)"></button>
+					</template>
+				</div>
 			</div>
 			<h1 class="font-bold font-body text-md mt-4 md:hidden">View available games</h1>
 			<div class="mt-2 md:mt-12">

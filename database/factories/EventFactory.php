@@ -22,7 +22,7 @@ class EventFactory extends Factory
             'event_date' => fake()->dateTimeBetween('now', '+2 months'),
             'starting_time' => fake()->time(), 
             'location' => fake()->address(),
-            'flier' => '/gelgas.jpg',
+            'flier' => '/fliers/gelgas.jpg',
             'tags' => 'Ish, Consesual, Multiple, Fun, Dressparty',
             'state' => 'Lagos',
             'status' => 'Draft',

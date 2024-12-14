@@ -14,7 +14,9 @@ class GameController extends Controller
     	$games = Game::latest()->orderBy('id')->cursorPaginate(12);
     	return view("dashboard.user.game.index", [
     		'user' => auth()->user(),
-    		'games' => $games]);
+    		'games' => $games,
+            'tags' => $this->gameTags()
+        ]);
     }
 
     public function paginateGames(Request $request)
@@ -38,5 +40,16 @@ class GameController extends Controller
     			'data' => $games
     		]
     	]);
+    }
+    protected function gameTags():array
+    {
+        $games = Game::select('tags')->get()->toArray();
+        $merged = [];
+        foreach($games as $game)
+        {
+          $merged = array_merge($merged, ...array_values($game));
+        }
+        $unique_tags = array_unique($merged, SORT_STRING);
+        return $unique_tags;
     }
 }

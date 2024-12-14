@@ -3,6 +3,7 @@
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),
+		{{-- tags: @json($tags), --}}
 		state: "",
 		searchParameter: "",
 		chosenEvents: [],
@@ -13,6 +14,7 @@
 		init() {
         	this.user = JSON.parse(sessionStorage.getItem("user"))
         	this.calender_days = this.getDates(this.events)
+        	console.log(this.tags)
    		},
    		showTickets(events)
    		{
@@ -28,7 +30,7 @@
 			    currentDate.setDate(this.start_date.getDate() + i);
 
 			    event_day = events.filter( (event) => currentDate.getDate() == new Date(event.event_date).getDate())
-			    days.push({day: currentDate.getDate(), events: event_day, hasEvents: (event_day.length > 0 ) ? true : false})
+			    days.push({day: currentDate.getDate(), events: event_day, hasEvents: (event_day.length > 0 ) ? true : false, dayOfTheWeek: currentDate.toDateString().slice(0, 3)})
 			}
 			return days
    		},
@@ -109,12 +111,38 @@
 					</div>
 				</template>
 				<template x-if="premium_events.length > 0">
-					<div class="mt-8">
-						<h2 class="font-body font-normal text-lg">Premium events</h2>
-						<ul class="">
+					<div class="mt-5 mb-6 md:mt-10 text-greyish-1000">
+						<h2 class="font-normal text-greyish font-body text-3xl">Premium events</h2>
+						<ul class="mt-10 grid gap-6 md:gap-12 md:px-12">
 							<template x-for="event in premium_events">
-								<li>
-									<img :src="`{{ asset('.') }}${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
+								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:grid md:grid-cols-2">
+									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
+										<p x-text="new Date().toDateString()" class="md:hidden"></p>
+										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
+										<div>
+											<h2 x-text="event.name" class="text-2xl"></h2>
+											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
+											<div class="flex justify-start items-center gap-5 mt-1">
+												<p class="flex justify-start items-center gap-1">
+													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">  <path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
+													<span x-text="event.state"></span>
+												</p>
+												<p class="flex justify-start items-center gap-1">
+													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+													<span x-text="event.starting_time"></span>
+												</p>
+											</div>
+											<p class="flex justify-start items-center gap-1 mt-2">
+												<svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+												<span x-text="event.location" class="text-sm"></span>
+											</p>
+										</div>
+									</div>
+									<div x-show="event.isPremium == 1" class="mt-3 ">
+										<template x-if="event.eventmedia != null">
+											<video  :src="`{{ asset('./images') }}/${event.eventmedia.video_gallery}`" title="Promotional video for event" controls="controls" class="border border-gray-800 md:w-full" ></video>
+										</template>
+									</div>
 								</li>
 							</template>
 						</ul>
@@ -123,9 +151,10 @@
 			</div>
 			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-gray-300 md:pt-3 pb-12 md:grid md:grid-cols-2 md:items-center md:py-12">
 				<h2 class="font-body font-normal text-2xl pt-5 text-purple-1000 md:text-greyish md:pt-10 md:hidden">Upcoming event calender</h2>
+				<p class="md:hidden leading-8 tracking-wide font-normal font-body mt-4">We offer a 30-day event view to keep things simple. Scheduled event dates are highlighted, while empty ones remain plain.</p>
 				<div>
 					<div class="mt-3 text-greyish font-body md:mt-6 md:px-4">
-						<h4 class="font-body font-normal md:hidden text-sm mb-3 text-purple-1000 md:text-greyish ">Filters</h4>
+						{{-- <h4 class="font-body font-normal md:hidden text-sm mb-3 text-purple-1000 md:text-greyish ">Filters</h4> --}}
 						<div class="md:flex md:justify-start">
 							<form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3 text-purple-1000 md:text-greyish">
 								<div class="">
@@ -142,13 +171,20 @@
 						</div>
 					</div>
 					<div class="mt-10 md:px-10 md:w-5/6">
-						<ul class="grid grid-cols-6 gap-x-3 gap-y-5">
+						<div class="grid grid-cols-7 gap-x-3 gap-y-8">
+							<template x-for="i in 7">
+						        <p x-text="calender_days[i].dayOfTheWeek" class="text-sm text-purple-1000 text-center font-bold"></p>
+						    </template>
+						</div>
+						<ul class="mt-2 grid grid-cols-7 gap-x-3 gap-y-6">
 							<template x-for="day in calender_days">
 								<li>
 									<button type="button" @click="showTickets(day)" x-text="day.day"
-										:class="{'bg-cover bg-purple-1000 md:bg-gray-700  bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}" 
+										{{-- :class="{'bg-cover bg-purple-1000 md:bg-gray-700  bg-blend-multiply text-gray-100': day.hasEvents, 'text-purple-1000': !day.hasEvents}"  --}}
+										:class="{'text-purple-1000 border border-red-1000': day.hasEvents, 'text-purple-1000': !day.hasEvents}"
 										class="text-center px-2 md:px-3 md:py-2 py-1 rounded-full bg-gray-300 text-sm"
-										:style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('./images/fliers') }}/${day.events[0].flier}')` : ''"></button>
+										{{-- :style="day.hasEvents && day.events[0]?.flier ? `background-image: url('{{ asset('./images/fliers') }}/${day.events[0].flier}')` : ''" --}}
+										></button>
 								</li>
 							</template>
 						</ul>

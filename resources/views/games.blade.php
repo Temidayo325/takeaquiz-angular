@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" defer src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
@@ -21,7 +22,7 @@
                 <h3 class="font-display  font-bold text-lg text-purple-1000 tracking-widest">CruiseHq</h3>
             </a>
 		</header>
-		<x-games.all-games :games="$games"></x-games.all-games>
+		<x-games.all-games :games="$games" :tags="$tags"></x-games.all-games>
 	</main>
 	<x-footer></x-footer>
 </body>
