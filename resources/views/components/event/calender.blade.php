@@ -242,7 +242,7 @@
 												<div class="grid grid-cols-2 gap-6 text-left mt-5">
 													<div class="pb-3 border-b border-gray-300">
 														<p class="text-greyish text-sm">Ticket owner</p>
-														<p class="text-lg text-purple-1000" x-text="user.nickname || 'Your nickname'">CruiseHq</p>
+														<p class="text-lg text-purple-1000" x-text="user != null ? user.nickname : 'My CruiseID'">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
 														<p class="text-greyish text-sm">Promoter</p>
@@ -285,7 +285,7 @@
 			            		<template x-if="ticket.type.length == 17">
 			            			<div>
 										<div class="bg-greyish pt-4 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-2 text-center text-purple-1000">
-											<p class="text-md py-2 block bg-transparent" x-text="user.nickname">Light</p>
+											<p class="text-md py-2 block bg-transparent" x-text="user != null ? user.nickname : 'My CruiseID'">Light</p>
 											<h2 class="text-md py-3 block text-greyish bg-purple-1000">General admission</h2>
 											<div class="px-4">
 												<h2 class="text-4xl font-display text-red-1000 my-2" x-text="chosenEvent.name">Name of the event</h2>
@@ -317,7 +317,7 @@
 										<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-2 text-center shadow-md border border-gray-200 text-greyish hover:shadow-3xl hover:border-gray-100 relative ">
 											<div class="grid gap-4">
 												<div>
-													<p class="text-sm " x-text="user.nickname">Light's</p>
+													<p class="text-sm " x-text="user != null ? user.nickname : 'My CruiseID'">Light's</p>
 													<h2 class="font-bold text-4xl py-2 text-red-1000">VIP</h2>
 													<p class="text-sm">ticket</p>
 												</div>

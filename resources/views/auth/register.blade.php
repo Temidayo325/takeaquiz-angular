@@ -33,7 +33,7 @@
 
             <!-- Nickname -->
             <fieldset class="border border-gray-400 px-1 py-1">
-                <legend class="px-2 ">Nickname</legend>
+                <legend class="px-2 ">CruiseID</legend>
 
                 <x-text-input id="nickname" class="block mt-1 w-full py-0" type="text" name="nickname" :value="old('nickname')" required autocomplete="username" placeholder="e.g. Tpain"/>
 

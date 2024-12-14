@@ -26,14 +26,14 @@
    init(){
       this.user = JSON.parse( localStorage.getItem("user") )
 }}'>
-   <div class="h-full py-6 overflow-y-auto bg-white text-purple-1000 md:text-greyish dark:bg-gray-800 tracking-wider bg-sidebar bg-cover bg-no-repeat bg-blend-multiply">
-      <div class="flex justify-start items-center gap-2 px-5 md:px-5 my-3 tracking-wider md:mt-12"> 
+   <div class="h-full py-4 overflow-y-auto bg-white text-purple-1000 dark:bg-gray-800 tracking-wider bg-sidebar bg-cover bg-no-repeat bg-blend-multiply">
+      <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider md:mt-12"> 
             {{-- <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
             <a href="/user/dashboard" class="text-purple-1000 font-bold ">CruiseHq</a> --}}
-            <img src="{{ asset('images/profile.svg') }}" alt="" class="w-20 h-20 rounded-full border border-gray-400 py-5">
+            <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto " :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
             <div>
-               <h2 x-text="user.name" class="text-2xl font-bold "></h2>
-               <p x-text="user.nickname" class="mt-2"></p>
+               <h2 x-text="user.name" class="text-2xl font-bold text-center"></h2>
+               <p x-text="user.nickname" class="mt-2 text-center"></p>
             </div>
       </div>   
       <ul class="space-y-2 px-5 font-medium mt-12 md:mt-10 md:mb-3 text-purple-1000">

@@ -38,6 +38,7 @@ Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'sear
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/facecard', [ProfileController::class, 'facecard'])->name('profile.update.facecard');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
 });
@@ -97,6 +98,7 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
 Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('user.profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/facecard', [ProfileController::class, 'facecard'])->name('profile.update.facecard');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.dashboard.home');    

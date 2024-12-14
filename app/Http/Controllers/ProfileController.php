@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Http\Requests\User\FacecardRequest;
 
 class ProfileController extends Controller
 {
@@ -40,6 +41,18 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    /**
+     * Update the user's profile picture.
+     */
+    public function facecard(FacecardRequest $request): RedirectResponse
+    {
+        $path = $request->facecard->store('facecards');
+        $user = \App\Models\User::find(auth()->id());
+        $user->facecard = $path;
+        $user->save();
+
+        return Redirect::route('user.profile.edit')->with('status', 'Face card updated');
+    }
     /**
      * Delete the user's account.
      */
