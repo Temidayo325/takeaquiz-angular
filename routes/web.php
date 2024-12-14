@@ -59,6 +59,7 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::get('/events', [EventController::class, 'index'])->name('promoter.event.index');
     Route::post('/events/paginate', [EventController::class, 'paginateEvents']);
     Route::post('/events/create', [EventController::class, 'store']);
+    Route::post('/events/promotional_video', [EventController::class, 'add_promotional_media']);
     Route::get('/events/create', [EventController::class, 'create'])->name('promoter.event.create');
     // ========== Event routes goes here ======== \\
     // ========== Attendancec route goes here ======= \\

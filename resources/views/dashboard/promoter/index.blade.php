@@ -44,7 +44,7 @@
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
 									<template x-if="event.isPremium == 1">
-									    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
+									    <span class="text-purple-1000 text-center text-2xl font-bold ">&#9824;</span>
 									</template>
 								</div>
 								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
@@ -85,7 +85,7 @@
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
 									<template x-if="event.isPremium == 1">
-									    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
+									    <span class="text-purple-1000 text-center text-2xl font-bold ">&#9824;</span>
 									</template>
 								</div>
 								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
@@ -140,10 +140,10 @@
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(chosenEvent.event_date)" class=""></p>
 									<template x-if="chosenEvent.isPremium == 1">
-									    <span class="text-red-1000 text-center text-2xl font-bold ">&#9824;</span>
+									    <span class="text-purple-1000 text-center text-2xl font-bold ">&#9824;</span>
 									</template>
 								</div>
-								<img :src="`{{ asset('.') }}${chosenEvent.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+								<img :src="`{{ asset('./images') }}/${chosenEvent.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 								<div>
 									<h2 x-text="chosenEvent.name" class="text-xl font-display tracking-wider"></h2>
 									<div class="flex justify-start items-center gap-5 mt-1">
@@ -289,7 +289,7 @@
 			       		</template>
 			       	</template>
 			       	<template x-if="chosenEventTickets != null && chosenEventTickets.length <= 0">
-			       		<p>You have not created tickets for this event yet, go to the <a href="/promoter/dashboard/events" class="bg-red-1000 py-2 px-4 text-gray-100">Events page</a> to create tickets for this event</p>
+			       		<p>You have not created tickets for this event yet, go to the <a href="/promoter/dashboard/events" class="text-red-1000 py-2 px-2 font-bold">Events page</a> to create tickets for this event</p>
 			       	</template>
 			    </div>
 			</div>

@@ -46,6 +46,31 @@ class EventController extends Controller
         }
     }
 
+    public function add_promotional_media(\App\Http\Requests\Event\PromotionalRequest $request)
+    {
+        try {
+            $path = $request->video->store('promotional_materials');
+            $event_media = \App\Models\EventMedia::create([
+                'user_id' => auth()->id(),
+                'event_id' => $request->event_id,
+                'video_gallery' => $path,
+                'image_gallery' => 'Wahala pro max and it does not exist',
+                'flier' => 'Again the same thing'
+            ]);
+            $event = \App\Models\Event::with('eventmedia')->where('id', $request->event_id)->first();
+            return response()->json([
+                'error' => false,
+                'message' => "Event promotional video added",
+                'event' => $event
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function paginateEvents(Request $request)
     {
     	$events = \App\Models\Event::with('tickets', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);

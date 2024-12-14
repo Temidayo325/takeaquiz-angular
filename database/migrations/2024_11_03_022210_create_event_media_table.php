@@ -22,8 +22,8 @@ return new class extends Migration
                     ->on('users')
                     ->onDelete('cascade');
             $table->text('video_gallery');
-            $table->text('image_gallery');
-            $table->string('flier');
+            $table->text('image_gallery')->nullable()->default(null);
+            $table->string('flier')->nullable()->default(null);
             $table->timestamps();
         });
     }

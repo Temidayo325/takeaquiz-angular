@@ -18,7 +18,7 @@ class CreateEvent extends EventTags
 	    	'starting_time' => $eventToBeCreated->starting_time,
 	    	'state' => $eventToBeCreated->state,
 	    	'coordinate' => $eventToBeCreated->coordinate,
-	    	'tags' => json_encode($this->turnStringTagsToArray($eventToBeCreated->tags)),
+	    	'tags' => $this->turnStringTagsToArray($eventToBeCreated->tags),
 	    	'flier' => $path,
 	    	'location' => $eventToBeCreated->location,
 	    	'promotional_copy' => $eventToBeCreated->promotional_copy

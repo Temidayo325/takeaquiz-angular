@@ -14,4 +14,8 @@ class Game extends Model
     protected $fillable = [
     	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image', 'tags'
     ];
+
+    protected $casts = [
+    	'tags' => 'array'
+    ];
 }

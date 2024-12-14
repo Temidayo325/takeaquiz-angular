@@ -24,6 +24,9 @@ class Event extends Model
     	'promotional_copy'
     ];
 
+    protected $casts = [
+        'tags' => 'array'
+    ];
     public function user()
     {
        return $this->belongsTo(User::class);
