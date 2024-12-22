@@ -26,8 +26,6 @@
    }'>
    <div class="h-full py-4 overflow-y-auto bg-white text-purple-1000 dark:bg-gray-800 tracking-wider bg-sidebar bg-cover bg-no-repeat bg-blend-multiply">
       <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider md:mt-12"> 
-            {{-- <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
-            <a href="/user/dashboard" class="text-purple-1000 font-bold ">CruiseHq</a> --}}
             <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto " :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
             <div>
                <h2 x-text="user.name" class="text-2xl font-bold text-center"></h2>

@@ -17,17 +17,17 @@
 		<header class="shadow-sm h-[92vh] md:h-[120vh] bg-black relative bg-contain md:bg-cover bg-hero3 md:bg-hero1 bg-no-repeat tracking-wider md:overflow-x-hidden">
 			<div class="sticky top-0 flex justify-between items-center py-3 px-4 md:py-5 md:px-12 bg-white z-80">
 				<a href="/" class="flex justify-start items-center gap-2 ">
-	                <x-application-logo class="w-8 h-8 fill-current text-purple-1000 " />
-	                <h3 class="font-display tracking-widest font-bold text-lg text-purple-1000 ">CruiseHq</h3>
+	                <x-application-logo class="fill-current text-purple-1000 " />
+	                {{-- <h3 class="font-display tracking-widest font-bold text-lg text-purple-1000 ">CruiseHq</h3> --}}
 	            </a>
-	            <ul class="flex justify-end gap-2 text-purple-1000 font-bold">
+	            <ul class="flex justify-end gap-2 md:gap-10 text-purple-1000 font-bold">
 	                <li><a href="/login" class="text-red-1000">Login</a></li>
 	            	<li><a href="/games">Cruise deck</a></li>
 	            </ul>
 			</div>
 			<div class="text-left text-gray-950 bg-white/30 md:bg-white/90 md:my-32 py-2 md:static px-4 md:w-3/6 md:px-12 md:py-10 absolute bottom-2 z-50">
-				<h1 class="text-5xl font-display md:text-9xl py-2">Updates HQ<h1>
-				<h3 class="font-body text-sm ">Welcome to CruiseHQ — the place where vibes and enjoyment are served hot. <span class="hidden md:inline">No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</span></h3>
+				<h1 class="text-3xl font-display md:text-8xl py-2">Ride the Wave of Fun Events <h1>
+				<h3 class="font-body text-sm ">Start Your Journey with Cruise HQ — the place where vibes and enjoyment are served hot. <span class="hidden md:inline">No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</span></h3>
 			</div>
 		</header>
 		<section class="text-greyish mt-10 md:mt-0">

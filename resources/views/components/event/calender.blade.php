@@ -1,5 +1,5 @@
 @props(['events', 'events_today', 'premium_events'])
-<div class="text-purple-1000 md:bg-gray-950 px-4 z-20" x-data='{ user: {},
+<div class="text-purple-1000 px-4 z-20" x-data='{ user: {},
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),

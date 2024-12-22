@@ -23,18 +23,16 @@
 </header>
 
 <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-50 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-   <div class="h-full py-6 overflow-y-auto bg-white text-purple-1000 md:text-greyish dark:bg-gray-800 tracking-wider bg-admin-sidebar bg-cover bg-no-repeat bg-blend-darken">
-      <div class="flex justify-start text-purple-1000 items-center gap-2 px-3 md:px-5 my-3 tracking-wide md:mt-12 font-body"> 
-            {{-- <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
-            <a href="/user/dashboard" class="text-purple-1000 font-bold ">CruiseHq</a> --}}
-            <img src="{{ asset('images/profile.svg') }}" alt="" class="w-20 h-20 rounded-full border border-gray-400 py-5">
-            <div x-data='{user: {}, 
-               init(){
-                  this.user = JSON.parse(localStorage.getItem("user"))
-            }}'>
-               <h2 x-text="user.name" class="text-xl font-bold "></h2>
-               <p x-text="user.nickname" class="mt-1"></p>
+   <div class="h-full py-6 overflow-y-auto bg-white text-purple-1000 md:text-greyish dark:bg-gray-800 tracking-wider bg-admin-sidebar bg-cover bg-no-repeat bg-blend-darken" x-data='{user: @json($user),
+   }'>
+      <div class="flex justify-start text-purple-1000 items-center gap-2 px-3 md:px-5 my-3 tracking-wide md:mt-4 font-body"> 
+         <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider"> 
+            <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto " :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
+            <div>
+               <h2 x-text="user.name" class="text-xl font-bold text-center"></h2>
+               <p x-text="user.nickname" class="mt-2 text-center"></p>
             </div>
+         </div> 
       </div>  
       <ul class="space-y-2 font-medium mt-10 md:mb-3 text-purple-1000 font-bold">
          <li>
