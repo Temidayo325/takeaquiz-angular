@@ -94,7 +94,7 @@
 <div class="p-4 sm:ml-64 bg-gray-50 md:px-0 min-h-screen md:max-w-screen md:overflow-x-hidden">
    <div class="p-2 md:px-0 dark:border-gray-700">
       <header class="px-10 flex justify-between hidden md:flex">
-         <h3 class="font-body tracking-wider text-left text-md">{{config('app.name')}}</h3>
+         <a class="font-body tracking-wider text-left text-md" href="/">{{config('app.name')}}</a>
          <div class="flex justify-end gap-3 text-sm">
             <a href="/user/dashboard/events" class="hover:underline underline-offset-4 hover:text-red-1000">Events</a>
             <a href="/user/dashboard/profile" class="hover:underline underline-offset-4 hover:text-red-1000">Profile</a>
