@@ -8,7 +8,7 @@
 		upcoming_events: @json($upcoming_events),
 		init() {
         	localStorage.setItem("user", JSON.stringify(this.user))
-        	console.log(this.events)
+        	
    		}
 	}'>
 		<section class="mt-2 grid gap-10 md:px-10">
@@ -19,7 +19,7 @@
 				<div class="hidden md:flex py-10 bg-purple-300 items-center justify-between px-12">
 					<div class="max-w-lg">
 						<h1 class="font-body font-bold text-4xl font-normal">Welcome back <span x-text="user.nickname"></span></h1>
-						<p class="text-md leading-7 my-4">Track events from your favorite promoters and get their tickets all in the same space !!! Also bring more life to that event you're attending by checking our games and having a time to remember at the events </p>
+						<p class="text-md leading-7 my-4">Track events from your favorite Organizers and get their tickets all in the same space !!! Also bring more life to that event you're attending by checking our games and having a time to remember at the events </p>
 						<a href="/user/dashboard/events" class="bg-red-1000 text-white px-9 py-3">Get started</a>
 					</div>
 					<img src="{{asset('/images/chilling.svg')}}" alt="People chilling" class="w-96 h-52">

@@ -1,5 +1,5 @@
 @props(['events', 'events_today', 'premium_events'])
-<div class="text-purple-1000 md:bg-gray-950 px-4" x-data='{ user: {},
+<div class="text-purple-1000 md:bg-gray-950 px-4 z-20" x-data='{ user: {},
 		events: @json($events),
 		events_today: @json($events_today),
 		premium_events: @json($premium_events),
@@ -150,7 +150,7 @@
 				</template>
 			</div>
 			<div class="w-full px-4 md:px-10 bg-gray-200 md:bg-gray-300 md:pt-3 pb-12 md:grid md:grid-cols-2 md:items-center md:py-12">
-				<h2 class="font-body font-normal text-2xl pt-5 text-purple-1000 md:text-greyish md:pt-10 md:hidden">Upcoming event calender</h2>
+				<h2 class="font-display font-normal text-4xl pt-5 text-purple-1000 md:text-greyish md:pt-10 md:hidden tracking-wider ">Cruise Calender</h2>
 				<p class="md:hidden leading-8 tracking-wide font-normal font-body mt-4">We offer a 30-day event view to keep things simple. Scheduled event dates are highlighted, while empty ones remain plain.</p>
 				<div>
 					<div class="mt-3 text-greyish font-body md:mt-6 md:px-4">
@@ -281,7 +281,7 @@
 														<p class="text-lg text-purple-1000" x-text="user != null ? user.nickname : 'My CruiseID'">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-greyish text-sm">Promoter</p>
+														<p class="text-greyish text-sm">Organizer</p>
 														<p class="text-lg text-purple-1000" x-text="chosenEvent.user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
@@ -358,7 +358,7 @@
 													<p class="text-sm">ticket</p>
 												</div>
 												<div>
-													<p x-text="chosenEvent.user.nickname" class="">Name of the promoter</p>
+													<p x-text="chosenEvent.user.nickname" class="">Name of the Organizer</p>
 													<p class="">presents</p>
 													<h2 class="text-4xl font-display text-red-1000 py-3" x-text="chosenEvent.name">Name of the event</h2>
 												</div>

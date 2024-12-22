@@ -15,7 +15,7 @@
 					<div class="max-w-lg">
 						<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-5 mb-3 md:mt-0 block md:hidden">
 						<h1 class="font-body font-bold text-4xl font-normal">OG <span x-text="user.nickname"></span></h1>
-						<p class="text-md leading-7 my-4">We've curated your upcoming event tickets to bring you up to speed easily and ASAP. Book more upcoming events with your favorite Promoters and ballers</p>
+						<p class="text-md leading-7 my-4">We've curated your upcoming event tickets to bring you up to speed easily and ASAP. Book more upcoming events with your favorite Organizers and ballers</p>
 						<a href="/user/dashboard/events" class="bg-red-1000 text-white px-9 py-3 mt-2 md:mt-0">Browse events</a>
 					</div>
 					<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-10 md:mt-0 hidden md:block">
@@ -42,7 +42,7 @@
 													<p class="text-sm text-greyish">ticket</p>
 												</div>
 												<div>
-													<p x-text="event.event.user.nickname" class="text-greyish">Name of the promoter</p>
+													<p x-text="event.event.user.nickname" class="text-greyish">Name of the Organizer</p>
 													<p class="text-greyish">presents</p>
 													<h2 class="text-5xl font-display text-red-1000 py-3" x-text="event.event.name">Name of the event</h2>
 												</div>
@@ -78,7 +78,7 @@
 														<p class="font-bold text-lg text-black" x-text="user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-greyish text-sm">Promoter</p>
+														<p class="text-greyish text-sm">Organizer</p>
 														<p class="font-bold text-lg text-black" x-text="event.event.user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">

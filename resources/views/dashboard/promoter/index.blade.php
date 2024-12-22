@@ -186,7 +186,7 @@
 													<p class="font-bold text-sm md:text-lg " x-text="user.nickname">CruiseHq</p>
 												</div>
 												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Promoter</p>
+													<p class="text-greyish text-sm">Organizer</p>
 													<p class="font-bold text-sm md:text-lg" x-text="user.nickname">CruiseHq</p>
 												</div>
 												<div class="pb-3 border-b border-gray-300">

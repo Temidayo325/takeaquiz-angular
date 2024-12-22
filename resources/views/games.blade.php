@@ -16,11 +16,15 @@
 </head>
 <body>
 	<main class="bg-gray-100 pb-0">
-		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12">
+		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center">
 			<a href="/" class="flex justify-start items-center gap-2 py-2">
                 <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
                 <h3 class="font-display  font-bold text-lg text-purple-1000 tracking-widest">CruiseHq</h3>
             </a>
+            <ul class="flex justify-end gap-2 text-purple-1000 font-bold">
+                <li><a href="/login" class="text-red-1000 px-3">Login</a></li>
+            	<li><a href="/games">Cruise Deck</a></li>
+            </ul>
 		</header>
 		<x-games.all-games :games="$games" :tags="$tags"></x-games.all-games>
 	</main>

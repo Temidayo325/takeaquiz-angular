@@ -42,7 +42,7 @@
 													<p class="text-sm text-greyish">ticket</p>
 												</div>
 												<div>
-													<p x-text="event.event.user.nickname" class="text-greyish">Name of the promoter</p>
+													<p x-text="event.event.user.nickname" class="text-greyish">Name of the Organizer</p>
 													<p class="text-greyish">presents</p>
 													<h2 class="text-5xl font-display text-red-1000 py-3" x-text="event.event.name">Name of the event</h2>
 												</div>
@@ -78,7 +78,7 @@
 														<p class="font-bold text-lg text-black" x-text="user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">
-														<p class="text-greyish text-sm">Promoter</p>
+														<p class="text-greyish text-sm">Organizer</p>
 														<p class="font-bold text-lg text-black" x-text="event.event.user.nickname">CruiseHq</p>
 													</div>
 													<div class="pb-3 border-b border-gray-300">

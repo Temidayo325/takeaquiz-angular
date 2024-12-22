@@ -74,7 +74,7 @@
 				<h1 class=" text-6xl font-normal font-display md:py-12 text-white/70 px-5 py-3">Fun party games!!</h1>
 				{{-- <p class="mt-3 text-md bg-white/50 px-5 py-3">We curated some games to light up your gatherings and events</p> --}}
 			</div>
-			<div class="mt-8">
+			<div class="mt-8" x-show="games.data.length > 0">
 				<h1 class="font-bold font-body text-md mt-4 md:hidden">Popular game tags</h1>
 				<div class="flex gap-6 justify-start items-center overflow-x-scroll py-6 px-3">
 					<template x-for="tag in tags">
@@ -82,8 +82,8 @@
 					</template>
 				</div>
 			</div>
-			<h1 class="font-bold font-body text-md mt-4 md:hidden">View available games</h1>
-			<div class="mt-2 md:mt-12">
+			<h1 class="font-bold font-body text-md mt-4 md:hidden" x-show="games.data.length > 0">View available games</h1>
+			<div class="mt-2 md:mt-12" x-show="games.data.length > 0">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
 					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="e.g. spin the bottle" @input.debounce.500ms="searchTerm">
@@ -119,7 +119,7 @@
 				</div>
 			</template>
 			<template x-if="games.data.length <= 0">
-				<h2>You have not created any games yet, Click here to add some games</h2>
+				<h2 class="text-center font-bold font-body text-xl py-20 ">You have not created any games yet, Click here to add some games</h2>
 			</template>
 			<x-sidebar-toggle-button></x-sidebar-toggle-button>
 			  

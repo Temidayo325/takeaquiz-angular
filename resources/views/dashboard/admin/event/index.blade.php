@@ -194,7 +194,7 @@
 		  <div class="py-4 overflow-y-auto mt-10">
 		      	<template x-if="tickets.length <= 0">
 		      		<div>
-		      			<h2 class="text-purple-1000 text-center font-body leading-8 my-32">This event does not have a ticket yet, remind the event promoter to create the ticket desired.</h2>
+		      			<h2 class="text-purple-1000 text-center font-body leading-8 my-32">This event does not have a ticket yet, remind the event Organizer to create the ticket desired.</h2>
 		      		</div>
 		      	</template>
 		      	<template x-if="tickets.length > 0">

@@ -16,7 +16,7 @@
 					<p class="text-sm text-gray-400">ticket</p>
 				</div>
 				<div>
-					<p x-text="chosenEvent.user.nickname" class="text-gray-200">Name of the promoter</p>
+					<p x-text="chosenEvent.user.nickname" class="text-gray-200">Name of the Organizer</p>
 					<p class="text-gray-500">presents</p>
 					<h2 class="text-4xl font-bold text-amber-600 py-3" x-text="chosenEvent.name">Name of the event</h2>
 				</div>

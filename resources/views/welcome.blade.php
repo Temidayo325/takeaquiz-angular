@@ -21,11 +21,11 @@
 	                <h3 class="font-display tracking-widest font-bold text-lg text-purple-1000 ">CruiseHq</h3>
 	            </a>
 	            <ul class="flex justify-end gap-2 text-purple-1000 font-bold">
-	                <li><a href="#" class="text-red-1000 px-3">Login</a></li>
-	            	<li><a href="#">Signup</a></li>
+	                <li><a href="/login" class="text-red-1000">Login</a></li>
+	            	<li><a href="/games">Cruise deck</a></li>
 	            </ul>
 			</div>
-			<div class="text-left text-gray-950 bg-white/30 md:bg-white/90 md:my-32 py-2 md:static px-4 md:w-3/6 md:px-12 md:py-10 absolute bottom-2">
+			<div class="text-left text-gray-950 bg-white/30 md:bg-white/90 md:my-32 py-2 md:static px-4 md:w-3/6 md:px-12 md:py-10 absolute bottom-2 z-50">
 				<h1 class="text-5xl font-display md:text-9xl py-2">Updates HQ<h1>
 				<h3 class="font-body text-sm ">Welcome to CruiseHQ — the place where vibes and enjoyment are served hot. <span class="hidden md:inline">No stress, no wahala, just pure cruise! Are you ready to catch some sharp-sharp fun?</span></h3>
 			</div>

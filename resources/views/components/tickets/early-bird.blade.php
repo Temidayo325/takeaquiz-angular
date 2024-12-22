@@ -30,7 +30,7 @@
 					<p class="font-bold text-purple-1000" x-text="user.nickname">CruiseHq</p>
 				</div>
 				<div class="pb-3 border-b border-gray-300">
-					<p class="text-gray-600 text-sm">Promoter</p>
+					<p class="text-gray-600 text-sm">Organizer</p>
 					<p class="font-bold text-purple-1000" x-text="chosenEvent.user.nickname">CruiseHq</p>
 				</div>
 				<div class="pb-3 border-b border-gray-300">

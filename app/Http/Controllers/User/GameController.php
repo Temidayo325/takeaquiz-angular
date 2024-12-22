@@ -44,6 +44,10 @@ class GameController extends Controller
     protected function gameTags():array
     {
         $games = Game::select('tags')->get()->toArray();
+        if(count($games) <= 0)
+        {
+            return [];
+        }
         $merged = [];
         foreach($games as $game)
         {
