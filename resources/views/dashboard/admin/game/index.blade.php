@@ -60,15 +60,15 @@
 						$refs.sideBarButton.dispatchEvent(new Event("click"))
 					},
 	}'>
-		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
 			<div class="max-w-lg">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
 				<p class="text-md leading-7 my-4">View all the available games, to view more details about the game, click on the game card and a sidebar would pop out revealing more information ablut the game. Click the button below to create more games</p>
-				<a href="/admin/dashboard/games/create" class="px-4 py-2 font-bold md:font-normal bg-red-1000 text-gray-200">Create game</a>
+				<a href="/admin/dashboard/games/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create game</a>
 			</div>
-			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
+			<img src="{{asset('/images/games.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
-		<div class="mt-20 flex justify-end">
+		<div class="mt-20 flex justify-end" x-show="games.data.length > 0 ">
 			<div>
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
@@ -101,7 +101,7 @@
 				</div>
 			</template>
 			<template x-if="games.data.length <= 0">
-				<h2>You have not created any games yet, Click here to add some games</h2>
+				<h2 class="text-center my-12 font-bold md:my-24 text-xl">You have not created any games yet, Click <a href="/admin/dashboard/games/create" class="text-red-1000"> here </a>  to add some games</h2>
 			</template>
 			<x-sidebar-toggle-button></x-sidebar-toggle-button>
 			  

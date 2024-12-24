@@ -3,9 +3,10 @@
 @section('title', 'View all Scheduled events')
 
 @section('content')
-	<div 	class="text-purple-1000 min-h-screen pb-32 md:px-6" 
+	<div 	class="text-purple-1000 min-h-screen pb-32 md:px-10" 
 			x-data='{ events: @json($events),
 						open: false,
+						user: JSON.parse(localStorage.getItem("user")),
 						searchterm: "",
 						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, 
 						tickets: [],
@@ -97,9 +98,17 @@
 							}).showToast();
 						},
 		}'>
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
+			<div class="max-w-lg">
+				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
+				<p class="text-md leading-7 my-4">View all the available events, to view more details about the events, click on the event card and a sidebar would pop out revealing more information ablut the event. Click the button below to create more events</p>
+				<a href="/promoter/dashboard/event/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
+			</div>
+			<img src="{{asset('/images/party.svg')}}" alt="People chilling" class="w-96 h-52">
+		</div>
 		<div class="flex justify-between items-center my-10">
-			<h1 class="font-bold text-2xl">Event dashboard</h1>
-			<div>
+			<h1 class="font-bold text-xl">Event dashboard</h1>
+			<div x-show="events.data.length > 0">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
 					<input type="text" class="w-72 p-2" x-model="searchterm" placeholder="Event name e.g. Block party" @input.debounce.500ms="searchTerm()">
@@ -164,7 +173,9 @@
 				</li>
 			</template>
 		</ul>
-		
+		<template x-if="events.data.length <= 0">
+			<h2 class="text-center my-6 font-bold text-lg ">You have not created any event yet. </h2>
+		</template>
 		{{-- Pagination link --}}
 		<div class="flex justify-end gap-10 my-10">
 			<template x-if="events.prev_cursor != null">

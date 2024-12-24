@@ -66,10 +66,10 @@
 			</div>
 			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
-		<h2 class="font-bold md:font-normal md:mt-12 mt-6 text-md md:text-lg">Events and their corresponding tickets</h2>
+		<h2 class="font-bold md:mt-12 mt-6 text-md md:text-lg">Events and their corresponding tickets</h2>
 		<ul class="md:mt-8 mt-6 grid gap-10">
 			<template x-if="events.data.length <= 0">
-				<p>You do not have an event you can create a ticket for, kindly <a href="/promoter/dashboard/events/create">click here to create an event</a>  to get started</p>
+				<p class="text-center my-6">You do not have an event you can create a ticket for, kindly <a href="/promoter/dashboard/events/create">click here to create an event</a>  to get started</p>
 			</template>
 			<template x-if="events.data.length > 0">
 				<template  x-for='event in events.data' :key="event.id">

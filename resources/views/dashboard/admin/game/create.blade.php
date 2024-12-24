@@ -18,13 +18,13 @@
 			}).showToast();
 		},
 	}'>
-		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
 			<div class="max-w-lg">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Create awesome and fun games</h1>
 				<p class="text-md leading-7 my-4">Create amazing games and ensure to provide adequate details to it. Also don't forget to add correct tags to it to ensure that it shows up in the right category</p>
 				<a href="/admin/dashboard/games" class="px-5 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">View games</a>
 			</div>
-			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
+			<img src="{{asset('/images/games.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
 		<div class="mt-10">
 			<h1 class="text-center mt-6 mb-2 font-display tracking-wider text-2xl">Create an amazing game</h1>

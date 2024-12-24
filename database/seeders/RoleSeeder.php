@@ -17,7 +17,8 @@ class RoleSeeder extends Seeder
         				->sequence(
         					['role' => 'user'],
         					['role' => 'admin'],
-        					['role' => 'promoter']
+                            ['role' => 'promoter']
+        					['role' => 'plug']
         				)
         				->create();
     }

@@ -133,11 +133,19 @@
             }
 		}
 	}'>
-		<div class="my-6 flex justify-between items-center">
+		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
+			<div class="max-w-md">
+				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
+				<p class="text-md leading-7 my-4">This is the database o all the users on the platform, you can adjust their roles as required. Remember that every individual you upgrade to an admin role would also have the ability to create and manage events while users to upgrade to Organizer can only manage their own events.</p>
+				<a href="/promoter/dashboard/event/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
+			</div>
+			<img src="{{asset('/images/people.svg')}}" alt="People chilling" class="w-96 h-52">
+		</div>
+		<div class="my-10 flex justify-between items-center">
 			<h1 class="font-bold text-xl">User management dashboard</h1>
 			<form action="" method="post" @submit.prevent="searchForUserOnRecord" class="flex justify-start items-center">
 				<input type="text" x-model="searchTerm" id="" placeholder="e.g. Yagami" class="md:w-64 focus:outline-none focus:border focus:border-gray-300 focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0" @input.debounce.500ms="searchForUserOnRecord">
-				<button type="submit" class="bg-red-1000 text-gray-100 py-2 border-4 border-gray-950 px-10 border-none shadow">Search</button>
+				{{-- <button type="submit" class="bg-red-1000 text-gray-100 py-2 border-4 border-gray-950 px-10 border-none shadow">Search</button> --}}
 			</form>
 		</div>
 		
@@ -146,7 +154,7 @@
 				<h3>No one yet</h3>
 			</template>
 			<template x-if="users.data.length > 0">
-				<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+				<table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 shadow-md border border-purple-200">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 					<th scope="col" class="px-6 py-3">Name</th>
 					<th scope="col" class="px-6 py-3">Nickname</th>
@@ -156,7 +164,7 @@
 				</thead>
 				<tbody>
 					<template x-for="user in users.data" :key="user.id">
-				        <tr class="odd:bg-white odd:dark:bg-gray-900 hover:bg-gray-200 duration-200 even:bg-gray-50 even:dark:bg-gray-00 border-b dark:border-gray-700">
+				        <tr class="odd:bg-white odd:dark:bg-gray-900 hover:bg-purple-200 duration-200 even:bg-gray-50 even:dark:bg-gray-00 border-b border-purple-300 dark:border-gray-700">
 				        	<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white" x-text="user.name"></th>
 			                <td class="px-6 py-4" x-text="user.nickname"></td>
 			                <td class="px-6 py-4" x-text="user.email"></td>

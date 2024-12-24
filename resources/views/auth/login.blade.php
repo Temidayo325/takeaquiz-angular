@@ -2,6 +2,9 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     @section('title', 'Login to your dashboard')
+    <div class="flex justify-center">
+        <a href="/" class="text-center mb-3"><x-application-logo></x-application-logo></a>
+    </div>
     <h2 x-data='{user: {}, 
         init(){
             this.user = JSON.parse(localStorage.getItem("user"))

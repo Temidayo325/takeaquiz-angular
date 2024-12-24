@@ -10,7 +10,7 @@
 				<p class="text-md leading-7 my-4">Create your events here, make the details as exciting and simple as possble. And don't forget to add appropriate tags as they woud help users search and sort events appropriately.</p>
 				<a href="/promoter/dashboard/events" class="px-4 py-3 mt-3 font-bold md:font-normal bg-red-1000 text-gray-200">View all my events</a>
 			</div>
-			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
+			<img src="{{asset('/images/party.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
 		<div>
 			<h1 class="font-body font-bold text-md md:text-lg pt-5 pb-3 md:mt-10">Create an event</h1>

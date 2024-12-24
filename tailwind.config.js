@@ -20,6 +20,7 @@ export default {
                 'vip-pattern': "url('../../public/images/architect.svg')",
                 // 'admin-hero': "url('../../public/images/admin-hero.svg')",
                 'hero': "url('../../public/images/hero.jpg')",
+                'hero-bg': "url('../../public/images/hero-bg.png')",
                 'hero1': "url('../../public/images/hero1.jpg')",
                 'hero2': "url('../../public/images/hero2.jpg')",
                 'hero3': "url('../../public/images/hero3.jpg')",

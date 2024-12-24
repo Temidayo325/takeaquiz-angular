@@ -1,5 +1,8 @@
 <x-guest-layout>
     @section('title', 'Create your account')
+    <div class="flex justify-center">
+        <a href="/" class="text-center mb-3"><x-application-logo></x-application-logo></a>
+    </div>
     <h2 class="text-center font-display font-bold text-purple-1000 text-2xl tracking-wider"> Create your account</h2>
     <form method="POST" action="{{ route('register') }}" class="mt-3 mb-7" 
         x-data='{showPasswordToggle: true,

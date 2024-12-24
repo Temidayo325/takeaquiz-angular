@@ -86,15 +86,14 @@
 				<p class="text-md leading-7 my-4">View all your events, tap on the edit button on each event card to edit the details of the events as required</p>
 				<a href="/promoter/dashboard/events/create" class="px-4 py-2 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
 			</div>
-			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
+			<img src="{{asset('/images/party.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
 		<div class="flex justify-between items-center py-6 md:pt-12 md:pb-4">
 			<h1 class="font-bold text-md md:text-lg">My Events</h1>
 			<a href="/promoter/dashboard/events/create" class="md:hidden px-4 py-2 text-red-1000 font-bold md:font-normal md:bg-red-1000 md:text-gray-200">Create event</a>
 		</div>
 
-		<div class="text-sm text-gray-700 w-full text-sm text-left rtl:text-right dark:text-gray-400 mt-6 md:mt-8">
-			
+		<div class="text-sm text-purple-1000 w-full text-sm text-left rtl:text-right dark:text-gray-400 mt-6 md:mt-8">
 			<ul class="grid gap-10 md:grid-cols-4 md:gap-12">
 				<template x-for="event in events.data" :key="event.id">
 					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer relative " >
@@ -138,6 +137,9 @@
 					</li>
 				</template>
 			</ul>
+			<template x-if="events.data.length <= 0">
+				<h2 class="text-center my-6 font-bold text-lg text-purple-1000 ">You have not created any event yet. </h2>
+			</template>
 		</div>
 		
 		{{-- Pagination link --}}
