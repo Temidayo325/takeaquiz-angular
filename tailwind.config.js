@@ -14,6 +14,7 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 display: ['Bangers, system-ui'],
+                hand: ['Playwrite CZ Guides'],
                 body: ['Poppins, sans-serif']
             },
             backgroundImage: {

@@ -191,7 +191,7 @@
 					</div>
 				</div>
 				<div class="hidden md:grid text-purple-1000">
-					<h1 class="text-7xl font-display ">Checkout Event Calender for the next 30 days</h1>
+					<h1 class="text-7xl font-display ">Checkout Cruise Calender for the next 30 days</h1>
 					<p class="leading-8 tracking-wide font-body mt-4">We provide a 30 days view of events so as not to overwhelm you. Dates with events scheduled for them is highlighted while those with zero events yet are plain</p>
 				</div>
 			</div>
