@@ -13,7 +13,7 @@
 						.then( (response) => {
 							if(!response.data.error)
 							{
-								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "" }
+								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", "social_media_handle": "", "event_type" : "", "duration": "", "audience": "", "dress_code": "" }
 								this.toast("Event created Succesfully", "#fff", "green")
 								setTimeout(()=>{
 									window.href = "/promoter/dashboard/events"
@@ -49,36 +49,48 @@
 					@csrf
 					<template x-if="errorMessage != null">
 			       		<p x-text="errorMessage" class="text-purple-1000 p-2 text-sm leading-7 bg-red-300"></p>
-			       		</template>
+			       	</template>
 					<div class="mt-4">
-						<label for="name" class="font-bold text-sm block">Name of the event</label>
-						<p class="text-sm text-greyish py-1">Hint: Make the name sharp</p>
+						<label for="name" class="font-bold text-sm block">Name of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Insert the name of the event here.</p>
 						<input type="text" name="name" id="name" required minLength="5" x-model="data.name" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 					<div class="mt-4">
-						<label for="state" class="font-bold text-sm block mb-1">State of the event</label>
+						<label for="state" class="font-bold text-sm block mb-1">State of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Provide the state or region where the event will take place.</p>
 						<select name="state" id="state" required x-model="data.state" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+							<option value="all">All states</option>
+							<option value="abia">Abia</option>
+							<option value="abuja">Abuja</option>
+							<option value="edo">Edo</option>
+							<option value="ekiti">Ekiti</option>
+							<option value="kebbi">Kebbi</option>
+							<option value="kogi">Kogi</option>
 							<option value="kwara">Kwara</option>
 							<option value="lagos">Lagos</option>
-							<option value="abuja">Abuja</option>
+							<option value="ondo">Ondo</option>
+							<option value="osun">Osun</option>
+							<option value="rivers">Rivers</option>
+							<option value="sokoto">Sokoto</option>
 						</select>
 					</div>
 					<div class="mt-4">
-						<label for="event_date" class="font-bold text-sm block mb-1">Date of the event</label>
+						<label for="event_date" class="font-bold text-sm block mb-1">Date of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1"></p>
 						<input type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 					<div class="mt-4">
-						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event</label>
-						<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" />
 					</div>
 					<div class="mt-4">
-						<label for="location" class="font-bold text-sm block mb-1">Location</label>
-						<p class="text-sm text-greyish py-1">Provide a succint and clear direction to the venue using popular landmarks for easy comprehension</p>
+						<label for="location" class="font-bold text-sm block mb-1">Location <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Provide a succint and clear direction to the venue using popular landmarks for easy comprehension. Example: XYZ Hall, near City Mall, opposite ABC Restaurant</p>
 						<textarea name="location" id="location" required x-model="data.location" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 					<div class="mt-4">
 						<label for="promotional_copy" class="font-bold text-sm">Promotional copy</label>
-						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from this including artists performing, ballers present etc</p>
+						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from this including artists performing, ballers present etc. Example: Get ready for an unforgettable night featuring DJ Spinall, A-list ballers, and vibes that’ll keep you on your feet!</p>
 						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 					<div class="mt-4">
@@ -88,12 +100,32 @@
 					</div>
 					<div class="mt-4">
 						<label for="flier" class="font-bold text-sm block mb-1">Event flier</label>
+						<p class="text-sm text-greyish py-1">Attach or upload an image file of the event flier.</p>
 						<input type="file" name="flier" id="flier" required x-ref="flier" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<div class="mt-4">
-						<label for="coordinate" class="font-bold text-sm block mb-1">Coordinate</label>
-						<input type="text" name="coordinate" id="coordinate" required x-model="data.coordinate" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<label for="duration" class="font-bold text-sm block mb-1">Duration of event</label>
+						<p class="text-sm text-greyish py-1">Add the estimated duration of the event or its end time. Example: 19:00 – 01:00</p>
+						<input type="text" name="duration" id="duration" required x-model="data.duration" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<div class="mt-4">
+						<label for="audience" class="font-bold text-sm block mb-1">Audience</label>
+						<p class="text-sm text-greyish py-1">Specify the audience the event is geared towards (e.g., All Ages, Adults Only, Families). Example: Adults Only.</p>
+						<input type="text" name="audience" id="audience" required x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<div class="mt-4">
+						<label for="dress_code" class="font-bold text-sm block mb-1">Dress Code</label>
+						<p class="text-sm text-greyish py-1">Mention if there’s a specific dress code or theme for the event to help attendees prepare. Example: All-white party attire.</p>
+						<input type="text" name="dress_code" id="dress_code" required x-model="data.dress_code" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<div class="mt-4">
+						<label for="contact_information" class="font-bold text-sm block mb-1">Contact Information</label>
+						<p class="text-sm text-greyish py-1">Provide contact details for inquiries, support, or assistance. Example: info@midnightvibes.com | +234 123 456 789</p>
+						<input type="text" name="contact_information" id="contact_information" required x-model="data.contact_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<button class="w-full py-3 bg-red-1000 border-none text-gray-200 mt-4 rounded-lg shadow-md md:shadow-sm disabled:bg-gray-400 disabled:text-purple-1000 disabled:shadow-none md:w-2/6 md:mx-auto" type="submit" @click.prevent="submitForm()" x-ref="createTicketButton">

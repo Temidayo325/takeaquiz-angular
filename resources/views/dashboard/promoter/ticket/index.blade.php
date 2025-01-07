@@ -62,7 +62,7 @@
 			<div class="max-w-lg">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back <span x-text="user.nickname"></span></h1>
 				<p class="text-md leading-7 my-4">Tap on an event to check out any tickets already set up (if there’s any cruise pass chilling there), and add more sharp-sharp if needed. As per the Oga wey you be!</p>
-				<a href="" class="bg-red-1000 text-gray-100 px-7 py-3">Create new ticket</a>
+				<a href="/promoter/dashboard/events/create" class="bg-red-1000 text-gray-100 px-7 py-3">Create new event</a>
 			</div>
 			<img src="{{asset('/images/create-ticket.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>

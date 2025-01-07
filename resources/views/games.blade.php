@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-	<title>Welcome to CruiseHq</title>
+	<title>Cruise deck</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -22,8 +22,7 @@
 	<main class="bg-gray-100 pb-0">
 		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center">
 			<a href="/" class="flex justify-start items-center gap-2 py-2">
-                <x-application-logo class="w-8 h-8 fill-current text-purple-1000" />
-                <h3 class="font-display  font-bold text-lg text-purple-1000 tracking-widest">CruiseHq</h3>
+                <x-application-logo />
             </a>
             <ul class="flex justify-end gap-2 text-purple-1000 font-bold">
                 <li><a href="/login" class="text-red-1000 px-3">Login</a></li>

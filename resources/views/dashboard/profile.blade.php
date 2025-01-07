@@ -25,7 +25,13 @@
                     @include('profile.partials.add-profile-picture')
                 </div>
             </div>
-            
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('components.plugs.create')
+                </div>
+            </div>
+
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')

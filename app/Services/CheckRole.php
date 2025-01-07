@@ -9,9 +9,9 @@ class CheckRole
 {
 	public static function check(string $email):bool
      {
-        
-      	// $admins = explode(',', config('role.admin'));env('ADMINS')
-      	$admins = explode(',', env('ADMINS'));
+        // $emails = config('role.admins');
+      	$admins = explode(',', config('role.role'));
+      	// $admins = explode(',', env('ADMINS'));
 	    if (in_array($email, $admins)) {
 	        return true;
 	    }

@@ -21,6 +21,10 @@ class CreateEvent extends EventTags
 	    	'tags' => $this->turnStringTagsToArray($eventToBeCreated->tags),
 	    	'flier' => $path,
 	    	'location' => $eventToBeCreated->location,
+	    	'duration' => $eventToBeCreated->duration,
+	        'audience' => $eventToBeCreated->audience,
+	        'dress_code' => $eventToBeCreated->dress_code,
+	        'contact_information' => $eventToBeCreated->contact_information,
 	    	'promotional_copy' => $eventToBeCreated->promotional_copy
 		]);
 		// $tag = new EventTags();

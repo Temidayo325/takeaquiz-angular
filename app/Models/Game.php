@@ -12,10 +12,13 @@ class Game extends Model
     // HasTags;
 
     protected $fillable = [
-    	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image', 'tags'
+    	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image', 'tags',
+    	'materials', 'play_time', 'difficulty_level', 'category', 'ideal_setting', 'objective', 'tips'
     ];
 
     protected $casts = [
-    	'tags' => 'array'
+    	'tags' => 'array',
+    	'materials' => 'array',
+    	'stepByStep' => 'array'
     ];
 }

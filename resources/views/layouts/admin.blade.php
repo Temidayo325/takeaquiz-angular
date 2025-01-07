@@ -28,10 +28,14 @@
 
 <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-50 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
    <div class="h-full py-6 overflow-y-auto bg-gray-950 text-purple-200 dark:bg-gray-800 tracking-wider bg-admin-sidebar bg-cover bg-no-repeat bg-blend-darken" x-data='{user: @json($user),
+   init()
+   {
+      localStorage.setItem("user", JSON.stringify(this.user))
+   }
    }'>
       <div class="flex justify-start text-purple-200 items-center gap-2 px-3 md:px-5 my-3 tracking-wide md:mt-4 font-body"> 
          <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider"> 
-            <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto " :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
+            <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto bg-white" :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
             <div>
                <h2 x-text="user.name" class="text-md font-bold text-center"></h2>
                <p x-text="user.nickname" class="mt-2 text-sm text-center"></p>
@@ -67,7 +71,7 @@
                      <a href="/promoter/dashboard/tickets" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Ticket performance</a>
                   </li>
                   <li>
-                     <a href="/promoter/dashboard/tickets/create" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Create ticket</a>
+                     <a href="/promoter/dashboard/tickets/create" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Create ticket</a>
                   </li>
                 {{--   <li>
                      <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Ticket sales</a>
@@ -106,8 +110,8 @@
 
 <div class="sm:ml-64">
    <div class="dark:border-gray-700 bg-purple-200 md:bg-purple-100 md:px-10">
-      <header class="px-10 py-6 flex justify-between hidden md:flex text-purple-1000">
-         <a href="/" class="font-body tracking-wider text-left font-bold text-md">{{config('app.name')}}</a>
+      <header class="px-10 py-6 flex justify-between items-center hidden md:flex text-purple-1000 ">
+         <a href="/" class="font-body tracking-wider text-left font-bold text-md"><x-application-logo /></a>
          <div class="flex justify-end gap-3 text-md">
             <a href="/promoter/dashboard/events" class="hover:underline underline-offset-4 hover:text-red-1000">My Events</a>
             <a href="/promoter/dashboard/profile" class="hover:underline underline-offset-4 hover:text-red-1000">My Profile</a>

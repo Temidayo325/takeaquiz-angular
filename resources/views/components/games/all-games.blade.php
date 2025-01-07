@@ -5,7 +5,7 @@
 					searchterm: "",
 					chosenGame: null,
 					init(){
-						console.log(this.tags)
+						
 					},
 					fetchData(cursor)
 					{
@@ -70,20 +70,20 @@
 					},
 	}'>
 		<div class="mt-6">
-			<div class="py-7 px-2 text-purple-1000 bg-gamebar bg-cover bg-no-repeat bg-greyish bg-blend-multiply md:h-56">
-				<h1 class=" text-6xl font-normal font-display md:py-12 text-white/70 px-5 py-3">Fun party games!!</h1>
-				{{-- <p class="mt-3 text-md bg-white/50 px-5 py-3">We curated some games to light up your gatherings and events</p> --}}
-			</div>
+			<h1 class=" text-5xl font-normal font-display text-purple-1000 tracking-wider py-3">Fun Games Brings the gatherings to Life!!</h1>
+			<h3 class="text-lg font-body font-bold text-purple-1000 mb-3">Your one-stop destination for game inspiration.</h3>
+			<x-games.carousel></x-games.carousel>
+			{{-- <img src="{{asset('images/game.jpg')}}" alt="People playing fun game at the gathering" title="People playing fun game at the gathering" class="mt-3"> --}}
 			<div class="mt-8" x-show="games.data.length > 0">
-				<h1 class="font-bold font-body text-md mt-4 md:hidden">Popular game tags</h1>
-				<div class="flex gap-6 justify-start items-center overflow-x-scroll py-6 px-3">
+				<h1 class="font-bold text-md mt-4 ">Popular game tags</h1>
+				<div class="flex gap-6 justify-start items-center overflow-x-scroll py-6">
 					<template x-for="tag in tags">
-						<button x-text="tag" class="rounded-full no-wrap px-8 py-2 shadow-lg text-nowrap bg-purple-1000 text-gray-200" @click="searchByTag(tag)"></button>
+						<button x-text="tag" class="rounded-full no-wrap px-4 md:px-8 py-2 shadow-lg text-nowrap bg-purple-1000 text-gray-200 font-body" @click="searchByTag(tag)"></button>
 					</template>
 				</div>
 			</div>
 			<h1 class="font-bold font-body text-md mt-4 md:hidden" x-show="games.data.length > 0">View available games</h1>
-			<div class="mt-2 md:mt-12" x-show="games.data.length > 0">
+			<div class="mt-2 md:mt-6" x-show="games.data.length > 0">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
 					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="e.g. spin the bottle" @input.debounce.500ms="searchTerm">
@@ -97,9 +97,9 @@
 					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-10">
 						<template x-for="game in games.data">
 							<button class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
-								<img :src="`{{ asset('.') }}${game.image}`" alt="Image depicting the game" class="w-full h-32">
+								<img :src="`{{ asset('images') }}/${game.image}`" alt="Image depicting the game" class="w-full h-32">
 								<div class="px-2 py-1 text-sm">
-									<h2 class="font-bold text-center" x-text="game.name">Name of the game</h2>
+									<h2 class="font-bold text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2>
 									<p>
 										<span>Min:<span class="font-bold" x-text="game.minimum_player"></span></span>
 										<span>Max:<span class="font-bold" x-text="game.maximum_player"></span></span>
@@ -119,7 +119,7 @@
 				</div>
 			</template>
 			<template x-if="games.data.length <= 0">
-				<h2 class="text-center font-bold font-body text-xl py-20 ">You have not created any games yet, Click here to add some games</h2>
+				<h2 class="text-center font-bold font-body text-xl py-20 ">You have not created any games yet</h2>
 			</template>
 			<x-sidebar-toggle-button></x-sidebar-toggle-button>
 			  
@@ -132,9 +132,9 @@
 		        <div class="py-4 overflow-y-auto text-black my-10">
 					<template x-if="chosenGame != null">
 						<div class="game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer pb-10" title="Click to view more information" >
-							<img :src="`{{ asset('.') }}${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
+							<img :src="`{{ asset('images') }}/${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
 							<div class="px-4 py-2">
-								<h2 class="font-display leading-9 text-center mb-4" x-text="chosenGame.name">Name of the game</h2>
+								<h2 class="font-display leading-9 text-center mb-4 md:text-lg md:py-1" x-text="chosenGame.name">Name of the game</h2>
 								<h4 class="font-bold text-md">Game summary</h4>
 								<p x-text="chosenGame.summary" class="text-sm leading-8"></p>
 								<p class="mt-4">
@@ -145,8 +145,41 @@
 									<strong>Max players : </strong>
 									<span x-text="chosenGame.maximum_player"></span>
 								</p>
-								<h4 class="mt-8 font-bold text-md">How to play game</h4>
-								<p x-text="chosenGame.stepByStep" class="text-sm leading-8"></p>
+								@auth
+									<div>
+										<h4 class="mt-8 font-bold text-md">How to play</h4>
+										<ul class="mt-2 px-10 py-2">
+											<template x-for="step in chosenGame.stepByStep" class="">
+												<li x-text="step" class="list-decimal py-1"></li>
+											</template>
+										</ul>
+
+										<h4 class="mt-8 font-bold text-md">Required Materials or Setup</h4>
+										<ul class="mt-2 px-10 py-2">
+											<template x-for="material in chosenGame.materials" class="">
+												<li x-text="material" class="list-decimal py-1"></li>
+											</template>
+										</ul>
+
+										<h4 class="mt-8 font-bold text-md">Estimated Playtime</h4>
+										<p x-text="chosenGame.play_time" class="text-sm leading-8"></p>
+
+										<h4 class="mt-8 font-bold text-md">Difficulty Level</h4>
+										<p x-text="chosenGame.difficulty_level" class="text-sm leading-8"></p>
+
+										<h4 class="mt-8 font-bold text-md">Player Category</h4>
+										<p x-text="chosenGame.category" class="text-sm leading-8"></p>
+
+										<h4 class="mt-8 font-bold text-md">Ideal setting</h4>
+										<p x-text="chosenGame.ideal_setting" class="text-sm leading-8"></p>
+
+										<h4 class="mt-8 font-bold text-md">Objective or Win Condition</h4>
+										<p x-text="chosenGame.objective" class="text-sm leading-8"></p>
+
+										<h4 class="mt-8 font-bold text-md">Tips for Success</h4>
+										<p x-text="chosenGame.tips" class="text-sm leading-8"></p>										
+									</div>
+								@endauth
 							</div>
 						</div>
 					</template>

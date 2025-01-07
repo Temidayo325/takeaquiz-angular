@@ -21,6 +21,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                $user = \App\Models\User::find(Auth::id());
+                if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
+                {
+                    return redirect()->intended(route('promoter.dashboard', absolute: false));
+                }
                 return redirect(RouteServiceProvider::HOME);
             }
         }

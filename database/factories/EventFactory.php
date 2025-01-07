@@ -28,7 +28,11 @@ class EventFactory extends Factory
             'status' => 'Draft',
             'coordinate' => fake()->longitude($min = -180, $max = 180) . " : " .fake()->latitude($min = -90, $max = 90),
             'promotional_copy' => fake()->paragraph(),
-            'isPremium' => false
+            'isPremium' => false,
+            'duration' => '2 hours',
+            'audience' => 'adults',
+            'dress_code' => 'all white party',
+            'contact_information' => '+23490898978'
         ];
     }
 }

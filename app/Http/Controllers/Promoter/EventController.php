@@ -6,12 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Event\CreateEventRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Event;
 
 class EventController extends Controller
 {
     public function index()
     {
-    	$events = \App\Models\Event::with('tickets.attendance', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets.attendance', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.promoter.event.index", ['events' => $events, 'user' => $user]);
     }
@@ -50,14 +51,14 @@ class EventController extends Controller
     {
         try {
             $path = $request->video->store('promotional_materials');
-            $event_media = \App\Models\EventMedia::create([
+            $event_media = EventMedia::create([
                 'user_id' => auth()->id(),
                 'event_id' => $request->event_id,
                 'video_gallery' => $path,
                 'image_gallery' => 'Wahala pro max and it does not exist',
                 'flier' => 'Again the same thing'
             ]);
-            $event = \App\Models\Event::with('eventmedia')->where('id', $request->event_id)->first();
+            $event = Event::with('eventmedia')->where('id', $request->event_id)->first();
             return response()->json([
                 'error' => false,
                 'message' => "Event promotional video added",
@@ -73,7 +74,7 @@ class EventController extends Controller
 
     public function paginateEvents(Request $request)
     {
-    	$events = \App\Models\Event::with('tickets', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
+    	$events = Event::with('tickets', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
     	return response()->json($events);
     }
 
@@ -81,5 +82,16 @@ class EventController extends Controller
     {
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
         return view("dashboard.promoter.event.create", ['user' => $user]);
+    }
+
+    public function updateStatus(\App\Http\Requests\Event\EventIdRequest $request)
+    {
+        $event = Event::find($request->id);
+        $event->status = ( $event->status == 'Draft' ) ? 'Published' : 'Draft';
+        $event->save();
+        return response()->json([
+            'error' => false,
+            'message' => "Event status updated successfully"
+        ]);
     }
 }

@@ -13,11 +13,11 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Role::factory()
-        				->count(3)
+        				->count(4)
         				->sequence(
         					['role' => 'user'],
         					['role' => 'admin'],
-                            ['role' => 'promoter']
+                            ['role' => 'promoter'],
         					['role' => 'plug']
         				)
         				->create();

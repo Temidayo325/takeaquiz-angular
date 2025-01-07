@@ -27,11 +27,11 @@ Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->na
 Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
 Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'search']);
 Route::post('/games/search/tag', [\App\Http\Controllers\GameController::class, 'searchByTags']);
-    // ========== Event routes goes here ======== \\
-// Route::get('/tickets', function () {
-//     return view('tickets');
-// });
-
+    // ========== Plugs routes goes here ======== \\
+Route::get('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'index'])->name('plug.list');
+Route::post('/plugs/search', [\App\Http\Controllers\Plug\PlugController::class, 'search']);
+Route::post('/plugs/search/tags', [\App\Http\Controllers\Plug\PlugController::class, 'searchByTags']);
+Route::get('/plugs/search/paginate', [\App\Http\Controllers\Plug\PlugController::class, 'paginateUsers']);
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -42,6 +42,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/facecard', [ProfileController::class, 'facecard'])->name('profile.update.facecard');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
+    Route::post('/plug/dashboard/create', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
+    Route::post('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
 });
 
 Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->group(function () {
@@ -60,6 +62,7 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::get('/events', [EventController::class, 'index'])->name('promoter.event.index');
     Route::post('/events/paginate', [EventController::class, 'paginateEvents']);
     Route::post('/events/create', [EventController::class, 'store']);
+    Route::post('/event/status', [EventController::class, 'updateStatus']);
     Route::post('/events/promotional_video', [EventController::class, 'add_promotional_media']);
     Route::get('/events/create', [EventController::class, 'create'])->name('promoter.event.create');
     // ========== Event routes goes here ======== \\

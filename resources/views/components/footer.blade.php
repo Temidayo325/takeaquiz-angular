@@ -20,7 +20,7 @@
 		<div>
 			<h3 class="font-bold">Quick actions</h3>
 			<a href="/games" class="text-sm block py-2">Cruise deck</a>
-			<a href="/login" class="text-sm block">Login your account</a>
+			<a href="/plugs" class="text-sm block">Plugs</a>
 		</div>
 		
 	</div>

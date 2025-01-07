@@ -91,7 +91,7 @@
 		},
 		AddRole(role)
 		{
-			this.toast("odifying user role", "blue")
+			this.toast("Modifying user role", "blue")
 			try {
                 axios.post("/admin/dashboard/users/roles/assign", {role: role.role, user_id: this.chosenUser.id})
                 .then( ( response ) => {
@@ -137,7 +137,7 @@
 			<div class="max-w-md">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
 				<p class="text-md leading-7 my-4">This is the database o all the users on the platform, you can adjust their roles as required. Remember that every individual you upgrade to an admin role would also have the ability to create and manage events while users to upgrade to Organizer can only manage their own events.</p>
-				<a href="/promoter/dashboard/event/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
+				<a href="/promoter/dashboard/events/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
 			</div>
 			<img src="{{asset('/images/people.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
@@ -249,15 +249,11 @@
 							</template>
 							<template x-if="rolesToAssign.length > 0">
 								<ul>
-									<p class="grid grid-cols-2 gap-1">
-										<span>Unassigned role</span>
-										<span></span>
-									</p>
 									<template x-for="role in rolesToAssign">
 										<li class="grid grid-cols-2 gap-3 justify-evenly items-center py-3">
 											<p x-text="role.role.toUpperCase()"></p>
 											<div class="flex justify-start items-center font-bold text-sm tracking-wider">
-												<button x-show="role.role != 'user'" @click="AddRole(role)" class="text-green-600 hover:underline hover:underline-offset-2">Add role</button>
+												<button x-show="role.role != 'user'" @Click="AddRole(role)" class="text-green-600 hover:underline hover:underline-offset-2">Add role</button>
 												
 											</div>
 										</li>

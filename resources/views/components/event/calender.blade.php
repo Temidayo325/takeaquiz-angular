@@ -165,6 +165,7 @@
 										<option value="abuja">Abuja</option>
 										<option value="kwara">Kwara</option>
 										<option value="lagos">Lagos</option>
+										<option value="osun">Osun</option>
 									</select>
 								</div>
 							</form>
@@ -231,7 +232,7 @@
 	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded" @click="showEventTickets(event, event.tickets)">
 									<div class="grid gap-2">
 										<p x-text="new Date(event.event_date).toDateString()" class="text-sm md:text-md"></p>
-										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
+										<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
 										<div>
 											<h2 x-text="event.name" class="text-xl md:text-2xl"></h2>
 											<div class="flex justify-start text-sm md:text-md items-center gap-5 mt-1">

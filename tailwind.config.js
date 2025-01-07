@@ -15,7 +15,9 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 display: ['Bangers, system-ui'],
                 hand: ['Playwrite CZ Guides'],
-                body: ['Poppins, sans-serif']
+                body: ['Architects Daughter, serif'],
+                sign: ['Dancing Script, serif']
+                // body: ['Poppins, sans-serif']
             },
             backgroundImage: {
                 'vip-pattern': "url('../../public/images/architect.svg')",

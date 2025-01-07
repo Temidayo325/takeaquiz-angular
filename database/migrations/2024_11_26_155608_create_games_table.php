@@ -17,9 +17,16 @@ return new class extends Migration
             $table->text('summary');
             $table->longText('stepByStep');
             $table->integer('minimum_player');
-            $table->integer('maximum_player');
+            $table->string('maximum_player');
             $table->text('tags');
             $table->string('image');
+            $table->text('materials');
+            $table->text('difficulty_level');
+            $table->text('category');
+            $table->text('ideal_setting');
+            $table->text('objective');
+            $table->text('tips');
+            $table->text('play_time');
             $table->timestamps();
         });
     }

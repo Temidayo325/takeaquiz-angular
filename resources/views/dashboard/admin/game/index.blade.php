@@ -83,7 +83,7 @@
 					<div class="w-full pb-20 py-10 grid md:grid-cols-4 md:gap-10 px-6">
 						<template x-for="game in games.data">
 							<div class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
-								<img :src="`{{ asset('.') }}${game.image}`" alt="Image depicting the game" class="w-full h-auto">
+								<img :src="`{{ asset('images') }}/${game.image}`" alt="Image depicting the game" class="w-full h-auto">
 								<div class="px-4 py-2">
 									<h2 class="font-bold leading-9 text-center" x-text="game.name">Name of the game</h2>
 								</div>
@@ -111,12 +111,12 @@
 		            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
 		            <span class="sr-only">Close menu</span>
 		        </button>
-		        <div class="py-4 overflow-y-auto text-black my-10">
+		        <div class="py-4 overflow-y-auto overflow-x-hidden text-black my-10">
 					<template x-if="chosenGame != null">
 						<div class="game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer pb-10" title="Click to view more information" >
-							<img :src="`{{ asset('.') }}${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
+							<img :src="`{{ asset('images') }}/${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
 							<div class="px-4 py-2">
-								<h2 class="font-bold leading-9 text-center mb-4" x-text="chosenGame.name">Name of the game</h2>
+								<h2 class="font-bold leading-9 text-center mb-4 text-lg" x-text="chosenGame.name">Name of the game</h2>
 								<h4 class="font-bold text-md">Game summary</h4>
 								<p x-text="chosenGame.summary"></p>
 								<p class="mt-4">
@@ -127,8 +127,40 @@
 									<strong>Maximum required players : </strong>
 									<span x-text="chosenGame.maximum_player"></span>
 								</p>
-								<h4 class="mt-4 font-bold text-md">How to play game</h4>
-								<p x-text="chosenGame.stepByStep"></p>
+								
+								<div>
+									<h4 class="mt-8 font-bold text-md">How to play</h4>
+									<ul class="mt-2 px-10 py-2">
+										<template x-for="step in chosenGame.stepByStep" class="">
+											<li x-text="step" class="list-decimal py-1"></li>
+										</template>
+									</ul>
+
+									<h4 class="mt-8 font-bold text-md">Required Materials or Setup</h4>
+									<ul class="mt-2 px-10 py-2">
+										<template x-for="material in chosenGame.materials" class="">
+											<li x-text="material" class="list-decimal py-1 wrap"></li>
+										</template>
+									</ul>
+
+									<h4 class="mt-8 font-bold text-md">Estimated Playtime</h4>
+									<p x-text="chosenGame.play_time" class="text-sm leading-8"></p>
+
+									<h4 class="mt-8 font-bold text-md">Difficulty Level</h4>
+									<p x-text="chosenGame.difficulty_level" class="text-sm leading-8"></p>
+
+									<h4 class="mt-8 font-bold text-md">Player Category</h4>
+									<p x-text="chosenGame.category" class="text-sm leading-8"></p>
+
+									<h4 class="mt-8 font-bold text-md">Ideal setting</h4>
+									<p x-text="chosenGame.ideal_setting" class="text-sm leading-8"></p>
+
+									<h4 class="mt-8 font-bold text-md">Objective or Win Condition</h4>
+									<p x-text="chosenGame.objective" class="text-sm leading-8"></p>
+
+									<h4 class="mt-8 font-bold text-md">Tips for Success</h4>
+									<p x-text="chosenGame.tips" class="text-sm leading-8"></p>										
+								</div>
 							</div>
 						</div>
 					</template>

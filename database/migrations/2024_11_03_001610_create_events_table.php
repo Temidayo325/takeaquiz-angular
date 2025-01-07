@@ -27,6 +27,10 @@ return new class extends Migration
             $table->string('flier')->nullable();
             $table->boolean('isPremium')->default(false);
             $table->text('promotional_copy');
+            $table->string('duration');
+            $table->string('audience');
+            $table->string('dress_code');
+            $table->text('contact_information');
             $table->timestamps();
         });
     }

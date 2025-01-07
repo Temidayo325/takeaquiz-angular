@@ -21,7 +21,12 @@ class Event extends Model
         'location',
         'flier',
     	// 'isPremium',
-    	'promotional_copy'
+        'promotional_copy',
+    	'social_media_handle',
+        'duration',
+        'audience',
+        'dress_code',
+        'contact_information'
     ];
 
     protected $casts = [
