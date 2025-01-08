@@ -37,8 +37,8 @@
          <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider"> 
             <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto bg-white" :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
             <div>
-               <h2 x-text="user.name" class="text-md font-bold text-center"></h2>
-               <p x-text="user.nickname" class="mt-2 text-sm text-center"></p>
+               <h2 x-text="user.nickname" class="text-md font-bold text-center"></h2>
+               <p x-text="user.name" class="mt-2 text-sm text-center"></p>
             </div>
          </div> 
       </div>  

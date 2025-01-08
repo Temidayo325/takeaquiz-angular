@@ -30,12 +30,12 @@
 	            </ul>
 			</div>
 			<div class="text-left text-purple-1000 py-2 px-4 md:px-20 md:py-10 grid gap-3 md:grid-cols-2 md:items-center my-10 md:my-20">
-				<img src="{{asset('/images/hero-pacy.png')}}" alt="" class="md:h-[300px] md:w-[600px]">
+				<img src="{{asset('/images/hero-pacy.png')}}" alt="" class="md:h-[300px] md:w-[600px]" />
 				<div class="mt-4 md:mt-0 mb-12 md:mb-0">
 					<h1 class="text-4xl font-display md:text-[80px] mb-4 py-2 text-center md:text-left text-purple-900">Ahoy Cruiser<h1>
-					<h3 class="font-body text-md leading-8">Welcome aboard CruiseHQ— your gateway to endless adventures and unforgettable moments. Here’s to creating memories that last a lifetime!</h3>
-					<h5 class="md:mt-8 font-body">Smooth sailing,</h5>
-					<h5 class="text-2xl mt-2 font-sign tracking-wider">TCG</h5>
+					<h3 class="font-body font-bold text-md leading-8">Welcome aboard CruiseHQ— your gateway to endless adventures and unforgettable moments. Here’s to creating memories that last a lifetime!</h3>
+					<h5 class="md:mt-8 font-body font-bold">Smooth sailing,</h5>
+					<h5 class="text-2xl mt-2 font-sign tracking-wider font-bold">TCG</h5>
 				</div>
 			</div>
 		</header>

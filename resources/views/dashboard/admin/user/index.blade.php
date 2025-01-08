@@ -136,7 +136,7 @@
 		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
 			<div class="max-w-md">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
-				<p class="text-md leading-7 my-4">This is the database o all the users on the platform, you can adjust their roles as required. Remember that every individual you upgrade to an admin role would also have the ability to create and manage events while users to upgrade to Organizer can only manage their own events.</p>
+				<p class="text-md leading-7 my-4">This is the database of all the users on the platform, you can adjust their roles as required. Remember that every individual you upgrade to an admin role would also have the ability to create and manage events while users to upgrade to Organizer can only manage their own events.</p>
 				<a href="/promoter/dashboard/events/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
 			</div>
 			<img src="{{asset('/images/people.svg')}}" alt="People chilling" class="w-96 h-52">
