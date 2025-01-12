@@ -17,11 +17,12 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = \App\Models\User::with('plug')->where('id', auth()->id())->first();
         if ( $request->user()->hasAnyRoles( ['promoter', 'admin'] ) ) {
-            return view('dashboard.profile', [ 'user' => $request->user()]);
+            return view('dashboard.profile', [ 'user' => $user]);
         }
         return view('dashboard.user.profile', [
-            'user' => $request->user(),
+            'user' => $user,
         ]);
     }
 

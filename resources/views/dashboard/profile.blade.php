@@ -28,7 +28,7 @@
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    @include('components.plugs.create')
+                    <x-plugs.create :user="$user"></x-plugs.create>
                 </div>
             </div>
 

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('promotional_copy');
             $table->string('duration');
             $table->string('audience');
-            $table->string('dress_code');
+            $table->string('dress_code')->nullable()->default('Drip nice');
             $table->text('contact_information');
             $table->timestamps();
         });

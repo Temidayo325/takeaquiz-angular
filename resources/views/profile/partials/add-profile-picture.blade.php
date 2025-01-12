@@ -1,6 +1,6 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-purple-1000 dark:text-gray-100">
+        <h2 class="text-lg font-medium text-purple-1000 font-bold dark:text-gray-100">
             {{ __('My Cruise Face-card') }}
         </h2>
 
@@ -13,7 +13,7 @@
         @csrf
 
         <div>
-            <x-input-label for="facecard" :value="__('My Face card')" />
+            <label for="facecard" class="font-bold text-sm">My Face card</label>
             {{-- <input id="facecard" name="facecard" type="file" class="mt-1 block w-full" required autofocus autocomplete="facecard" /> --}}
             <input type="file" name="facecard" id="facecard" required class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
             <x-input-error class="mt-2" :messages="$errors->get('facecard')" />

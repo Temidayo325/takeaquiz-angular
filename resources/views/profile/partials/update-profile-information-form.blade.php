@@ -1,9 +1,9 @@
 <section x-data='{init(){ localStorage.setItem("user", JSON.stringify(this.user))}}'>
     <header>
-        <h2 class="text-lg font-medium text-purple-1000 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
-
+       {{--  <h2 class="text-lg font-medium text-purple-1000 font-bold dark:text-gray-100">
+            Profile Information
+        </h2> --}}
+        <h1 class="font-bold text-purple-1000 text-lg">Profile Information</h1>
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             {{ __("Update your account's profile information and email address.") }}
         </p>
@@ -18,13 +18,13 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <label for="name" class="font-bold text-sm">Name</label>
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
         
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <label class="font-bold text-sm" for="email">Email</label>
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

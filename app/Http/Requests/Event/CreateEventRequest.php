@@ -32,7 +32,7 @@ class CreateEventRequest extends FormRequest
             'promotional_copy' => ['required', 'string', 'bail'],
             'id' => ['integer', 'min:1', 'nullable'],
             'duration' => ['required', 'string', 'bail'],
-            'audience' => ['required', 'string', 'bail'],
+            'audience' => ['nullable', 'string', 'bail'],
             'dress_code' => ['required', 'string', 'bail'],
             'contact_information' => ['required', 'string', 'bail']
         ];

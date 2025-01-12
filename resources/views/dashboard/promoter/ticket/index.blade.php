@@ -73,7 +73,7 @@
 			</template>
 			<template x-if="events.data.length > 0">
 				<template  x-for='event in events.data' :key="event.id">
-						<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-white md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer">
+						<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-white md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer" >
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>

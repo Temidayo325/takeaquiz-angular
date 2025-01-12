@@ -66,7 +66,7 @@
 		</div>
 		<div class="py-4 grid gap-3">
 			<h3 class="text-md font-bold mt-6">Upcoming events and tickets</h3>
-			<p class="leading-7 text-sm md:hidden">Tap on an event to check out any tickets already set up (if there’s any cruise pass chilling there), and add more sharp-sharp if needed. As per the Oga wey you be!</p>
+			<p class="leading-7 text-sm md:hidden">Click on an event to check out any tickets already set up (if there’s any chilling there), and add more A-S-A-P if needed. As per the Oga wey you be!</p>
 		</div>
 		<div class="flex justify-center items-center md:mt-8">
 			<template x-if="events.data.length <= 0">
@@ -79,7 +79,7 @@
 					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer" @click="addEvent(event)" data-drawer-target="drawer-right-example" 
 					data-drawer-show="drawer-right-example" data-drawer-placement="right" 
 					aria-controls="drawer-right-example" 
-					id="right-drawer-button">
+					id="right-drawer-button" title="Click the event to create tickets for it">
 						<div class="grid gap-2">
 							<div class="flex justify-between items-center">
 								<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -261,7 +261,7 @@
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-x-hidden md:px-8" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
 			       	<form action="" method="post" @submit.prevent="createTicket()" class="w-full grid gap-6 my-5 mx-auto font-body tracking-wide text-purple-1000 overflow-x-hidden pb-8">
 			       		<template x-if="chosenEvent != null">
-			       			<img :src="`{{ asset('.') }}${chosenEvent.flier}`" alt="Image depicting the event" class="w-full h-auto md:w-full ">
+			       			<img :src="`{{ asset('./images') }}/${chosenEvent.flier}`" alt="Image depicting the event" class="w-full h-auto md:w-full ">
 			       		</template>
 			       		<template x-if="errorMessage != null">
 			       			<p x-text="errorMessage" class="text-gray-100 p-2 text-sm leading-7 bg-red-300"></p>

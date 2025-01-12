@@ -15,9 +15,7 @@
 							{
 								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", "social_media_handle": "", "event_type" : "", "duration": "", "audience": "", "dress_code": "" }
 								this.toast("Event created Succesfully", "#fff", "green")
-								setTimeout(()=>{
-									window.href = "/promoter/dashboard/events"
-								}, 3000)
+								location.href = "/promoter/dashboard/tickets"
 							}
 							$refs.createTicketButton.removeAttribute("disabled")
 							this.spinner = false
@@ -83,48 +81,54 @@
 						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" />
 					</div>
+
+					<div class="mt-4">
+						<label for="duration" class="font-bold text-sm block mb-1">Duration of event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Add the estimated duration of the event or its end time. Example: 19:00 – 01:00</p>
+						<input type="text" name="duration" id="duration" required x-model="data.duration" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
 					<div class="mt-4">
 						<label for="location" class="font-bold text-sm block mb-1">Location <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Provide a succint and clear direction to the venue using popular landmarks for easy comprehension. Example: XYZ Hall, near City Mall, opposite ABC Restaurant</p>
 						<textarea name="location" id="location" required x-model="data.location" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 					<div class="mt-4">
-						<label for="promotional_copy" class="font-bold text-sm">Promotional copy</label>
-						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from this including artists performing, ballers present etc. Example: Get ready for an unforgettable night featuring DJ Spinall, A-list ballers, and vibes that’ll keep you on your feet!</p>
+						<label for="promotional_copy" class="font-bold text-sm">Promotional copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from the event including performing artists. Example: Get ready for an unforgettable night featuring DJ Spinall, Alcohol, and vibes that’ll keep you on your feet!</p>
 						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 					<div class="mt-4">
-						<label for="tags" class="font-bold text-sm">Event tags</label>
+						<label for="tags" class="font-bold text-sm">Event tags <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Add some tags to help in search like you'll do in twitter, separate using a comma.</p>
 						<input type="text" name="tags" id="tags" required x-model="data.tags" placeholder="blockparty, party, shayo, badman, vibesAndChill" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full placeholder:text-gray-200">
 					</div>
 					<div class="mt-4">
-						<label for="flier" class="font-bold text-sm block mb-1">Event flier</label>
+						<label for="flier" class="font-bold text-sm block mb-1">Event flier <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Attach or upload an image file of the event flier.</p>
 						<input type="file" name="flier" id="flier" required x-ref="flier" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<div class="mt-4">
-						<label for="duration" class="font-bold text-sm block mb-1">Duration of event</label>
-						<p class="text-sm text-greyish py-1">Add the estimated duration of the event or its end time. Example: 19:00 – 01:00</p>
-						<input type="text" name="duration" id="duration" required x-model="data.duration" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
-					</div>
-
-					<div class="mt-4">
-						<label for="audience" class="font-bold text-sm block mb-1">Audience</label>
+						<label for="audience" class="font-bold text-sm block mb-1">Audience <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Specify the audience the event is geared towards (e.g., All Ages, Adults Only, Families). Example: Adults Only.</p>
-						<input type="text" name="audience" id="audience" required x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<select name="audience" id="audience" required="" x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+							<option value="All ages">All ages</option>
+							<option value="Adult only">Adult only</option>
+							<option value="Families">Families</option>
+						</select>
+						{{-- <input type="text" name="audience" id="audience" required x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full"> --}}
 					</div>
 
 					<div class="mt-4">
-						<label for="dress_code" class="font-bold text-sm block mb-1">Dress Code</label>
+						<label for="dress_code" class="font-bold text-sm block mb-1">Dress Code <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Mention if there’s a specific dress code or theme for the event to help attendees prepare. Example: All-white party attire.</p>
 						<input type="text" name="dress_code" id="dress_code" required x-model="data.dress_code" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<div class="mt-4">
-						<label for="contact_information" class="font-bold text-sm block mb-1">Contact Information</label>
-						<p class="text-sm text-greyish py-1">Provide contact details for inquiries, support, or assistance. Example: info@midnightvibes.com | +234 123 456 789</p>
+						<label for="contact_information" class="font-bold text-sm block mb-1">Contact Information <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Provide contact details for inquiries, support, or assistance, separating each phone number or social media link with a comma (,). Example: info@midnightvibes.com , +234 123 456 789, https:\\www.x.com/myeventpage</p>
 						<input type="text" name="contact_information" id="contact_information" required x-model="data.contact_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
