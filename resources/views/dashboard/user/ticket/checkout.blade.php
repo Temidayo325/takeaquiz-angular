@@ -8,9 +8,39 @@
 		chosenEvent: null,
 		init() {
         	sessionStorage.setItem("ticket", JSON.stringify(this.desiredTicket))
-        	console.log(this.ticket)
         	this.chosenEvent = this.desiredTicket.event
-   		}
+   		},
+        toast(text, background){
+            Toastify({
+              text: text, 
+              style: {
+                background: background,
+                color: "white"
+              }
+            }).showToast();
+        },
+        checkout()
+        {
+            try {
+                axios.post("/user/dashboard/ticket/initiate-payment", {ticket_id: this.desiredTicket.id})
+                .then(response => {
+                    if( !response.data.error && this.desiredTicket.access_type == "Free")
+                    {
+                        this.toast(response.data.message, "green")
+                        window.location = "/user/dashboard"
+                    }
+
+                    if(response.data.error)
+                    {
+                        this.toast(response.data.message, "orange")
+                    }
+                })
+                .catch(error => console.log(error))
+            } catch (error) {
+                this.toast(error.response.data.message, "red")
+                console.error(error)
+            }
+        }
 	}'>
 		<h1 class="font-bold text-lg py-4">Complete your ticket transaction</h1>
 		<div>
@@ -33,8 +63,12 @@
     			</div>
     		</template>	
 		</div>
-		<div class="flex justify-center items-center mt-8 mb-14">
-			<button class="bg-gray-950 text-gray-200 px-10 py-2">Proceed to checkout</button>
+        <p class="text-red-1000 font-bold py-3 "><span class="text-lg">&#8358; </span><span x-text="desiredTicket.price"></span> would be deducted from your wallet</p>
+		<div class="flex justify-center items-center mt-4 mb-14">
+			<button class="bg-gray-950 text-gray-200 px-6 py-3" @click="checkout()">
+                Continue to checkout
+                <svg class="animate-bounce w-10 h-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" /></svg>
+            </button>
 		</div>
 	</div>
 

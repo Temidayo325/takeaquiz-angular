@@ -229,13 +229,13 @@
             		<template x-if="chosenEvents.length > 0">
             			<ul class="grid gap-10 pb-12">
             				<template x-for="event in chosenEvents" :key="event.id">
-	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded" @click="showEventTickets(event, event.tickets)">
+	            				<li class="border shadow-lg md:shadow-sm border-gray-200 bg-gray-200 px-2 py-5 cursor-pointer rounded text-purple-1000 hover:shadow-md">
 									<div class="grid gap-2">
 										<p x-text="new Date(event.event_date).toDateString()" class="text-sm md:text-md"></p>
 										<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto">
-										<div>
-											<h2 x-text="event.name" class="text-xl md:text-2xl"></h2>
-											<div class="flex justify-start text-sm md:text-md items-center gap-5 mt-1">
+										<div class="pt-2 pb-5 border-b border-gray-700">
+											<h2 x-text="event.name" class="text-xl md:text-2xl font-body font-bold"></h2>
+											<div class="flex justify-start text-sm md:text-md items-center gap-5 mt-3">
 												<p class="flex justify-start items-center gap-1">
 													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
 
@@ -247,9 +247,33 @@
 												</p>
 											</div>
 											<p class="flex justify-start items-start gap-1 mt-3">
-												<svg class="w-6 h-6 text-red-1000" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+												<svg class="w-7 h-7 text-purple-1000" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
 												<span x-text="event.location" class="text-sm "></span>
 											</p>
+										</div>
+										<div class="py-2 grid gap-3 mt-2 text-purple-1000">
+											<div>
+												<h3 class="text-sm font-bold ">Event duration</h3>
+												<p x-text="event.duration"></p>
+											</div>
+
+											<div>
+												<h3 class="text-sm font-bold ">Recomended Audience</h3>
+												<p x-text="event.audience"></p>
+											</div>
+
+											<div>
+												<h3 class="text-sm font-bold ">Dress code</h3>
+												<p x-text="event.dress_code"></p>
+											</div>
+
+											<div>
+												<h3 class="text-sm font-bold ">For  more information</h3>
+												<p x-text="event.contact_information"></p>
+											</div>
+											<div>
+												<button @click="showEventTickets(event, event.tickets)" class="bg-purple-1000 text-gray-300 hover:bg-purple-900 hover:text-gray-100 py-3 w-full text-center text-white hover:shadow-md">View Event ticket</button>
+											</div>
 										</div>
 									</div>
 								</li>

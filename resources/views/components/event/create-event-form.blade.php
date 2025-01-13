@@ -121,7 +121,7 @@
 					</div>
 
 					<div class="mt-4">
-						<label for="dress_code" class="font-bold text-sm block mb-1">Dress Code <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="dress_code" class="font-bold text-sm block mb-1">Dress Code </label>
 						<p class="text-sm text-greyish py-1">Mention if there’s a specific dress code or theme for the event to help attendees prepare. Example: All-white party attire.</p>
 						<input type="text" name="dress_code" id="dress_code" required x-model="data.dress_code" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>

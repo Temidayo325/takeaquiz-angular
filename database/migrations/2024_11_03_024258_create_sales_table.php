@@ -25,7 +25,6 @@ return new class extends Migration
                     ->references('id')
                     ->on('tickets')
                     ->onDelete('cascade');
-            $table->integer("purchased_tickets");
             $table->integer("amount_paid");
             $table->set('status', ['Pending', 'Failed', 'Success']);
             $table->timestamps();

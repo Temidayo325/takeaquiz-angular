@@ -26,6 +26,7 @@ return new class extends Migration
             $table->text('usp');
             $table->text('social_media_links');
             $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Active');
+            $table->boolean('isPremium')->default(false);
             $table->timestamps();
         });
     }

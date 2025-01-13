@@ -20,7 +20,6 @@ class SaleFactory extends Factory
             'user_id' => random_int(1, 100),
             'event_id' => random_int(1, 50),
             'ticket_id' => random_int(1, 50),
-            'purchased_tickets' => random_int(1, 3),
             'amount_paid' => random_int(1000, 3000),
             'status' => 'Success'
         ];

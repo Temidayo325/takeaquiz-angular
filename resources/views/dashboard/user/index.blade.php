@@ -25,21 +25,21 @@
 					<img src="{{asset('/images/chilling.svg')}}" alt="People chilling" class="w-96 h-52">
 				</div>
 				<div class="flex justify-between items-center md:mt-10">
-					<h2 class="font-normal font-body text-lg">My upcoming events</h2>
+					<h2 class="font-bold font-body text-lg">My upcoming events</h2>
 				</div>
-				<div class="md:px-12">
+				<div class="md:px-12 mt-6">
 					<template x-if="upcoming_events.length <= 0">
 						<p class="leading-8 py-4 font-bold text-sm tracking-wider">You do not have an upcoming event yet, get tickets for upcoming events to see them here</p>
 					</template>
 					<template x-if="upcoming_events.length > 0">
 						<ul class="w-full overflow-x-auto">
 							<template x-for="event in upcoming_events">
-								<li class="py-5">
+								<li class="py-3 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-xl transition duration-900 ease-in-out border border-gray-200 bg-white">
 									<div class="grid gap-2">
-										<p x-text="new Date().toDateString()" class=""></p>
-										<img :src="`{{ asset('.') }}${event.event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
+										<p x-text="new Date(event.event.event_date).toDateString()" class=""></p>
+										<img :src="`{{ asset('/images') }}/${event.event.flier}`" alt="Image depicting the event" class="w-full h-auto md:w-64 ">
 										<div>
-											<h2 x-text="event.event.name" class="text-2xl"></h2>
+											<h2 x-text="event.event.name" class="font-bold font-body text-2xl"></h2>
 											<div class="flex justify-start items-center gap-5 mt-1">
 												<p class="flex justify-start items-center gap-1">
 													<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
@@ -59,8 +59,8 @@
 				</div>
 			</div>
 			<div>
-				<div class="flex justify-between items-center">
-					<h2 class="font-normal font-body text-lg">My events</h2>
+				<div class="flex justify-between items-center mt-6">
+					<h2 class="font-bold font-body text-lg">My recent events</h2>
 					<template x-if="events.length > 2">
 						<a href="/user/dashboard/events" class="text-sm underline underline-offset-2 cursor-pointer">View all</a>
 					</template>
@@ -72,12 +72,12 @@
 					<template x-if="events.length > 0">
 						<ul class="grid gap-3">
 							<template x-for="event in events">
-								<li class="py-3 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-xl transition duration-900 ease-in-out border border-gray-200">
+								<li class="py-3 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-xl transition duration-900 ease-in-out border border-gray-200 bg-white">
 									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-3">
-										<p x-text="new Date(event.event_date).toDateString()" class="md:hidden"></p>
-										<img :src="`{{ asset('.') }}${event.event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
+										<p x-text="new Date(event.event.event_date).toDateString()" class="md:hidden"></p>
+										<img :src="`{{ asset('./images') }}/${event.event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
 										<div>
-											<h2 x-text="event.event.name" class="text-2xl"></h2>
+											<h2 x-text="event.event.name" class="text-2xl font-bold font-body"></h2>
 											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
 											<div class="flex justify-start items-center gap-5 mt-1">
 												<p class="flex justify-start items-center gap-1">

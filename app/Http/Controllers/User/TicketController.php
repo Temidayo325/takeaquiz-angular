@@ -18,7 +18,7 @@ class TicketController extends Controller
     public function upcomingEvents()
     {
     	$upcoming_events = Sale::with('ticket', 'event.user')->whereHas('event', function ($query) {
-		    $query->where('event_date', '>', now())->where('status', 'Success')->latest();
+		    $query->where('event_date', '>', now())->where('status', 'Published')->latest();
 		})->where('user_id', auth()->id())->limit(5)->get();
         $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
     	return view("dashboard.user.ticket.upcoming", ['user' => $user, 'upcoming_events' => $upcoming_events]);
@@ -48,5 +48,29 @@ class TicketController extends Controller
         // Register the ticket against the user
         // return payment details
         // return redirect()->intended(route('user.dashboard.tickets', absolute: false));
+    }
+
+    public function initiatePayment(Request $request)
+    {
+        $ticket = \App\Models\Ticket::find($request->ticket_id);
+        try {
+            $saleExists = \App\Models\Sale::where('ticket_id', $request->ticket_id)->where('user_id', auth()->id())->first();
+            if ($saleExists != null) {
+                throw new \Exception("You have purchased the ticket previously");
+            }
+            if ($ticket->access_type == "Free") {
+                $sale = ( new \App\Actions\Sale\CreateSale() )($ticket, 'Success');
+            }
+            return response()->json([
+                'error' => false,
+                'message' => "You have succesfully purchased a ticket for the event"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ]);
+        }
+        
     }
 }

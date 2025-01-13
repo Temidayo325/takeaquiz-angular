@@ -7,7 +7,7 @@
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div>
-		<div class="bg-gray-500 w-48 md:w-64 pt-4 pb-10 rounded mx-auto text-gray-300 mt-2 text-center">
+		<div class="bg-gray-500 w-64 md:w-64 pt-4 pb-10 rounded mx-auto text-gray-300 mt-2 text-center">
 			<p class="text-md text-gray-200 py-2 block bg-transparent" x-text="user.nickname">Light</p>
 			<h2 class="font-bold text-xl py-3 text-gray-200 block bg-gray-950">General admission</h2>
 			<div class="px-4">

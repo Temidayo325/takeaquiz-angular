@@ -32,9 +32,11 @@
 		<section x-data='{ plugs: @json($plugs),
             searchTerm: "",
             chosenPlug: null,
+            premuimPlugs: [],
+            {{-- premuimPlugs: @json($premiumPlugs), --}}
             init()
             {
-                
+                this.premiumPlugs = this.plugs.data.filter( plug  => plug.isPremium == true)
             },
             toast(text, background)
             {
@@ -100,7 +102,10 @@
         }' class="md:px-10 px-4 py-6 md:py-4">
             <div>
                 <h2 class="font-bold text-xl mb-3">Plugs</h2>
-                <form method="POST" class="flex justify-end md:items-center">
+                <template x-if="plugs.data.length > 0">
+                    <x-plugs.premium-plugs-carousel :plugs="$plugs"></x-plugs.premium-plugs-carousel>
+                </template>
+                <form method="POST" class="flex justify-end md:items-center" x-show="plugs.data.length > 4">
                     <input type="text" x-model="searchTerm" id="" placeholder="e.g. DJ" class="md:w-96 border border-gray-300 shadow-sm focus:outline-none focus:border focus:border-gray-300 focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0" @input.debounce.500ms="searchDatabaseForPlug">
                 </form>
                 <template x-if="plugs.data.length <= 0">

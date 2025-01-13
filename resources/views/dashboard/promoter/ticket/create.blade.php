@@ -76,10 +76,7 @@
 		<div class="pb-20">
 			<ul class="grid gap-10 md:grid-cols-3 md:gap-12">
 				<template x-for="event in events.data" :key="event.id">
-					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer" @click="addEvent(event)" data-drawer-target="drawer-right-example" 
-					data-drawer-show="drawer-right-example" data-drawer-placement="right" 
-					aria-controls="drawer-right-example" 
-					id="right-drawer-button" title="Click the event to create tickets for it">
+					<li class="hover:shadow-2xl duration-700 hover:border hover:border-gray-400 p-3 bg-gray-100 md:bg-white md:border md:border-gray-200 shadow-md md:shadow-sm cursor-pointer" title="Click the event to create tickets for it">
 						<div class="grid gap-2">
 							<div class="flex justify-between items-center">
 								<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -89,10 +86,10 @@
 							</div>
 							<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 							<div>
-								<h2 x-text="event.name" class="text-xl font-display tracking-wider"></h2>
-								<div class="flex justify-start items-center gap-5 mt-1 text-sm">
+								<h2 x-text="event.name" class="text-xl font-display tracking-wider font-bold"></h2>
+								<div class="flex justify-start items-center gap-5 mt-1 text-md">
 									<p class="flex justify-start items-center gap-1">
-										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+										<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
 										<span x-text="event.state"></span>
 									</p>
 									<p class="flex justify-start items-center gap-1">
@@ -102,8 +99,14 @@
 								</div>
 								<p class="mt-2">
 									<svg class="w-5 h-5 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
-									<span x-text="event.location" class="text-sm"></span>
+									<span x-text="event.location" class="text-md"></span>
 								</p>
+								<button  @click="addEvent(event)" 
+										data-drawer-target="drawer-right-example" 			data-drawer-show="drawer-right-example" data-drawer-placement="right" 
+										aria-controls="drawer-right-example" 
+										id="right-drawer-button"
+										class="mt-5 bg-yellow-200 text-gray-900 hover:bg-yellow-400 hover:shadow-md hover:text-gray-950 w-full py-2">Create event
+								</button>
 							</div>
 						</div>
 					</li>
@@ -127,12 +130,15 @@
 			            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-styled-tab" data-tabs-target="#styled-dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Edit</button>
 			        </li> --}}
 			        <li class="me-2" role="presentation">
-			            <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Create ticket</button>
+			            <button class="animate-bounce inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="settings-styled-tab" data-tabs-target="#styled-settings" type="button" role="tab" aria-controls="settings" aria-selected="false" data-tooltip-target="tooltip-no-arrow">Create ticket</button>
+			            <div id="tooltip-no-arrow" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+						    Click to display ticket form 
+						</div>
 			        </li>
 			    </ul>
 			</div>
 			<div id="default-styled-tab-content">
-			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 tracking-wider" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
             		<template x-if="chosenEventTickets != null && chosenEventTickets.length > 0" class="grid gap-12">
 			       		<template x-for="ticket in chosenEventTickets" :key="ticket.id">
 			       			<div>
@@ -252,7 +258,7 @@
 			       		</template>
 			       	</template>
 			       	<template x-if="chosenEventTickets != null && chosenEventTickets.length <= 0">
-			       		<p class="text-sm leading-7 text-purple-1000 font-body">You have not created tickets for this event yet, go to the <a href="/promoter/dashboard/events" class="bg-red-1000 py-2 px-4 text-gray-100">Events page</a> to create tickets for this event</p>
+			       		<p class="text-sm leading-7 text-purple-1000 font-body">You have not created tickets for this event yet, go to the to create tickets for this event</p>
 			       	</template>	
 			    </div>
 			    {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">

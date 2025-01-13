@@ -15,13 +15,13 @@
 					<div class="max-w-lg">
 						<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-5 mb-3 md:mt-0 block md:hidden">
 						<h1 class="font-body font-bold text-4xl font-normal">OG <span x-text="user.nickname"></span></h1>
-						<p class="text-md leading-7 my-4">We've curated your upcoming event tickets to bring you up to speed easily and ASAP. Book more upcoming events with your favorite Organizers and ballers</p>
+						<p class="text-md leading-7 my-4">We've curated your upcoming event tickets to bring you up to speed easily and ASAP. Get more upcoming events' ticket with your favorite Organizers and ballers</p>
 						<a href="/user/dashboard/events" class="bg-red-1000 text-white px-9 py-3 mt-2 md:mt-0">Browse events</a>
 					</div>
 					<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-10 md:mt-0 hidden md:block">
 				</div>
 			<div>
-				<h2 class="font-body text-lg md:mt-10">My Upcoming events' tickets</h2>
+				<h2 class="font-body font-bold  text-lg md:mt-10">My Upcoming events' tickets</h2>
 				<div class="mt-4 md:mt-8">
 					<template x-if="upcoming_events.length <= 0">
 						<div>

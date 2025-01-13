@@ -8,7 +8,7 @@
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div class="">
-		<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-48 md:w-64 mx-auto text-gray-200 mt-2 text-center shadow-md border border-gray-200 duration-700 hover:shadow-3xl hover:border-gray-100 relative ">
+		<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-64 md:w-64 mx-auto text-gray-200 mt-2 text-center shadow-md border border-gray-200 duration-700 hover:shadow-3xl hover:border-gray-100 relative ">
 			<div class="grid gap-4">
 				<div>
 					<p class="text-sm text-gray-400" x-text="user.nickname">Light's</p>

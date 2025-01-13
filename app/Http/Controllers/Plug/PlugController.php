@@ -25,8 +25,10 @@ class PlugController extends Controller
     public function index()
     {
     	$plugs = Plug::with('user')->where('status', 'Active')->latest()->orderBy('id')->cursorPaginate(12);
+        // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
     	return view("plugs", [
     		'plugs' => $plugs,
+            // 'premiumPlugs' => $premiumPlugs
     	]);
     }
 
@@ -68,5 +70,25 @@ class PlugController extends Controller
                 'data' => $plugs
             ]
         ]);
+    }
+
+    public function makePlugPremium(Request $request)
+    {
+        $plug = Plug::find($request->id);
+        $plug->isPremium = ($plug->isPremium == false ) ? true : false;
+        $plug->save();
+
+        return response()->json([
+            'error' => false,
+            'errorMessage' => 'Premium feature enabled for plug',
+            'data' => $users
+        ]);
+    }
+
+    public function showPlug($id)
+    {
+        $plug = Plug::with('user')->where('status', 'Active')->where('id', $id)->first();
+         // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
+        return view("plug", [ 'plug' => $plug ]);
     }
 }

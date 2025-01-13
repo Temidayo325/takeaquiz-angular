@@ -18,7 +18,7 @@
 			
 		</div>
 	</div> --}}
-	<div class="w-48 md:w-64 bg-white px-4 py-10 pb-5 rounded mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg font-body">
+	<div class="w-64 md:w-64 bg-white px-4 py-10 pb-5 rounded mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg font-body">
 		<div>
 			<div class="border-b border-black">
 				<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>

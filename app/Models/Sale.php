@@ -13,7 +13,6 @@ class Sale extends Model
     	'user_id',
     	'event_id',
     	'ticket_id',
-    	'purchased_tickets',
     	'amount_paid',
     	'status'
     ];

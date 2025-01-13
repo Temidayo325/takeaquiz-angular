@@ -32,6 +32,7 @@ Route::get('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'index']
 Route::post('/plugs/search', [\App\Http\Controllers\Plug\PlugController::class, 'search']);
 Route::post('/plugs/search/tags', [\App\Http\Controllers\Plug\PlugController::class, 'searchByTags']);
 Route::get('/plugs/search/paginate', [\App\Http\Controllers\Plug\PlugController::class, 'paginateUsers']);
+Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlug']);
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -118,6 +119,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);
     Route::post('/tickets/checkout', [\App\Http\Controllers\User\TicketController::class, 'toCheckout']);
     Route::get('/ticket/checkout', [\App\Http\Controllers\User\TicketController::class, 'Checkout'])->name('user.dashboard.ticket.checkout');
+    Route::post('/ticket/initiate-payment', [\App\Http\Controllers\User\TicketController::class, 'initiatePayment'])->name('user.dashboard.ticket.checkout');
     // ========== Ticket routes goes here ======== \\
     
     // ========== Game routes goes here ======== \\

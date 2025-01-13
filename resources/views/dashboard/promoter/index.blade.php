@@ -21,7 +21,7 @@
    			$refs.sideBarButton.dispatchEvent(new Event("click"))
    		}
 	}'>
-		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
+		<div class="hidden text-purple-1000 md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
 			<div class="max-w-lg">
 				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back <span x-text="user.nickname"></span></h1>
 				<p class="text-md leading-7 my-4">Track your events realtime in terms of attendance and ticket sales</p>
@@ -30,16 +30,16 @@
 			<img src="{{asset('/images/admin-hero.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
 		<div class="flex justify-between items-center md:mt-10">
-			<h2 class="font-body text-lg font-bold">My upcoming events</h2>
+			<h2 class="font-body text-lg font-bold text-purple-1000">My upcoming events</h2>
 		</div>
 		<div class="md:px-12">
 			<template x-if="upcoming_events.length <= 0">
-				<p class="leading-8 py-4 font-bold text-sm tracking-wider">You do not have an upcoming event yet, get tickets for upcoming events to see them here</p>
+				<p class="leading-8 py-4 font-bold text-sm tracking-wider">You do not have tickets to an upcoming event yet, get tickets for upcoming events to see them here</p>
 			</template>
 			<template x-if="upcoming_events.length > 0">
 				<ul class="w-full grid gap-6 mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
 					<template x-for="event in upcoming_events">
-						<li class="p-3 bg-white shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400" @click="showEventDetail(event)">
+						<li class="p-3 bg-white shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400">
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -49,8 +49,8 @@
 								</div>
 								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 								<div>
-									<h2 x-text="event.name" class="font-display tracking-wider text-xl"></h2>
-									<div class="flex justify-start items-center gap-5 mt-1">
+									<h2 x-text="event.name" class="font-display tracking-wider text-xl font-body font-bold"></h2>
+									<div class="flex justify-start items-center gap-5 mt-2">
 										<p class="flex justify-start items-center gap-1">
 											<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
 											<span x-text="event.state"></span>
@@ -60,6 +60,7 @@
 											<span x-text="event.starting_time"></span>
 										</p>
 									</div>
+									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
 								</div>
 							</div>
 						</li>
@@ -68,19 +69,19 @@
 			</template>
 		</div>
 		<div class="flex justify-between items-center mt-10">
-			<h2 class="font-bold font-body text-lg">My events</h2>
+			<h2 class="font-bold font-body text-lg">My recent events</h2>
 			<template x-if="events.length > 2">
 				<a href="/promoter/dashboard/events" class="text-sm underline underline-offset-2 cursor-pointer">View all</a>
 			</template>
 		</div>
 		<div class="py-3 md:py-10 md:px-12 text-purple-1000 pb:10">
 			<template x-if="events.length <= 0">
-				<p class="leading-8 py-2 md:py-4 font-bold text-sm tracking-wider">You haven't had any event tickets yet, get tickets for upcoming events to see them here. Click <a class="text-gray-100 bg-red-1000 px-3 py-1" href="#">here</a> to see available events around you</p>
+				<p class="leading-8 py-2 md:py-4 font-bold text-sm tracking-wider">You haven't had any event tickets yet, get tickets for upcoming events to see them here. Click <a class="text-gray-100 bg-red-1000 px-3 py-1" href="/">here</a> to see available events around you</p>
 			</template>
 			<template x-if="events.length > 0">
 				<ul class="grid gap-6 pb-12 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
 					<template x-for="event in events">
-						<li class="hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400 p-3 bg-white shadow-2xl md:shadow-sm cursor-pointer" @click="showEventDetail(event)">
+						<li class="hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400 p-3 bg-white shadow-2xl md:shadow-sm cursor-pointer text-purple-1000">
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -90,7 +91,7 @@
 								</div>
 								<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
 								<div>
-									<h2 x-text="event.name" class="text-xl font-display tracking-wider"></h2>
+									<h2 x-text="event.name" class="text-xl font-bold  font-display tracking-wider"></h2>
 									<div class="flex justify-start items-center gap-5 mt-1">
 										<p class="flex justify-start items-center gap-1">
 											<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
@@ -101,6 +102,7 @@
 											<span x-text="event.starting_time"></span>
 										</p>
 									</div>
+									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
 								</div>
 							</div>
 						</li>
@@ -133,10 +135,10 @@
 			    </ul>
 			</div>
 			<div id="default-styled-tab-content">
-			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
+			    <div class="hidden py-4 px-2 md:p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
             		<template x-if="chosenEvent != null">
             			<div class="p-3 bg-white text-purple-1000 ">
-							<div class="grid gap-2">
+							<div class="grid gap-2 bg-gray-200 p-3 shadow-lg border border-gray-200">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(chosenEvent.event_date)" class=""></p>
 									<template x-if="chosenEvent.isPremium == 1">
@@ -144,8 +146,8 @@
 									</template>
 								</div>
 								<img :src="`{{ asset('./images') }}/${chosenEvent.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64 ">
-								<div>
-									<h2 x-text="chosenEvent.name" class="text-xl font-display tracking-wider"></h2>
+								<div class="pb-4 pt-2 border-b border-gray-400">
+									<h2 x-text="chosenEvent.name" class="text-xl font-display font-bold font-body tracking-wider"></h2>
 									<div class="flex justify-start items-center gap-5 mt-1">
 										<p class="flex justify-start items-center gap-1">
 											<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m20.893 13.393-1.135-1.135a2.252 2.252 0 0 1-.421-.585l-1.08-2.16a.414.414 0 0 0-.663-.107.827.827 0 0 1-.812.21l-1.273-.363a.89.89 0 0 0-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 0 1-1.81 1.025 1.055 1.055 0 0 1-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 0 1-1.383-2.46l.007-.042a2.25 2.25 0 0 1 .29-.787l.09-.15a2.25 2.25 0 0 1 2.37-1.048l1.178.236a1.125 1.125 0 0 0 1.302-.795l.208-.73a1.125 1.125 0 0 0-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 0 1-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 0 1-1.458-1.137l1.411-2.353a2.25 2.25 0 0 0 .286-.76m11.928 9.869A9 9 0 0 0 8.965 3.525m11.928 9.868A9 9 0 1 1 8.965 3.525" /></svg>
@@ -161,6 +163,27 @@
 										<svg class="w-5 h-5 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
 										<span x-text="chosenEvent.location" class="text-sm inline ml-0"></span>
 									</p>
+								</div>
+								<div class="py-2 grid gap-3 mt-2 text-purple-1000">
+									<div>
+										<h3 class="text-sm font-bold ">Event duration</h3>
+										<p x-text="chosenEvent.duration"></p>
+									</div>
+
+									<div>
+										<h3 class="text-sm font-bold ">Recomended Audience</h3>
+										<p x-text="chosenEvent.audience"></p>
+									</div>
+
+									<div>
+										<h3 class="text-sm font-bold ">Dress code</h3>
+										<p x-text="chosenEvent.dress_code"></p>
+									</div>
+
+									<div>
+										<h3 class="text-sm font-bold ">For  more information</h3>
+										<p x-text="chosenEvent.contact_information"></p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -289,7 +312,7 @@
 			       		</template>
 			       	</template>
 			       	<template x-if="chosenEventTickets != null && chosenEventTickets.length <= 0">
-			       		<p>You have not created tickets for this event yet, go to the <a href="/promoter/dashboard/events" class="text-red-1000 py-2 px-2 font-bold">Events page</a> to create tickets for this event</p>
+			       		<p>You have not created tickets for this event yet, go to the <a href="/promoter/dashboard/tickets" class="text-red-1000 py-2 px-2 font-bold">Tickets page</a> to create tickets for this event</p>
 			       	</template>
 			    </div>
 			</div>
