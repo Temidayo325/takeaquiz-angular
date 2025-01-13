@@ -23,6 +23,7 @@ class TicketFactory extends Factory
             'available_seat' => random_int(10, 100),
             'type' => 'Early bird',
             'type_copy' => fake()->paragraph(),
+            'name' => 'Diamond',
             'access_type' => 'Purchase'
         ];
     }

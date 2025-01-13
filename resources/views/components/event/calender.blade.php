@@ -335,7 +335,7 @@
 											</div>
 										</div>
 										<div class="mt-6 md:mt-10 text-purple-1000">
-											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">Perks of the <span x-text="ticket.name"></span> ticket</h2>
 											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 										</div>
 										<div class="flex justify-center items-center mb-10 mt-4">

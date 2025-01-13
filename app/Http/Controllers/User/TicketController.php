@@ -60,7 +60,9 @@ class TicketController extends Controller
             }
             if ($ticket->access_type == "Free") {
                 $sale = ( new \App\Actions\Sale\CreateSale() )($ticket, 'Success');
+                $ticket->available_seat = $ticket->available_seat--; 
             }
+
             return response()->json([
                 'error' => false,
                 'message' => "You have succesfully purchased a ticket for the event"

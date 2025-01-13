@@ -7,9 +7,9 @@
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div>
-		<div class="bg-gray-500 w-64 md:w-64 pt-4 pb-10 rounded mx-auto text-gray-300 mt-2 text-center">
+		<div {{ $attributes->merge(['class' => 'bg-gray-500 pt-4 pb-10 rounded mx-auto text-gray-300 mt-2 text-center']) }} >
 			<p class="text-md text-gray-200 py-2 block bg-transparent" x-text="user.nickname">Light</p>
-			<h2 class="font-bold text-xl py-3 text-gray-200 block bg-gray-950">General admission</h2>
+			<h2 class="font-bold text-xl py-3 text-gray-200 block bg-gray-950" x-text="ticket.name">General admission</h2>
 			<div class="px-4">
 				<h2 class="text-3xl font-bold text-gray-200" x-text="chosenEvent.name">Name of the event</h2>
 				<p class="mt-4 text-sm" x-text="chosenEvent.event_date">10th of August, 2024</p>
@@ -27,7 +27,7 @@
 		</div>
 
 		<div class="mt-10">
-			<h2 class="font-bold text-left py-2 text-md">USP of <span x-text="ticket.type"></span></h2>
+			<h2 class="font-bold text-left py-2 text-md">Perks of <span x-text="ticket.name"></span> ticket</h2>
 			<p x-text="ticket.type_copy" class="text-left text-purple-1000 tracking-wider leading-8"></p>
 		</div>
 	</div>

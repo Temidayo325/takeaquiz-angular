@@ -3,7 +3,7 @@
 @section('title', 'Checkout your ticket')
 
 @section('content')
-	<div class="text-black px-0" x-data='{ user: @json($user),
+	<div class="text-black px-4 md:px-10 py-6" x-data='{ user: @json($user),
 		desiredTicket: @json($ticket),
 		chosenEvent: null,
 		init() {
@@ -47,23 +47,23 @@
 			<template x-if="desiredTicket.type.length == 10">
     			<div>
     				{{-- <h2>This is early bird page</h2> --}}
-    				<x-tickets.early-bird></x-tickets.early-bird>
+    				<x-tickets.early-bird class="w-64 md:w-96 mx-auto"></x-tickets.early-bird>
     			</div>
     		</template>		
     		<template x-if="desiredTicket.type.length == 17">
     			<div>
-    				<x-tickets.ga></x-tickets.ga>
+    				<x-tickets.ga class="w-64 md:w-96 mx-auto"></x-tickets.ga>
     				{{-- <h2>This is General admission page</h2> --}}
     			</div>
     		</template>
     		<template x-if="desiredTicket.type.length == 3">
     			<div>
-    				<x-tickets.vip>	</x-tickets.vip>
+    				<x-tickets.vip class="w-64 md:w-96 mx-auto">	</x-tickets.vip>
     				{{-- <h2>This is VIP page</h2> --}}
     			</div>
     		</template>	
 		</div>
-        <p class="text-red-1000 font-bold py-3 "><span class="text-lg">&#8358; </span><span x-text="desiredTicket.price"></span> would be deducted from your wallet</p>
+        <p class="text-red-1000 font-bold py-3 text-center"><span class="text-lg">&#8358; </span><span x-text="desiredTicket.price"></span> would be deducted from your wallet</p>
 		<div class="flex justify-center items-center mt-4 mb-14">
 			<button class="bg-gray-950 text-gray-200 px-6 py-3" @click="checkout()">
                 Continue to checkout

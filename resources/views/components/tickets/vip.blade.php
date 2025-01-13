@@ -8,7 +8,7 @@
 			x-modelable="event"
 			x-model="chosenEvent">
 	<div class="">
-		<div class="px-4 bg-purple-1000 py-6 pb-10 rounded w-64 md:w-64 mx-auto text-gray-200 mt-2 text-center shadow-md border border-gray-200 duration-700 hover:shadow-3xl hover:border-gray-100 relative ">
+		<div {{ $attributes->merge(['class' => 'px-4 bg-purple-1000 py-6 pb-10 rounded mx-auto text-gray-200 mt-2 text-center shadow-md border border-gray-200 duration-700 hover:shadow-3xl hover:border-gray-100 relative ']) }} >
 			<div class="grid gap-4">
 				<div>
 					<p class="text-sm text-gray-400" x-text="user.nickname">Light's</p>
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="mt-10">
-		<h2 class="font-bold text-left py-2 text-xl">USP of <span x-text="ticket.type"></span></h2>
+		<h2 class="font-bold text-left py-2 text-xl">Perks of <span x-text="ticket.name"></span> ticket</h2>
 		<p x-text="ticket.type_copy" class="text-left text-gray-950 tracking-wider leading-8"></p>
 	</div>
 </section>

@@ -110,7 +110,7 @@
 </aside>
 
 <div class="sm:ml-64">
-   <div class="dark:border-gray-700 bg-purple-200 md:bg-purple-100 md:px-10">
+   <div class="dark:border-gray-700 bg-gray-100 md:bg-purple-100 md:px-10">
       <header class="px-10 py-6 flex justify-between items-center hidden md:flex text-purple-1000 ">
          <a href="/" class="font-body tracking-wider text-left font-bold text-md"><x-application-logo /></a>
          <div class="flex justify-end gap-3 text-md">

@@ -105,13 +105,13 @@
 				                		<h4>Ticket type</h4>
 				                		<h4>Ticket Access</h4>
 				                		<h4>Ticket price</h4>
-				                		<h4 class="text-center">Expected odogwus</h4>
-				                		<h4 class="text-center">Yet-to-annouce Odogwus</h4>
+				                		<h4 class="text-center">Ticket quantity</h4>
+				                		<h4 class="text-center">Unsold ticket quantity</h4>
 				                		<h4>Actions</h4>
 				                	</div>
 				                	<template x-for="ticket in event.tickets">
 					                	<div class="w-full md:grid md:grid-cols-6 gap-2 py-2">
-					                		<p x-text="ticket.type + ' ticket' " class="text-center font-display py-2 md:py-0 tracking-wider"></p>
+					                		<p x-text="ticket.name + ' ticket' " class="text-center font-display py-2 md:py-0 tracking-wider"></p>
 					                		<p class="text-left md:text-left">
 					                			<span class="md:hidden text-sm py-2">Ticket Access</span>
 					                			<span  x-text="ticket.access_type" class="text-sm mx-4 md:mx-0 font-bold"></span>
@@ -121,11 +121,11 @@
 					                			<span  x-text="ticket.price" class="text-sm mx-4 md:mx-0 font-bold"></span>
 					                		</p>
 					                		<p class="text-left md:text-center">
-					                			<span class="md:hidden text-sm py-2">Expected odogwus</span>
+					                			<span class="md:hidden text-sm py-2">Total ticket</span>
 					                			<span  x-text="ticket.total_seat" class="text-sm mx-4 md:mx-0 font-bold"></span>
 					                		</p>
 					                		<p class="text-left md:text-center">
-					                			<span class="md:hidden text-sm py-2">Confirmed odogwus</span>
+					                			<span class="md:hidden text-sm py-2">Unsold ticket</span>
 					                			<span  x-text="ticket.available_seat" class="text-sm mx-4 md:mx-0 font-bold"></span>
 					                		</p>
 

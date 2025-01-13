@@ -14,6 +14,7 @@ class Ticket extends Model
     	'price',
     	'total_seat',
     	'available_seat',
+        'name',
     	'type',
     	'type_copy',
         'access_type'

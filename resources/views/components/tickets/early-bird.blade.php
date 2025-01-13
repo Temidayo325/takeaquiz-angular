@@ -18,7 +18,7 @@
 			
 		</div>
 	</div> --}}
-	<div class="w-64 md:w-64 bg-white px-4 py-10 pb-5 rounded mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg font-body">
+	<div {{ $attributes->merge(['class' => 'bg-white px-4 py-10 pb-5 rounded mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg font-body']) }} >
 		<div>
 			<div class="border-b border-black">
 				<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>
@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	<div class="mt-12">
-		<h2 class="font-bold text-left py-2 text-md">USP of <span x-text="ticket.type"></span></h2>
+		<h2 class="font-bold text-left py-2 text-md">Perks of <span x-text="ticket.name"></span> ticket</h2>
 		<p x-text="ticket.type_copy" class="text-left text-gray-950 text-sm tracking-wider leading-8"></p>
 	</div>
 </section>

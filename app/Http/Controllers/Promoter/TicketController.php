@@ -40,6 +40,7 @@ class TicketController extends Controller
 			    	'price' => $request->price,
 			    	'total_seat' => $request->total_seat,
 			    	'available_seat' => $request->total_seat,
+                    'name' => $request->name,
 			    	'type' => $request->ticket_type,
 			    	'type_copy' => $request->type_copy,
 			        'access_type' => $request->access_type

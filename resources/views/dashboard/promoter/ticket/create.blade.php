@@ -43,7 +43,7 @@
 								this.errorMessage = null
 								this.spinner = false
 								this.createTicketButtonText = "Create ticket"
-								this.toast(this.ticket.type +" ticket created ", "#fff", "green")
+								this.toast(this.ticket.name +" ticket created ", "#fff", "green")
 								$refs.createTicketButton.removeAttribute("disabled")
 								this.errorMessage = response.data.message
 							})
@@ -139,7 +139,7 @@
 			</div>
 			<div id="default-styled-tab-content">
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 tracking-wider" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
-            		<template x-if="chosenEventTickets != null && chosenEventTickets.length > 0" class="grid gap-12">
+            		<template x-if="chosenEventTickets != null && chosenEventTickets.length > 0" class="grid gap-20">
 			       		<template x-for="ticket in chosenEventTickets" :key="ticket.id">
 			       			<div>
 			       				<template x-if="ticket.type == 'Early bird'">
@@ -184,7 +184,7 @@
 											</div>
 										</div>
 										<div class="mt-6 md:mt-10 text-purple-1000">
-											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.name"></span></h2>
 											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 										</div>
 									</div>
@@ -211,7 +211,7 @@
 											</div>
 										</div>
 										<div class="mt-6 md:mt-10 text-purple-1000">
-											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.name"></span></h2>
 											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 										</div>
 									</div>
@@ -249,7 +249,7 @@
 										</div>
 									</div>
 									<div class="mt-6 md:mt-10 text-purple-1000">
-										<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+										<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.name"></span></h2>
 										<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 									</div>
 			            			</div>
@@ -267,36 +267,46 @@
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-x-hidden md:px-8" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
 			       	<form action="" method="post" @submit.prevent="createTicket()" class="w-full grid gap-6 my-5 mx-auto font-body tracking-wide text-purple-1000 overflow-x-hidden pb-8">
 			       		<template x-if="chosenEvent != null">
-			       			<img :src="`{{ asset('./images') }}/${chosenEvent.flier}`" alt="Image depicting the event" class="w-full h-auto md:w-full ">
+			       			<img :src="`{{ asset('./images') }}/${chosenEvent.flier}`" alt="Image depicting the event" class="w-full h-auto md:w-full mb-5">
 			       		</template>
 			       		<template x-if="errorMessage != null">
-			       			<p x-text="errorMessage" class="text-gray-100 p-2 text-sm leading-7 bg-red-300"></p>
+			       			<p x-text="errorMessage" class="text-gray-100 p-2 text-sm leading-7 bg-red-300 mb-3"></p>
 			       		</template>
 			       		<div>
-							<label for="ticket_type" class="font-bold text-sm">Ticket type</label>
+							<label for="ticket_type" class="font-bold text-md">Ticket type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<p class="text-sm text-gray-700 ">Provide a name for your ticket. E.g Diamond </p>
+							<input type="text" name="name" id="name" x-model="ticket.name" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						</div>
+			       		<div>
+							<label for="ticket_type" class="font-bold text-md">Ticket type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<p class="text-sm text-gray-700 ">Choose the desired template for the ticket. VIP provides the most elegant design and should be reserved for your most premium ticket type. Of course you can create multiple tickets of the same event, just ensure that you stay within the 3 provided templates to avoid duplication of ticket design</p>
 							<select x-model="ticket.ticket_type" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 								<option value="Early bird">Early bird</option>
 								<option value="General admission">General admission</option>
 								<option value="VIP">VIP</option>
 							</select>
 						</div>
-						<div class="">
-							<label for="price" class="font-bold text-sm">Price</label>
-							<input type="tel" name="price" id="price" x-model="ticket.price" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
-						</div>
 						<div>
-							<label for="total_seat" class="font-bold text-sm">Expected total Odogwu</label>
+							<label for="total_seat" class="font-bold text-sm">Ticket Quantity <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<p class="text-sm text-gray-700 ">Provide the total number of tickets available for sale</p>
 							<input type="tel" name="total_seat" id="total_seat" x-model="ticket.total_seat" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
 						<div>
-							<label for="access_type" class="font-bold text-sm">Ticket access type</label>
+							<label for="access_type" class="font-bold text-sm">Ticket access type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<p class="text-sm text-gray-700 ">State wether the ticket is free or not</p>
 							<select x-model="ticket.access_type" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 								<option >Free</option>
 								<option >Purchase</option>
 							</select>
 						</div>
+						<div class="">
+							<label for="price" class="font-bold text-sm">Price <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<p class="text-sm text-gray-700 ">State ticket price. In case the ticket is free, kindly inpt 0</p>
+							<input type="tel" name="price" id="price" x-model="ticket.price" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						</div>
+						
 						<div>
-							<label for="type_copy" class="font-bold text-sm">Short ticket copy</label>
+							<label for="type_copy" class="font-bold text-sm">Short ticket copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-greyish text-sm text-left">Highlight Ticket Perks and Promises</p>
 							<textarea name="type_copy" id="type_copy" x-model="ticket.type_copy" required class="w-48 min-h-48 text-sm leading-7 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full"></textarea>
 						</div>
