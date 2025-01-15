@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('minimum_player');
             $table->string('maximum_player');
             $table->text('tags');
-            $table->string('image');
+            $table->string('image')->nullable()->default(null);
             $table->text('materials');
             $table->text('difficulty_level');
             $table->text('category');
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('objective');
             $table->text('tips');
             $table->text('play_time');
+            $table->string('video')->nullable()->default(null);
             $table->timestamps();
         });
     }

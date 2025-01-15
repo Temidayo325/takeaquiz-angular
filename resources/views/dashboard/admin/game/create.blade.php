@@ -3,7 +3,9 @@
 @section('title', 'Create fun games')
 
 @section('content')
-	<div class="text-black px-10 md:pb-20" x-data='{ user: @json($user),
+	<div class="text-purple-1000 px-10 md:pb-20" x-data='{ user: @json($user),
+		errorMessage: "",
+		error: false,
 		init() {
         	sessionStorage.setItem("user", JSON.stringify(this.user))
    		},
@@ -28,14 +30,13 @@
 		</div>
 		<div class="mt-12">
 			<h1 class="text-center mt-6 mb-2 font-display tracking-wider text-2xl">Create an amazing game</h1>
+			<p x-text="errorMessage" x-show="error" class="px-3 py-2 bg-red-300 text-purple-1000 font-bold text-left "></p>
 			<form action="" 
 
 						method="post"
 						x-ref="form"
 						@submit.prevent="submitForm()" 
 						x-data='{ data: { name: "", summary: "", stepByStep: [], minimum_player: "", maximum_player: "", image: "", tags: "", "materials": "", "play_time": "", "difficulty_level": "", "category": "", "ideal_setting": "", "objective": "", "tips": "" }, 
-						error: false,
-						errorMessage: "",
 						steps: [],
 						submitForm(){
 							this.toast("Creating games", "white", "blue")
@@ -43,13 +44,22 @@
 							formdata.append("stepByStepJson", JSON.stringify(this.steps));
 							axios.post("/admin/dashboard/games/create", formdata)
 							.then( ( response ) => {
-								this.toast("Games created successfully, click on the View games button to view all games", "white", "green")
-								this.data = { name: "", summary: "", stepByStep: "", minimum_player: "", maximum_player: "", image: "", tags: "" }
-								this.error = false
-								this.steps = []
+								console.log(response)
+								if(!response.error)
+								{
+									this.toast("Games created successfully, click on the View games button to view all games", "white", "green")
+									this.data = { name: "", summary: "", stepByStep: "", minimum_player: "", maximum_player: "", image: "", tags: "" }
+									this.error = false
+									window.location = "/admin/dashboard/games"
+									this.steps = []
+								}
+								this.error = true
+								this.errorMessage = response.data.message
 							})
 							.catch( (error) => {
 								console.log(error)
+								this.error = true
+								this.errorMessage = error.response.data.message
 								this.toast(error.response.data.message, "white", "red")
 							})
 						},
@@ -61,19 +71,19 @@
 					}'
 						class="mx-auto md:w-full border border-gray-100 shadow-md px-6 py-5 grid md:overflow-x-hidden md:grid-cols-2 gap-x-6 gap-y-10 bg-gray-100 md:bg-white pb-8 shadow-2xl mt-10">
 				<div class="my-2">
-					<label for="name" class="font-bold text-gray-950">Name of the game</label>
+					<label for="name" class="font-bold text-gray-950">Name of the game <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Most popular name of the game</p>
 					<input type="text" name="name" id="name" required="required" minLength="5" x-model="data.name" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 				@csrf
 				<div class="my-2">
-					<label for="summary" class="font-bold text-gray-950">Summary of the game</label>
+					<label for="summary" class="font-bold text-gray-950">Summary of the game <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Provide a brief description of the game's concept and objective.</p>
 					<textarea name="summary" id="summary" required="required" minLength="5" x-model="data.summary" class="focus:outline-0 focus:shadow-lg focus:border-none w-full min-h-56"></textarea>
 				</div>
 
 				<div class="my-2">
-					<label for="stepByStep" class="font-bold text-gray-950">How to Play the Game</label>
+					<label for="stepByStep" class="font-bold text-gray-950">How to Play the Game <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Step-by-step instructions on setting up and playing the game, mentioning any rules or special conditions.</p>
 					<textarea name="stepByStep" id="stepByStep" minLength="5" x-model="data.stepByStep" class="min-h-24 focus:outline-0 focus:shadow-lg focus:border-none w-full"></textarea>
 					<button type="button" class="px-6 py-2 bg-purple-1000 text-white" title="Click the button to add to the step by step list" @Click="addStep()">Add step</button>
@@ -85,37 +95,37 @@
 					</ul>
 				</div>
 				<div class="my-2">
-					<label for="tags" class="font-bold text-gray-950">Game tags</label>
+					<label for="tags" class="font-bold text-gray-950">Game tags <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">List relevant tags or categories (e.g., “outdoor,” “team-building,” “board game,” “party,” etc.).</p>
 					<input type="text" name="tags" id="tags" required="required" minLength="5" x-model="data.tags" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 				<div class="">
-					<label for="minimum_player">Minimum number of players</label>
+					<label for="minimum_player">Minimum number of players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">State the minimum number of players required.</p>
 					<input type="tel" name="minimum_player" id="minimum_player" required x-model="data.minimum_player">
 				</div>
 				<div class="">
-					<label for="maximum_player">Maximum number of players</label>
+					<label for="maximum_player">Maximum number of players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">State the maximum number of players allowed (or "unlimited" if applicable).</p>
 					<input type="text" name="maximum_player" id="maximum_player" required x-model="data.maximum_player">
 				</div>		
 				<div class="">
-					<label for="picture">Game image</label>
+					<label for="picture">Game image <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Include or attach an image representing the game (e.g., a photo, icon, or illustration).</p>
-					<input type="file" name="picture" id="picture" required x-ref="picture">
+					<input type="file" name="picture" id="picture" x-ref="picture">
 				</div>
 				<div class="my-2">
-					<label for="materials" class="font-bold text-gray-950">Game materials</label>
+					<label for="materials" class="font-bold text-gray-950">Game materials <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">List all items or setup required to play the game. Separate each material with a comma</p>
 					<textarea name="materials" id="materials"  required="required" minLength="5" x-model="data.materials" class="min-h-56 focus:outline-0 focus:shadow-lg focus:border-none w-full"></textarea>
 				</div>
 				<div class="my-2">
-					<label for="play_time" class="font-bold text-gray-950">Estimated Playtime</label>
+					<label for="play_time" class="font-bold text-gray-950">Estimated Playtime <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">State how long a typical game session lasts.</p>
 					<input type="text" name="play_time" id="play_time" required="required" minLength="5" x-model="data.play_time" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 				<div class="my-2">
-					<label for="difficulty_level" class="font-bold text-gray-950">Difficulty Level</label>
+					<label for="difficulty_level" class="font-bold text-gray-950">Difficulty Level <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Rate as Easy, Moderate, or Challenging.</p>
 					<select name="difficulty_level" id="difficulty_level" x-model="data.difficulty_level">
 						<option value="Easy">Easy</option>
@@ -125,24 +135,25 @@
 				</div>
 				
 				<div class="my-2">
-					<label for="tips" class="font-bold text-gray-950">Tips</label>
-					<p class="text-gray-600 text-sm ">Hint: Hashtags for the game</p>
+					<label for="tips" class="font-bold text-gray-950">Tips <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+					<p class="text-gray-600 text-sm ">Offer strategies or tips to enjoy the game better or increase chances of winning.</p>
 					<input type="text" name="tips" id="tips" required="required" minLength="5" x-model="data.tips" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 
 				<div class="my-2">
-					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting</label>
+					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Mention where the game is best played (e.g., indoors, outdoors, small space, large area).</p>
 					<input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 				<div class="my-2">
-					<label for="objective" class="font-bold text-gray-950">Objective or Win Condition</label>
+					<label for="objective" class="font-bold text-gray-950">Objective or Win Condition <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Describe the goal or what constitutes winning the game.</p>
-					<input type="text" name="objective" id="objective" required="required" minLength="5" x-model="data.objective" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<textarea name="objective" id="objective" required="required" minLength="5" x-model="data.objective" class="min-h-56 focus:outline-0 focus:shadow-lg focus:border-none w-full"></textarea>
+					{{-- <input type="text" name="objective" id="objective" required="required" minLength="5" x-model="data.objective" class="focus:outline-0 focus:shadow-lg focus:border-none w-full"> --}}
 				</div>
 				
 				<div class="my-2">
-					<label for="category" class="font-bold text-gray-950">Player Category</label>
+					<label for="category" class="font-bold text-gray-950">Player Category <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<select name="category" id="category" required="required" x-model="data.category">
 						<option value="All Ages">All Ages (suitable for everyone)</option>
 						<option value="Kids">Kids (primarily for children)</option>

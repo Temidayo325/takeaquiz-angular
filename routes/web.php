@@ -36,7 +36,23 @@ Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'sh
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+// 
+// ========== tools routes goes here ======== \\
 
+Route::prefix('tools')->group(function () {
+    Route::get('/', function(){
+        return view('tools');
+    });   
+    Route::get('/timer', function(){
+        return view('tools/timer');
+    });
+    Route::get('/coin-flip', function(){
+        return view('tools/coin');
+    });
+    Route::get('/spin-the-bottle', function(){
+        return view('tools/bottle');
+    });
+});
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

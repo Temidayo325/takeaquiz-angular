@@ -50,7 +50,7 @@
 
 		<div class="mt-4">
 			<label for="social_media_links" class="font-bold text-sm">Social media links <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-			<p class="text-sm text-greyish py-1">Link to the your social media that best promotes your service</p>
+			<p class="text-sm text-greyish py-1">Link to the your social media that best promotes your service. Paste the full url containing https://</p>
 			<textarea name="social_media_links" id="social_media_links" maxlength="2000" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full invalid:border invalid:border-red-600 h-48 text-sm leading-7 "> </textarea>
 			<x-input-error :messages="$errors->get('social_media_links')" class="mt-2" />
 		</div>

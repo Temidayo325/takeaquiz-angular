@@ -27,12 +27,12 @@ class GameController extends Controller
 
     public function search(Request $request)
     {
-    	$games = Search::add(Game::class, ['name', 'summary', 'how-to', 'minimum_player'])
-			              ->beginWithWildcard() 
-			              ->endWithWildcard(true)
-			              ->orderByRelevance()
-			              ->search($request->searchTerm)
-			              ->take(12);
+    	$games = Search::add(Game::class, ['name', 'summary', 'stepByStep', 'materials'])
+              ->beginWithWildcard() 
+              ->endWithWildcard(true)
+              ->orderByRelevance()
+              ->search($request->searchTerm)
+              ->take(12);
     	return response()->json([
     		'error' => false,
     		'message' => "Games returned",

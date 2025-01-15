@@ -13,7 +13,7 @@ class CreateGame extends EventTags
 	
 	function __invoke($gameToBeCreated)
 	{
-        $image_path = $gameToBeCreated->picture->store('games');
+        $image_path = ( $gameToBeCreated->has('picture') ) ? $gameToBeCreated->picture->store('games') : null;
 		$game = \App\Models\Game::create([
 			'name' => $gameToBeCreated->name, 
 	    	'summary' => $gameToBeCreated->summary,

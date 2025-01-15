@@ -27,7 +27,7 @@ class CreateGameRequest extends FormRequest
             'stepByStepJson' => ['required', 'string'], 
             'minimum_player' => ['required', 'min:1', 'integer', 'bail'], 
             'maximum_player' => ['required', 'min:1', 'string', 'bail'], 
-            'picture' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'picture' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
             'materials' => ['required', 'string', 'min:10'], 
             'play_time' => ['required', 'string', 'min:10'], 
             'difficulty_level' => ['required', 'string'], 

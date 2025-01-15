@@ -59,8 +59,12 @@ class TicketController extends Controller
                 throw new \Exception("You have purchased the ticket previously");
             }
             if ($ticket->access_type == "Free") {
+                if ($ticket->price > 0) {
+                    throw new Exception("We cannot process paid tickets at this time. ")
+                }
                 $sale = ( new \App\Actions\Sale\CreateSale() )($ticket, 'Success');
-                $ticket->available_seat = $ticket->available_seat--; 
+                $ticket->available_seat = $ticket->available_seat - 1;
+                $ticket->save(); 
             }
 
             return response()->json([

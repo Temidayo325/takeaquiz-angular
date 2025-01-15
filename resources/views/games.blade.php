@@ -26,6 +26,7 @@
             </a>
             <ul class="flex justify-end gap-2 text-purple-1000 font-bold">
                 <li><a href="/login" class="text-red-1000 px-3">Login</a></li>
+                <li><a href="/plugs" class="">Plugs</a></li>
             	<li><a href="/games">Cruise Deck</a></li>
             </ul>
 		</header>

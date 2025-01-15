@@ -13,7 +13,7 @@ class Game extends Model
 
     protected $fillable = [
     	'name', 'summary', 'stepByStep', 'minimum_player', 'maximum_player', 'image', 'tags',
-    	'materials', 'play_time', 'difficulty_level', 'category', 'ideal_setting', 'objective', 'tips'
+    	'materials', 'play_time', 'difficulty_level', 'category', 'ideal_setting', 'objective', 'tips', 'video'
     ];
 
     protected $casts = [

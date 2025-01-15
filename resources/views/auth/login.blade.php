@@ -8,7 +8,7 @@
     <h2 x-data='{user: {}, 
         init(){
             this.user = JSON.parse(localStorage.getItem("user"))
-    }}' class="text-center font-display font-bold text-purple-1000 text-3xl tracking-wider">Welcome back <span x-text="user != null ? user.nickname : ''"></span></h2>
+    }}' class="text-center font-display font-bold text-purple-1000 text-3xl tracking-wider">Login </h2>
     <form method="POST" action="{{ route('login') }}" class="text-purple-1000 mt-3" 
             x-data='{showPasswordToggle: true,
                     passwordType: "password",

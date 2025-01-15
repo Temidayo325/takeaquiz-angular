@@ -23,7 +23,8 @@ class GameFactory extends Factory
             'minimum_player' => random_int(1, 6), 
             'maximum_player' => random_int(6, 20),
             'tags' => 'retro, non-sexual, chill',
-            'image' => '/images/games/talk.jpg'
+            'image' => '/images/games/talk.jpg',
+            'video' => '/videos/games/talk.jpg'
         ];
     }
 }

@@ -86,7 +86,7 @@
 			<div class="mt-2 md:mt-6" x-show="games.data.length > 0">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
-					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="e.g. spin the bottle" @input.debounce.500ms="searchTerm">
+					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="type anything you remember about the game such as name, materials or even how-to play" @input.debounce.500ms="searchTerm">
 					{{-- <button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button> --}}
 				</form>
 			</div>
@@ -94,9 +94,9 @@
 		<div>
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-10">
+					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-6 md:gap-10">
 						<template x-for="game in games.data">
-							<button class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer" title="Click to view more information" @click="viewGameDetails(game)">
+							<button class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-gray-300 text-gray-950 tracking-widest cursor-pointer grid justify-start" title="Click to view more information" @click="viewGameDetails(game)">
 								<img :src="`{{ asset('images') }}/${game.image}`" alt="Image depicting the game" class="w-full h-32">
 								<div class="px-2 py-1 text-sm">
 									<h2 class="font-bold text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2>

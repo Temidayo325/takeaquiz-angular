@@ -14,7 +14,7 @@
 		init() {
         	this.user = JSON.parse(sessionStorage.getItem("user"))
         	this.calender_days = this.getDates(this.events)
-        	console.log(this.tags)
+        	{{-- console.log(this.calender_days) --}}
    		},
    		showTickets(events)
    		{
@@ -85,7 +85,7 @@
 								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300">
 									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
 										<p x-text="new Date().toDateString()" class="md:hidden"></p>
-										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
+										<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
 										<div>
 											<h2 x-text="event.name" class="text-2xl"></h2>
 											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
@@ -118,7 +118,7 @@
 								<li class="border-t-4 border-greyish py-5 px-4 shadow-lg md:shadow-sm hover:scale-105 hover:shadow-md transition duration-800 ease-in-out md:border md:border-gray-300 md:grid md:grid-cols-2">
 									<div class="grid gap-2 md:flex md:justify-start md:items-center md:gap-5">
 										<p x-text="new Date().toDateString()" class="md:hidden"></p>
-										<img :src="`{{ asset('./images/fliers') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
+										<img :src="`{{ asset('./images') }}/${event.flier}`" alt="Image depicting the game" class="w-full h-auto md:w-64">
 										<div>
 											<h2 x-text="event.name" class="text-2xl"></h2>
 											<p x-text="new Date().toDateString()" class="hidden md:block my-2"></p>
@@ -173,8 +173,8 @@
 					</div>
 					<div class="mt-10 md:px-10 md:w-5/6">
 						<div class="grid grid-cols-7 gap-x-3 gap-y-8">
-							<template x-for="i in 7">
-						        <p x-text="calender_days[i].dayOfTheWeek" class="text-sm text-purple-1000 text-center font-bold"></p>
+							<template x-for="i in 7" :key="i">
+						        <p x-text="calender_days[(i - 1)].dayOfTheWeek" class="text-sm text-purple-1000 text-center font-bold"></p>
 						    </template>
 						</div>
 						<ul class="mt-2 grid grid-cols-7 gap-x-3 gap-y-6">
