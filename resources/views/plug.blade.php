@@ -54,7 +54,7 @@
             <div>
                 <div class="rounded-xl shadow-md p-4 bg-white border border-gray-300 md:w-96 md:mx-auto">
                     <div class="flex justify-center items-center pb-4 ">
-                        <img src="{{ asset('/images/'. $plug->flier) }}" alt="" class="w-full h-24 mx-auto bg-white">
+                        <img src="{{ asset('/images/'. $plug->flier) }}" alt="" class="w-full h-24 md:h-44 rounded-tr-xl rounded-tl-xl mx-auto bg-white">
                     </div>
                     <div class="pb-3 border-b border-gray-400 text-center">   
                         <h3 class="font-bold text-lg tracking-wide text-center">{{ $plug->user->nickname}}</h3>

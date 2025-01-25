@@ -24,7 +24,7 @@ class CreatePlug
             'flier' => $path,
             'service' => $plug->service,
             'service_summary' => $plug->service_summary,
-            'usp' => ( strlen($plug->usp) > 1 ) ? $plug->usp : null,
+            'usp' => $plug->usp ,
             'social_media_links' => $plug->social_media_links
         ]);
 
