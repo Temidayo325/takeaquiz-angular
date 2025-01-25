@@ -31,7 +31,7 @@
    <div class="h-full py-6 overflow-y-auto bg-gray-950 text-purple-200 dark:bg-gray-800 tracking-wider bg-admin-sidebar bg-cover bg-no-repeat bg-blend-darken" x-data='{user: @json($user),
    init()
    {
-      localStorage.setItem("user", JSON.stringify(this.user))
+      sessionStorage.setItem("user", JSON.stringify(this.user))
    }
    }'>
       <div class="flex justify-start text-purple-200 items-center gap-2 px-3 md:px-5 my-3 tracking-wide md:mt-4 font-body"> 

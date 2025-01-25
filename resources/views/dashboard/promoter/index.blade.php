@@ -30,7 +30,7 @@
 			<img src="{{asset('/images/admin-hero.svg')}}" alt="People chilling" class="w-96 h-52">
 		</div>
 		<div class="flex justify-between items-center md:mt-10">
-			<h2 class="font-body text-lg font-bold text-purple-1000">My upcoming events</h2>
+			<h2 class="text-2xl font-bold text-purple-1000">My upcoming events</h2>
 		</div>
 		<div class="md:px-12">
 			<template x-if="upcoming_events.length <= 0">
@@ -39,7 +39,7 @@
 			<template x-if="upcoming_events.length > 0">
 				<ul class="w-full grid gap-6 mt-10 md:grid-cols-3 md:gap-x-10 md:gap-y-12">
 					<template x-for="event in upcoming_events">
-						<li class="p-3 bg-white shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400">
+						<li class="p-3 bg-white shadow-lg md:shadow-sm cursor-pointer hover:shadow-2xl duration-700 border border-gray-200 hover:border-gray-400 overflow-x-hidden">
 							<div class="grid gap-2">
 								<div class="flex justify-between items-center">
 									<p x-text="new Date().toDateString(event.event_date)" class=""></p>
@@ -60,7 +60,7 @@
 											<span x-text="event.starting_time"></span>
 										</p>
 									</div>
-									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
+									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full md:w-5/6 hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
 								</div>
 							</div>
 						</li>
@@ -69,7 +69,7 @@
 			</template>
 		</div>
 		<div class="flex justify-between items-center mt-10">
-			<h2 class="font-bold font-body text-lg">My recent events</h2>
+			<h2 class="font-bold text-2xl">My recent events</h2>
 			<template x-if="events.length > 2">
 				<a href="/promoter/dashboard/events" class="text-sm underline underline-offset-2 cursor-pointer">View all</a>
 			</template>
@@ -102,7 +102,7 @@
 											<span x-text="event.starting_time"></span>
 										</p>
 									</div>
-									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
+									<button @click="showEventDetail(event)" class="mt-3  bg-yellow-200 text-purple-1000 text-center w-full md:w-5/6 hover:bg-yellow-400 hover:shadow-md py-2 font-bold font-body">View full information</button>
 								</div>
 							</div>
 						</li>

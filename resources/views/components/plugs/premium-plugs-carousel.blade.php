@@ -1,8 +1,8 @@
 @props(['plugs'])
 
-<div id="default-carousel" class="relative w-full" data-carousel="slide" x-data='{plugs: @json($plugs)}'>
+<div id="default-carousel" class="relative w-full z-30" data-carousel="slide" x-data='{plugs: @json($plugs)}'>
     <!-- Carousel wrapper -->
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96 z-30">
         <template x-for="plug in plugs.data">
              <!-- Item -->
             <div class="hidden duration-700 ease-in-out" data-carousel-item>

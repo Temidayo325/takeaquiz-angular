@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function index()
     {
-    	$events = Sale::with('ticket', 'event')->latest()->where('user_id', auth()->id())->limit(5)->get();
+    	$events = Sale::with('ticket', 'event')->where('user_id', auth()->id())->latest()->limit(5)->get();
     	$upcoming_events = Sale::with('ticket', 'event')->whereHas('event', function ($query) {
 		    $query->where('event_date', '>', now())->where('status', 'Published')->latest();
 		})->where('user_id', auth()->id())->limit(5)->get();

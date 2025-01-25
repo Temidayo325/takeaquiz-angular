@@ -347,9 +347,9 @@
 			            			<div>
 										<div class="bg-greyish pt-4 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-2 text-center text-purple-1000">
 											<p class="text-md py-2 block bg-transparent" x-text="user != null ? user.nickname : 'My CruiseID'">Light</p>
-											<h2 class="text-md py-3 block text-greyish bg-purple-1000">General admission</h2>
+											<h2 class="text-md py-3 block text-greyish bg-purple-1000" x-text="ticket.name">General admission</h2>
 											<div class="px-4">
-												<h2 class="text-4xl font-display text-red-1000 my-2" x-text="chosenEvent.name">Name of the event</h2>
+												<h2 class="text-4xl font-display text-purple-1000 my-2" x-text="chosenEvent.name">Name of the event</h2>
 												<p class="mt-4 text-sm" x-text="chosenEvent.event_date">10th of August, 2024</p>
 												<p x-text="new Date(chosenEvent.event_date).toDateString()" class="my-3">Sunday 10th of August, 2024 @ 4:00 PM</p>
 												<p x-text="chosenEvent.location" class="my-2">31270 Rahul Roads Beckerview, KS 94569-2627</p>
@@ -358,8 +358,8 @@
 											</div>
 											<div class="mt-10">
 												<p>	
-													<span class="font-bold text-xl text-red-1000">&#8358; </span>
-													<span class="font-bold text-xl text-red-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
+													<span class="font-bold text-xl text-purple-1000">&#8358; </span>
+													<span class="font-bold text-xl text-purple-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
 												</p>
 											</div>
 										</div>

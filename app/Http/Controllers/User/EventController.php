@@ -13,6 +13,7 @@ class EventController extends Controller
     public function index()
     {
     	$events = Event::with('tickets', 'user', 'eventmedia')->where('status', 'Published')->whereBetween('event_date', [Carbon::today(), Carbon::parse('+30 day')])->orderBy('event_date', 'ASC')->get();
+      
     	$premium_events = $events->filter( function($event){
     		return $event->isPremium == true;
     	})->toArray();

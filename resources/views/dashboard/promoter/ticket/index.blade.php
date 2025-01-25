@@ -188,7 +188,7 @@
             			<x-tickets.ga></x-tickets.ga>
             		</template>
             		<template x-if="typeLength == 3">
-            			<x-tickets.vip>	</x-tickets.vip>
+            			<x-tickets.vip ></x-tickets.vip>
             		</template>		
 			    </div>
 			    {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">

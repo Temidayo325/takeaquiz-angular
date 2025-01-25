@@ -13,12 +13,13 @@ class PlugController extends Controller
     public function store(CreatePlugRequest $request)
     {
     	try {
-    			$plug = ( new \App\Actions\Plug\CreatePlug() )( $request );
-    			var_dump($plug);
-	    		// return Redirect::route('user.plug.edit');
+                $plug = Plug::where('user_id', auth()->id())->first();
+                if ($plug == null) {
+                    $plug = ( new \App\Actions\Plug\CreatePlug() )( $request );
+                }
+                return redirect()->intended(route('user.plug.edit', absolute: false));
     		} catch (\Exception $e) {
-    			var_dump($e->getMessage());
-    			// return back()->with('error', $e->getMessage());
+    			return back()->with('error', $e->getMessage());
     		}
     }
 
@@ -83,6 +84,11 @@ class PlugController extends Controller
             'errorMessage' => 'Premium feature enabled for plug',
             'data' => $users
         ]);
+    }
+    public function displayPlug()
+    {
+        $plug = Plug::with('user')->where('user_id', auth()->id())->first();
+        return view("dashboard.user.plug", [ 'plug' => $plug, 'user' => auth()->user() ]);
     }
 
     public function showPlug($id)

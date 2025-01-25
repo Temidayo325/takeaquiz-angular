@@ -29,7 +29,7 @@ class CreatePlugRequest extends FormRequest
             'flier' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048',    'bail'],
             'service' => ['required', 'string', 'bail'],
             'service_summary' => ['required', 'string', 'bail'],
-            'usp' => ['required', 'string', 'bail'],
+            'usp' => ['nullable', 'string', 'bail'],
             'social_media_links' => ['required', 'string', 'bail']
         ];
     }

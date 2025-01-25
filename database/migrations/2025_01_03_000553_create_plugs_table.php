@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('plugs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')
+                    ->unique()
                     ->references('id')
                     ->on('users')->onDelete('cascade');
             $table->string('state');
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('flier');
             $table->string('service');
             $table->text('service_summary');
-            $table->text('usp');
+            $table->text('usp')->nullable()->default(null);
             $table->text('social_media_links');
             $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Active');
             $table->boolean('isPremium')->default(false);

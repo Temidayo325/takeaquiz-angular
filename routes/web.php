@@ -122,7 +122,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/facecard', [ProfileController::class, 'facecard'])->name('profile.update.facecard');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    Route::get('/plug', [\App\Http\Controllers\Plug\PlugController::class, 'displayPlug'])->name('user.plug.edit');
     Route::get('/', [\App\Http\Controllers\User\UserController::class, 'index'])->name('user.dashboard.home');    
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\User\EventController::class, 'index']);

@@ -101,7 +101,7 @@
 		}'>
 		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
 			<div class="max-w-lg">
-				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back <span x-text="user.nickname"></span></h1>
+				<h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome <span x-text="user.nickname"></span></h1>
 				<p class="text-md leading-7 my-4">View all your events, tap on the edit button on each event card to edit the details of the events as required</p>
 				<a href="/promoter/dashboard/events/create" class="px-4 py-2 font-bold md:font-normal bg-red-1000 text-gray-200">Create event</a>
 			</div>
