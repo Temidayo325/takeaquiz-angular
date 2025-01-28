@@ -27,14 +27,13 @@ class CreateGameRequest extends FormRequest
             'stepByStepJson' => ['required', 'string'], 
             'minimum_player' => ['required', 'min:1', 'integer', 'bail'], 
             'maximum_player' => ['required', 'min:1', 'string', 'bail'], 
-            'picture' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'video' => ['nullable', 'file', 'max:20048'],
             'materials' => ['required', 'string', 'min:10'], 
-            'play_time' => ['required', 'string', 'min:10'], 
+            'play_time' => ['nullable', 'string', 'min:10'], 
             'difficulty_level' => ['required', 'string'], 
             'category' => ['required', 'string'], 
-            'ideal_setting' => ['required', 'string'], 
-            'objective' => ['required', 'string', 'min:10'], 
-            'tips' => ['required', 'string', 'min:10']
+            'ideal_setting' => ['nullable', 'string'], 
+            'tips' => ['nullable', 'string', 'min:10']
         ];
     }
 }

@@ -20,7 +20,6 @@ class Event extends Model
         'user_id',
         'location',
         'flier',
-    	// 'isPremium',
         'promotional_copy',
     	'social_media_handle',
         'duration',

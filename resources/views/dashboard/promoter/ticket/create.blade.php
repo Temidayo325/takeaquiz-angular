@@ -35,7 +35,6 @@
 						this.spinner = true
 						axios.post("/promoter/dashboard/tickets/create", this.ticket)
 							.then( ( response ) => {
-								console.log(response)
 								this.chosenEventTickets.push(response.data.ticket)
 								this.chosenEvent.tickets = this.chosenEventTickets
 								this.ticket = { "event_id": this.ticket.event_id, "price": "", "total_seat": "", "ticket_type": "VIP", "type_copy" : "", "access_type": "Purchase"}
@@ -43,7 +42,7 @@
 								this.errorMessage = null
 								this.spinner = false
 								this.createTicketButtonText = "Create ticket"
-								this.toast(this.ticket.name +" ticket created ", "#fff", "green")
+								this.toast("Ticket created ", "#fff", "green")
 								$refs.createTicketButton.removeAttribute("disabled")
 								this.errorMessage = response.data.message
 							})
@@ -273,12 +272,12 @@
 			       			<p x-text="errorMessage" class="text-gray-100 p-2 text-sm leading-7 bg-red-300 mb-3"></p>
 			       		</template>
 			       		<div>
-							<label for="ticket_type" class="font-bold text-md">Ticket type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<label for="ticket_type" class="font-bold text-md">Ticket name <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-sm text-gray-700 ">Provide a name for your ticket. E.g Diamond </p>
 							<input type="text" name="name" id="name" x-model="ticket.name" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
 			       		<div>
-							<label for="ticket_type" class="font-bold text-md">Ticket type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+							<label for="ticket_type" class="font-bold text-md">Ticket theme <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-sm text-gray-700 ">Choose the desired template for the ticket. VIP provides the most elegant design and should be reserved for your most premium ticket type. Of course you can create multiple tickets of the same event, just ensure that you stay within the 3 provided templates to avoid duplication of ticket design</p>
 							<select x-model="ticket.ticket_type" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 								<option value="Early bird">Early bird</option>
@@ -301,7 +300,7 @@
 						</div>
 						<div class="">
 							<label for="price" class="font-bold text-sm">Price <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-							<p class="text-sm text-gray-700 ">State ticket price. In case the ticket is free, kindly inpt 0</p>
+							<p class="text-sm text-gray-700 ">State ticket price. In case the ticket is free, kindly input 0</p>
 							<input type="tel" name="price" id="price" x-model="ticket.price" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
 						

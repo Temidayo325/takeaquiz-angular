@@ -19,15 +19,13 @@ return new class extends Migration
             $table->integer('minimum_player');
             $table->string('maximum_player');
             $table->text('tags');
-            $table->string('image')->nullable()->default(null);
+            $table->string('video')->nullable()->default(null);
             $table->text('materials');
             $table->text('difficulty_level');
             $table->text('category');
-            $table->text('ideal_setting');
-            $table->text('objective');
-            $table->text('tips');
-            $table->text('play_time');
-            $table->string('video')->nullable()->default(null);
+            $table->text('ideal_setting')->nullable()->default(null);
+            $table->text('tips')->nullable()->default(null);
+            $table->text('play_time')->nullable()->default(null);
             $table->timestamps();
         });
     }

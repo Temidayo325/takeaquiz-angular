@@ -19,7 +19,7 @@ return new class extends Migration
                     ->on('users')->onDelete('cascade');
             $table->string('state');
             $table->text('tags');
-            $table->string('address');
+            $table->string('address')->nullable()->default(null);
             $table->integer('travel');
             $table->string('flier');
             $table->string('service');

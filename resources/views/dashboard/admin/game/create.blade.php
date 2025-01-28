@@ -36,7 +36,7 @@
 						method="post"
 						x-ref="form"
 						@submit.prevent="submitForm()" 
-						x-data='{ data: { name: "", summary: "", stepByStep: [], minimum_player: "", maximum_player: "", image: "", tags: "", "materials": "", "play_time": "", "difficulty_level": "", "category": "", "ideal_setting": "", "objective": "", "tips": "" }, 
+						x-data='{ data: { name: "", summary: "", stepByStep: [], minimum_player: "", maximum_player: "", image: "", tags: "", "materials": "", "play_time": "", "difficulty_level": "", "category": "", "ideal_setting": "", "tips": "" }, 
 						steps: [],
 						submitForm(){
 							this.toast("Creating games", "white", "blue")
@@ -78,8 +78,8 @@
 				@csrf
 				<div class="my-2">
 					<label for="summary" class="font-bold text-gray-950">Summary of the game <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">Provide a brief description of the game's concept and objective.</p>
-					<textarea name="summary" id="summary" required="required" minLength="5" x-model="data.summary" class="focus:outline-0 focus:shadow-lg focus:border-none w-full min-h-56"></textarea>
+					<p class="text-gray-600 text-sm ">Should include brief description of the game's concept and objective / win condition</p>
+					<textarea name="summary" id="summary" required="required" minLength="5" x-model="data.summary" class="mt-1 focus:outline-0 focus:shadow-lg focus:border-none w-full min-h-56"></textarea>
 				</div>
 
 				<div class="my-2">
@@ -99,20 +99,23 @@
 					<p class="text-gray-600 text-sm ">List relevant tags or categories (e.g., “outdoor,” “team-building,” “board game,” “party,” etc.).</p>
 					<input type="text" name="tags" id="tags" required="required" minLength="5" x-model="data.tags" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
-				<div class="">
-					<label for="minimum_player">Minimum number of players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">State the minimum number of players required.</p>
-					<input type="tel" name="minimum_player" id="minimum_player" required x-model="data.minimum_player">
+				<div class="flex justify-start">
+					<div>
+						<label for="minimum_player" class="font-bold text-gray-950 block">Min players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						{{-- <p class="text-gray-600 text-sm ">State the minimum number of players required.</p> --}}
+						<input type="tel" name="minimum_player" id="minimum_player" required x-model="data.minimum_player" class="w-32" placeholder="e.g. min 2">
+					</div>
+					<div class="">
+						<label for="maximum_player" class="font-bold text-gray-950 block">Max players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						{{-- <p class="text-gray-600 text-sm ">State the maximum number of players allowed (or "unlimited" if applicable).</p> --}}
+						<input type="text" name="maximum_player" id="maximum_player" required x-model="data.maximum_player" placeholder="e.g. 10, Unlimited if applicable">
+					</div>	
 				</div>
+					
 				<div class="">
-					<label for="maximum_player">Maximum number of players <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">State the maximum number of players allowed (or "unlimited" if applicable).</p>
-					<input type="text" name="maximum_player" id="maximum_player" required x-model="data.maximum_player">
-				</div>		
-				<div class="">
-					<label for="picture">Game image <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">Include or attach an image representing the game (e.g., a photo, icon, or illustration).</p>
-					<input type="file" name="picture" id="picture" x-ref="picture">
+					<label for="picture" class="font-bold text-gray-950">Game video </label>
+					<p class="text-gray-600 text-sm ">Attach a video showcasing the game and how's it played.</p>
+					<input type="file" name="picture" id="picture" x-ref="video">
 				</div>
 				<div class="my-2">
 					<label for="materials" class="font-bold text-gray-950">Game materials <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
@@ -120,7 +123,7 @@
 					<textarea name="materials" id="materials"  required="required" minLength="5" x-model="data.materials" class="min-h-56 focus:outline-0 focus:shadow-lg focus:border-none w-full"></textarea>
 				</div>
 				<div class="my-2">
-					<label for="play_time" class="font-bold text-gray-950">Estimated Playtime <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+					<label for="play_time" class="font-bold text-gray-950">Estimated Playtime</label>
 					<p class="text-gray-600 text-sm ">State how long a typical game session lasts.</p>
 					<input type="text" name="play_time" id="play_time" required="required" minLength="5" x-model="data.play_time" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
@@ -135,21 +138,20 @@
 				</div>
 				
 				<div class="my-2">
-					<label for="tips" class="font-bold text-gray-950">Tips <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+					<label for="tips" class="font-bold text-gray-950">Tips</label>
 					<p class="text-gray-600 text-sm ">Offer strategies or tips to enjoy the game better or increase chances of winning.</p>
 					<input type="text" name="tips" id="tips" required="required" minLength="5" x-model="data.tips" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 
 				<div class="my-2">
-					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">Mention where the game is best played (e.g., indoors, outdoors, small space, large area).</p>
-					<input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
-				</div>
-				<div class="my-2">
-					<label for="objective" class="font-bold text-gray-950">Objective or Win Condition <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-					<p class="text-gray-600 text-sm ">Describe the goal or what constitutes winning the game.</p>
-					<textarea name="objective" id="objective" required="required" minLength="5" x-model="data.objective" class="min-h-56 focus:outline-0 focus:shadow-lg focus:border-none w-full"></textarea>
-					{{-- <input type="text" name="objective" id="objective" required="required" minLength="5" x-model="data.objective" class="focus:outline-0 focus:shadow-lg focus:border-none w-full"> --}}
+					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting</label>
+					<p class="text-gray-600 text-sm ">Select where the game is best played.</p>
+					{{-- <input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full"> --}}
+					<select type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+						<option value="Indoor">Indoor</option>
+						<option value="Outdoor">Outdoor</option>
+						<option value="Pool">Pool</option>
+					</select>
 				</div>
 				
 				<div class="my-2">

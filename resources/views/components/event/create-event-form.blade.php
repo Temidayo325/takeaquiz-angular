@@ -115,7 +115,7 @@
 						<select name="audience" id="audience" required="" x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 							<option value="All ages">All ages</option>
 							<option value="Adult only">Adult only</option>
-							<option value="Families">Families</option>
+							<option value="Families">Family friendly</option>
 						</select>
 						{{-- <input type="text" name="audience" id="audience" required x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full"> --}}
 					</div>

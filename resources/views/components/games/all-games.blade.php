@@ -94,16 +94,16 @@
 		<div>
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-6 md:gap-10">
+					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-2 gap-y-10 md:grid-cols-5 md:gap-10">
 						<template x-for="game in games.data">
-							<button class="hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-200 w-full bg-gray-300 text-gray-950 tracking-widest cursor-pointer grid justify-start" title="Click to view more information" @click="viewGameDetails(game)">
-								<img :src="`{{ asset('images') }}/${game.image}`" alt="Image depicting the game" class="w-full h-32">
-								<div class="px-2 py-1 text-sm">
-									<h2 class="font-bold text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2>
-									<p>
-										<span>Min:<span class="font-bold" x-text="game.minimum_player"></span></span>
+							<button class="py-6 hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-400 w-full bg-yellow-300 text-gray-950 tracking-widest cursor-pointer grid gap-4 justify-center" title="Click to view more information" @click="viewGameDetails(game)">
+								<img src="{{ asset('images/cruise.png') }}" alt="Image depicting the game" class="w-16 md:w-20 md:w-20 h-16 mx-auto">
+								<div class="px-2 py-1 text-md">
+									<h2 class="font-bold font-display text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2>
+									{{-- <p>
+										<span>Ideal setting:<span class="font-bold" x-text="game.ideal_setting"></span></span>
 										<span>Max:<span class="font-bold" x-text="game.maximum_player"></span></span>
-									</p>
+									</p> --}}
 								</div>
 							</button>
 						</template>
@@ -132,7 +132,7 @@
 		        <div class="py-4 overflow-y-auto text-black my-10">
 					<template x-if="chosenGame != null">
 						<div class="game-card-ui shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer pb-10" title="Click to view more information" >
-							<img :src="`{{ asset('images') }}/${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto">
+							{{-- <img :src="`{{ asset('images') }}/${chosenGame.image}`" alt="Image depicting the game" class="w-full h-auto"> --}}
 							<div class="px-4 py-2">
 								<h2 class="font-display leading-9 text-center mb-4 md:text-lg md:py-1" x-text="chosenGame.name">Name of the game</h2>
 								<h4 class="font-bold text-md">Game summary</h4>

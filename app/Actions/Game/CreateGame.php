@@ -13,7 +13,7 @@ class CreateGame extends EventTags
 	
 	function __invoke($gameToBeCreated)
 	{
-        $image_path = ( $gameToBeCreated->has('picture') ) ? $gameToBeCreated->picture->store('games') : null;
+        $video_path = ( $gameToBeCreated->has('game') ) ? $gameToBeCreated->picture->store('games') : null;
 		$game = \App\Models\Game::create([
 			'name' => $gameToBeCreated->name, 
 	    	'summary' => $gameToBeCreated->summary,
@@ -21,13 +21,12 @@ class CreateGame extends EventTags
 	    	'minimum_player' => $gameToBeCreated->minimum_player,
 	    	'maximum_player' => $gameToBeCreated->maximum_player,
 	    	'tags' => $this->turnStringTagsToArray( $gameToBeCreated->tags ),
-	    	'image' => $image_path,
+	    	'video' => $video_path,
 	    	'materials' => $this->turnStringTagsToArray( $gameToBeCreated->materials ), 
 	    	'play_time' => $gameToBeCreated->play_time, 
 	    	'difficulty_level' => $gameToBeCreated->difficulty_level, 
 	    	'category' => $gameToBeCreated->category, 
 	    	'ideal_setting' => $gameToBeCreated->ideal_setting, 
-	    	'objective' => $gameToBeCreated->objective, 
 	    	'tips' => $gameToBeCreated->tips
 		]);
 		// $tag = new EventTags();

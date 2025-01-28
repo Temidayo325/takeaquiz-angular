@@ -24,7 +24,7 @@ class CreatePlugRequest extends FormRequest
         return [
             'state' => ['required', 'string', 'bail'],
             'tags' => ['required', 'string', 'bail'],
-            'address' => ['required', 'string', 'bail'],
+            'address' => ['nullable', 'string', 'bail'],
             'travel' => ['required', 'string', 'bail'],
             'flier' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048',    'bail'],
             'service' => ['required', 'string', 'bail'],
