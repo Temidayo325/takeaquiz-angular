@@ -67,6 +67,11 @@
 						{
 							this.steps.push(this.data.stepByStep)
 							this.data.stepByStep = ""
+						},
+						removeStep(index)
+						{
+							console.log(index)
+							this.steps.splice(index, 1 )
 						}
 					}'
 						class="mx-auto md:w-full border border-gray-100 shadow-md px-6 py-5 grid md:overflow-x-hidden md:grid-cols-2 gap-x-6 gap-y-10 bg-gray-100 md:bg-white pb-8 shadow-2xl mt-10">
@@ -89,8 +94,11 @@
 					<button type="button" class="px-6 py-2 bg-purple-1000 text-white" title="Click the button to add to the step by step list" @Click="addStep()">Add step</button>
 					<ul class="mt-2 px-10 py-2">
 						<h3 class="text-center font-bold ">Step by step guide to playing the game</h3>
-						<template x-for="step in steps" class="">
-							<li x-text="step" class="list-decimal py-1"></li>
+						<template x-for="(step, index) in steps" class="" :key="index">
+							<li class="list-decimal py-1 flex justify-between">
+								<span x-text="step" ></span>	
+								<span class="text-red-400 cursor-pointer px-3" @click="removeStep(index)">&#x2718;</span>
+							</li>
 						</template>
 					</ul>
 				</div>
@@ -146,12 +154,12 @@
 				<div class="my-2">
 					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting</label>
 					<p class="text-gray-600 text-sm ">Select where the game is best played.</p>
-					{{-- <input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full"> --}}
-					<select type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<!-- <select type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 						<option value="Indoor">Indoor</option>
 						<option value="Outdoor">Outdoor</option>
 						<option value="Pool">Pool</option>
-					</select>
+					</select> -->
 				</div>
 				
 				<div class="my-2">

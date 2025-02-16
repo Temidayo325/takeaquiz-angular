@@ -83,7 +83,7 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::post('/events/promotional_video', [EventController::class, 'add_promotional_media']);
     Route::get('/events/create', [EventController::class, 'create'])->name('promoter.event.create');
     // ========== Event routes goes here ======== \\
-    // ========== Attendancec route goes here ======= \\
+    // ========== Attendance route goes here ======= \\
     Route::post('/ticket/attendance/search', [\App\Http\Controllers\Promoter\AttendanceController::class, 'search']);
     Route::post('/ticket/attendance/mark', [\App\Http\Controllers\Promoter\AttendanceController::class, 'markUserAsPresent']);
     // ========== Ends here ============\\
@@ -106,8 +106,9 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::post('/event/delete', [\App\Http\Controllers\Admin\EventController::class, 'delete']);
     Route::post('/event/premium/toggle', [\App\Http\Controllers\Admin\EventController::class, 'togglePremium']);
     // ========== Event routes goes here ======== \\
-    // 
-    
+    //
+    Route::get('/promoter/requests', [\App\Http\Controllers\Admin\PromoterController::class, 'index']);
+    Route::post('/promoter/request', [\App\Http\Controllers\Admin\PromoterController::class, 'approve']);
     // ========== Game routes goes here ======== \\
     Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
     Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);
@@ -127,9 +128,10 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\User\EventController::class, 'index']);
     Route::post('/events/search', [\App\Http\Controllers\User\UserController::class, 'search']);
-    // ========== Event routes goes here ======== \\
+    // ========== Event routes ends here ======== \\
 
-    
+    Route::get('promoter/request', [\App\Http\Controllers\User\PromoterController::class, 'index']);
+    Route::post('promoter/request', [\App\Http\Controllers\User\PromoterController::class, 'create']);
      // ========== Ticket routes goes here ======== \\
     Route::get('/tickets', [\App\Http\Controllers\User\TicketController::class, 'index'])->name('user.dashboard.tickets');
     Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);

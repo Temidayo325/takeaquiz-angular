@@ -50,7 +50,7 @@
 	            	<li class="hidden md:inline"><a href="/tools">Tools</a></li>
 	            </ul>
 			</div>
-			<div class="text-left text-purple-1000 py-2 px-4 md:px-20 md:py-10 grid gap-3 md:grid-cols-2 md:items-center my-10 md:my-20">
+			<div class="text-left text-purple-1000 py-2 px-4 md:px-20 md:py-10 grid gap-3 md:grid-cols-2 md:justify-center md:items-center my-10 md:my-24">
 				<img src="{{asset('/images/hero-pacy.png')}}" alt="" class="md:h-[300px] md:w-[600px]" />
 				<div class="mt-4 md:mt-0 mb-12 md:mb-0">
 					<h1 class="text-4xl font-display md:text-[80px] mb-4 py-2 text-center md:text-left text-purple-900">Ahoy Cruiser<h1>
@@ -72,7 +72,7 @@
 				</div>
 				<div class="bg-gray-200 p-3 rounded shadow-md">
 					<h4 class="font-display text-purple-1000 mb-2 text-6xl">02</h4>
-					<p class="font-body">Reach out to the admin via any of the channels provided below or on your dashboard to upgrade your account to an organizer's account.</p>
+					<p class="font-body">Request to become a promoter via your dashboard.</p>
 				</div>
 				<div class="bg-gray-200 p-3 rounded shadow-md">
 					<h4 class="font-display text-purple-1000 mb-2 text-6xl">03</h4>

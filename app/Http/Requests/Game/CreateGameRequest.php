@@ -29,7 +29,7 @@ class CreateGameRequest extends FormRequest
             'maximum_player' => ['required', 'min:1', 'string', 'bail'], 
             'video' => ['nullable', 'file', 'max:20048'],
             'materials' => ['required', 'string', 'min:10'], 
-            'play_time' => ['nullable', 'string', 'min:10'], 
+            'play_time' => ['nullable', 'string', 'min:3'], 
             'difficulty_level' => ['required', 'string'], 
             'category' => ['required', 'string'], 
             'ideal_setting' => ['nullable', 'string'], 

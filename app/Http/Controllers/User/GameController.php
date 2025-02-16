@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Game;
-
+use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 
 class GameController extends Controller
 {

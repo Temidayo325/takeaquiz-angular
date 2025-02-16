@@ -47,6 +47,12 @@
             @endif
         </div>
 
+        <div>
+            <label for="nickname" class="font-bold text-sm">Cruise ID</label>
+            <x-text-input id="nickname" name="nickname" type="text" class="mt-1 block w-full" :value="old('nickname', $user->nickname)" required autofocus autocomplete="nickname" />
+            <x-input-error class="mt-2" :messages="$errors->get('nickname')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
