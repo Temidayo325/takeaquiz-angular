@@ -13,8 +13,8 @@
 		</header>
 		<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-5 md:gap-10">
 			<template x-for="tool in tools">
-				<a class="hover:shadow-xl hover:border-2 hover:border-gray-300 shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer grid justify-start" title="Click to view more information" :href="tool.url">
-					<img :src="`{{ asset('.') }}/${tool.image}`" alt="Image depicting the tool" class="w-full h-38">
+				<a class="hover:shadow-xl hover:border-2 hover:border-gray-300 shadow border border-gray-200 w-full bg-white text-gray-950 tracking-widest cursor-pointer grid justify-center" title="Click to view more information" :href="tool.url">
+					<img :src="`{{ asset('.') }}/${tool.image}`" alt="Image depicting the tool" class="w-full h-38 mx-auto">
 					<div class="px-2 py-1 text-sm">
 						<h2 class="font-bold text-center md:text-lg py-2" x-text="tool.name"></h2>
 						<p>
