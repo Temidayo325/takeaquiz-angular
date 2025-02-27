@@ -51,7 +51,7 @@ class EventController extends Controller
     {
         try {
             $path = $request->video->store('promotional_materials');
-            $event_media = EventMedia::create([
+            $event_media = \App\Models\EventMedia::create([
                 'user_id' => auth()->id(),
                 'event_id' => $request->event_id,
                 'video_gallery' => $path,

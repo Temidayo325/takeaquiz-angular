@@ -104,7 +104,7 @@
 										data-drawer-target="drawer-right-example" 			data-drawer-show="drawer-right-example" data-drawer-placement="right" 
 										aria-controls="drawer-right-example" 
 										id="right-drawer-button"
-										class="mt-5 bg-yellow-200 text-gray-900 hover:bg-yellow-400 hover:shadow-md hover:text-gray-950 w-full py-2">Create event
+										class="mt-5 bg-yellow-200 text-gray-900 hover:bg-yellow-400 hover:shadow-md hover:text-gray-950 w-full py-2">Create ticket
 								</button>
 							</div>
 						</div>

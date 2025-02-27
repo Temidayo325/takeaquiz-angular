@@ -14,6 +14,7 @@ class Plug extends Model
     	'state',
         'tags',
     	'address',
+        'slug',
         'travel',
         'flier',
         'service',
@@ -26,6 +27,19 @@ class Plug extends Model
     protected $casts = [
         'tags' => 'array'
     ];
+    
+    protected $appends = ['links'];
+
+    public function getLinksAttribute()
+    {
+        $url = secure_url('/plugs/') . '/'.$this->slug;
+        return \Share::page($url, "Here's my plug card")    
+                ->facebook()
+                ->twitter()
+                ->whatsapp()
+                ->linkedin()
+                ->getRawLinks();
+    }
 
     public function user()
     {

@@ -160,8 +160,11 @@
 		            			<button @click="changeEventStatus(event)" class="py-3 w-full bg-red-1000 text-purple-100 shadow-md hover:bg-red-800 hover:text-purple-200" title="Click this button to make this event a draft">Remove event</button>
 		            		</template>
 		            	</div>
+						<div class="mt-3 w-full" x-show="event.tickets.length == 0">
+		            		<a href="/promoter/dashboard/tickets/create" class="text-red-1000 font-bold py-2 text-center underline block underline-offset-4">Create tickets</a>
+		            	</div>
 		                <div class="mt-3 w-full">
-		            		<a href="/promoter/dashboard/tickets/create" class="font-bold py-2 text-center underline block underline-offset-4">Manage ticket</a>
+		            		<a href="/promoter/dashboard/tickets" class="font-bold py-2 text-center underline block underline-offset-4">Manage tickets</a>
 		            	</div>
 					</li>
 				</template>

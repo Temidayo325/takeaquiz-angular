@@ -15,7 +15,7 @@
 		<div>
 			<h1 class="font-body font-bold text-md md:text-lg pt-5 pb-3 md:mt-10">Create an event</h1>
 		</div>
-		<x-event.create-event-form></x-eventbxe.create-event-form>
+		<x-event.create-event-form></x-event.create-event-form>
 	</div>
 
 @endsection

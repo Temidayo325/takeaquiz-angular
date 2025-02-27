@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('social_media_links');
             $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Active');
             $table->boolean('isPremium')->default(false);
+            $table->string('slug');
             $table->timestamps();
         });
     }

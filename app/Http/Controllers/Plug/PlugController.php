@@ -82,7 +82,7 @@ class PlugController extends Controller
         return response()->json([
             'error' => false,
             'errorMessage' => 'Premium feature enabled for plug',
-            'data' => $users
+            // 'data' => $user
         ]);
     }
     public function displayPlug()
@@ -93,8 +93,20 @@ class PlugController extends Controller
 
     public function showPlug($id)
     {
-        $plug = Plug::with('user')->where('status', 'Active')->where('id', $id)->first();
-         // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
-        return view("plug", [ 'plug' => $plug ]);
+        $searchParameter = (int) $id;
+        $plug = ( $searchParameter > 0 ) ? Plug::with('user')->where('status', 'Active')->where('id', $id)->first() : Plug::with('user')->where('slug', $id)->where('status', 'Active')->first();
+        $searchComponent = \Share::page(url()->current(), "Here's my plug card")
+                            ->facebook()
+                            ->twitter()
+                            ->whatsapp()
+                            ->linkedin();
+        // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
+        return view("plug", [ 'plug' => $plug, 'shareButtons' => $searchComponent ]);
     }
+
+    // public function showPlugByName($name)
+    // {
+    //     $plug = Plug::with('user')->where('slug', $name)->where('status', 'Active')->first();
+    //     return view("plug", ['plug' => $plug ]);
+    // }
 }

@@ -15,7 +15,7 @@
 							{
 								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", "social_media_handle": "", "event_type" : "", "duration": "", "audience": "", "dress_code": "" }
 								this.toast("Event created Succesfully", "#fff", "green")
-								location.href = "/promoter/dashboard/tickets"
+								location.href = "/promoter/dashboard/tickets/create"
 							}
 							$refs.createTicketButton.removeAttribute("disabled")
 							this.spinner = false

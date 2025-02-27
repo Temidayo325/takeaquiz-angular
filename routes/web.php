@@ -33,6 +33,8 @@ Route::post('/plugs/search', [\App\Http\Controllers\Plug\PlugController::class, 
 Route::post('/plugs/search/tags', [\App\Http\Controllers\Plug\PlugController::class, 'searchByTags']);
 Route::get('/plugs/search/paginate', [\App\Http\Controllers\Plug\PlugController::class, 'paginateUsers']);
 Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlug']);
+// Route::get('/plugs/{name}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlugByName']);
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

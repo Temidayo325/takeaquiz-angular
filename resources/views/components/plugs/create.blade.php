@@ -15,6 +15,9 @@
 		enctype="multipart/form-data"
 		class="grid gap-4">
 		@csrf
+		<div>
+			<x-input-error :messages="$errors->get('state')" class="mt-2" />
+		</div>
 		<div class="mt-4">
 			<label for="service" class="font-bold text-sm">Service Provided <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 			<p class="text-sm text-greyish py-1">Select the category that best describes your service. Use commonly recognized names to improve your visibility. (Examples: DJ, Event Planner, Web Designer, Social Media Manager, Content Writer, Virtual Assistant, UI/UX Designer, etc.).</p>
