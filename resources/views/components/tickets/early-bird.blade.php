@@ -1,7 +1,7 @@
 <section 	class="grid gap-6 text-purple-1000" 
 			x-data='{ event: {
 				id: 13, user_id: 1, name: "Buju Phenomena gathering", state: "Lagos", starting_time: "04:11:24", event_date: "2024-11-25"}, 
-				user: JSON.parse(sessionStorage.getItem("user")),
+				user: JSON.parse(localStorage.getItem("user")),
 				ticket: JSON.parse(sessionStorage.getItem("ticket")),
 				init()
 				{

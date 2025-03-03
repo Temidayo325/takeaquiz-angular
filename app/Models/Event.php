@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Share;
+
 // use Spatie\Tags\HasTags;
 
 class Event extends Model
@@ -31,6 +33,19 @@ class Event extends Model
     protected $casts = [
         'tags' => 'array'
     ];
+    protected $appends = ['links'];
+    
+    public function getLinksAttribute()
+    {
+        $url = secure_url('/event/') . '/'.\Illuminate\Support\Str::slug($this->name);
+        return \Share::page($url, "Here's my invitation from me to you")    
+                ->facebook()
+                ->twitter()
+                ->whatsapp()
+                ->linkedin()
+                ->getRawLinks();
+    }
+
     public function user()
     {
        return $this->belongsTo(User::class);

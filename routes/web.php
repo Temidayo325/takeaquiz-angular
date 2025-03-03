@@ -22,18 +22,24 @@ use App\Http\Controllers\Promoter\TicketController;
 
 Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage']);
 Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
+
 // ========== Game routes goes here ======== \\
 Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('admin.games.index');
 Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
 Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'search']);
 Route::post('/games/search/tag', [\App\Http\Controllers\GameController::class, 'searchByTags']);
-    // ========== Plugs routes goes here ======== \\
+   
+// ========== Plugs routes goes here ======== \\
 Route::get('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'index'])->name('plug.list');
 Route::post('/plugs/search', [\App\Http\Controllers\Plug\PlugController::class, 'search']);
 Route::post('/plugs/search/tags', [\App\Http\Controllers\Plug\PlugController::class, 'searchByTags']);
 Route::get('/plugs/search/paginate', [\App\Http\Controllers\Plug\PlugController::class, 'paginateUsers']);
 Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlug']);
 // Route::get('/plugs/{name}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlugByName']);
+
+// SharedEvent Routes goes here
+Route::get('/event/{eventSlug}', [\App\Http\Controllers\ShareEventController::class, 'getSharedEvent']);   
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

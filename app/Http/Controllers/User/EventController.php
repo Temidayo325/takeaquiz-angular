@@ -58,8 +58,8 @@ class EventController extends Controller
     	$events_today = ($request->state !== 'all') ? Event::with('tickets', 'user', 'eventmedia')->where('state', strtolower($request->state))->where('status', 'Published')->where('event_date', '=', Carbon::today())->orderBy('event_date', 'ASC')->get() : Event::with('tickets', 'user', 'eventmedia')->where('status', 'Published')->where('event_date', '=', Carbon::today())->orderBy('event_date', 'ASC')->get();
     	return response()->json([
     		'events' => $events, 
-			'premium_events' => $premium_events,
-			'events_today' => $events_today
+			  'premium_events' => $premium_events,
+			  'events_today' => $events_today
     	]);
     }
 
