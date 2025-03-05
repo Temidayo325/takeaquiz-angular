@@ -39,6 +39,7 @@ Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'sh
 
 // SharedEvent Routes goes here
 Route::get('/event/{eventSlug}', [\App\Http\Controllers\ShareEventController::class, 'getSharedEvent']);   
+Route::get('/shared-event/{ticketName}', [\App\Http\Controllers\ShareEventController::class, 'getSharedTicket']);   
 
 
 // Route::get('/dashboard', function () {

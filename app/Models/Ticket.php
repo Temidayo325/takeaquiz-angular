@@ -20,6 +20,19 @@ class Ticket extends Model
         'access_type'
     ];
 
+    protected $appends = ['links'];
+
+    public function getLinksAttribute()
+    {
+        $url = secure_url('/shared-ticket/') . '/'.$this->name;
+        return \Share::page($url, "Get your ticket")    
+                ->facebook()
+                ->twitter()
+                ->whatsapp()
+                ->linkedin()
+                ->getRawLinks();
+    }
+
     public function event()
     {
     	return $this->belongsTo(Event::class);
