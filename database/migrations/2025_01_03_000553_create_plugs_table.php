@@ -29,6 +29,11 @@ return new class extends Migration
             $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Active');
             $table->boolean('isPremium')->default(false);
             $table->string('slug');
+            $table->set('location_based', ['Hybrid', 'In-person', 'Remote']);
+            $table->text('physical_address')->nullable()->default(null);
+            $table->string('contact_email', 100)->nullable()->default(null);
+            $table->string('contact_portfolio')->nullable()->default(null);
+            $table->string('contact_whatsapp', 40)->nullable()->default(null);
             $table->timestamps();
         });
     }

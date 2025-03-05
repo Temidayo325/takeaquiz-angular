@@ -30,7 +30,12 @@ class CreatePlugRequest extends FormRequest
             'service' => ['required', 'string', 'bail'],
             'service_summary' => ['required', 'string', 'bail'],
             'usp' => ['nullable', 'string', 'bail'],
-            'social_media_links' => ['required', 'string', 'bail']
+            'social_media_links' => ['required', 'string', 'bail'],
+            'location_based' => ['required', 'string', 'bail'],
+            'physical_address' => ['nullable', 'string', 'bail'],
+            'contact_email' => ['nullable', 'string', 'bail'],
+            'contact_portfolio' => ['nullable', 'string', 'bail'],
+            'contact_whatsapp' => ['nullable', 'string', 'bail']
         ];
     }
 }

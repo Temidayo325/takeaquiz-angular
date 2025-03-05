@@ -78,19 +78,6 @@
                         <p >{{ $plug->user->name }}</p>
                         <p> {{ $plug->state }} </p>
                     </div>  
-                    <div class="mt-5">
-                        <h3 class="font-bold text-sm pb-2">Address</h3>
-                        <p > {{ $plug->address}}</p>
-
-                        <h3 class="font-bold text-sm pb-2 mt-5">Service summary</h3>
-                        <p >{{ $plug->service_summary }}</p>
-
-                        <h3 class="font-bold mt-5 pb-2">Plug's Unique Selling Point</h3>
-                        <p>{{ $plug->usp }}</p>
-
-                        <h3 class="font-bold mt-5 pb-2">Does the plug engage in out-of-state delivery ?</h3>
-                        <p> {{ ( $plug->travel == 1) ? "Yes" : "No"  }}</p>
-                    </div>
                     <div class="grid mt-2 pb-4">
                         <h3 class="font-bold mt-3 pb-2">Contact details</h3>
                         <a href="tel: {{ $plug->user->phone }} "> 
@@ -103,6 +90,43 @@
                         <a href="{{ $plug->social_media_links }}" target="__blank"> <svg class="w-8 h-9 inline pr-3 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
                         <span>{{ $plug->social_media_links }}</span>
                         </a>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mt-3 pb-0 text-sm">Service</h3>
+                        <p class="text-gray-500"> {{ $plug->service}} </p>
+
+                        <h3 class="font-bold text-sm mt-3">Service summary</h3>
+                        <p class="text-gray-500"> {{ $plug->service_summary}} </p>
+
+                        <h3 class="font-bold mt-3 text-sm">Plug's Unique Selling Point</h3>
+                        <p class="text-gray-500">{{ $plug->usp}}</p>
+
+                    </div>
+                    <div class="grid mt-2 border-t border-gray-400">
+                        <h3 class="font-bold mt-3 text-sm">Service Availability</h3>
+                        <p class="text-gray-500">{{ $plug->location_based }}</p>
+
+                        <h3 class="font-bold mt-3 text-sm">State</h3>
+                        <p class="text-gray-500">{{ $plug->state }}</p>
+
+                        <h3 class="font-bold mt-3 text-sm">Contact Address (If location-based)</h3>
+                        <p class="text-gray-500">{{ $plug->physical_address }}</p>
+
+                        <h3 class="font-bold mt-3 text-sm">Available for travel ?</h3>
+                        <p class="text-gray-500">{{ ( $plug->travel == 1) ? "Yes" : "No"  }}</p>
+                    </div>
+                    <div class="grid mt-2 border-t border-gray-400">
+                        <h3 class="font-bold mt-3 text-sm">Email</h3>
+                        <a :href="mailto:" class="text-gray-500 block" >{{ ( $plug->contact_email == null) ? $plug->user->email : $plug->contact_email}}</a>
+
+                        <h3 class="font-bold mt-3 text-sm">Website / Portfolio</h3>
+                        <a :href="{{ ( $plug->contact_portfolio == null) ? $plug->social_media_links : $plug->contact_portfolio}}" class="text-gray-500">{{ ( $plug->contact_portfolio == null) ? $plug->social_media_links : $plug->contact_portfolio}}</a>
+
+                        <h3 class="font-bold mt-3 text-sm">Phone / WhatsApp</h3>
+                        <a :href="'tel:' + ( chosenPlug.contact_whatsapp == null ) ? chosenPlug.user.phone :  chosenPlug.contact_whatsapp" class="text-gray-500">{{ ( $plug->contact_whatsapp == null) ? $plug->user->phone : $plug->contact_whatsapp}}</a>
+
+                        <h3 class="font-bold mt-3 text-sm">Social Media Links</h3>
+                        <a :href="chosenPlug.social_media_links" target="__blank" class="text-gray-500" x-text="chosenPlug.social_media_links"></a>
                     </div>
                     <div class="grid mt-2 pb-4">
                         <h3 class="font-bold mt-3 pb-2">Share link buttons</h3>

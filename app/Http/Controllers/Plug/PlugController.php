@@ -41,7 +41,7 @@ class PlugController extends Controller
 
     public function search(Request $request)
     {
-    	$users = Search::add(Plug::where('status', 'Active'), ['service', 'service_summary', 'usp', 'address', 'tags'])
+    	$users = Search::add(Plug::with('user')->where('status', 'Active'), ['service', 'service_summary', 'usp', 'address', 'tags'])
 					    ->beginWithWildcard()
 					    ->endWithWildcard(true)
 					    ->orderByRelevance()

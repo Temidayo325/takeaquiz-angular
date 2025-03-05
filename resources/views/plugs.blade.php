@@ -33,7 +33,7 @@
 </head>
 <body>
 	<main class="bg-gray-100 pb-0">
-		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center z-70">
+		<header class="py-3 px-4 sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center z-70">
 			<a href="/" class="flex justify-start items-center gap-2 py-2">
                 <x-application-logo />
             </a>
@@ -86,6 +86,7 @@
             showFullDetails(plug)
             {
                 this.chosenPlug = plug
+                $refs.target.dispatchEvent(new Event("click"))
             },
             searchDatabaseForPlug()
             {
@@ -143,8 +144,9 @@
         }' class="md:px-10 px-4 py-6 md:py-4">
             <div>
                 <h2 class="font-bold text-xl mb-3">Plugs</h2>
+                <button class="rounded-xl bg-yellow-200 text-sm text-purple-1000 py-1 px-4 hidden" title="View the full description of the Plug" x-ref="target" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example" id="right-drawer-button" ></button>
                 <form method="POST" class="flex justify-end md:items-center">
-                    <input type="text" x-model="searchTerm" id="" placeholder="e.g. DJ" class="md:w-96 border border-gray-300 shadow-sm focus:outline-none focus:border focus:border-gray-300 focus:shadow-xl focus:border focus:border-gray-200 focus:ring-0" @input.debounce.500ms="searchDatabaseForPlug">
+                    <input type="text" x-model="searchTerm" id="" placeholder="e.g. DJ" class="md:w-96 border border-gray-300 shadow-sm focus:outline-none focus:border-gray-300 focus:shadow-xl focus:border focus:ring-0" @input.debounce.500ms="searchDatabaseForPlug">
                 </form>
                 <template x-if="!hasSearched">
                     <div>
@@ -182,7 +184,7 @@
                                         <span x-text="plug.user.phone" class="text-sm"></span>
                                     </a>
                                     <a :href="'mailto:'+plug.user.email" class="flex justify-start gap-3 items-center"> 
-                                        <svg class="w-5 h-8 inline pr-4 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> <span x-text="plug.user.email" class="text-sm"></span>
+                                        <svg class="w-5 h-8 inline text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> <span x-text="plug.user.email" class="text-sm"></span>
                                     </a>
                                     <a :href="plug.social_media_links" rel="noopener noreferrer" target="__blank"> 
                                         <svg class="w-8 h-9 inline pr-3 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64l-185.3 0c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64l185.3 0c2.2 20.4 3.3 41.8 3.3 64zm28.8-64l123.1 0c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64l-123.1 0c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32l-116.7 0c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0l-176.6 0c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0L18.6 160C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192l123.1 0c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64L8.1 320C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6l176.6 0c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352l116.7 0zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6l116.7 0z"/></svg>
@@ -237,7 +239,7 @@
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 <span class="sr-only">Close menu</span>
             </button>
-            <div class="py-4 overflow-y-auto text-black">
+            <div class="py-4 overflow-y-auto text-purple-1000 mt-3">
                 <template x-if="chosenPlug != null ">
                     <div class="rounded-xl shadow-md p-4 bg-white border border-gray-300">
                             <div class="flex justify-center items-center pb-4 ">
@@ -255,41 +257,35 @@
                                 <h3 class="font-bold text-sm mt-3">Service summary</h3>
                                 <p x-text="chosenPlug.service_summary" class="text-gray-500"></p>
 
-                                <h3 class="font-bold mt-3 text-sm">Address</h3>
-                                <p x-text="chosenPlug.address" class="text-gray-500"></p>
-
                                 <h3 class="font-bold mt-3 text-sm">Plug's Unique Selling Point</h3>
                                 <p x-text="chosenPlug.usp" class="text-gray-500"></p>
 
-                                <h3 class="font-bold mt-3 text-sm">Does the plug engage in out-of-state delivery ?</h3>
+                            </div>
+                            <div class="grid mt-2 border-t border-gray-400">
+                                <h3 class="font-bold mt-3 text-sm">Service Availability</h3>
+                                <p x-text="chosenPlug.location_based" class="text-gray-500"></p>
+
+                                <h3 class="font-bold mt-3 text-sm">State</h3>
+                                <p x-text="chosenPlug.state" class="text-gray-500"></p>
+
+                                <h3 class="font-bold mt-3 text-sm">Contact Address (If location-based)</h3>
+                                <p x-text="chosenPlug.physical_address" class="text-gray-500"></p>
+
+                                <h3 class="font-bold mt-3 text-sm">Available for travel ?</h3>
                                 <p x-text="( chosenPlug.travel == 1) ? 'Yes' : 'No'" class="text-gray-500"></p>
                             </div>
-                            <div class="grid mt-2">
-                                <h3 class="font-bold mt-3 pb-2 text-sm">Contact details</h3>
-                                <a :href="'tel:' + chosenPlug.user.phone" class="text-gray-500"> 
-                                    <svg class="w-8 h-9 inline pr-3 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 3.75v4.5m0-4.5h-4.5m4.5 0-6 6m3 12c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 0 0-.38 1.21 12.035 12.035 0 0 0 7.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 0 1 1.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 0 1-2.25 2.25h-2.25Z" /></svg>
-                                    <span x-text="chosenPlug.user.phone" ></span>
-                                </a>
-                                <a :href="'mailto:'+chosenPlug.user.email" class="text-gray-500"> 
-                                    <svg class="w-8 h-9 inline pr-3 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 1 0-2.636 6.364M16.5 12V8.25" /></svg> <span x-text="chosenPlug.user.email"></span>
-                                </a>
-                                <a :href="chosenPlug.social_media_links" target="__blank" class="text-gray-500"> <svg class="w-8 h-9 inline pr-3 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
-                                <span x-text="chosenPlug.social_media_links"></span>
-                                </a>
-                            </div>
-                            <div class="grid mt-2">
-                                <h3 class="font-bold mt-3 pb-2 text-sm">Contact details</h3>
-                                <a :href="'tel:' + chosenPlug.user.phone" class="text-gray-500 flex justify-start gap-3 items-center"> 
-                                    <svg class="w-5 h-9 inline pr-2 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z"/></svg>
-                                    <span x-text="chosenPlug.user.phone" class="text-sm"></span>
-                                </a>
-                                <a :href="'mailto:'+chosenPlug.user.email" class="text-gray-500 flex justify-start gap-3 items-center"> 
-                                    <svg class="w-5 h-8 inline pr-4 text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg> <span x-text="chosenPlug.user.email" class="text-sm"></span>
-                                </a>
-                                <a :href="chosenPlug.social_media_links" target="__blank" class="text-gray-500 flex justify-start gap-3 items-center"> 
-                                    <svg class="w-5 h-8 inline text-purple-1000 font-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64l-185.3 0c-2.2-20.4-3.3-41.8-3.3-64s1.2-43.6 3.3-64l185.3 0c2.2 20.4 3.3 41.8 3.3 64zm28.8-64l123.1 0c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64l-123.1 0c2.1-20.6 3.2-42 3.2-64s-1.1-43.4-3.2-64zm112.6-32l-116.7 0c-10-63.9-29.8-117.4-55.3-151.6c78.3 20.7 142 77.5 171.9 151.6zm-149.1 0l-176.6 0c6.1-36.4 15.5-68.6 27-94.7c10.5-23.6 22.2-40.7 33.5-51.5C239.4 3.2 248.7 0 256 0s16.6 3.2 27.8 13.8c11.3 10.8 23 27.9 33.5 51.5c11.6 26 20.9 58.2 27 94.7zm-209 0L18.6 160C48.6 85.9 112.2 29.1 190.6 8.4C165.1 42.6 145.3 96.1 135.3 160zM8.1 192l123.1 0c-2.1 20.6-3.2 42-3.2 64s1.1 43.4 3.2 64L8.1 320C2.8 299.5 0 278.1 0 256s2.8-43.5 8.1-64zM194.7 446.6c-11.6-26-20.9-58.2-27-94.6l176.6 0c-6.1 36.4-15.5 68.6-27 94.6c-10.5 23.6-22.2 40.7-33.5 51.5C272.6 508.8 263.3 512 256 512s-16.6-3.2-27.8-13.8c-11.3-10.8-23-27.9-33.5-51.5zM135.3 352c10 63.9 29.8 117.4 55.3 151.6C112.2 482.9 48.6 426.1 18.6 352l116.7 0zm358.1 0c-30 74.1-93.6 130.9-171.9 151.6c25.5-34.2 45.2-87.7 55.3-151.6l116.7 0z"/></svg>
-                                    <span x-text="chosenPlug.social_media_links" class="text-sm text-wrap"></span>
-                                </a>
+                            <div class="grid mt-2 border-t border-gray-400">
+                                <h3 class="font-bold mt-3 text-sm">Email</h3>
+                                <a :href="'mailto:' + chosenPlug.user.email" class="text-gray-500 block" x-text="( chosenPlug.contact_email == null ) ? chosenPlug.user.email :  chosenPlug.contact_email"></a>
+
+                                <h3 class="font-bold mt-3 text-sm">Website / Portfolio</h3>
+                                <a :href="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" class="text-gray-500" x-text="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" ></a>
+
+                                <h3 class="font-bold mt-3 text-sm">Phone / WhatsApp</h3>
+                                <a :href="'tel:' + ( chosenPlug.contact_whatsapp == null ) ? chosenPlug.user.phone :  chosenPlug.contact_whatsapp" class="text-gray-500" x-text="( chosenPlug.contact_whatsapp == null ) ? chosenPlug.user.phone :  chosenPlug.contact_whatsapp"></a>
+
+                                <h3 class="font-bold mt-3 text-sm">Social Media Links</h3>
+                                <a :href="chosenPlug.social_media_links" target="__blank" class="text-gray-500" x-text="chosenPlug.social_media_links"></a>
                             </div>
                             <ul class="pb-3 border-t border-gray-400 mt-2 flex justify-center gap-4 py-3 text-purple-1000">
                                 <template x-for="(link, key) in chosenPlug.links">

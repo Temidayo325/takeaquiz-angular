@@ -21,7 +21,12 @@ class Plug extends Model
     	'service_summary',
         'usp',
         'social_media_links',
-        'status'
+        'status',
+        'location_based',
+        'physical_address',
+        'contact_email',
+        'contact_portfolio',
+        'contact_whatsapp'
     ];
 
     protected $casts = [

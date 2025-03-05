@@ -14,21 +14,31 @@ class CreatePlug
 	
 	public function __invoke(CreatePlugRequest $plug):Plug
 	{
-        $path = $plug->flier->store('plugs');
-		$newPlug = Plug::create([
-            'user_id' => auth()->id(), 
-            'state' => $plug->state,
-            'tags' => TurningStringToArray::convert( $plug->tags ),
-            'address' => $plug->address,
-            'travel' => ( $plug->has('travel') != null && $plug->travel == 'on' ) ? 1 : 0,
-            'flier' => $path,
-            'service' => $plug->service,
-            'service_summary' => $plug->service_summary,
-            'usp' => $plug->usp ,
-            'social_media_links' => $plug->social_media_links,
-            'slug' => Str::slug(auth()->user()->name)
-        ]);
-
-        return $newPlug;
+        try {
+            $path = $plug->flier->store('plugs');
+            $newPlug = Plug::create([
+                'user_id' => auth()->id(), 
+                'state' => $plug->state,
+                'tags' => TurningStringToArray::convert( $plug->tags ),
+                'address' => $plug->address,
+                'travel' => ( $plug->has('travel') != null && $plug->travel == 'on' ) ? 1 : 0,
+                'flier' => $path,
+                'service' => $plug->service,
+                'service_summary' => $plug->service_summary,
+                'usp' => $plug->usp ,
+                'social_media_links' => $plug->social_media_links,
+                'slug' => Str::slug(auth()->user()->name),
+                'location_based' => $plug->location_based,
+                'physical_address' => $plug->physical_address,
+                'contact_email' => $plug->contact_email,
+                'contact_portfolio' => $plug->contact_portfolio,
+                'contact_whatsapp' => $plug->contact_whatsapp 
+            ]);
+            logger($newPlug->toArray());
+            return $newPlug;
+        } catch (\Throwable $th) {
+            logger($th->getMessage());
+            throw new \Exception($th->getMessage());
+        }
 	}
 }
