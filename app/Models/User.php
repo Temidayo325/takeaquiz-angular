@@ -92,6 +92,11 @@ class User extends Authenticatable
         return $this->hasOne(Plug::class);
     }
     
+    public function va()
+    {
+        return $this->hasOne(VirtualAccount::class);
+    }
+
     public function attendance()
     {
         // return $this->hasManyTh

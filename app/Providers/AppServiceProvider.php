@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Http;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-         \Illuminate\Support\Facades\Schema::defaultStringLength(191);
+        \Illuminate\Support\Facades\Schema::defaultStringLength(191);
+
+        Http::macro('secretKeyRequest', function ($url, $data = []) {
+            return Http::retry(3, 200)->withHeaders([
+                'content_type' => 'Content-Type: application/json',
+                'authorization' => "Bearer " .config('paystack.keys.secret')
+            ])->post($url, $data);
+        });
+
     }
 }
