@@ -2,8 +2,10 @@
 declare(strict_types = 1);
 namespace App\Services;
 use App\Contracts\PaymentProvider;
-use App\DTO\Paystack\CreateCustomer;
 use Illuminate\Support\Facades\Http;
+
+use App\DTO\Paystack\GeneratedAccount;
+use App\DTO\Paystack\CreateCustomer;
 
 class Paystack extends PaymentProvider
 {
@@ -31,8 +33,25 @@ class Paystack extends PaymentProvider
         }
     }   
     
-    // public static function AssignVirtualAccount(int $user_id, int $paystack_customer_id)
-    // {
-
-    // }
+    public function AssignVirtualAccount(\App\Models\User $user, int $customer_id):GeneratedAccount
+    {
+        try {
+            $request = Http::secretKeyRequest(config('paystack.url.assign_virtual_account'), [
+                'customer' => $customer_id,
+            ]);
+            $response = $request->object();
+            if ( $request->failed() || !$response->status) {
+                throw new \Exception("Error Processing Request", 1);  
+            }
+            return new GeneratedAccount( 
+                $response->data->account_name, 
+                $response->data->account_number,
+                $response->data->bank->name, 
+                $user,
+                $this->provider 
+            );
+        } catch (\Throwable $th) {
+            throw new \Exception($th->getMessage(), 1);
+        }
+    }
 }

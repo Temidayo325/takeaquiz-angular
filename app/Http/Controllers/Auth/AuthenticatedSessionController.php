@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+use App\Events\UserLoggedIn;
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -30,6 +32,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = \App\Models\User::find(Auth::id());
+        
+        event(new \App\Events\UserLoggedIn($user));
+
         if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
         {
             # code...

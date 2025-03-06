@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
             \App\Listeners\CreatePaystackCustomer::class,
         ],
+        \App\Events\UserLoggedIn::class => [
+            \App\Listeners\GenerateUserVirtualAccount::class,
+        ]
     ];
 
     /**

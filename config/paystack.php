@@ -6,7 +6,7 @@ return [
         'secret' => env("PAYSTACK_SECRET_KEY")
     ],
     'url' => [
-        'assign_dedicated_account' => env('PAYSTACK_ASSIGN_VIRTUAL_ACCOUNT'),
+        'assign_virtual_account' => env('PAYSTACK_ASSIGN_VIRTUAL_ACCOUNT'),
         'create_customer' => env("PAYSTACK_CREATE_CUSTOMER")
     ]
 ];
