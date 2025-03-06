@@ -1,6 +1,6 @@
 @extends('layouts.user-dashboard')
 
-@section('title', 'My dashboard')
+@section('title', 'Become an event organizer on CruiseHq')
 
 @section('content')
 	<div class="text-purple-1000" x-data='{ summary: "",

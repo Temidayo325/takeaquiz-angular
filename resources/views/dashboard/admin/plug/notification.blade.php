@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', "View promoter's request")
+@section('title', "View notification's request")
 
 @section('content')
 	<div class="text-purple-1000" x-data='{ summary: "",
@@ -23,7 +23,7 @@
         approveRequest(index, notificationId)
         {
             this.toast("Approving request ...", "white", "blue")
-             axios.post("/admin/dashboard/promoter/request", {notification_id: notificationId})
+             axios.post("/admin/dashboard/plug/request", {notification_id: notificationId})
             .then( ( response ) => {
                 console.log(response)
                 if(!response.error)
@@ -42,10 +42,9 @@
             <div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4 shadow-lg border border-purple-200">
                 <div class="max-w-lg">
                     <h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
-                    <p class="text-md leading-7 my-4">These are users that have made the request to become promoters so that they can be able to promote their events</p>
-                    <a href="/admin/dashboard/games/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create game</a>
+                    <p class="text-md leading-7 my-4">These are users that have made the request to become plugs so that they can be able to provide more information on their services</p> 
                 </div>
-                <img src="{{asset('/images/games.svg')}}" alt="People chilling" class="w-96 h-52">
+                <img src="{{asset('/images/plug-request.svg')}}" alt="People chilling" class="w-96 h-52">
             </div>
             <div class="md:mt-10 mb-4">
                 <h2 class="font-bold font-body text-2xl">User's request</h2>
@@ -53,7 +52,7 @@
             
            <div>
             <template x-if="notifications == null || notifications.length < 1">
-                <p class="bg-purple-300 p-3 rounded text-purple-1000">No user has recently requested to become an organizer</p>
+                <p class="bg-purple-300 p-3 rounded text-purple-1000">No user has recently requested to become a plug</p>
             </template>
             <template x-if="notifications != null && notifications.length > 0">
                 <section class="grid grid-cols-3 gap-x-4 gap-y-10 mb-12">

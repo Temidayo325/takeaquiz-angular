@@ -10,7 +10,7 @@ class Notification extends Model
     use HasFactory;
 
     public $fillable = [
-        'user_id', 'summary', 'status'
+        'user_id', 'summary', 'status', 'role'
     ];
 
     public function user()

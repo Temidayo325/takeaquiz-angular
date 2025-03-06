@@ -86,7 +86,7 @@
 			<div class="mt-2 md:mt-6" x-show="games.data.length > 0">
 				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
 					@csrf
-					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="type anything you remember about the game such as name, materials or even how-to play" @input.debounce.500ms="searchTerm">
+					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="Enter a game related keyword, name, category, setting, etc" @input.debounce.500ms="searchTerm">
 					{{-- <button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button> --}}
 				</form>
 			</div>

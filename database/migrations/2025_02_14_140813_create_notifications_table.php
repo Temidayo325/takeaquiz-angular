@@ -18,6 +18,7 @@ return new class extends Migration
                     ->on('users')
                     ->onDelete('cascade');
             $table->string('summary');
+            $table->string('role');
             $table->boolean('status')->nullable()->default(0);
             $table->timestamps();
         });

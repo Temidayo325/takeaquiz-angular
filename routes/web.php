@@ -118,6 +118,9 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     //
     Route::get('/promoter/requests', [\App\Http\Controllers\Admin\PromoterController::class, 'index']);
     Route::post('/promoter/request', [\App\Http\Controllers\Admin\PromoterController::class, 'approve']);
+    
+    Route::get('/plug/requests', [\App\Http\Controllers\Admin\PlugController::class, 'index']);
+    Route::post('/plug/request', [\App\Http\Controllers\Admin\PlugController::class, 'approve']);
     // ========== Game routes goes here ======== \\
     Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
     Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);
@@ -141,6 +144,9 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
 
     Route::get('promoter/request', [\App\Http\Controllers\User\PromoterController::class, 'index']);
     Route::post('promoter/request', [\App\Http\Controllers\User\PromoterController::class, 'create']);
+
+    Route::get('plug/request', [\App\Http\Controllers\User\PlugController::class, 'index']);
+    Route::post('plug/request', [\App\Http\Controllers\User\PlugController::class, 'create']);
      // ========== Ticket routes goes here ======== \\
     Route::get('/tickets', [\App\Http\Controllers\User\TicketController::class, 'index'])->name('user.dashboard.tickets');
     Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);

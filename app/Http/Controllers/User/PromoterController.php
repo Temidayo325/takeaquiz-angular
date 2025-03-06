@@ -9,13 +9,13 @@ class PromoterController extends Controller
 {
     public function index()
     {
-        $notification = \App\Models\Notification::query()->where('user_id', auth()->id())->first();
+        $notification = \App\Models\Notification::query()->where('role', 'promoter')->where('user_id', auth()->id())->first();
         return view("dashboard.user.promoter.create", ['user' => auth()->user(), 'notification' => $notification]);
     }
 
     public function create(Request $request)
     {
-        $notification_exists = \App\Models\Notification::where('user_id', auth()->id())->first();
+        $notification_exists = \App\Models\Notification::query()->where('role', 'promoter')->where('user_id', auth()->id())->first();
         if($notification_exists != null)
         {
             return response()->json([
@@ -26,7 +26,8 @@ class PromoterController extends Controller
 
         $new_promoter_notification = \App\Models\Notification::create([
             'summary' => $request->summary,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'role' => 'promoter'
         ]); 
 
         return response()->json([

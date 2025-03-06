@@ -45,30 +45,30 @@
             </li>
       </ul>
    </li>
- {{--   <li>
-      <button type="button" class="flex items-center w-full p-2 text-base text-gray-200 transition duration-75 px-3 md:px-5 group hover:bg-gray-100 text-gray-950 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="toggle-admin-event-ul">
-            <svg class="flex-shrink-0 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" /></svg>
+   <li>
+      <button type="button" class="flex items-center w-full py-2 text-base text-purple-200 transition duration-75 px-3 md:px-5 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="toggle-request-ul">
+         <svg class="flex-shrink-0 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>
 
-            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Manage tickets</span>
+            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Role requests</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
       </button>
-      <ul id="toggle-admin-event-ul" class="hidden py-2 space-y-2">
+      <ul id="toggle-request-ul" class="hidden py-2 space-y-2">
             <li>
-               <a href="/admin/dashboard/tickets" class="flex items-center w-full p-2 text-gray-200 transition duration-75 rounded-lg pl-20 group hover:bg-gray-100 text-gray-950 dark:text-white dark:hover:bg-gray-700">All tickets</a>
+               <a href="/admin/dashboard/promoter/requests" class="flex items-center w-full p-2 text-purple-200 transition duration-75 pl-11 md:pl-16 md:ml-3 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700 text-sm">Organizer</a>
             </li>
             <li>
-               <a href="#" class="flex items-center w-full p-2 text-gray-200 transition duration-75 rounded-lg pl-20 group hover:bg-gray-100 text-gray-950 dark:text-white dark:hover:bg-gray-700">Ticket sales</a>
+               <a href="/admin/dashboard/plug/requests" class="flex items-center w-full p-2 text-purple-200 transition duration-75 pl-11 md:pl-16 md:ml-3 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700 text-sm">Plug</a>
             </li> 
       </ul>
-   </li> --}}
+   </li>
 
-   <li>
+   <!-- <li>
       <a href="/admin/dashboard/promoter/requests" class="flex items-center w-full py-2 text-base transition duration-75 px-3 md:px-6 group text-purple-200 hover:bg-purple-200 hover:text-purple-1000  dark:text-white dark:hover:bg-gray-700" class="{{ Request::routeIs('admin.games.index') ? 'bg-purple-200 text-purple-1000' : '' }}">
          <svg class="flex-shrink-0 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>
 
-         <span class="ms-3">Promoter request</span>
+         <span class="ms-3">Organizer request</span>
       </a>
-   </li>
+   </li> -->
 </ul>
