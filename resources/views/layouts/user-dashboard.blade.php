@@ -33,15 +33,33 @@
    {{-- console.log(this.user) --}}
 }
    }'>
-   <div class="h-full py-4 overflow-y-auto bg-white md:bg-gray-950 md:text-purple-200 text-purple-1000 dark:bg-gray-800 tracking-wider bg-sidebar bg-cover bg-no-repeat bg-blend-multiply">
+   <div class="h-full py-3 overflow-y-auto bg-white md:bg-gray-950 md:text-purple-200 text-purple-1000 dark:bg-gray-800 tracking-wider bg-sidebar bg-cover bg-no-repeat bg-blend-multiply">
       <div class="grid gap-2 px-5 md:px-5 my-1 tracking-wider md:mt-12"> 
             <img class="w-32 h-32 rounded-full border border-gray-400 mx-auto bg-white" :src="`{{ asset('./images') }}/${user.facecard}`" alt="My face-card">
             <div>
                <h2 x-text="user.nickname" class="text-2xl font-bold text-center"></h2>
-               <p x-text="user.name" class="mt-2 text-center"></p>
+               <p x-text="user.name" class="mt-0 text-center"></p>
             </div>
-      </div>   
-      <ul class="space-y-2 px-5 font-medium mt-7 md:mt-5 md:mb-3 text-purple-1000">
+      </div> 
+      <div class="py-2 grid gap-2 px-8 border-b border-t border-gray-400">
+         <div>
+            <h4 class="font-light text-sm">Wallet balance</h4>
+            <p class="font-bold text-sm" x-text="user.va.balance"></p>
+         </div>
+         <div>
+            <h4 class="font-light text-sm">Account number</h4>
+            <p class="font-bold text-sm" x-text="user.va.account_number"></p>
+         </div>
+         <div>
+            <h4 class="font-light text-sm">Account name</h4>
+            <p class="font-bold text-sm" x-text="user.va.account_name"></p>
+         </div>
+         <div>
+            <h4 class="font-light text-sm">Bank</h4>
+            <p class="font-bold text-sm" x-text="user.va.bank"></p>
+         </div>
+      </div>  
+      <ul class="space-y-2 px-5 font-medium mt-5 md:mt-5 md:mb-3 text-purple-1000">
          <li>
             <a href="/user/dashboard" class="flex items-center w-full py-2 text-base text-purple-1000 md:text-purple-200 transition duration-75 px-3 md:px-5 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700">
                <svg class="w-5 h-5 text-purple-1000 md:text-purple-200 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
@@ -101,8 +119,8 @@
             <button type="button" class="flex items-center w-full p-2 text-base text-purple-1000 transition duration-75 px-3 md:px-5 group md:hover:bg-gray-100 md:hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 md:text-purple-200" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                   <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white md:text-purple-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" /></svg>
 
-                  <span class="ml-3 flex-1 text-left rtl:text-right whitespace-nowrap">Manage my tickets</span>
-                  <svg class="ml-1 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+                  <span class="ml-3 flex-1 text-sm text-left rtl:text-right whitespace-nowrap">Manage my tickets</span>
+                  <svg class="ml-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2 md:pl-10">
                   <li>

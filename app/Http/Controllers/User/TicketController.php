@@ -11,7 +11,7 @@ class TicketController extends Controller
     public function index()
     {
     	$events = Sale::with('ticket', 'event.user')->latest()->where('user_id', auth()->id())->get();
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.user.ticket.all", ['events' => $events, 'user' => $user]);
     }
 
@@ -60,7 +60,7 @@ class TicketController extends Controller
             }
 
             if ( $ticket->available_seat < 1) {
-                throw new Exception("Ooops!! We've sold out");
+                throw new \Exception("Ooops!! We've sold out");
             }
 
             if ($ticket->access_type == "Purchase" || $ticket->price > 0) {

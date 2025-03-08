@@ -14,7 +14,7 @@ class UserController extends Controller
     	$upcoming_events = Sale::with('ticket', 'event')->whereHas('event', function ($query) {
 		    $query->where('event_date', '>', now())->where('status', 'Published')->latest();
 		})->where('user_id', auth()->id())->limit(5)->get();
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.user.index", ['events' => $events, 'user' => $user, 'upcoming_events' => $upcoming_events]);
     }
 

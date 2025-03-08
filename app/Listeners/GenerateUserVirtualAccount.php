@@ -23,7 +23,7 @@ class GenerateUserVirtualAccount
     public function handle(UserLoggedIn $event): void
     {
         $user = $event->user;
-        if ( $user->va->ccount_number == NULL ) {
+        if ( $user->va->account_number == NULL ) {
             $paystack  = new Paystack();
             $vitualAccount = $paystack->AssignVirtualAccount($user, $user->va->customer_id);
             $user->va->update([

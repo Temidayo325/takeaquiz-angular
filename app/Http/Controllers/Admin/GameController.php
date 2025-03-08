@@ -11,7 +11,7 @@ class GameController extends Controller
 {
     public function index()
     {
-    	$user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	$user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	$games = Game::latest()->orderBy('id')->cursorPaginate(12);
     	return view("dashboard.admin.game.index", [
     		'user' => $user,
@@ -26,7 +26,7 @@ class GameController extends Controller
 
     public function create()
     {
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
         return view("dashboard.admin.game.create", ['user' => $user]);
     }
 

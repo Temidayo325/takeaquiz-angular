@@ -16,7 +16,7 @@ class TicketController extends Controller
     			->latest()
     			->orderBy('id')
     			->cursorPaginate(5);
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.promoter.ticket.index", ['events' => $events, 'user' => $user]);
     }
 
@@ -28,7 +28,7 @@ class TicketController extends Controller
     						->latest()
 			    			->orderBy('id')
 			    			->cursorPaginate(5);
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.promoter.ticket.create", [ 'events' => $events, 'user' => $user ]);
     }
 

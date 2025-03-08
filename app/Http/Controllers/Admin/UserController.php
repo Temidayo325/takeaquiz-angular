@@ -13,7 +13,7 @@ class UserController extends Controller
     {
     	$user = User::with('role')->where('id', auth()->id())->first();
     	$roles = \App\Models\Role::get();
-    	$users = User::with('role', 'sales')->latest()->orderBy('id')->cursorPaginate(10);
+    	$users = User::with('role', 'sales', 'va')->latest()->orderBy('id')->cursorPaginate(10);
     	return view("dashboard.admin.user.index", [
     			'user' => $user, 
     			'users' => $users,

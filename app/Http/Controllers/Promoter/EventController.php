@@ -13,7 +13,7 @@ class EventController extends Controller
     public function index()
     {
     	$events = Event::with('tickets.attendance', 'user')->where('user_id', auth()->id())->latest()->orderBy('id')->cursorPaginate(5);
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.promoter.event.index", ['events' => $events, 'user' => $user]);
     }
 
@@ -80,7 +80,7 @@ class EventController extends Controller
 
     public function create()
     {
-        $user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
         return view("dashboard.promoter.event.create", ['user' => $user]);
     }
 

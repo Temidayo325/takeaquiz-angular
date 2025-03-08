@@ -12,9 +12,10 @@ class DashboardController extends Controller
     {
     	$recent_events = Event::with(['tickets.sales', 'tickets.attendance'])->where('user_id', auth()->id())->latest()->limit(3)->get();
     	$upcoming_events = $event = Event::with(['tickets.sales', 'tickets.attendance'])->where('event_date', '>', now())->latest()->where('user_id', auth()->id())->limit(3)->get();
-    	return view("dashboard.promoter.index", ['user' => auth()->user(),
-    											'recent_events' => $recent_events,
-    											'upcoming_events' => $upcoming_events
-    										]);
+    	return view("dashboard.promoter.index", 
+				[	'user' => \App\Models\User::with('va')->where('id', auth()->id())->first(),
+					'recent_events' => $recent_events,
+					'upcoming_events' => $upcoming_events
+				]);
     }
 }

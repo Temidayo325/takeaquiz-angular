@@ -10,7 +10,10 @@ class PlugController extends Controller
     public function index()
     {
         $notification = \App\Models\Notification::query()->where('role', 'plug')->where('user_id', auth()->id())->first();
-        return view("dashboard.user.plug.create", ['user' => auth()->user(), 'notification' => $notification]);
+        return view("dashboard.user.plug.create", [
+            'user' => \App\Models\User::with('va')->where('id', auth()->id())->first(), 
+            'notification' => $notification
+        ]);
     }
 
     public function create(\App\Http\Requests\Plug\RequestPlugAccessRequest $request)

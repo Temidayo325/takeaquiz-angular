@@ -22,7 +22,7 @@ class EventController extends Controller
     	
       return view("dashboard.user.event.index", [
           'events' => $events, 
-          'user' => auth()->user(), 
+          'user' => \App\Models\User::with('va')->where('id', auth()->id())->first(), 
           'premium_events' => $premium_events, 
           'events_today' => $events_today,
           // 'tags' => $this->eventTags()

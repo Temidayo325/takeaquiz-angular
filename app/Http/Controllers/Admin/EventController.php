@@ -12,7 +12,7 @@ class EventController extends Controller
     public function index()
     {
     	$events = Event::with('tickets', 'user')->latest()->orderBy('id')->cursorPaginate(10);
-    	$user = \App\Models\User::with('role')->where('id', auth()->id())->first();
+    	$user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
     	return view("dashboard.admin.event.index", ['events' => $events, 'user' => $user]);
     }
 

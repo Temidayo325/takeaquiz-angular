@@ -13,7 +13,7 @@ class GameController extends Controller
     {
     	$games = Game::latest()->orderBy('id')->cursorPaginate(12);
     	return view("dashboard.user.game.index", [
-    		'user' => auth()->user(),
+    		'user' => \App\Models\User::with('va')->where('id', auth()->id())->first(),
     		'games' => $games,
             'tags' => $this->gameTags()
         ]);

@@ -10,7 +10,10 @@ class PromoterController extends Controller
     public function index()
     {
         $notification = \App\Models\Notification::query()->where('role', 'promoter')->where('user_id', auth()->id())->first();
-        return view("dashboard.user.promoter.create", ['user' => auth()->user(), 'notification' => $notification]);
+        return view("dashboard.user.promoter.create", [
+                'user' => \App\Models\User::with('va')->where('id', auth()->id())->first(), 
+                'notification' => $notification
+            ]);
     }
 
     public function create(Request $request)
