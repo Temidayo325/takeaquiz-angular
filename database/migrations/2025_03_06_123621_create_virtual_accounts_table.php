@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('account_number', 20)->nullable();
             $table->string('bank', 40)->nullable();
             $table->string('provider', 20);
+            $table->double('balance', null, 2)->default(0.00);
             $table->timestamps();
         });
     }

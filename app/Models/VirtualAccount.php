@@ -15,7 +15,8 @@ class VirtualAccount extends Model
         'account_number',
         'account_name',
         'bank',
-        'provider'
+        'provider',
+        'balance'
     ];
 
     public function user()
