@@ -21,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\UserLoggedIn::class => [
             \App\Listeners\GenerateUserVirtualAccount::class,
+        ],
+        \App\Events\SuccessfulWalletFunding::class => [
+            \App\Listeners\LogTransaction::class,
+            \App\Listeners\UpdateUserBalance::class
         ]
     ];
 

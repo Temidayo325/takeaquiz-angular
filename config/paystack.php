@@ -7,6 +7,8 @@ return [
     ],
     'url' => [
         'assign_virtual_account' => env('PAYSTACK_ASSIGN_VIRTUAL_ACCOUNT'),
-        'create_customer' => env("PAYSTACK_CREATE_CUSTOMER")
+        'create_customer' => env("PAYSTACK_CREATE_CUSTOMER"),
+        'generate_payment_url' => env("PAYSTACK_GENERATE_PAYMENT_URL"),
+        'confirm_transaction' => env("PAYSTACK_CONFIRM_TRANSACTION")
     ]
 ];

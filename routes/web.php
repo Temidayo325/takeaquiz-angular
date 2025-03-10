@@ -159,6 +159,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/games', [\App\Http\Controllers\User\GameController::class, 'index'])->name('admin.games.index');
     Route::post('/games/paginate', [\App\Http\Controllers\User\GameController::class, 'paginateGames']);
     Route::post('/games/search', [\App\Http\Controllers\User\GameController::class, 'search']);
-    // ========== Event routes goes here ======== \\
+    // ========== Wallet routes goes here ======== \\
+    Route::get('/wallet', [\App\Http\Controllers\User\WalletController::class, 'index']);
 });
 require __DIR__.'/auth.php';

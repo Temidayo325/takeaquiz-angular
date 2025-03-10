@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('virtual_accounts', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('customer_id');
-            $table->string('account_name', 60)->nullable();
-            $table->string('account_number', 20)->nullable();
-            $table->string('bank', 40)->nullable();
-            $table->string('provider', 20);
-            $table->double('balance', null, 2)->default(0.00);
+            $table->string('reference');
+            $table->string('timestamp');
+            $table->double('amount', null, 2);
+            $table->double('balance_before_transaction', null, 2);
+            $table->double('balance_after_transaction', null, 2);
+            $table->set('status', ['PAID', 'FAILED', 'PENDING']);
+            $table->set('type', ['DEBIT', 'CREDIT']);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('virtual_accounts');
+        Schema::dropIfExists('transactions');
     }
 };

@@ -29,5 +29,11 @@ class AppServiceProvider extends ServiceProvider
             ])->post($url, $data);
         });
 
+        Http::macro('secretKeyGetRequest', function ($url, $data = []) {
+            return Http::retry(3, 200)->withHeaders([
+                'content_type' => 'Content-Type: application/json',
+                'authorization' => "Bearer " .config('paystack.keys.secret')
+            ])->get($url, $data);
+        });
     }
 }

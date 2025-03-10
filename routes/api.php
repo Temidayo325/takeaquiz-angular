@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/confirm-transaction', [\App\Http\Controllers\User\WalletController::class, 'fundWallet']);
+Route::get('/confirm-transaction', [\App\Http\Controllers\User\WalletController::class, 'fundWallet']);
