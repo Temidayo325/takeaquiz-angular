@@ -100,4 +100,24 @@ class Paystack extends PaymentProvider
             throw new \Exception($th->getMessage(), 1);
         }
     }
+
+    public static function GetBanks($cursor = null)
+    {
+        try {
+            $request = Http::secretKeyGetRequest( config('paystack.url.get_banks'), [
+                'country' => 'nigeria',
+                'use_cursor' => true,
+                'perPage' => 100,
+                // 'pay_with_bank' => true,
+                'next' => $cursor
+            ]);
+            $response = $request->object();
+            if ( $request->failed() || !$response->status) {
+                throw new \Exception("Unable to confirm the status of the transaction", 1);  
+            }
+            return $response;
+        } catch (\Throwable $th) {
+            throw new \Exception($th->getMessage(), 1);
+        }
+    }
 }

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             // UserSeeder::class,
             // EventSeeder::class,
             RatingSeeder::class,
+            BankSeeder::class,
             // SaleSeeder::class,
             // TicketSeeder::class,
             // AttendanceSeeder::class,
