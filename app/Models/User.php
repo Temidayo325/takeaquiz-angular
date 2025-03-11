@@ -97,6 +97,11 @@ class User extends Authenticatable
         return $this->hasOne(VirtualAccount::class);
     }
 
+    public function beneficiary()
+    {
+        return $this->hasOne(Beneficiary::class);
+    }
+
     public function attendance()
     {
         // return $this->hasManyTh

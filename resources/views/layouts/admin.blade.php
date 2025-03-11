@@ -126,6 +126,13 @@
                <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
             </a>
          </li>
+         <li>
+            <a href="/promoter/dashboard/wallet" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
+               <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3" /></svg>
+
+               <span class="flex-1 ms-3 whitespace-nowrap">Wallet</span>
+            </a>
+         </li>
       </ul>
       @if($user->hasAnyRole('admin'))
          <x-admin-navigation></x-admin-navigation>

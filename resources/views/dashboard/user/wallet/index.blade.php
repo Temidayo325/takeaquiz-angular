@@ -63,11 +63,12 @@
             </ul>
         </div>
 
-        <div>
-            <h2 class="font-bold text-md mt-3 ">My Transactions</h2>
+        @if($user->hasAnyRole('promoter'))
             <div>
-
+                <h2>I am a promoter</h2>
             </div>
-        </div>
+
+
+        @endif
     </div>
 @endsection

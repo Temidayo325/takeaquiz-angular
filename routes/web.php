@@ -96,6 +96,9 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::post('/ticket/attendance/search', [\App\Http\Controllers\Promoter\AttendanceController::class, 'search']);
     Route::post('/ticket/attendance/mark', [\App\Http\Controllers\Promoter\AttendanceController::class, 'markUserAsPresent']);
     // ========== Ends here ============\\
+    Route::get('/wallet', [\App\Http\Controllers\User\WalletController::class, 'index']);
+    Route::get('/wallet/findBank/{bank_name}', [\App\Http\Controllers\User\WalletController::class, 'findBank']);
+    Route::post('/wallet/createBeneficiary', [\App\Http\Controllers\User\WalletController::class, 'createBeneficiary']);
 });
 
 Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function () {
