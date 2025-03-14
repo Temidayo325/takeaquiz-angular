@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\PendingRequest;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,16 +25,26 @@ class AppServiceProvider extends ServiceProvider
 
         Http::macro('secretKeyRequest', function ($url, $data = []) {
             return Http::retry(3, 200)->withHeaders([
-                'content_type' => 'Content-Type: application/json',
-                'authorization' => "Bearer " .config('paystack.keys.secret')
+                'Content-Type' => 'application/json',
+                'Authorization' => "Bearer " .config('paystack.keys.secret')
             ])->post($url, $data);
         });
 
         Http::macro('secretKeyGetRequest', function ($url, $data = []) {
             return Http::retry(3, 200)->withHeaders([
-                'content_type' => 'Content-Type: application/json',
-                'authorization' => "Bearer " .config('paystack.keys.secret')
+                'Content-Type' => 'application/json',
+                'Authorization' => "Bearer " .config('paystack.keys.secret')
             ])->get($url, $data);
         });
+
+        PendingRequest::macro(
+            'paystack',
+            fn(): PendingRequest => PendingRequest::acceptJson()
+                ->withHeaders([
+                    'Authorization' => 'Bearer ' . config('paystack.keys.secret')
+                ])
+                ->baseUrl(url: config('paystack.url.base_url'))
+                // ->withToken(token: 'Bearer '.config('paystack.keys.secret')),
+        );
     }
 }

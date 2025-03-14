@@ -70,6 +70,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
     Route::post('/plug/dashboard/create', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
     Route::post('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
+
+    Route::post('/generate/payment/checkoutUrl', [\App\Http\Controllers\User\WalletController::class, 'generateCheckoutUrl']);
 });
 
 Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->group(function () {
@@ -97,8 +99,8 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::post('/ticket/attendance/mark', [\App\Http\Controllers\Promoter\AttendanceController::class, 'markUserAsPresent']);
     // ========== Ends here ============\\
     Route::get('/wallet', [\App\Http\Controllers\User\WalletController::class, 'index']);
-    Route::get('/wallet/findBank/{bank_name}', [\App\Http\Controllers\User\WalletController::class, 'findBank']);
-    Route::post('/wallet/createBeneficiary', [\App\Http\Controllers\User\WalletController::class, 'createBeneficiary']);
+    Route::get('/wallet/findBank/{bank_name}', [\App\Http\Controllers\Promoter\BeneficiaryController::class, 'findBank']);
+    Route::post('/wallet/createBeneficiary', [\App\Http\Controllers\Promoter\BeneficiaryController::class, 'createBeneficiary']);
 });
 
 Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function () {

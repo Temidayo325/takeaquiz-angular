@@ -5,6 +5,7 @@
 @section('content')
 	<div class="grid gap-4 pt-3 px-2 pb-20" x-data='{user: @json($user),
         hasClickedCopy: false,
+        amount: 100,
         copyAccountNumber()
         {
             navigator.clipboard.writeText(this.user.va.account_number).then(() => {
@@ -13,6 +14,39 @@
                 
             });
             
+        },
+        generateCheckoutUrl()
+        {
+            if(this.amount < 100)
+            {
+                this.toast("You cannot fund less than #100", "white", "orange")
+                return false;
+            }
+            this.toast("Generating payment link .... ", "#fff", "green")
+            axios.post("/generate/payment/checkoutUrl", {amount: this.amount})
+            .then( ( response ) => {
+                if(response.data.status)
+                {
+                    this.toast("Payment link generated ", "#fff", "green")
+                    this.toast("Redirecting you to the payment link ", "#fff", "green")
+                    setTimeout( () => {
+                        window.open(response.data.data.checkoutUrl, "_blank")
+                    }, 2000)
+                }
+            })
+            .catch( ( error ) => {
+                console.log(error)
+                this.toast(error.response.data.message, "#fff", "#DB162F")
+            })
+        },
+        toast(text, color, background){
+            Toastify({
+                text: text, 
+                style: {
+                background: background,
+                color: color
+                }
+            }).showToast();
         },
         init(){
             console.log(this.user.va.balance)
@@ -29,7 +63,7 @@
         </div>
 
         <div>
-            <h2 class="font-bold text-md mt-3 ">How to fund wallet</h2>
+            <h2 class="font-bold text-2xl mt-3 ">How to fund wallet</h2>
             <ul class="list-disc px-8 grid gap-4 mt-2">
                 <li>
                     <h3 class="font-bold text-sm">Fund with bank transfer</h3>
@@ -56,19 +90,13 @@
                 </li>
                 <li>
                     <h3 class="font-bold text-sm">Fund with card</h3>
-                    <p class="">You can fund your wallet using your card via a web checkout url. Add the amount you want t0 add before add and click the button to get started</p>
-                    <input type="tel">
-                    <button>Fund wallet</button>
+                    <p class="">You can fund your wallet using your card via a web checkout url. Add the amount you want to add to wallet below</p>
+
+                    <p class="text-sm text-gray-500 py-1 mt-3">You cannot fund your wallet with amount less than #100</p>
+                    <input type="number" min="100" placeholder="5000" class="w-36 border-0 border-b-2 border-gray-300 outline-none ring-0 focus:shadow-sm transition duration-500 focus:border-b focus:border-gray-500 focus:outline-none focus:ring-0 md:w-48 invalid:border-b invalid:border-red-600 placeholder:text-gray-200" x-model="amount">
+                    <button @click="generateCheckoutUrl()" class="bg-red-1000 text-white px-4 py-2 mt-6 rounded">Fund wallet</button>
                 </li>
             </ul>
         </div>
-
-        @if($user->hasAnyRole('promoter'))
-            <div>
-                <h2>I am a promoter</h2>
-            </div>
-
-
-        @endif
     </div>
 @endsection

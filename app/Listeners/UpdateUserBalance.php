@@ -23,7 +23,7 @@ class UpdateUserBalance
         //Log the transaction
         $transaction_details = $walletFunding->transaction_details;
         $user = \App\Models\User::with('va')->where('email', $transaction_details->email)->first();
-        $user->va->save([
+        $user->va->update([
             'balance' => $user->va->balance + ( $transaction_details->amount / 100)
         ]);
     }

@@ -61,9 +61,11 @@ class Paystack extends PaymentProvider
     {
         try {
             $dateTime = new \DateTime();
+            $calculated_amount =  $amount * 100;
             $request = Http::secretKeyRequest(config('paystack.url.generate_payment_url'), [
                 'email' => $user->email,
-                'amount' => ( float ) $amount * 100,
+                'amount' => $calculated_amount,
+                "currency" =>  "NGN",
                 'reference' => $dateTime->getTimestamp()
             ]);
             $response = $request->object();
@@ -77,7 +79,8 @@ class Paystack extends PaymentProvider
                 $user
             );
         } catch (\Throwable $th) {
-            throw new \Exception($th->getMessage(), 1);
+            dd($th->getMessage());
+            throw new \Exception($th->getMessage());
         }
 
     }
