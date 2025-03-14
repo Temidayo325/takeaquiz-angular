@@ -39,13 +39,13 @@ class RegisteredUserController extends Controller
 
         $user = ( new \App\Actions\User\CreateUser() )((object) $validated_data);
         event(new Registered($user));
-
-        Auth::login($user);
-        if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
-        {
-            # code...
-            return redirect()->intended(route('promoter.dashboard', absolute: false));
-        }
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->intended(url('/login'));
+        // Auth::login($user);
+        // if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
+        // {
+        //     # code...
+        //     return redirect()->intended(route('promoter.dashboard', absolute: false));
+        // }
+        // return redirect(RouteServiceProvider::HOME);
     }
 }
