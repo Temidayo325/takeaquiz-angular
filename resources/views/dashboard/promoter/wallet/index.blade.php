@@ -53,12 +53,21 @@
         }}'>
         <div class="px-2">
             <h2 class="font-bold text-md mt-3 ">My wallet</h2>
-            <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-72">
-                <h3 class="text-sm">Account balance</h3>
-                <h1 class="text-5xl md:text-8xl mt-2">
-                    <span class="text-lg">&#8358; </span>
-                    <span x-text="user.va.balance" class="text-gray-200"></span>
-                </h1>
+            <div class="grid gap-5 md:gap-10  md:flex md:justify-start">
+                <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-72">
+                    <h3 class="text-sm">Account balance</h3>
+                    <h1 class="text-5xl md:text-8xl mt-2">
+                        <span class="text-lg">&#8358; </span>
+                        <span x-text="user.va.balance" class="text-gray-200"></span>
+                    </h1>
+                </div>
+                <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-72">
+                    <h3 class="text-sm">Ticket sales</h3>
+                    <h1 class="text-5xl md:text-8xl mt-2">
+                        <span class="text-lg">&#8358; </span>
+                        <span x-text="user.va.balance" class="text-gray-200"></span>
+                    </h1>
+                </div>
             </div>
         </div>
 

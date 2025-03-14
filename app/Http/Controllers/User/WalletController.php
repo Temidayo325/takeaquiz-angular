@@ -14,6 +14,7 @@ class WalletController extends Controller
         $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
         if( $user->hasAnyRole('promoter') )
         {
+            // $wallet = ;
             return view('dashboard.promoter.wallet.index', ['user' => $user]);
         }
         return view('dashboard.user.wallet.index', ['user' => $user]);

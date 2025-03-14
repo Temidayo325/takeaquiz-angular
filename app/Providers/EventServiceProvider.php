@@ -25,6 +25,12 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\SuccessfulWalletFunding::class => [
             \App\Listeners\LogTransaction::class,
             \App\Listeners\UpdateUserBalance::class
+        ],
+        \App\Events\TicketSold::class => [
+            \App\Listeners\Sales\DebitUser::class,
+            \App\Listeners\Sales\CreditOrganizer::class,
+            \App\Listeners\Sales\NewSales::class,
+            \App\Listeners\Sales\UpdateTicketQuantity::class,
         ]
     ];
 

@@ -64,12 +64,16 @@ class TicketController extends Controller
             }
 
             if ($ticket->access_type == "Purchase" || $ticket->price > 0) {
-                throw new \Exception("We cannot process paid tickets at this time. ");
+                // throw new \Exception("We cannot process paid tickets at this time. ");
+                $balance = \App\Models\VirtualAccount::select('balance')->where('user_id', auth()->id())->first()->balance;
+                if($balance < $ticket->price)
+                {
+                    throw new \Exception("Insufficient wallet balance, top up your wallet to continue", 1);
+                }
+                event(new \App\Events\TicketSold($ticket, auth()->user()));
             }
             
-            $sale = ( new \App\Actions\Sale\CreateSale() )($ticket, 'Success');
-            $ticket->available_seat = (int) $ticket->available_seat - 1;
-            $ticket->save(); 
+            event(new \App\Events\TicketSold($ticket, auth()->user()));
 
             return response()->json([
                 'error' => false,

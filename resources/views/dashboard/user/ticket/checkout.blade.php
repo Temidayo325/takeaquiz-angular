@@ -24,7 +24,7 @@
             try {
                 axios.post("/user/dashboard/ticket/initiate-payment", {ticket_id: this.desiredTicket.id})
                 .then(response => {
-                    if( !response.data.error && this.desiredTicket.access_type == "Free")
+                    if( !response.data.error)
                     {
                         this.toast(response.data.message, "green")
                         window.location = "/user/dashboard"

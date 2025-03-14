@@ -116,4 +116,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function wallet_activities()
+    {
+        return $this->hasMany(WalletActivity::class);
+    }
+
+    public function totalSales()
+    {
+        return $this->hasManyThrough(Sale::class, Event::class);
+    }
 }
