@@ -73,7 +73,10 @@ class TicketController extends Controller
                 event(new \App\Events\TicketSold($ticket, auth()->user()));
             }
             
-            event(new \App\Events\TicketSold($ticket, auth()->user()));
+            if( $ticket->access_type == "Free" )
+            {
+                event(new \App\Events\TicketSold($ticket, auth()->user()));
+            }
 
             return response()->json([
                 'error' => false,

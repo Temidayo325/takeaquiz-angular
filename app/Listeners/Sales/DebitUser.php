@@ -21,9 +21,10 @@ class DebitUser
     public function handle(\App\Events\TicketSold $sale): void
     {
         // Remove the price of the ticket from the User (Customer)
-        $virtualWallet = \App\Models\VirtualAccount::select('balance')->where('user_id', $sale->user->id)->first();
-        $virtualWallet->balance = $virtualWallet->balance - $sale->ticket->price;
-        $virtualWallet->save();
+        $virtualWallet = \App\Models\VirtualAccount::where('user_id', $sale->user->id)
+            ->lockForUpdate()
+            ->first();
+        $virtualWallet->decrement('balance', $sale->ticket->price);
         // Create a walletActivity
         $walletAcitivy = ( new \App\Actions\Wallet\Activity() )($sale->user, $sale->ticket->price, 'Debit');
     }

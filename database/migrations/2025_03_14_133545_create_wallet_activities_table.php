@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('wallet_activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->double('amount', null, 2)->default(0.00);
             $table->double('balance_before', null, 2)->default(0.00);

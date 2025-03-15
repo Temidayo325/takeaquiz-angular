@@ -8,12 +8,13 @@ final class Activity
     public function __invoke(\App\models\User $user, int $amount, string $type)
 	{
         $balance = \App\models\VirtualAccount::where('user_id', $user->id)->first()->balance;
+        $adjusted_balance = ( $type == 'Credit' ) ? (int) $amount + $balance : (int) $balance - $amount;
         $wallet_activity = WalletActivity::create([
             'user_id' => $user->id,
             'amount' => $amount,
             'type' => $type,
             'balance_before' => $balance,
-            'balance_after' => ( $type = 'Credit' ) ? $amount + $balance : $balance - $amount,
+            'balance_after' => $adjusted_balance,
         ]);
 	}
 }
