@@ -4,8 +4,11 @@
 
 @section('content')
 	<div class="grid gap-4 pt-3 px-4 pb-20 md:px-12" x-data='{user: @json($user),
+        totalSales: @json($totalSales),
+        monthlySales: @json($monthlySales),
         hasClickedCopy: false,
         amount: 100,
+        withdrawAmount: 0,
         copyAccountNumber()
         {
             navigator.clipboard.writeText(this.user.va.account_number).then(() => {
@@ -25,7 +28,7 @@
             this.toast("Generating payment link .... ", "#fff", "green")
             axios.post("/generate/payment/checkoutUrl", {amount: this.amount})
             .then( ( response ) => {
-                if(response.data.status)
+                if(response.data.error)
                 {
                     this.toast("Payment link generated ", "#fff", "green")
                     this.toast("Redirecting you to the payment link ", "#fff", "green")
@@ -39,37 +42,81 @@
                 this.toast(error.response.data.message, "#fff", "#DB162F")
             })
         },
-        toast(text, color, background){
+        toast(text, background){
             Toastify({
                 text: text, 
                 style: {
                 background: background,
-                color: color
+                color: "#fff"
                 }
             }).showToast();
         },
+        initiateWithdrawal()
+        {
+            if(this.withdrawAmount > this.user.va.balance)
+            {
+                this.toast("You cannot withdraw above your wallet balance", "orange")
+                return false;
+            }
+            this.toast("Making withdrawal request .... ", "blue")
+            axios.post("/promoter/dashboard/wallet/withdraw", {amount: this.withdrawAmount})
+            .then( ( response ) => {
+                if(response.data.error)
+                {
+                    this.toast("Your withdrawal request has been submitted", "green")
+                    this.withdrawAmount = 0
+                }else{
+                    this.toast(response.data.errorMessage, "orange")
+                }
+            })
+            .catch( ( error ) => {
+                this.toast(error.response.data.message, "#DB162F")
+            })
+
+        },
         init(){
-            
         }}'>
         <div class="px-2">
             <h2 class="font-bold text-md mt-3 ">My wallet</h2>
             <div class="grid gap-5 md:gap-10  md:flex md:justify-start">
                 <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-72">
                     <h3 class="text-sm">Account balance</h3>
-                    <h1 class="text-5xl md:text-8xl mt-2">
+                    <h1 class="text-5xl md:text-7xl mt-2 md:my-4">
                         <span class="text-lg">&#8358; </span>
-                        <span x-text="user.va.balance" class="text-gray-200"></span>
+                        <span x-text="new Intl.NumberFormat().format(user.va.balance)"></span>
                     </h1>
                 </div>
-                <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-72">
-                    <h3 class="text-sm">Ticket sales</h3>
-                    <h1 class="text-5xl md:text-8xl mt-2">
+                <div class="bg-yellow-300 px-3 py-5  text-purple-1000 rounded-md shadow-md mt-2 md:w-72">
+                    <h3 class="text-sm">Ticket sales for this month</h3>
+                    <h1 class="text-5xl md:text-7xl mt-2 md:my-4">
                         <span class="text-lg">&#8358; </span>
-                        <span x-text="user.va.balance" class="text-gray-200"></span>
+                        <span x-text="new Intl.NumberFormat().format(monthlySales)"></span>
+                    </h1>
+                </div>
+                <div class="bg-red-1000 px-3 py-5  text-gray-200 rounded-md shadow-md mt-2 md:w-72">
+                    <h3 class="text-sm">All time Ticket sales</h3>
+                    <h1 class="text-5xl md:text-7xl mt-2 md:my-4">
+                        <span class="text-lg">&#8358; </span>
+                        <span x-text="new Intl.NumberFormat().format(totalSales)"></span>
                     </h1>
                 </div>
             </div>
         </div>
+
+        @if( $user->hasAnyRole('promoter') )
+            <div class="md:w-2/4 mt-10 md:mt-20 bg-white py-5 md:px-6 px-2">
+                <h2 class="font-bold text-md mt-3 ">Make withdrawal</h2>
+                <ul class="list-none grid gap-4 md:gap-6 mt-2">
+                    <li>
+                        <p class="text-gray-400 text-sm">Kindly note that you cannot withdraw beyond your wallet balance.</p>
+                    </li>
+                    <li>
+                        <input type="num" x-model="withdrawAmount" :max="user.va.balance" class="w-56 border-0 border-b-2 border-gray-300 outline-none ring-0 focus:shadow-sm transition duration-500 focus:border-b focus:border-gray-500 focus:outline-none focus:ring-0 md:w-4/5 invalid:border-b invalid:border-red-600 placeholder:text-gray-200 block">
+                        <button  @click="initiateWithdrawal()" class="bg-red-1000 text-white px-4 py-3 mt-6 rounded block">Withdraw from wallet</button>
+                    </li>
+                </ul>
+            </div>
+        @endif
 
         <div class="md:w-2/4 mt-10 md:mt-20 bg-white py-5 md:px-6 px-2">
             <h2 class="font-bold text-md mt-3 ">How to fund wallet</h2>
@@ -114,7 +161,7 @@
                 banks: [],
                 init()
                 {
-                    this.account_details = this.beneficiary
+                    this.account_details = ( this.beneficiary == null ) ?  {account_name: null, account_number: null, bank_name: null, bank_code: null} : this.beneficiary
                 },
                 toast(text, color, background){
                     Toastify({
@@ -148,7 +195,7 @@
                     this.toast("Creating your withdrawal account .... ", "#fff", "#1d1128")
                     axios.post("/promoter/dashboard/wallet/createBeneficiary",{...this.account_details})
                     .then( ( response ) => {
-                        if(response.data.status)
+                        if(response.data.error)
                         {
                             this.toast("Withdrawal account created succesfully")
                             this.errorMessage = ""
@@ -156,7 +203,6 @@
                         }
                     })
                     .catch( ( error ) => {
-                        console.log(error)
                         this.toast(error.response.data.message, "#fff", "#DB162F")
                         this.errorMessage = error.response.data.message
                     })

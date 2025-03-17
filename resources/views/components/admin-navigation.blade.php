@@ -49,7 +49,7 @@
       <button type="button" class="flex items-center w-full py-2 text-base text-purple-200 transition duration-75 px-3 md:px-5 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="toggle-request-ul">
          <svg class="flex-shrink-0 w-5 h-5 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>
 
-            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Role requests</span>
+            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Requests</span>
             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
@@ -61,6 +61,9 @@
             <li>
                <a href="/admin/dashboard/plug/requests" class="flex items-center w-full p-2 text-purple-200 transition duration-75 pl-11 md:pl-16 md:ml-3 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700 text-sm">Plug</a>
             </li> 
+            <li>
+               <a href="/admin/dashboard/wallet/withdrawals" class="flex items-center w-full p-2 text-purple-200 transition duration-75 pl-11 md:pl-16 md:ml-3 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700 text-sm">Withdrawal</a>
+            </li>
       </ul>
    </li>
 

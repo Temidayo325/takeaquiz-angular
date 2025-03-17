@@ -101,6 +101,7 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::get('/wallet', [\App\Http\Controllers\User\WalletController::class, 'index']);
     Route::get('/wallet/findBank/{bank_name}', [\App\Http\Controllers\Promoter\BeneficiaryController::class, 'findBank']);
     Route::post('/wallet/createBeneficiary', [\App\Http\Controllers\Promoter\BeneficiaryController::class, 'createBeneficiary']);
+    Route::post('/wallet/withdraw', [\App\Http\Controllers\Promoter\BeneficiaryController::class, 'initiateWthdraw']);
 });
 
 Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function () {
@@ -126,6 +127,12 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     
     Route::get('/plug/requests', [\App\Http\Controllers\Admin\PlugController::class, 'index']);
     Route::post('/plug/request', [\App\Http\Controllers\Admin\PlugController::class, 'approve']);
+
+    Route::get('/wallet/withdrawals', [\App\Http\Controllers\Admin\WalletWithdrawalController::class, 'index']);
+    // Route::post('/wallet/withdrawal', [\App\Http\Controllers\Admin\WalletWithdrawalController::class, 'approve']);
+    Route::post('/wallet/withdrawal/initialize', [\App\Http\Controllers\Admin\WalletWithdrawalController::class, 'initializeWithdrawal']);
+    Route::post('/wallet/withdrawal/complete', [\App\Http\Controllers\Admin\WalletWithdrawalController::class, 'completeWithdrawal']);
+
     // ========== Game routes goes here ======== \\
     Route::get('/games', [\App\Http\Controllers\Admin\GameController::class, 'index'])->name('admin.games.index');
     Route::post('/games/paginate', [\App\Http\Controllers\Admin\GameController::class, 'paginateGames']);

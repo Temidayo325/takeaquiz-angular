@@ -49,11 +49,11 @@
             }).showToast();
         },
         init(){
-            console.log(this.user.va.balance)
+            console.log(this.user)
         }}'>
         <div>
             <h2 class="font-bold text-md mt-3 ">My wallet</h2>
-            <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2">
+            <div class="bg-purple-1000 px-3 py-5 text-gray-200 rounded-md shadow-md mt-2 md:w-2/5">
                 <h3 class="text-sm">Account balance</h3>
                 <h1 class="text-5xl mt-2">
                     <span class="text-lg">&#8358; </span>

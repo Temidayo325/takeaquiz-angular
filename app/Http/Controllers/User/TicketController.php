@@ -64,7 +64,6 @@ class TicketController extends Controller
             }
 
             if ($ticket->access_type == "Purchase" || $ticket->price > 0) {
-                // throw new \Exception("We cannot process paid tickets at this time. ");
                 $balance = \App\Models\VirtualAccount::select('balance')->where('user_id', auth()->id())->first()->balance;
                 if($balance < $ticket->price)
                 {

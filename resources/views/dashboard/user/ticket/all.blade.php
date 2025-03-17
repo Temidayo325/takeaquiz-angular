@@ -15,7 +15,7 @@
 				<div class="shadow-md md:shadow-sm md:flex pb-10  px-4 md:py-10 bg-purple-300 items-center justify-between md:px-12">
 					<div class="max-w-lg">
 						<img src="{{asset('/images/all-tickets.svg')}}" alt="People chilling" class="w-64 h-32 md:w-96 md:h-52 mt-5 mb-3 md:mt-0 block md:hidden">
-						<h1 class="font-body font-bold text-4xl font-normal">OG <span x-text="user.nickname"></span></h1>
+						<h1 class="font-body font-bold text-4xl">OG <span x-text="user.nickname"></span></h1>
 						<p class="text-md leading-7 my-4">We've curated all your purchased event tickets. Get tickets to more events to boost your collection</p>
 						<a href="/user/dashboard/events" class="bg-red-1000 text-white px-9 py-3 mt-2 md:mt-0">Browse events</a>
 					</div>
