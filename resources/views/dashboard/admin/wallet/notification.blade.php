@@ -48,11 +48,12 @@
             this.toast("Initializing the withdrawal process ...", "blue")
             axios.post("/admin/dashboard/wallet/withdrawal/initialize", {notification_id: notification.id})
             .then( ( response ) => {
-                if(!response.error)
+                if(!response.data.error)
                 {
                     this.toast("Process initialized, enter OTP to complete request", "green")
                     this.hasRequestedOtp = true
                 }
+                this.toast(response.data.errorMessage, "green")
             })
             .catch( (error) => {
                 this.toast(error.response.data.message, "red")
@@ -101,8 +102,8 @@
                                     <td class="px-6 py-4 text-right">
                                         <button x-show="!hasRequestedOtp" @click="initializeWithdrawal(notification, index)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Disburse Funds</button>
                                         <div x-show="hasRequestedOtp" class="flex justify-start items-baseline">
-                                            <input type="tel"  class="w-36 border-0 border-b-2 border-gray-300 outline-none ring-0 focus:shadow-sm transition duration-500 focus:border-b focus:border-gray-500 focus:outline-none focus:ring-0 md:w-48 invalid:border-b invalid:border-red-600 placeholder:text-gray-200" placeholder="1234" x-model="otp">
-                                            <button @click="completeWithdrawal()" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Complete transaction</button>
+                                            <input type="tel"  class="w-24 border-0 border-b-2 border-gray-300 outline-none ring-0 focus:shadow-sm transition duration-500 focus:border-b focus:border-gray-500 focus:outline-none focus:ring-0 invalid:border-b invalid:border-red-600 placeholder:text-gray-200" placeholder="1234" x-model="otp">
+                                            <button @click="completeWithdrawal()" class="font-medium text-gray-200 dark:text-blue-500 hover:underline bg-purple-1000 py-2 px-4">Complete transaction</button>
                                         </div>
                                     </td>
                                 </tr>

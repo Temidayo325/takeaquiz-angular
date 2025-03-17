@@ -40,7 +40,8 @@ class TicketController extends Controller
     {
         $ticket_id = (int) session('ticket_id');
         $ticket = \App\Models\Ticket::with('event.user')->where('id', $ticket_id)->first();
-        return view("dashboard.user.ticket.checkout", ['user' => auth()->user(), 'ticket' => $ticket]);
+        $user = \App\Models\User::with('va', 'role')->where('id', auth()->id())->first();
+        return view("dashboard.user.ticket.checkout", ['user' => $user, 'ticket' => $ticket]);
     }
 
     public function purchase()

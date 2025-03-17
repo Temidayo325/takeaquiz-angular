@@ -66,7 +66,7 @@
 										</div>
 									</template>
 									<template x-if="event.ticket.type == 'Early bird'">
-										<div class="bg-white text-purple-1000 px-4 py-8 pb-5 rounded w-64 text-gray-950 mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg ">
+										<div class="bg-white text-purple-1000 px-4 py-8 pb-5 rounded w-64 mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg ">
 											<div>
 												<div class="border-b border-black">
 													<h2 class="text-4xl tracking-wide font-display" x-text="event.event.name"></h2>

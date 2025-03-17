@@ -5,11 +5,23 @@
 @section('content')
 	<div class="text-black px-4 md:px-10 py-6" x-data='{ user: @json($user),
 		desiredTicket: @json($ticket),
+        hasClickedCopy: false,
+        amount: 100,
 		chosenEvent: null,
 		init() {
         	sessionStorage.setItem("ticket", JSON.stringify(this.desiredTicket))
         	this.chosenEvent = this.desiredTicket.event
+            console.log(this.desiredTicket)
    		},
+        copyAccountNumber()
+        {
+            navigator.clipboard.writeText(this.user.va.account_number).then(() => {
+                this.hasClickedCopy = true
+            }).catch(err => {
+                
+            });
+            
+        },
         toast(text, background){
             Toastify({
               text: text, 
@@ -19,6 +31,7 @@
               }
             }).showToast();
         },
+
         checkout()
         {
             try {
@@ -63,11 +76,19 @@
     			</div>
     		</template>	
 		</div>
-        <p class="text-red-1000 font-bold py-3 text-center"><span class="text-lg">&#8358; </span><span x-text="desiredTicket.price"></span> would be deducted from your wallet</p>
+        
+       
 		@auth
-        <div class="flex justify-center items-center mt-4 mb-14">
+        <template x-if="user.va.balance >= desiredTicket.price" >
+            <p class="text-purple-1000 text-sm font-bold py-3 text-center"><span class="text-lg">&#8358; </span><span x-text="desiredTicket.price"></span> would be deducted from your wallet</p>
+        </template>
+        <template x-if="desiredTicket.price > user.va.balance" >
+            <p class="text-red-1000 text-sm font-bold py-3 text-center">You do not have sufficient balance, kindly top up your wallet via any of the ways highlighted below</p>
+        </template>
+        
+        <div class="flex justify-center items-center mt-4 mb-14" x-show="user.va.balance >= desiredTicket.price">
 			<button class="bg-gray-950 text-gray-200 px-6 py-3" @click="checkout()">
-                Continue to checkout
+                Purchase ticket
                 <svg class="animate-bounce w-10 h-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" /></svg>
             </button>
 		</div>
@@ -75,6 +96,10 @@
         @guest
             <a class="text-center underline text-purple-1000" href="/login">Create an account to continue to ticket</a>
         @endguest
+
+        <template x-if="desiredTicket.price > user.va.balance">
+            <x-fund-wallet></x-fund-wallet>
+        </template>
 	</div>
 
 @endsection
