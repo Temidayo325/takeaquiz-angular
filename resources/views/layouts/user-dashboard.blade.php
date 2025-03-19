@@ -118,13 +118,15 @@
                </a>
             </li>
          @endif
-         <li>
-            <a href="/user/dashboard/promoter/request" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
-               <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002" /></svg>
+         @if($user->hasAnyRole('promoter'))
+            <li>
+               <a href="/user/dashboard/promoter/request" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
+                  <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002" /></svg>
 
-               <span class="flex-1 ms-3 whitespace-nowrap">I am an event organizer</span>
-            </a>
-         </li>
+                  <span class="flex-1 ms-3 whitespace-nowrap">I am an event organizer</span>
+               </a>
+            </li>
+         @endif
          <li>
             <a href="/user/dashboard/plug/request" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
                <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
@@ -141,7 +143,7 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2 md:pl-10">
                   <li>
-                     <a href="/user/dashboard/tickets" class="flex items-center w-full p-2 text-purple-1000 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 md:text-purple-200">All ticket</a>
+                     <a href="/user/dashboard/tickets" class="flex items-center w-full p-2 text-purple-1000 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 md:text-purple-200">All tickets</a>
                   </li>
                   <li>
                      <a href="/user/dashboard/tickets/upcoming" class="flex items-center w-full p-2 text-purple-1000 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 md:text-purple-200">Upcoming tickets</a>

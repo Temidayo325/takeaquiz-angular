@@ -43,7 +43,6 @@
                 <div class="max-w-lg">
                     <h1 class="font-display text-2xl tracking-wider md:text-4xl font-normal">Welcome back Legend <span x-text="user.nickname"></span></h1>
                     <p class="text-md leading-7 my-4">These are users that have made the request to become promoters so that they can be able to promote their events</p>
-                    <a href="/admin/dashboard/games/create" class="px-6 py-3 font-bold md:font-normal bg-red-1000 text-gray-200">Create game</a>
                 </div>
                 <img src="{{asset('/images/games.svg')}}" alt="People chilling" class="w-96 h-52">
             </div>

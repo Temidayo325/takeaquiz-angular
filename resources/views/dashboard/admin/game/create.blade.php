@@ -74,7 +74,7 @@
 							this.steps.splice(index, 1 )
 						}
 					}'
-						class="mx-auto md:w-full border border-gray-100 shadow-md px-6 py-5 grid md:overflow-x-hidden md:grid-cols-2 gap-x-6 gap-y-10 bg-gray-100 md:bg-white pb-8 shadow-2xl mt-10">
+						class="mx-auto md:w-full border border-gray-100 px-6 py-5 grid md:overflow-x-hidden md:grid-cols-2 gap-x-6 gap-y-10 bg-gray-100 md:bg-white pb-8 shadow-2xl mt-10">
 				<div class="my-2">
 					<label for="name" class="font-bold text-gray-950">Name of the game <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 					<p class="text-gray-600 text-sm ">Most popular name of the game</p>
@@ -133,7 +133,7 @@
 				<div class="my-2">
 					<label for="play_time" class="font-bold text-gray-950">Estimated Playtime</label>
 					<p class="text-gray-600 text-sm ">State how long a typical game session lasts.</p>
-					<input type="text" name="play_time" id="play_time" required="required" minLength="5" x-model="data.play_time" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<input type="text" name="play_time" id="play_time" minLength="5" x-model="data.play_time" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 				<div class="my-2">
 					<label for="difficulty_level" class="font-bold text-gray-950">Difficulty Level <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
@@ -148,13 +148,13 @@
 				<div class="my-2">
 					<label for="tips" class="font-bold text-gray-950">Tips</label>
 					<p class="text-gray-600 text-sm ">Offer strategies or tips to enjoy the game better or increase chances of winning.</p>
-					<input type="text" name="tips" id="tips" required="required" minLength="5" x-model="data.tips" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<input type="text" name="tips" id="tips" minLength="5" x-model="data.tips" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 				</div>
 
 				<div class="my-2">
 					<label for="ideal_setting" class="font-bold text-gray-950">Ideal Setting</label>
 					<p class="text-gray-600 text-sm ">Select where the game is best played.</p>
-					<input type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
+					<input type="text" name="ideal_setting" id="ideal_setting"  minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 					<!-- <select type="text" name="ideal_setting" id="ideal_setting" required="required" minLength="5" x-model="data.ideal_setting" class="focus:outline-0 focus:shadow-lg focus:border-none w-full">
 						<option value="Indoor">Indoor</option>
 						<option value="Outdoor">Outdoor</option>
@@ -172,7 +172,7 @@
 						<option value="NSFW">NSFW (not safe for work or age-restricted content)</option>
 					</select>
 				</div>
-				<button type="submit" class="px-6 py-3 bg-red-1000 text-gray-300 font-bold mx-auto shadow-lg hover:bg-gray-800 hover:text-gray-500 my-4 mx-auto ">Create game</button>
+				<button type="submit" class="px-6 py-3 bg-red-1000 text-gray-300 font-bold shadow-lg hover:bg-gray-800 hover:text-gray-500 my-4 mx-auto ">Create game</button>
 			</form>
 		</div>
 	</div>

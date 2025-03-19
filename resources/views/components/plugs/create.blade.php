@@ -18,6 +18,22 @@
 		<div>
 			<x-input-error :messages="$errors->get('error')" class="mt-2" />
 		</div>
+		@if(session('success'))
+			<div id="flash-message" class="py-3 px-2 bg-green-300 text-purple-1000 text-left text-sm">
+				{{ session('success') }}
+			</div>
+
+			<script>
+				setTimeout(() => {
+					let flashMessage = document.getElementById('flash-message');
+					if (flashMessage) {
+						flashMessage.style.transition = "opacity 0.5s ease";
+						flashMessage.style.opacity = "0";
+						setTimeout(() => flashMessage.remove(), 500); // Remove after fade out
+					}
+				}, 10000); // 10 seconds
+			</script>
+		@endif
 		<ul class="list-decimal grid gap-4">
 			<li class="mt-4">
 				<label for="service" class="font-bold text-sm">Service Provided <sup class="text-red-700 mb-10" title="This field must be filled">&#8727;</sup></label>
@@ -139,7 +155,7 @@
 			</li>
 		</ul>
 
-		<button class="w-full py-3 bg-red-1000 border-none text-gray-200 mt-4 rounded-lg shadow-md md:shadow-sm disabled:bg-gray-400 disabled:text-purple-1000 disabled:shadow-none md:w-2/6 md:mt-8 hover:shadow-md shadow-sm hover:bg-red-800 hover:text-purple-200" type="submit" :disabled="plug != null">
+		<button class="w-full py-3 bg-red-1000 border-none text-gray-200 mt-4 rounded-lg md:shadow-sm disabled:bg-gray-400 disabled:text-purple-1000 disabled:shadow-none md:w-2/6 md:mt-8 hover:shadow-md shadow-sm hover:bg-red-800 hover:text-purple-200" type="submit" :disabled="plug != null">
 			Create plug profile
 		</button>
 	</form>

@@ -17,7 +17,10 @@ class PlugController extends Controller
                 if ($plug == null) {
                     $plug = ( new \App\Actions\Plug\CreatePlug() )( $request );
                 }
-                return redirect()->intended(route('user.plug.edit', absolute: false));
+                return redirect()
+                        ->intended(route('user.plug.edit', absolute: false))
+                        ->with('success', 'Plug form succesfully completed');
+                        
     		} catch (\Exception $e) {
     			return back()->with('error', $e->getMessage());
     		}

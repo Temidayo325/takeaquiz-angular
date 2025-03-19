@@ -34,12 +34,12 @@
 	}'>
 		<section class="mt-2 grid gap-10 md:px-10">
             <div class="md:mt-10">
-                <h2 class="font-bold font-body text-lg">Request for account upgrade to promoter</h2>
+                <h2 class="font-bold font-body text-lg">Request for account upgrade to organizer</h2>
                 <p>The promoter account provides with more controls and features, allowing you to upload your upcoming events, create tickets, and track attendance. Fill the form below to request for a promoter account </p>
             </div>
             <div>
                 <form action="" method="post" x-show='notification == null'>
-                    <label for="summary" class="font-bold block">Provide a brief introduction about yourself and the kind of event you'll like to host </label>
+                    <label for="summary" class="font-bold block">Provide a brief introduction about yourself and the kind of event you'll like to host / reference to your last events </label>
                     <textarea name="summary" id="summary" required="required" minlength="10" maxlength="2000" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-2/4 mt-2 invalid:border invalid:border-red-600 h-48 md:h-56 text-sm leading-7 " x-model="summary" ></textarea>
 
                     <button type="submit" @click.prevent="submitForm()" class="block px-10 py-3 bg-red-1000 text-gray-200 mt-3">Make request</button>

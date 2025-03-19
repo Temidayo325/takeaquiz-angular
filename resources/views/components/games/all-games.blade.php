@@ -94,12 +94,12 @@
 		<div>
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-2 gap-y-10 md:grid-cols-5 md:gap-10">
+					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-2 gap-y-10 md:grid-cols-4 md:gap-10">
 						<template x-for="game in games.data">
 							<button class="py-6 hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-400 w-full bg-yellow-300 text-gray-950 tracking-widest cursor-pointer grid gap-4 justify-center" title="Click to view more information" @click="viewGameDetails(game)">
-								<img src="{{ asset('images/cruise.png') }}" alt="Image depicting the game" class="w-16 md:w-20 md:w-20 h-16 mx-auto">
+								<img src="{{ asset('images/cruisehq-frontcard.png') }}" alt="Image depicting the game" class="w-20 md:w-20 h-36 md:h-48 mx-auto">
 								<div class="px-2 py-1 text-md">
-									<h2 class="font-bold font-display text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2>
+									<!-- <h2 class="font-bold font-display text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2> -->
 									{{-- <p>
 										<span>Ideal setting:<span class="font-bold" x-text="game.ideal_setting"></span></span>
 										<span>Max:<span class="font-bold" x-text="game.maximum_player"></span></span>
