@@ -12,12 +12,17 @@
 	<!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+	<style>
+		header{
+			z-index: 1000 !important;
+		}
+	</style>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+	
 </head>
 <body>
-	<header class="shadow-sm">
+	<header class="shadow-sm z-50">
 		<div class="sticky top-0 flex justify-between items-center py-3 px-4 md:py-7 md:px-12 bg-white z-80">
 			<a href="/" class="flex justify-start items-center gap-2 ">
                 <x-application-logo class="fill-current text-purple-1000 " />

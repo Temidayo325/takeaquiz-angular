@@ -1,5 +1,16 @@
 @props(['games', 'tags'])
-<div 	class="text-purple-1000 px-4 md:px-12" 
+<style>
+		.transform-style-preserve-3d {
+		transform-style: preserve-3d;
+		}
+		.backface-hidden {
+		backface-visibility: hidden;
+		}
+		.rotate-y-180 {
+		transform: rotateY(180deg);
+		}
+	</style>
+<div 	class="text-purple-1000 px-4 md:px-10 " 
 			x-data='{ games: @json($games),
 					tags: @json($tags),
 					searchterm: "",
@@ -11,7 +22,7 @@
 					{
 						this.toast("Fetching more games ...", "blue")
 						try {
-			                axios.post("/admin/dashboard/games/paginate", {cursor: cursor})
+			                axios.post("/games/paginate", {cursor: cursor})
 			                .then(response => {
 			                	this.toast("Games retrieved successfully", "green")
 			                	this.games = response.data
@@ -26,7 +37,11 @@
 					searchTerm()
 					{
 						this.toast("Searching for games ... ", "blue")
-						axios.post("/admin/dashboard/games/search", {searchTerm: this.searchterm})
+						if(this.searchterm.length < 3)
+						{
+							return false
+						}
+						axios.post("/games/search", {searchTerm: this.searchterm})
 						.then( ( response ) => {
 							if(!response.error)
 							{
@@ -83,29 +98,43 @@
 				</div>
 			</div>
 			<h1 class="font-bold font-body text-md mt-4 md:hidden" x-show="games.data.length > 0">View available games</h1>
-			<div class="mt-2 md:mt-6" x-show="games.data.length > 0">
-				<form action="" method="" class="flex justify-start " @submit.prevent="searchTerm()">
+			<div class="mt-2 md:mt-6"  x-show="games.data.length > 0">
+				<form action="" method="" class="flex justify-end " @submit.prevent="searchTerm()">
 					@csrf
 					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="Enter a game related keyword, name, category, setting, etc" @input.debounce.500ms="searchTerm">
 					{{-- <button class="bg-gray-950 text-gray-200 px-6 py-2">Search</button> --}}
 				</form>
 			</div>
 		</div>
-		<div>
+		<div class="mt-5 md:mt-10">
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="w-full pb-10 py-10 grid grid-cols-2 gap-x-2 gap-y-10 md:grid-cols-4 md:gap-10">
-						<template x-for="game in games.data">
-							<button class="py-6 hover:shadow-xl hover:border-2 hover:border-gray-300 hover:transition-border game-card-ui shadow border border-gray-400 w-full bg-yellow-300 text-gray-950 tracking-widest cursor-pointer grid gap-4 justify-center" title="Click to view more information" @click="viewGameDetails(game)">
-								<img src="{{ asset('images/cruisehq-frontcard.png') }}" alt="Image depicting the game" class="w-20 md:w-20 h-36 md:h-48 mx-auto">
-								<div class="px-2 py-1 text-md">
-									<!-- <h2 class="font-bold font-display text-center md:text-lg md:py-1" x-text="game.name">Name of the game</h2> -->
-									{{-- <p>
-										<span>Ideal setting:<span class="font-bold" x-text="game.ideal_setting"></span></span>
-										<span>Max:<span class="font-bold" x-text="game.maximum_player"></span></span>
-									</p> --}}
+					<div class="grid justify-start grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full max-w-7xl mx-auto">
+						<!-- Loop through cards -->
+						<template x-for="card in games.data" :key="card.id">
+						<div
+							x-data="{ isFlipped: false }"
+							@mouseenter="isFlipped = true"
+							@mouseleave="isFlipped = false"
+							class="relative w-full h-96 cursor-pointer"
+						>
+							<!-- Card Container -->
+							<div
+							:class="{ 'transform rotate-y-180': isFlipped }"
+							class="z-20 absolute w-full h-full transition-transform duration-500 transform-style-preserve-3d"
+							@click="viewGameDetails(card)"
+							>
+								<!-- Front Side -->
+								<div class="absolute w-full h-full rounded-lg shadow-sm flex items-center justify-center backface-hidden">
+									<img src="{{ asset('images/cruisehq-frontcard.png') }}" alt="Image depicting the game" class="w-full h-full">
 								</div>
-							</button>
+								<!-- Back Side -->
+								<div class="absolute w-full h-full rounded-lg shadow-sm flex items-center justify-center backface-hidden transform rotate-y-180 text-purple-1000 ">
+									<img src="{{ asset('images/cruise-back-gray.png') }}" alt="Image depicting the game" class="w-full h-full">
+									<h2 x-text="card.name" class="absolute top-[50%] px-5 text-center font-bold"></h2>
+								</div>
+							</div>
+						</div>
 						</template>
 					</div>
 					<div class="flex justify-end gap-10 my-1 pb-20">

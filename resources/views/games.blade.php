@@ -20,7 +20,7 @@
 </head>
 <body>
 	<main class="bg-gray-100 pb-0">
-		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center">
+		<header class="py-3 px-4 bg-white shadow-sm md:px-12 flex justify-between items-center">
 			<a href="/" class="flex justify-start items-center gap-2 py-2">
                 <x-application-logo />
             </a>

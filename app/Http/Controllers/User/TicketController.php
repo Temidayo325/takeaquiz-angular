@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sale;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BoughtTicket;
 
 class TicketController extends Controller
 {
@@ -53,7 +55,7 @@ class TicketController extends Controller
 
     public function initiatePayment(Request $request)
     {
-        $ticket = \App\Models\Ticket::find($request->ticket_id);
+        $ticket = \App\Models\Ticket::with('event')->where('id',$request->ticket_id)->first();
         try {
             $saleExists = \App\Models\Sale::where('ticket_id', $request->ticket_id)->where('user_id', auth()->id())->first();
             if ($saleExists != null) {
@@ -71,11 +73,13 @@ class TicketController extends Controller
                     throw new \Exception("Insufficient wallet balance, top up your wallet to continue", 1);
                 }
                 event(new \App\Events\TicketSold($ticket, auth()->user()));
+                Mail::to($ticket)->send(new BoughtTicket($ticket, $ticket->event, auth()->user()));
             }
             
             if( $ticket->access_type == "Free" )
             {
                 event(new \App\Events\TicketSold($ticket, auth()->user()));
+                Mail::to($ticket)->send(new BoughtTicket($ticket, $ticket->event, auth()->user()));
             }
 
             return response()->json([

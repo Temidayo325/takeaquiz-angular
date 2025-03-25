@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Client\PendingRequest;
 
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -46,5 +47,17 @@ class AppServiceProvider extends ServiceProvider
                 ->baseUrl(url: config('paystack.url.base_url'))
                 // ->withToken(token: 'Bearer '.config('paystack.keys.secret')),
         );
+
+        Http::macro('mailjet', function ($url, $data = []) {
+            $publicKey = config('mailjet.keys.public');
+            $secretKey = config('mailjet.keys.secret');
+        
+            return Http::retry(3, 200, function ($exception) {
+                // return $exception instanceof RequestException;
+            })->withBasicAuth($publicKey, $secretKey)
+              ->withHeaders([
+                  'Content-Type' => 'application/json',
+              ])->post($url, $data);
+        });
     }
 }

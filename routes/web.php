@@ -24,7 +24,7 @@ Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage'])
 Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
 
 // ========== Game routes goes here ======== \\
-Route::get('/games', [\App\Http\Controllers\GameController::class, 'index'])->name('admin.games.index');
+Route::get('/games', [\App\Http\Controllers\GameController::class, 'index']);
 Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
 Route::post('/games/search', [\App\Http\Controllers\GameController::class, 'search']);
 Route::post('/games/search/tag', [\App\Http\Controllers\GameController::class, 'searchByTags']);
@@ -46,6 +46,18 @@ Route::get('/shared-event/{ticketName}', [\App\Http\Controllers\ShareEventContro
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 // 
+Route::get('/test-email', function () {
+    $ticket = \App\Models\Ticket::first();
+    $event = \App\Models\Event::with('user')->first();
+    $user = \App\Models\User::first();
+
+    return new \App\Mail\UserBoughtTicket($ticket, $event, $user);
+});
+Route::get('mail', function () {
+    $markdown = new \Illuminate\Mail\Markdown(view(), config('mail.markdown'));
+
+    return $markdown->render('mails.tickets.eticket');
+});
 // ========== tools routes goes here ======== \\
 
 Route::prefix('tools')->group(function () {
