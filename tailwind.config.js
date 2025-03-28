@@ -31,6 +31,7 @@ export default {
                 'sidebar': "url('../../public/images/sidebar.jpg')",
                 'admin-sidebar': "url('../../public/images/admin-sidebar.jpg')",
                 'gamebar': "url('../../public/images/game.jpg')",
+                'ticket-bg': "url('../../public/images/cruise-back-gray.png')",
             },
             colors: {
                 purple: {

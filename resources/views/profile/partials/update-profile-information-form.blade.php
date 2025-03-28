@@ -1,6 +1,6 @@
 <section x-data='{init(){ localStorage.setItem("user", JSON.stringify(this.user))}}'>
     <header>
-       {{--  <h2 class="text-lg font-medium text-purple-1000 font-bold dark:text-gray-100">
+       {{--  <h2 class="text-lg font-medium text-purple-1000 dark:text-gray-100">
             Profile Information
         </h2> --}}
         <h1 class="font-bold text-purple-1000 text-lg">Profile Information</h1>

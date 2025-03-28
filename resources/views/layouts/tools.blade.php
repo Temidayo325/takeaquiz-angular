@@ -12,6 +12,8 @@
 	<!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<style>
 		header{
 			z-index: 1000 !important;
@@ -55,7 +57,7 @@
 	            </ul>
 		</div>
 	</header>
-	<main class="bg-gray-200 px-4 md:px-10 py-6">
+	<main class="bg-gray-100 px-4 md:px-10 py-6">
 		@yield('content')
 	</main>
 	<x-footer></x-footer>

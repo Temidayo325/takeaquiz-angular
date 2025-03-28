@@ -24,26 +24,22 @@ class Event extends Model
         'flier',
         'promotional_copy',
     	'social_media_handle',
+        'ticket_information',
         'duration',
         'audience',
         'dress_code',
-        'contact_information'
+        'contact_information',
+        'coordinate'
     ];
 
     protected $casts = [
         'tags' => 'array'
     ];
-    protected $appends = ['links'];
-    
-    public function getLinksAttribute()
+    protected $appends = ['slug'];
+
+    public function getSlugAttribute()
     {
-        $url = secure_url('/event/') . '/'.\Illuminate\Support\Str::slug($this->name);
-        return \Share::page($url, "Here's my invitation from me to you")    
-                ->facebook()
-                ->twitter()
-                ->whatsapp()
-                ->linkedin()
-                ->getRawLinks();
+        return \Illuminate\Support\Str::slug($this->name);
     }
 
     public function user()

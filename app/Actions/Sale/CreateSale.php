@@ -9,10 +9,10 @@ use App\Models\Sale;
  */
 class CreateSale
 {
-	public function __invoke(Model $ticket, string $status )
+	public function __invoke(Model $ticket, string $status, ?int $guest_id = null)
 	{
 		$sale = Sale::create([
-			'user_id' => auth()->id(),
+			'user_id' => ( auth()->id() != null ) ? auth()->id() : $guest_id,
 	    	'event_id' => $ticket->event_id,
 	    	'ticket_id' => $ticket->id,
 	    	'amount_paid' => ( $ticket->access_type == 'Free' ) ? 0 : $ticket->price,

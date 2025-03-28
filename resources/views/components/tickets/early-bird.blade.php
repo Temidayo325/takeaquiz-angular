@@ -1,8 +1,22 @@
-<section 	class="grid gap-6 text-purple-1000" 
+@props(['ticket'])
+<style>
+	#ticket-container{
+			background-image: url('https://cruisehq.fun/images/cruise-back-gray.png'); 
+			background-repeat: no-repeat; 
+			background-size: 100% 100% ; 
+			background-origin: center; 
+			position: relative;
+			padding: 65px 35px;
+			text-align: left;
+			margin: 0 auto;
+			min-width: 270px;
+			max-width: 300px;
+		}
+</style>
+<section class="grid gap-6 text-purple-1000 justify-start md:justify-start md:grid-cols-2" 
 			x-data='{ event: {
 				id: 13, user_id: 1, name: "Buju Phenomena gathering", state: "Lagos", starting_time: "04:11:24", event_date: "2024-11-25"}, 
-				user: JSON.parse(localStorage.getItem("user")),
-				ticket: JSON.parse(sessionStorage.getItem("ticket")),
+				ticket: @json($ticket),
 				init()
 				{
 					
@@ -11,22 +25,17 @@
 			x-modelable="event"
 			x-model="chosenEvent"
 >
-	{{-- <div>
-		<h2 class="text-center font-bold ">Early bird ticket (at point of purchase)</h2>
-		<div>
-			
-		</div>
-	</div> --}}
-	<div {{ $attributes->merge(['class' => 'bg-white px-4 py-10 pb-5 rounded mt-2 text-center border border-gray-200 shadow-md hover:shadow-lg font-body']) }} >
-		<div>
-			<div class="border-b border-black">
+	<div id="ticket-container" class='rounded-3xl mt-2 text-center font-body' >
+		<div class="">
+			<div class="border-b border-black text-center">
+				<p x-text="ticket.name"></p>
 				<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>
 				<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
 			</div>
 			<div class="grid grid-cols-2 gap-6 text-left mt-5">
 				<div class="pb-3 border-b border-gray-300">
 					<p class="text-gray-600 text-sm">Ticket owner</p>
-					<p class="font-bold text-purple-1000" x-text="user.nickname">CruiseHq</p>
+					<p class="font-bold text-purple-1000">Your name</p>
 				</div>
 				<div class="pb-3 border-b border-gray-300">
 					<p class="text-gray-600 text-sm">Organizer</p>
@@ -57,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="mt-12">
+	<div class="mt-6">
 		<h2 class="font-bold text-left py-2 text-md">Perks of <span x-text="ticket.name"></span> ticket</h2>
 		<p x-text="ticket.type_copy" class="text-left text-gray-950 text-sm tracking-wider leading-8"></p>
 	</div>

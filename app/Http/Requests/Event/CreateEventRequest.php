@@ -34,7 +34,9 @@ class CreateEventRequest extends FormRequest
             'duration' => ['required', 'string', 'bail'],
             'audience' => ['nullable', 'string', 'bail'],
             'dress_code' => ['nullable', 'string', 'bail'],
-            'contact_information' => ['required', 'string', 'bail']
+            'contact_information' => ['required', 'string', 'bail'],
+            'ticket_information' => ['nullable', 'string'],
+            'coordinate' => ['nullable', 'string']
         ];
     }
 }

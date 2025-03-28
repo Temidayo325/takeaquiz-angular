@@ -25,7 +25,7 @@ class CreateTicketRequest extends FormRequest
             'event_id' => ['required', 'exists:events,id', 'integer', 'bail'],
             'price' => ['required', 'integer', 'bail'],
             'total_seat' => ['required', 'integer', 'bail'],
-            'ticket_type' => ['required','string', 'bail'],
+            // 'ticket_type' => ['required','string', 'bail'],
             'type_copy' => ['required', 'string', 'bail'],
             'access_type' => ['required', 'in:Purchase,Gift,Free', 'string', 'bail']
         ];

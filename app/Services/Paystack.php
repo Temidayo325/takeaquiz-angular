@@ -8,6 +8,7 @@ use App\DTO\Paystack\GeneratedAccount;
 use App\DTO\Paystack\CreateCustomer;
 use App\DTO\Paystack\CheckoutUrl;
 use App\Models\User;
+use App\Models\Guest;
 
 class Paystack extends PaymentProvider
 {
@@ -57,7 +58,7 @@ class Paystack extends PaymentProvider
         }
     }
 
-    public function GeneratePaymentUrl(User $user, int $amount): CheckoutUrl
+    public function GeneratePaymentUrl(User|Guest $user, int $amount, ?string $callback_url = null): CheckoutUrl
     {
         try {
             $dateTime = new \DateTime();
@@ -66,7 +67,8 @@ class Paystack extends PaymentProvider
                 'email' => $user->email,
                 'amount' => $calculated_amount,
                 "currency" =>  "NGN",
-                'reference' => $dateTime->getTimestamp()
+                'reference' => $dateTime->getTimestamp(),
+                'callback_url' => $callback_url
             ]);
             $response = $request->object();
             if ( $request->failed() || !$response->status) {

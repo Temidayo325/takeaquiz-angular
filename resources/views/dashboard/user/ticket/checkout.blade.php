@@ -57,24 +57,7 @@
 	}'>
 		<h1 class="font-bold text-lg py-4">Complete your ticket transaction</h1>
 		<div>
-			<template x-if="desiredTicket.type.length == 10">
-    			<div>
-    				{{-- <h2>This is early bird page</h2> --}}
-    				<x-tickets.early-bird class="w-64 md:w-96 mx-auto" :ticket="$ticket"></x-tickets.early-bird>
-    			</div>
-    		</template>		
-    		<template x-if="desiredTicket.type.length == 17">
-    			<div>
-    				<x-tickets.ga class="w-64 md:w-96 mx-auto" :ticket="$ticket"></x-tickets.ga>
-    				{{-- <h2>This is General admission page</h2> --}}
-    			</div>
-    		</template>
-    		<template x-if="desiredTicket.type.length == 3">
-    			<div>
-    				<x-tickets.vip class="w-64 md:w-96 mx-auto" :ticket="$ticket"></x-tickets.vip>
-    				{{-- <h2>This is VIP page</h2> --}}
-    			</div>
-    		</template>	
+    		<x-tickets.early-bird class="w-64 md:w-96 mx-auto" :ticket="$ticket"></x-tickets.early-bird>
 		</div>
         
        

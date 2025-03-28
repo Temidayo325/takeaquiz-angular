@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('starting_time'); 
             $table->string('state', 30);
             $table->string('coordinate', 150)->nullable()->default(null);
+            $table->string('ticket_information')->nullable();
             $table->text('location');
             $table->text('tags');
             $table->set('status', ['Draft', 'Published'])->default('Draft');

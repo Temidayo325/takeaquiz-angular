@@ -1,7 +1,7 @@
 <form x-data='{		spinner: false,
 					errorMessage: null,
 					createTicketButtonText: "Save edit",
-					data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "" }, 
+					data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", ticket_information: "" }, 
 					submitForm(){
 						$refs.createTicketButton.setAttribute("disabled", "")
 						this.spinner = true
@@ -13,7 +13,7 @@
 						.then( (response) => {
 							if(!response.data.error)
 							{
-								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", "social_media_handle": "", "event_type" : "", "duration": "", "audience": "", "dress_code": "" }
+								this.data = { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", "social_media_handle": "", "event_type" : "", "duration": "", "audience": "", "dress_code": "", "ticket_information": "" }
 								this.toast("Event created Succesfully", "#fff", "green")
 								location.href = "/promoter/dashboard/tickets/create"
 							}
@@ -75,7 +75,7 @@
 					<div class="mt-4">
 						<label for="event_date" class="font-bold text-sm block mb-1">Date of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1"></p>
-						<input type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<input type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" placeholder="dd/mm/yyyy">
 					</div>
 					<div class="mt-4">
 						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
@@ -89,28 +89,19 @@
 					</div>
 
 					<div class="mt-4">
-						<label for="location" class="font-bold text-sm block mb-1">Location <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="location" class="font-bold text-sm block mb-1">Venue <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Provide a succint and clear direction to the venue using popular landmarks for easy comprehension. Example: XYZ Hall, near City Mall, opposite ABC Restaurant</p>
 						<textarea name="location" id="location" required x-model="data.location" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
+
 					<div class="mt-4">
-						<label for="promotional_copy" class="font-bold text-sm">Promotional copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from the event including performing artists. Example: Get ready for an unforgettable night featuring DJ Spinall, Alcohol, and vibes that’ll keep you on your feet!</p>
-						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
-					</div>
-					<div class="mt-4">
-						<label for="tags" class="font-bold text-sm">Event tags <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<p class="text-sm text-greyish py-1">Add some tags to help in search like you'll do in twitter, separate using a comma.</p>
-						<input type="text" name="tags" id="tags" required x-model="data.tags" placeholder="blockparty, party, shayo, badman, vibesAndChill" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full placeholder:text-gray-200">
-					</div>
-					<div class="mt-4">
-						<label for="flier" class="font-bold text-sm block mb-1">Event flier <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<p class="text-sm text-greyish py-1">Attach or upload an image file of the event flier.</p>
-						<input type="file" name="flier" id="flier" required x-ref="flier" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<label for="location" class="font-bold text-sm block mb-1">Ticket information <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Include ticket details such as pricing, where to purchase tickets, or if it’s a free event. Example: ₦5,000 early bird, ₦7,000 at the gate.</p>
+						<textarea name="ticket_information" id="ticket_information" required x-model="data.ticket_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 
 					<div class="mt-4">
-						<label for="audience" class="font-bold text-sm block mb-1">Audience <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="audience" class="font-bold text-sm block mb-1">Audience </label>
 						<p class="text-sm text-greyish py-1">Specify the audience the event is geared towards (e.g., All Ages, Adults Only, Families). Example: Adults Only.</p>
 						<select name="audience" id="audience" required="" x-model="data.audience" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 							<option value="All ages">All ages</option>
@@ -126,10 +117,35 @@
 						<input type="text" name="dress_code" id="dress_code" required x-model="data.dress_code" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
+
+					<div class="mt-4">
+						<label for="promotional_copy" class="font-bold text-sm">Promotional copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from the event including performing artists. Example: Get ready for an unforgettable night featuring DJ Spinall, Alcohol, and vibes that’ll keep you on your feet!</p>
+						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
+					</div>
+					<div class="mt-4">
+						<label for="tags" class="font-bold text-sm">Event tags <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Add some tags to help in search like you'll do in twitter, separate using a comma.</p>
+						<input type="text" name="tags" id="tags" required x-model="data.tags" placeholder="blockparty, party, shayo, badman, vibesAndChill" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full placeholder:text-gray-200">
+					</div>
+
 					<div class="mt-4">
 						<label for="contact_information" class="font-bold text-sm block mb-1">Contact Information <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<p class="text-sm text-greyish py-1">Provide contact details for inquiries, support, or assistance, separating each phone number or social media link with a comma (,). Example: info@midnightvibes.com , +234 123 456 789, https:\\www.x.com/myeventpage</p>
+						<p class="text-sm text-greyish py-1">Provide contact details for inquiries/support and/or social media links if availableseparating each with a comma (,). It's advised to add at least one. Example: info@midnightvibes.com, +234 123 456 789, https://www.x.com/myeventpage</p>
 						<input type="text" name="contact_information" id="contact_information" required x-model="data.contact_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+
+					<div class="mt-4">
+						<label for="flier" class="font-bold text-sm block mb-1">Event flier <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Attach or upload an image file of the event flier.</p>
+						<input type="file" name="flier" id="flier" required x-ref="flier" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+					</div>
+					
+					<div class="mt-4">
+						<label for="contact_information" class="font-bold text-sm block mb-1">Coordinate </label>
+						<p class="text-sm text-greyish py-1">Provide GPS coordinates or a Google Maps link for easy navigation.
+						Example: Google Maps Link</p>
+						<input type="text" name="coordinate" id="coordinate" required x-model="data.coordinate" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<button class="w-full py-3 bg-red-1000 border-none text-gray-200 mt-4 rounded-lg shadow-md md:shadow-sm disabled:bg-gray-400 disabled:text-purple-1000 disabled:shadow-none md:w-2/6 md:mx-auto" type="submit" @click.prevent="submitForm()" x-ref="createTicketButton">

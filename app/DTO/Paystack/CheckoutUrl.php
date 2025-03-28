@@ -8,7 +8,8 @@ final class CheckoutUrl
         public readonly string $checkoutUrl,
         public readonly string $paymentReference,
         public readonly string $access_code,
-        public readonly \App\Models\User $user
+        public readonly \App\Models\User|\App\Models\Guest $user,
+        public readonly ?string $callback_url = null
     )
     {}
 }

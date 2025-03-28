@@ -15,22 +15,16 @@ class Ticket extends Model
     	'total_seat',
     	'available_seat',
         'name',
-    	'type',
+    	// 'type',
     	'type_copy',
         'access_type'
     ];
 
-    protected $appends = ['links'];
+    protected $appends = ['slug'];
 
-    public function getLinksAttribute()
+    public function getSlugAttribute()
     {
-        $url = secure_url('/shared-ticket/') . '/'.$this->name;
-        return \Share::page($url, "Get your ticket")    
-                ->facebook()
-                ->twitter()
-                ->whatsapp()
-                ->linkedin()
-                ->getRawLinks();
+        return \Illuminate\Support\Str::slug($this->name);
     }
 
     public function event()

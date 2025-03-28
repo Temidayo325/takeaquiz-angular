@@ -23,6 +23,11 @@ use App\Http\Controllers\Promoter\TicketController;
 Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage']);
 Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
 
+Route::post('/tickets/checkout', [\App\Http\Controllers\User\TicketController::class, 'toCheckout']);
+Route::get('/ticket/checkout/{ticket_name}', [\App\Http\Controllers\User\TicketController::class, 'Checkout']);
+Route::post('/ticket/initiate-payment', [\App\Http\Controllers\User\TicketController::class, 'guestPayment']);
+Route::get('/confirm-ticket-purchase', [\App\Http\Controllers\User\TicketController::class, 'confirmGuestPayment']);
+
 // ========== Game routes goes here ======== \\
 Route::get('/games', [\App\Http\Controllers\GameController::class, 'index']);
 Route::post('/games/paginate', [\App\Http\Controllers\GameController::class, 'paginateGames']);
@@ -39,6 +44,7 @@ Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'sh
 
 // SharedEvent Routes goes here
 Route::get('/event/{eventSlug}', [\App\Http\Controllers\ShareEventController::class, 'getSharedEvent']);   
+Route::get('/ticket/{ticketSlug}', [\App\Http\Controllers\ShareEventController::class, 'getSharedTicket']);   
 Route::get('/shared-event/{ticketName}', [\App\Http\Controllers\ShareEventController::class, 'getSharedTicket']);   
 
 
@@ -53,11 +59,11 @@ Route::get('/test-email', function () {
 
     return new \App\Mail\UserBoughtTicket($ticket, $event, $user);
 });
-Route::get('mail', function () {
-    $markdown = new \Illuminate\Mail\Markdown(view(), config('mail.markdown'));
+// Route::get('mail', function () {
+//     $markdown = new \Illuminate\Mail\Markdown(view(), config('mail.markdown'));
 
-    return $markdown->render('mails.tickets.eticket');
-});
+//     return $markdown->render('mails.tickets.eticket');
+// });
 // ========== tools routes goes here ======== \\
 
 Route::prefix('tools')->group(function () {
@@ -175,7 +181,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/tickets', [\App\Http\Controllers\User\TicketController::class, 'index'])->name('user.dashboard.tickets');
     Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);
     Route::post('/tickets/checkout', [\App\Http\Controllers\User\TicketController::class, 'toCheckout']);
-    Route::get('/ticket/checkout', [\App\Http\Controllers\User\TicketController::class, 'Checkout'])->name('user.dashboard.ticket.checkout');
+    Route::get('/ticket/checkout/{ticket_name}', [\App\Http\Controllers\User\TicketController::class, 'Checkout'])->name('user.dashboard.ticket.checkout');
     Route::post('/ticket/initiate-payment', [\App\Http\Controllers\User\TicketController::class, 'initiatePayment'])->name('user.dashboard.ticket.checkout');
     // ========== Ticket routes goes here ======== \\
     
