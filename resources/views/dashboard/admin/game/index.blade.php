@@ -89,14 +89,14 @@
 			</div>
 		</div>
 		<template x-if="games.data.length > 0 " class="">
-			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-10 w-full max-w-6xl mx-auto my-20">
 				<!-- Loop through cards -->
 				<template x-for="card in games.data" :key="card.id">
 				<div
 					x-data="{ isFlipped: false }"
 					@mouseenter="isFlipped = true"
 					@mouseleave="isFlipped = false"
-					class="relative w-full h-96 cursor-pointer"
+					class="relative w-full h-64 cursor-pointer"
 				>
 					<!-- Card Container -->
 					<div
@@ -111,7 +111,7 @@
 						<!-- Back Side -->
 						<div class="absolute w-full h-full rounded-lg shadow-sm flex items-center justify-center backface-hidden transform rotate-y-180 text-purple-1000 ">
 							<img src="{{ asset('images/cruise-back-gray.png') }}" alt="Image depicting the game" class="w-full h-full">
-							<h2 x-text="card.name" class="absolute z-20 top-2 left-3 px-5 text-center font-bold"></h2>
+							<h2 x-text="card.name" class="absolute z-20 top-45 left-0 px-5 text-center font-bold"></h2>
 						</div>
 					</div>
 				</div>

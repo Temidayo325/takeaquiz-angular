@@ -8,7 +8,7 @@ use App\Actions\Event\EventTags;
 /**
  * 
  */
-class CreateGame extends EventTags
+class CreateGame
 {
 	
 	function __invoke($gameToBeCreated)
@@ -29,10 +29,6 @@ class CreateGame extends EventTags
 	    	'ideal_setting' => $gameToBeCreated->ideal_setting, 
 	    	'tips' => $gameToBeCreated->tips
 		]);
-		// $tag = new EventTags();
-		// $tag->add($gameToBeCreated->tags, $game);
-		// return $game;
-		// 
 	}
 
 	private function turnStringTagsToArray(string $tags):Array

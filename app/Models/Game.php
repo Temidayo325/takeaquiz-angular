@@ -21,4 +21,9 @@ class Game extends Model
     	'materials' => 'array',
     	'stepByStep' => 'array'
     ];
+
+    public function ideas()
+    {
+        return $this->hasMany(GameIdea::class)->orderBy('created_at', 'desc');
+    }
 }

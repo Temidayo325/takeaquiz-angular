@@ -6,7 +6,7 @@ namespace App\Actions\Event;
 /**
  * 
  */
-class CreateEvent extends EventTags
+class CreateEvent
 {
 	
 	function __invoke(object $eventToBeCreated)
@@ -27,8 +27,6 @@ class CreateEvent extends EventTags
 	        'contact_information' => $eventToBeCreated->contact_information,
 	    	'promotional_copy' => $eventToBeCreated->promotional_copy
 		]);
-		// $tag = new EventTags();
-		// $tag->add($eventToBeCreated->tags, $event);
 		return $event;
 	}
 

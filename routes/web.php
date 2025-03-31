@@ -157,6 +157,10 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::post('/games/search', [\App\Http\Controllers\Admin\GameController::class, 'search']);
     Route::get('/games/create', [\App\Http\Controllers\Admin\GameController::class, 'create']);
     Route::post('/games/create', [\App\Http\Controllers\Admin\GameController::class, 'store']);
+
+    Route::get('/games/ideas', [\App\Http\Controllers\Admin\GameIdeaController::class, 'index']);
+    Route::post('/games/idea/create', [\App\Http\Controllers\Admin\GameIdeaController::class, 'store']);
+    Route::post('/games/idea/delete', [\App\Http\Controllers\Admin\GameIdeaController::class, 'delete']);
     // ========== Event routes goes here ======== \\
 });
 

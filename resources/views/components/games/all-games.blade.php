@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<h1 class="font-bold font-body text-md mt-4 md:hidden" x-show="games.data.length > 0">View available games</h1>
-			<div class="mt-2 md:mt-6"  x-show="games.data.length > 0">
+			<div class="mt-2 md:mt-6 mb-6"  x-show="games.data.length > 0">
 				<form action="" method="" class="flex justify-end " @submit.prevent="searchTerm()">
 					@csrf
 					<input type="text" class="w-full text-sm px2 py-1 md:py-2 focus:outline-0 focus:border-lightpurple focus:ring-0 md:w-2/6" x-model="searchterm" placeholder="Enter a game related keyword, name, category, setting, etc" @input.debounce.500ms="searchTerm">
@@ -106,17 +106,17 @@
 				</form>
 			</div>
 		</div>
-		<div class="mt-5 md:mt-10">
+		<div class="mt-5 md:py-20">
 			<template x-if="games.data.length > 0 ">
 				<div >
-					<div class="grid justify-start grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 w-full max-w-7xl mx-auto">
+					<div class="grid justify-start grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-8 md:gap-10 w-full max-w-7xl">
 						<!-- Loop through cards -->
 						<template x-for="card in games.data" :key="card.id">
 						<div
 							x-data="{ isFlipped: false }"
 							@mouseenter="isFlipped = true"
 							@mouseleave="isFlipped = false"
-							class="relative w-full h-96 cursor-pointer"
+							class="relative w-full h-64 cursor-pointer"
 						>
 							<!-- Card Container -->
 							<div
