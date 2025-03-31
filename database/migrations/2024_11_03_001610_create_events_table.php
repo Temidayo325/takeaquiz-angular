@@ -28,8 +28,8 @@ return new class extends Migration
             $table->string('flier')->nullable();
             $table->boolean('isPremium')->default(false);
             $table->text('promotional_copy');
-            $table->string('duration');
-            $table->string('audience');
+            $table->string('duration')->nullable();
+            $table->string('audience')->nullable();
             $table->string('dress_code')->nullable()->default('Drip nice');
             $table->text('contact_information');
             $table->timestamps();

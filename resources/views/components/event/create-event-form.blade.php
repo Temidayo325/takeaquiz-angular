@@ -42,7 +42,7 @@
 				}' 
 				action="" 
 				method="post" 
-				class="bg-white mx-4 shadow-lg rounded-lg border-2 border-gray-300 p-3 mx-auto mt-3 overflow-hidden text-purple-1000 grid gap-3 pb-6 md:w-3/6 md:mx-auto md:px-12" x-ref="form">
+				class="bg-white mx-4 shadow-lg rounded-lg border-2 border-gray-300 p-3  mt-3 overflow-hidden text-purple-1000 grid gap-3 pb-6 md:w-3/6 md:mx-auto md:px-12" x-ref="form">
 	        		<h2 class="font-display font-normal tracking-wider text-center text-purple-1000 text-lg py-3">Create a new event</h2>
 					@csrf
 					<template x-if="errorMessage != null">
@@ -83,9 +83,9 @@
 					</div>
 
 					<div class="mt-4">
-						<label for="duration" class="font-bold text-sm block mb-1">Duration of event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="duration" class="font-bold text-sm block mb-1">Duration of event </label>
 						<p class="text-sm text-greyish py-1">Add the estimated duration of the event or its end time. Example: 19:00 – 01:00</p>
-						<input type="text" name="duration" id="duration" required x-model="data.duration" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
+						<input type="text" name="duration" id="duration" x-model="data.duration" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 
 					<div class="mt-4">
@@ -95,9 +95,9 @@
 					</div>
 
 					<div class="mt-4">
-						<label for="location" class="font-bold text-sm block mb-1">Ticket information <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="location" class="font-bold text-sm block mb-1">Ticket information </label>
 						<p class="text-sm text-greyish py-1">Include ticket details such as pricing, where to purchase tickets, or if it’s a free event. Example: ₦5,000 early bird, ₦7,000 at the gate.</p>
-						<textarea name="ticket_information" id="ticket_information" required x-model="data.ticket_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
+						<textarea name="ticket_information" id="ticket_information" x-model="data.ticket_information" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 
 					<div class="mt-4">
@@ -120,7 +120,7 @@
 
 					<div class="mt-4">
 						<label for="promotional_copy" class="font-bold text-sm">Promotional copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<p class="text-sm text-greyish py-1">Hint: Give a quick gist of what to expect from the event including performing artists. Example: Get ready for an unforgettable night featuring DJ Spinall, Alcohol, and vibes that’ll keep you on your feet!</p>
+						<p class="text-sm text-greyish py-1">A short engaging description used to market your event and attract attendees. Provide a quick gist of what to expect.</p>
 						<textarea name="promotional_copy" id="promotional_copy" maxlength="2000" x-model="data.promotional_copy" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full h-48 text-sm leading-7 "></textarea>
 					</div>
 					<div class="mt-4">

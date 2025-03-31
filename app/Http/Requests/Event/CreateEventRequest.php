@@ -31,12 +31,11 @@ class CreateEventRequest extends FormRequest
             'flier' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048'],
             'promotional_copy' => ['required', 'string', 'bail'],
             'id' => ['integer', 'min:1', 'nullable'],
-            'duration' => ['required', 'string', 'bail'],
+            'duration' => ['nullable', 'string', 'bail'],
             'audience' => ['nullable', 'string', 'bail'],
             'dress_code' => ['nullable', 'string', 'bail'],
             'contact_information' => ['required', 'string', 'bail'],
-            'ticket_information' => ['nullable', 'string'],
-            'coordinate' => ['nullable', 'string']
+            'ticket_information' => ['nullable', 'string']
         ];
     }
 }

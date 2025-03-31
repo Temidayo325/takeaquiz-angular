@@ -47,7 +47,7 @@
             </div>
             <div>
                 <template x-if="notification != null && notification.status == 1">
-                    <p class="p-2 bg-green-300 text-purple-1000 leading-6">Hurray!!! Your request has been granted. Click on the Event management link to see more options on event creation. </p>
+                    <p class="p-2 bg-green-300 text-purple-1000 leading-6">Hurray!!! Your request has been granted. Click on the Switch to organizer button on your navigation side bar to see organizer controls </p>
                 </template>
                 <template x-if="notification != null && notification.status == 0">
                     <p class="p-2 bg-red-300 text-purple-1000 leading-6">Apologies for the late response, We currently  have a large volume of request to attend to, your request is still a priority to use and would be attended to ASAP </p>

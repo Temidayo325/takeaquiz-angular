@@ -38,7 +38,12 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-
+        
+        if( $request->user()->hasAnyRole('promoter') || $request->user()->hasAnyRole('admin')) 
+        {
+            # code...
+            return Redirect::route('promoter.profile.edit')->with('status', 'profile-updated');
+        }
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
