@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text('service_summary');
             $table->text('usp')->nullable()->default(null);
             $table->text('social_media_links');
-            $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Active');
+            $table->set('status', ['Active', 'Suspended', 'Inactive'])->default('Inactive');
             $table->boolean('isPremium')->default(false);
             $table->string('slug');
             $table->set('location_based', ['Hybrid', 'In-person', 'Remote']);

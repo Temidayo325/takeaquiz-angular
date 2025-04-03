@@ -26,7 +26,7 @@ class CreatePlugRequest extends FormRequest
             'tags' => ['required', 'string', 'bail'],
             'address' => ['nullable', 'string', 'bail'],
             'travel' => ['nullable', 'string', 'bail'],
-            'flier' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:2048',    'bail'],
+            'flier' => ['required_if:id,null', 'file', 'mimes:jpeg,png,jpg', 'max:2048', 'bail'],
             'service' => ['required', 'string', 'bail'],
             'service_summary' => ['required', 'string', 'bail'],
             'usp' => ['nullable', 'string', 'bail'],

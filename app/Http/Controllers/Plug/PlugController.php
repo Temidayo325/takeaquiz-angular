@@ -10,29 +10,31 @@ use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 
 class PlugController extends Controller
 {
-    public function store(CreatePlugRequest $request)
-    {
-    	try {
-                $plug = Plug::where('user_id', auth()->id())->first();
-                if ($plug == null) {
-                    $plug = ( new \App\Actions\Plug\CreatePlug() )( $request );
-                }
-                return redirect()
-                        ->intended(route('user.plug.edit', absolute: false))
-                        ->with('success', 'Plug form succesfully completed');
-                        
-    		} catch (\Exception $e) {
-    			return back()->with('error', $e->getMessage());
-    		}
-    }
-
     public function index()
     {
-    	$plugs = Plug::with('user')->where('status', 'Active')->latest()->orderBy('id')->cursorPaginate(12);
+    	// $plugs = Plug::with('user')->where('status', 'Active')->latest()->orderBy('id')->cursorPaginate(12);
+        $plugs = Plug::with('user')
+                ->where('status', 'Active')
+                ->orderByRaw('RAND()')
+                ->limit(10)
+                ->get();
         // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
     	return view("plugs", [
     		'plugs' => $plugs,
             // 'premiumPlugs' => $premiumPlugs
+    	]);
+    }
+
+    public function backToHome()
+    {
+        $plugs = Plug::where('status', 'Active')
+                ->orderByRaw('RAND()')
+                ->limit(10)
+                ->get();
+        return response()->json([
+    		'error' => false,
+    		'errorMessage' => 'Search results returned successfully',
+    		'data' => $plugs
     	]);
     }
 
@@ -44,7 +46,8 @@ class PlugController extends Controller
 
     public function search(Request $request)
     {
-    	$users = Search::add(Plug::with('user')->where('status', 'Active'), ['service', 'service_summary', 'usp', 'address', 'tags'])
+    	$users = Search::add(Plug::with('user')->where('status', 'Active'), ['service', 'service_summary', 'usp', 'address', 'tags', 'contact_email', 'contact_whatsapp'])
+                        // ->add(\App\Models\User::class, ['name', 'nickname'])
 					    ->beginWithWildcard()
 					    ->endWithWildcard(true)
 					    ->orderByRelevance()
@@ -101,13 +104,8 @@ class PlugController extends Controller
     {
         $searchParameter = (int) $id;
         $plug = ( $searchParameter > 0 ) ? Plug::with('user')->where('status', 'Active')->where('id', $id)->first() : Plug::with('user')->where('slug', $id)->where('status', 'Active')->first();
-        $searchComponent = \Share::page(url()->current(), "Here's my plug card")
-                            ->facebook()
-                            ->twitter()
-                            ->whatsapp()
-                            ->linkedin();
         // $premiumPlugs = Plug::with('user')->where('status', 'Active')->where('isPremium', true)->latest()->get();
-        return view("plug", [ 'plug' => $plug, 'shareButtons' => $searchComponent ]);
+        return view("plug", [ 'plug' => $plug ]);
     }
 
     // public function showPlugByName($name)

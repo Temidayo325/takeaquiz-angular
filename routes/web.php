@@ -37,6 +37,7 @@ Route::post('/games/search/tag', [\App\Http\Controllers\GameController::class, '
 // ========== Plugs routes goes here ======== \\
 Route::get('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'index'])->name('plug.list');
 Route::post('/plugs/search', [\App\Http\Controllers\Plug\PlugController::class, 'search']);
+Route::post('/plugs/backToHome', [\App\Http\Controllers\Plug\PlugController::class, 'backToHome']);
 Route::post('/plugs/search/tags', [\App\Http\Controllers\Plug\PlugController::class, 'searchByTags']);
 Route::get('/plugs/search/paginate', [\App\Http\Controllers\Plug\PlugController::class, 'paginateUsers']);
 Route::get('/plugs/{id}', [\App\Http\Controllers\Plug\PlugController::class, 'showPlug']);
@@ -132,6 +133,12 @@ Route::prefix('admin/dashboard')->middleware(['auth', 'admin'])->group(function 
     Route::post('/users/roles/assign', [\App\Http\Controllers\Admin\RoleController::class, 'AddRoleToUser']);
     // ========== User routes ends here ======== \\
     
+    // ========== Plugs routes ends here ======== \\
+    Route::get('/plugs', [\App\Http\Controllers\Admin\PlugController::class, 'list']);
+    Route::post('/plug/suspend', [\App\Http\Controllers\Admin\PlugController::class, 'suspend']);
+    // ========== Plugs routes ends here ======== \\
+
+
     // ========== Event routes goes here ======== \\
     Route::get('/events', [\App\Http\Controllers\Admin\EventController::class, 'index'])->name('admin.event.index');
     Route::post('/events/paginate', [\App\Http\Controllers\Admin\EventController::class, 'paginateEvents']);
@@ -181,6 +188,7 @@ Route::prefix('user/dashboard')->middleware(['auth'])->group(function () {
 
     Route::get('plug/request', [\App\Http\Controllers\User\PlugController::class, 'index']);
     Route::post('plug/request', [\App\Http\Controllers\User\PlugController::class, 'create']);
+    Route::post('plug/edit', [\App\Http\Controllers\User\PlugController::class, 'edit']);
      // ========== Ticket routes goes here ======== \\
     Route::get('/tickets', [\App\Http\Controllers\User\TicketController::class, 'index'])->name('user.dashboard.tickets');
     Route::get('/tickets/upcoming', [\App\Http\Controllers\User\TicketController::class, 'upcomingEvents']);

@@ -25,7 +25,7 @@
       <span class="sr-only">Open sidebar</span>
       <svg class="w-6 h-6 text-purple-1000" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path></svg>
    </button>
-   <a href="/" class="font-display tracking-wider text-left text-xl">{{config('app.name')}}</a>
+   <a class="font-body tracking-wider text-left text-md" href="/"><x-application-logo class="fill-current text-purple-1000 " /></a>
 </header>
 
 <aside id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 md:w-72 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar" x-data='{user: @json($user),
@@ -86,7 +86,7 @@
                <span class="ms-3">Dashboard</span>
             </a>
          </li>
-         @if($user->hasAnyRole('plug'))
+         <!-- @if($user->hasAnyRole('plug'))
             <li>
                <a href="/user/dashboard/plug" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
                   <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
@@ -94,7 +94,7 @@
                   <span class="flex-1 ms-3 whitespace-nowrap">Create Plug account</span>
                </a>
             </li>
-         @endif
+         @endif -->
          <li>
             <a href="/user/dashboard/events" class="flex justify-start w-full py-2 px-3 md:px-5 text-purple-1000 transition duration-75 group hover:bg-gray-100 hover:text-gray-950 dark:text-white dark:hover:bg-gray-700 text-sm md:text-purple-200">
                <svg class="flex-shrink-0 w-5 h-5 text-purple-1000 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white md:text-purple-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
@@ -193,7 +193,7 @@
             <a href="/logout" class="hover:underline underline-offset-4 hover:text-red-1000">Logout</a>
          </div>
       </header>
-      <main class="md:px-12">
+      <main class="px-4 md:px-12">
          @yield("content")
       </main>
    	

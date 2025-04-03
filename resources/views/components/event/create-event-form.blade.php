@@ -75,7 +75,7 @@
 					<div class="mt-4">
 						<label for="event_date" class="font-bold text-sm block mb-1">Date of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1"></p>
-						<input type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" placeholder="dd/mm/yyyy">
+						<input :min="Date.now()" type="date" name="event_date" id="event_date" required x-model="data.event_date" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" placeholder="dd/mm/yyyy">
 					</div>
 					<div class="mt-4">
 						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>

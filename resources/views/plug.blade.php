@@ -37,7 +37,7 @@
 </head>
 <body>
 	<main class="bg-gray-100 pb-0">
-		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white shadow-sm md:px-12 flex justify-between items-center">
+		<header class="py-3 px-4 shadow-sm sticky top-0 bg-white md:px-12 flex justify-between items-center">
 			<a href="/" class="flex justify-start items-center gap-2 py-2">
                 <x-application-logo />
             </a>
@@ -127,10 +127,6 @@
 
                         <h3 class="font-bold mt-3 text-sm">Social Media Links</h3>
                         <a :href="chosenPlug.social_media_links" target="__blank" class="text-gray-500" x-text="chosenPlug.social_media_links"></a>
-                    </div>
-                    <div class="grid mt-2 pb-4">
-                        <h3 class="font-bold mt-3 pb-2">Share link buttons</h3>
-                        {!! $shareButtons !!}
                     </div>
                 </div>
             </div>

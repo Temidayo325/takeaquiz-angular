@@ -4,21 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Share;
-
-// use Spatie\Tags\HasTags;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
     use HasFactory ; 
-    // HasTags;
+
     protected $fillable = [
     	'name', 
     	'event_date',
     	'starting_time',
     	'state',
         'tags',
-    	'coordinate',
         'user_id',
         'location',
         'flier',
@@ -29,7 +26,9 @@ class Event extends Model
         'audience',
         'dress_code',
         'contact_information',
-        'coordinate'
+        'location_name',
+        'lat',
+        'long'
     ];
 
     protected $casts = [

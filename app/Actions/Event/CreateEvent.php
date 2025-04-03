@@ -2,7 +2,6 @@
 declare(strict_types = 1);
 
 namespace App\Actions\Event;
-
 /**
  * 
  */
@@ -17,7 +16,7 @@ class CreateEvent
 	    	'event_date' => $eventToBeCreated->event_date,
 	    	'starting_time' => $eventToBeCreated->starting_time,
 	    	'state' => $eventToBeCreated->state,
-	    	'coordinate' => $eventToBeCreated->coordinate,
+	    	'coordinate' => null,
 	    	'tags' => $this->turnStringTagsToArray($eventToBeCreated->tags),
 	    	'flier' => $path,
 	    	'location' => $eventToBeCreated->location,
@@ -27,6 +26,15 @@ class CreateEvent
 	        'contact_information' => $eventToBeCreated->contact_information,
 	    	'promotional_copy' => $eventToBeCreated->promotional_copy
 		]);
+		
+		if($eventToBeCreated->coordinate != null)
+		{
+			$coordinates = \App\Services\Maps::GenerateLatnLongFromShortUrl($eventToBeCreated->coordinate);
+			$event->lat = $coordinates->latitude;
+			$event->long = $coordinates->longitude;
+			$event->save();
+		}
+
 		return $event;
 	}
 

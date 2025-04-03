@@ -34,10 +34,8 @@ class CreatePlug
                 'contact_portfolio' => $plug->contact_portfolio,
                 'contact_whatsapp' => $plug->contact_whatsapp 
             ]);
-            logger($newPlug->toArray());
             return $newPlug;
         } catch (\Throwable $th) {
-            logger($th->getMessage());
             throw new \Exception($th->getMessage());
         }
 	}

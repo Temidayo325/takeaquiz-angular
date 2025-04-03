@@ -126,4 +126,9 @@ class User extends Authenticatable
     {
         return $this->hasManyThrough(Sale::class, Event::class);
     }
+
+    public function suspensions()
+    {
+        return $this->hasMany(Suspension::class);
+    }
 }

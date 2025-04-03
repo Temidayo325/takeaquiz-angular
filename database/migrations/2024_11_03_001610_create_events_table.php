@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+// use AngelSourceLabs\LaravelSpatial\Schema\SpatialBlueprint as Blueprint;
 
 return new class extends Migration
 {
@@ -20,7 +21,9 @@ return new class extends Migration
             $table->date('event_date');
             $table->string('starting_time'); 
             $table->string('state', 30);
-            $table->string('coordinate', 150)->nullable()->default(null);
+            $table->string('location_name')->nullable();
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('long', 11, 8)->nullable();
             $table->string('ticket_information')->nullable();
             $table->text('location');
             $table->text('tags');

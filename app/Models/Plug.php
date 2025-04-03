@@ -32,22 +32,18 @@ class Plug extends Model
     protected $casts = [
         'tags' => 'array'
     ];
-    
-    protected $appends = ['links'];
 
-    public function getLinksAttribute()
+    protected $appends = ['slug'];
+
+    public function getSlugAttribute()
     {
-        $url = secure_url('/plugs/') . '/'.$this->slug;
-        return \Share::page($url, "Here's my plug card")    
-                ->facebook()
-                ->twitter()
-                ->whatsapp()
-                ->linkedin()
-                ->getRawLinks();
+        return \Illuminate\Support\Str::slug($this->name);
     }
-
+    
     public function user()
     {
     	return $this->belongsTo(User::class);
     }
+
+    
 }
