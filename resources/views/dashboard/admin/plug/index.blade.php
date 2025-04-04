@@ -14,7 +14,7 @@
         hasSearched: false,
         init()
         {
-            
+            console.log(this.suspendedPlugs)
         },
         searchDatabaseForPlug()
         {
@@ -58,11 +58,11 @@
         suspendPlug()
         {
             this.toast("Suspending plugs ...", "orange")
-            axios.post("/admin/dashboard/plug/suspend", { plug_id: chosenPlug.plug.id , reason: this.reason})
+            axios.post("/admin/dashboard/plug/suspend", { plug_id: this.chosenPlug.id , reason: this.reason})
             .then( ( response ) => {
                 if(!response.data.error)
                 {
-                    this.toast("Plug suspended successfully", "red")
+                    this.toast("Plug suspended successfully", "green")
                     plug.status = "Suspended"
                     this.plugs.splice(this.plugIndex, 1, this.chosenPlug)
                 }
@@ -76,6 +76,8 @@
         {
             this.chosenPlug = plug
             this.plugIndex = index
+            console.log(plug)
+            $refs.modal.dispatchEvent(new Event("click"))
         },
 
         toast(text, background)
@@ -204,7 +206,8 @@
                                                     'text-red-1000': plug.status == 'Suspended'
                                                 }"></p>
                                                 <template x-if="plug.status != 'Suspended'">
-                                                    <button @click="showReason(plug, index)" class="px-3 py-2 rounded bg-red-1000 text-gray-200" data-modal-target="popup-modal" data-modal-toggle="popup-modal">Suspend</button>
+                                                    <button @click="showReason(plug, index)" class="px-3 py-2 rounded bg-red-1000 text-gray-200">Suspend</button>
+                                                    
                                                 </template>
                                             </div>
                                         </div>
@@ -255,11 +258,11 @@
                                                 <span x-text="plug.social_media_links" class="text-sm text-wrap"></span>
                                                 </a>
                                             </div>
-                                            <div class="border-t border-gray-400 py-5 grid gap-8 items-center">
+                                            <ul class="border-t border-gray-400 py-5 grid gap-8 items-center">
                                                 <template x-for="reason in plug.user.suspensions">
-                                                    <p x-text="reason" class="text-sm leading-9 "></p>
+                                                    <p x-text="reason.reason" class="text-sm "></p>
                                                 </template>
-                                            </div>
+                                            </ul>
                                         </div>
                                     </div>
                                 </template>
@@ -339,7 +342,7 @@
         <!-- <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
         Toggle modal
         </button> -->
-
+        <button class="" x-ref="modal" data-modal-target="popup-modal" data-modal-toggle="popup-modal"></button>
         <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
@@ -354,6 +357,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Provide a reason / justification why the account is being suspended</h3>
+                        <textarea x-model="reason" name="reason" id="reason" class="w-full h-96 my-3  p-3 rounded-md"></textarea>
                         <button data-modal-hide="popup-modal" @click="suspendPlug()" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                             Suspend plug
                         </button>

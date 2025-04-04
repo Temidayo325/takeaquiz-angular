@@ -67,7 +67,7 @@ class PlugController extends Controller
 
         $suspension = \App\Models\Suspension::create([
             'reason' => $request->reason,
-            'user_id' => $request->user_id
+            'user_id' => $plug->user_id
         ]);
         // Send an Email to notify User of Suspension
         return response()->json([

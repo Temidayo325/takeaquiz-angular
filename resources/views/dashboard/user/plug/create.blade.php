@@ -2,11 +2,16 @@
 
 @section('title', 'Be a CruiseHq plug')
 
+
 @section('content')
-	<div class="text-purple-1000 py-4 max-w-7xl" x-data='{ error: { status: false, message: ""},
+	<div class="text-purple-1000 py-4 max-w-3xl" x-data='{ error: { status: false, message: ""},
         disabled: false,
         plug: @json($user->plug),
         notification: @json($notification),
+        init()
+        {
+            console.log(this.plug)
+        },
         toast(text, color, background)
 		{
 			Toastify({
@@ -42,11 +47,11 @@
                 <p class="font-body leading-7">The plug account provides access to list your services on the cruiseHq service directory which will help to improve awareness to our community about your services. Fill the form below to request for a promoter account </p>
             </div>
 
-            <template x-if="plug.status == 'Suspended'">
+            <template x-if="plug != null && plug.status == 'Suspended'">
                 <p class="p-2 bg-red-300 text-purple-1000 leading-6">Your account has been suspended by the admin. Kindly reach out to the admin via email including the email address you used to register on CruiseHq to find out what the problem was.</p>
             </template>
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl overflow-hidden">
+                <div class="max-w-6xl">
                     <x-plugs.create :user="$user"></x-plugs.create>
                 </div>
             </div>

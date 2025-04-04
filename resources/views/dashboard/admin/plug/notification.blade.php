@@ -118,9 +118,9 @@
                                     <h3 class="font-bold mt-3 text-sm">Social Media Links</h3>
                                     <a :href="notification.user.plug.social_media_links" target="__blank" class="text-gray-500" x-text="notification.user.plug.social_media_links"></a>
                                 </div>
-                                <div class="border border-gray-300 shadow-md rounded py-3 px-4 hover:shadow-2xl duration-200">
+                                <div class="border border-gray-300 rounded py-3 px-4">
                                     <h3 class="font-bold mt-2">Notification Summary</h3>
-                                    <p x-text="notification.summary" class="leading-8"></p>
+                                    <p x-text="notification.summary" class="leading-8 px-2"></p>
 
                                     <div class="flex justify-center mt-3">
                                         <button class="bg-yellow-200 text-purple-1000 py-2  w-3/4 text-center hover:bg-yellow-400 duration-300 shadow-md" @click="approveRequest(index, notification.id)">Accept</button>

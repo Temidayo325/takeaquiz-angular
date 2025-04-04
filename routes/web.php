@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/logout', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']);
     Route::post('/plug/dashboard/create', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
-    Route::post('/plugs', [\App\Http\Controllers\Plug\PlugController::class, 'store']);
+    Route::post('/plugs', [\App\Http\Controllers\User\PlugController::class, 'store']);
 
     Route::post('/generate/payment/checkoutUrl', [\App\Http\Controllers\User\WalletController::class, 'generateCheckoutUrl']);
 });

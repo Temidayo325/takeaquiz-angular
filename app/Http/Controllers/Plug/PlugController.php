@@ -93,7 +93,9 @@ class PlugController extends Controller
     }
     public function displayPlug()
     {
-        $plug = Plug::with('user')->where('user_id', auth()->id())->first();
+        // $plug = Plug::with('user')->where('user_id', auth()->id())->first();
+        $plug = \App\Models\User::with('plug')->where('id', auth()->id())->first();
+
         return view("dashboard.user.plug", [ 
             'plug' => $plug, 
             'user' => \App\Models\User::with('va')->where('id', auth()->id())->first() 
