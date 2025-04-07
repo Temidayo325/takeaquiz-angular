@@ -35,16 +35,10 @@
 						this.spinner = true
 						axios.post("/promoter/dashboard/tickets/create", this.ticket)
 							.then( ( response ) => {
-								this.chosenEventTickets.push(response.data.ticket)
-								this.chosenEvent.tickets = this.chosenEventTickets
 								this.ticket = { "event_id": this.ticket.event_id, "price": "", "total_seat": "", "ticket_type": "VIP", "type_copy" : "", "access_type": "Purchase"}
 								$refs.eventTicketTab.dispatchEvent(new Event("click"))
 								this.errorMessage = null
-								this.spinner = false
-								this.createTicketButtonText = "Create ticket"
-								this.toast("Ticket created ", "#fff", "green")
-								$refs.createTicketButton.removeAttribute("disabled")
-								this.errorMessage = response.data.message
+								
 								if(this.chosenEventTickets == null)
 								{	
 									this.chosenEventTickets = []
@@ -52,10 +46,13 @@
 								}else{
 									this.chosenEventTickets.push(response.data.ticket)
 								}
-								
+								this.spinner = false
+								this.createTicketButtonText = "Create ticket"
+								this.toast("Ticket created ", "#fff", "green")
+								$refs.createTicketButton.removeAttribute("disabled")
+								this.errorMessage = response.data.message
 							})
 							.catch( ( error ) => {
-								console.log(error)
 								this.spinner = false
 								this.createTicketButtonText = "Create ticket"
 								$refs.createTicketButton.removeAttribute("disabled")

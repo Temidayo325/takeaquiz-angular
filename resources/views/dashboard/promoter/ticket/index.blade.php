@@ -11,7 +11,6 @@
 						chosenTicket: null,
 						chosenAttendance: [],
 						chosenEvent: null,
-						typeLength: 0,
 						data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "" }, 
 						submitForm()
 						{
@@ -53,7 +52,6 @@
 							this.chosenAttendance = ticket.attendance
 							this.viewToggle = true
 							this.editToggle = false
-							this.typeLength = parseInt(ticket.type.trim().length)
 							sessionStorage.setItem("ticket", JSON.stringify(ticket));
 							$refs.sideBarButton.dispatchEvent(new Event("click"))
 						} 
@@ -181,15 +179,69 @@
 			</div>
 			<div id="default-styled-tab-content">
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-profile" role="tabpanel" aria-labelledby="profile-tab">
-            		<template x-if="typeLength == 10">
-            			<x-tickets.early-bird></x-tickets.early-bird>
-            		</template>		
-            		<template x-if="typeLength == 17">
-            			<x-tickets.ga></x-tickets.ga>
-            		</template>
-            		<template x-if="typeLength == 3">
-            			<x-tickets.vip ></x-tickets.vip>
-            		</template>		
+					<style>
+						#ticket-container{
+								background-image: url('https://cruisehq.fun/images/cruise-back-gray.png'); 
+								background-repeat: no-repeat; 
+								background-size: 100% 100% ; 
+								background-origin: center; 
+								position: relative;
+								padding: 65px 35px;
+								text-align: left;
+								margin: 0 auto;
+								min-width: 270px;
+								max-width: 300px;
+							}
+					</style>
+					<template x-if="chosenTicket != null">
+						<section class="grid gap-6 text-purple-1000 justify-center" >
+							<div id="ticket-container" class='rounded-3xl mt-2 text-center font-body' >
+								<div class="">
+									<div class="border-b border-black text-center">
+										<p x-text="chosenTicket.name"></p>
+										<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>
+										<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
+									</div>
+									<div class="grid grid-cols-2 gap-6 text-left mt-5">
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-gray-600 text-sm">Ticket owner</p>
+											<p class="font-bold text-purple-1000">Your name</p>
+										</div>
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-gray-600 text-sm">Organizer</p>
+											<p class="font-bold text-purple-1000" x-text="chosenEvent.user.nickname">CruiseHq</p>
+										</div>
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-gray-600 text-sm">Date</p>
+											<p class="font-bold text-purple-1000" x-text="new Date(chosenEvent.event_date).toDateString()"></p>
+										</div>
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-gray-600 text-sm">Time</p>
+											<p class="font-bold text-purple-1000" x-text="chosenEvent.starting_time">4:00 PM</p>
+										</div>
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-gray-600 text-sm">Location</p>
+											<p class="font-bold text-purple-1000" x-text="chosenEvent.location"></p>
+										</div>
+										<div class="pb-3 border-b border-gray-300">
+											<p class="text-greyish text-sm">State</p>
+											<p class="font-bold" x-text="chosenEvent.state"></p>
+										</div>
+									</div>
+									<div class="mt-10 text-purple-1000 text-center">
+										<p>Price : 
+											<span class="font-bold text-2xl">&#8358; </span>
+											<span class="font-bold text-2xl" x-text="new Intl.NumberFormat().format(chosenTicket.price)"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="mt-6">
+								<h2 class="font-bold text-left py-2 text-md">Perks of <span x-text="chosenTicket.name"></span> ticket</h2>
+								<p x-text="chosenTicket.type_copy" class="text-left text-gray-950 text-sm tracking-wider leading-8"></p>
+							</div>
+						</section>
+					</template>
 			    </div>
 			    {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
 			        Ticket form would be here

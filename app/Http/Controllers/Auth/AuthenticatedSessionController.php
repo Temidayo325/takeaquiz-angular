@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = \App\Models\User::find(Auth::id());
         
-        event(new \App\Events\UserLoggedIn($user));
+        // event(new \App\Events\UserLoggedIn($user));
 
         if( $user->hasAnyRole('promoter') || $user->hasAnyRole('admin')) 
         {

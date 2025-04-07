@@ -10,7 +10,7 @@ class GameController extends Controller
 {
      public function index()
     {
-    	$games = Game::inRandomOrder()->cursorPaginate(12);
+    	$games = Game::inRandomOrder()->cursorPaginate(8);
         $tags = $this->gameTags();
     	return view("games", [
     		'user' => auth()->user(),
@@ -21,7 +21,7 @@ class GameController extends Controller
 
     public function paginateGames(Request $request)
     {
-    	$events = Game::latest()->cursorPaginate(12);
+    	$events = Game::latest()->cursorPaginate(8);
     	return response()->json($events);
     }
 
@@ -32,7 +32,7 @@ class GameController extends Controller
               ->endWithWildcard(true)
               ->orderByRelevance()
               ->search($request->searchTerm)
-              ->take(12);
+              ->take(8);
     	return response()->json([
     		'error' => false,
     		'message' => "Games returned",

@@ -35,7 +35,10 @@ class TicketController extends Controller
     public function store(\App\Http\Requests\Ticket\CreateTicketRequest $request)
     {
     	try {
-    		$ticket = \App\Models\Ticket::create([
+			$ticket = \App\Models\Ticket::where('name', $request->name)->where('price', $request->price)->first();
+    		if($ticket == null)
+			{
+				$ticket = \App\Models\Ticket::create([
     				'event_id' => $request->event_id,
 			    	'price' => $request->price,
 			    	'total_seat' => $request->total_seat,
@@ -44,7 +47,8 @@ class TicketController extends Controller
 			    	'type' => $request->ticket_type,
 			    	'type_copy' => $request->type_copy,
 			        'access_type' => $request->access_type
-    		]);
+    			]);
+			}
     		return response()->json([
 	    		'error' => false,
 	    		'errorMessage' => 'Ticket succesfully created',

@@ -1,14 +1,16 @@
 <form x-data='{		spinner: false,
 					errorMessage: null,
-					createTicketButtonText: "Save edit",
-					data: { name: "", state: "", event_date: "", starting_time: "", promotional_copy: "", coordinate: "", location: "", tags: "", ticket_information: "" }, 
+					createTicketButtonText: "Create event",
+					data: { name: "", state: "", event_date: "", starting_time: {hour: "", minute: "", meridien: ""}, promotional_copy: "", coordinate: "", location: "", tags: "", ticket_information: "" }, 
 					submitForm(){
 						$refs.createTicketButton.setAttribute("disabled", "")
 						this.spinner = true
 						this.createTicketButtonText = "Saving edit ..."
 						this.toast("Saving edit ...", "#fff", "blue")
+						let starting_time = `${this.data.starting_time.hour}:${this.data.starting_time.minute} ${this.data.starting_time.meridien}`
 						let formdata = new FormData($refs.form)
-						formdata.append("tags", this.data.tags);
+						formdata.append("tags", this.data.tags)
+						formdata.append("starting_time", starting_time)
 						axios.post("/promoter/dashboard/events/create", formdata)
 						.then( (response) => {
 							if(!response.data.error)
@@ -54,7 +56,7 @@
 						<input type="text" name="name" id="name" required minLength="5" x-model="data.name" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 					</div>
 					<div class="mt-4">
-						<label for="state" class="font-bold text-sm block mb-1">State of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<label for="state" class="font-bold text-sm block mb-1">Location <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 						<p class="text-sm text-greyish py-1">Provide the state or region where the event will take place.</p>
 						<select name="state" id="state" required x-model="data.state" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 							<option value="all">All states</option>
@@ -79,7 +81,29 @@
 					</div>
 					<div class="mt-4">
 						<label for="starting_time" class="font-bold text-sm block mb-1">Time of the event <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-						<input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" />
+						<div>
+							<!-- Hour -->
+							<select x-model="data.starting_time.hour" class="p-2 rounded-lg border" required>
+								<template x-for="h in 12">
+									<option x-text="String(h).padStart(2, '0')" :value="String(h).padStart(2, '0')"></option>
+								</template>
+							</select>
+
+							<!-- Minute -->
+							<select x-model="data.starting_time.minute" class="p-2 rounded-lg border" required>
+								<option value="" disabled>min</option>
+								<template x-for="m in Array.from({length: 60}, (_, i) => i)">
+									<option :value="String(m).padStart(2, '0')" x-text="String(m).padStart(2, '0')"></option>
+								</template>
+							</select>
+
+							<!-- AM/PM -->
+							<select x-model="data.starting_time.meridien" class="p-2 rounded-lg border" required>
+								<option value="AM">AM</option>
+								<option value="PM">PM</option>
+							</select>
+						</div>
+						<!-- <input type="time" name="starting_time" id="starting_time" required x-model="data.starting_time" class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full" /> -->
 					</div>
 
 					<div class="mt-4">
