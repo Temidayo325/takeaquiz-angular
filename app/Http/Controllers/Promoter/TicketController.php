@@ -71,7 +71,6 @@ class TicketController extends Controller
     			->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date')
     			->where('user_id', auth()->id())
     			->latest()
-    			->orderBy('id')
     			->cursorPaginate(5);
     	return response()->json([
     		'error' => false,
@@ -80,4 +79,40 @@ class TicketController extends Controller
     	]);
     }
 
+
+	public function modify()
+    {
+    	$events = \App\Models\Event::with(['tickets'])
+				->select('id', 'user_id', 'name', 'state', 'starting_time', 'event_date', 'location', 'flier', 'isPremium', 'status')
+    			->where('user_id', auth()->id())
+    			->latest()
+    			->cursorPaginate(10);
+        $user = \App\Models\User::with('role', 'va')->where('id', auth()->id())->first();
+    	return view("dashboard.promoter.ticket.modify", ['events' => $events, 'user' => $user]);
+    }
+
+	public function updateStatus(Request $request)
+	{
+		$ticket = \App\models\Ticket::find($request->id);
+        $ticket->status = ( $ticket->status == 'DRAFT' ) ? 'PUBLISHED' : 'DRAFT';
+        $ticket->save();
+
+        return response()->json([
+            'error' => false,
+            'message' => "Ticket status updated successfully"
+        ]);
+	}
+
+	public function updateTicket(Request $request)
+	{
+		$ticket = \App\models\Ticket::find($request->id);
+        $ticket->fill($request->toArray());
+        $ticket->save();
+
+        return response()->json([
+            'error' => false,
+			'ticket' => $ticket,
+            'message' => "Ticket status updated successfully"
+        ]);
+	}
 }

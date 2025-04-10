@@ -103,6 +103,10 @@ Route::prefix('promoter/dashboard')->middleware(['auth', 'admin', 'promoter'])->
     Route::get('/tickets/create', [TicketController::class, 'create'])->name('promoter.ticket.create');
     Route::post('/tickets/create', [TicketController::class, 'store'])->name('promoter.ticket.store');
     Route::post('/ticket/delete', [TicketController::class, 'delete']);
+
+    Route::get('/tickets/modify', [TicketController::class, 'modify'])->name('promoter.ticket.modify');
+    Route::post('/ticket/status', [TicketController::class, 'updateStatus']);
+    Route::post('/ticket/modify', [TicketController::class, 'updateTicket']);
     // ========== Ticket routes ends here ======== \\
     
     // ========== Event routes goes here ======== \\

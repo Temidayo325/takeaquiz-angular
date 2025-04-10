@@ -110,11 +110,15 @@
             </button>
             <ul id="dropdown-example" class="hidden py-2 space-y-2 md:pl-10 ml-10 md:ml-0">
                   <li>
-                     <a href="/promoter/dashboard/tickets" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Ticket performance</a>
-                  </li>
-                  <li>
                      <a href="/promoter/dashboard/tickets/create" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Create ticket</a>
                   </li>
+                  <li>
+                     <a href="/promoter/dashboard/tickets/modify" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Modify ticket</a>
+                  </li>
+                  <li>
+                     <a href="/promoter/dashboard/tickets" class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group hover:bg-purple-200 hover:text-purple-1000 dark:text-white dark:hover:bg-gray-700">Ticket analytics</a>
+                  </li>
+                  
                 {{--   <li>
                      <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Ticket sales</a>
                   </li> --}}

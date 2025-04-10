@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("name");
             // $table->set('type', ['Early bird', 'General admission', 'VIP']);
             $table->set('access_type', ['Free', 'Purchase', 'Gift']);
+            $table->set('status', ['PUBLISHED', 'DRAFT'])->nullable()->default('DRAFT');
             $table->text('type_copy');
             $table->timestamps();
         });
