@@ -3,6 +3,7 @@
 @section('title', 'Edit your tickets')
 
 @section('content')
+
 	<div x-data='{ events: @json($events),
 					user: @json($user),
 					ticket: { "price": "", "total_seat": "", "ticket_type": "VIP", "type_copy" : "", "access_type": ""},
@@ -14,14 +15,17 @@
                     ticketIndex: 0,
 					chosenEventTickets: null,
                     editTicketStatus: false,
-					init(){
+					init()
+					{
 						
 					},
     				addEvent(event){
     					this.ticket.event_id = event.id
     					this.chosenEvent = event
-    					this.chosenEventTickets = event.tickets
-                       
+    					this.chosenEventTickets = event.tickets.map(ticket => ({
+							...ticket,
+							showForm: false
+						}));
                         this.editTicketStatus = false
     				},
     				toast(text, color, background){
@@ -61,10 +65,10 @@
                         this.componentKey = Date.now()
                         $nextTick(() => { 
                             this.editTicketStatus = true 
+							this.chosenEventTickets[index].showForm = true
                             this.ticket_id = ticket.id
                             this.ticket = { ...ticket }
-                        })                       
-                        
+                        })
                     },
 	}' class="px-4 md:px-12 py-4 font-body text-purple-1000" >
 		<div class="hidden md:flex py-6 md:py-10 bg-purple-300 items-center justify-between md:px-12 px-4">
@@ -162,11 +166,11 @@
 			       		<template x-for="(ticket, index) in chosenEventTickets" :key="ticket.id">
 			       			<div>
 								<div >
-									<div class="bg-white text-purple-1000 px-4 py-8 pb-5 rounded w-48 md:w-64 mt-6 text-center border border-gray-200 shadow-md hover:shadow-lg mx-auto">
+									<div class="relative text-left mx-auto bg-[url('https://cruisehq.fun/cruise-back-yellow.png')] bg-no-repeat bg-[length:100%_100%] bg-origin-center text-purple-1000 px-10 py-20 pb-5 w-full md:w-64 mt-6 border border-gray-200 hover:shadow-lg rounded-[40px]">
                                         <p class="text-center pb-6 " x-text="ticket.name"></p>
 										<div class="border-b border-black">
-											<h2 class="text-4xl tracking-wide font-display" x-text="chosenEvent.name"></h2>
-											<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
+											<h2 class="text-4xl tracking-wide text-center font-display" x-text="chosenEvent.name"></h2>
+											<p class="text-sm font-bold py-2 text-center" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
 										</div>
 										<div class="grid grid-cols-2 gap-6 text-left mt-5">
 											<div class="pb-3 border-b border-gray-300">
@@ -194,7 +198,7 @@
 												<p class="font-bold text-sm" x-text="chosenEvent.state"></p>
 											</div>
 										</div>
-										<div class="mt-10 font-body">
+										<div class="py-10 font-body">
 											<p>
 												<span class="text-greyish">Price : </span>
 												<span class="font-bold text-xl">&#8358; </span>
@@ -227,10 +231,10 @@
 			        Ticket form would be here
 			    </div> --}}
 			    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 overflow-x-hidden md:px-8" id="styled-settings" role="tabpanel" aria-labelledby="settings-tab">
-			       	<form action="" x-data='{
+			       	<template x-for="( ticket, index ) in chosenEventTickets">
+					   <form action="" x-show="ticket.showForm" x-data='{
                     createTicketButtonText: "Edit ticket",
-                    editTicket(){
-                        console.table(this.ticket)
+                    editTicket(ticket){
 						this.createTicketButtonText = "Editing ticket ..."
 						this.toast("Editing ticket .... ", "#fff", "#1d1128")
 						$refs.createTicketButton.setAttribute("disabled", "")
@@ -251,7 +255,6 @@
                                 this.ticket = { "id": this.ticket.id, "price": "", "total_seat": "", "ticket_type": "VIP", "type_copy" : "", "access_type": "Purchase"}
 							})
 							.catch( ( error ) => {
-                                console.log(error)
 								this.spinner = false
 								this.createTicketButtonText = "Edit ticket"
 								$refs.createTicketButton.removeAttribute("disabled")
@@ -269,21 +272,18 @@
 			       		<div>
 							<label for="ticket_type" class="font-bold text-md">Ticket name <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-sm text-gray-700 ">Provide a name for your ticket. E.g Diamond </p>
-                            <p >Initial input: <span x-text="ticket.name"></span></p>
 							<input type="text" name="name" id="name" x-model="ticket.name" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
 			       		
 						<div>
 							<label for="total_seat" class="font-bold text-sm">Ticket Quantity <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-sm text-gray-700 ">Provide the total number of tickets available for sale</p>
-                            <p >Initial input: <span x-text="ticket.total_seat"></span></p>
 							<input type="tel" name="total_seat" id="total_seat" x-model="ticket.total_seat" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
 
 						<div>
 							<label for="access_type" class="font-bold text-sm">Ticket access type <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-sm text-gray-700 ">State wether the ticket is free or not</p>
-                            <p >Initial input: <span x-text="ticket.access_type"></span></p>
 							<select x-model="ticket.access_type" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 								<option >Free</option>
 								<option >Purchase</option>
@@ -292,7 +292,6 @@
                         
 						<div class="">
 							<label for="price" class="font-bold text-sm">Price <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
-							<p class="text-sm text-gray-700 ">State ticket price. In case the ticket is free, kindly input 0</p>
                             <p >Initial input: <span x-text="ticket.price"></span></p>
 							<input type="tel" name="price" id="price" x-model="ticket.price" required class="w-48 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full">
 						</div>
@@ -300,7 +299,6 @@
 						<div>
 							<label for="type_copy" class="font-bold text-sm">Short ticket copy <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
 							<p class="text-greyish text-sm text-left">Highlight Ticket Perks and Promises</p>
-                            <p >Initial input: <span x-text="ticket.type_copy"></span></p>
 							<textarea name="type_copy" id="type_copy" x-model="ticket.type_copy" required class="w-48 min-h-48 text-sm leading-7 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full"></textarea>
 						</div>
 						<div class="flex justify-center items-center mt-3">
@@ -309,6 +307,7 @@
 								<span x-text="createTicketButtonText"></span></button>
 						</div>
 					</form>
+					</template>
 			    </div>
 			</div>
 	        </div>

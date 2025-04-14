@@ -12,7 +12,6 @@
 		typeLength: 0,
 		init() {
         	localStorage.setItem("user", JSON.stringify(this.user))
-			console.log(this.events)
    		},
    		showEventDetail(event)
    		{
@@ -196,118 +195,52 @@
 			       	<template x-if="chosenEventTickets != null && chosenEventTickets.length > 0">
 			       		<template x-for="ticket in chosenEventTickets">
 			       			<div>
-			       				<template x-if="ticket.type.length == 10">
-			            			<div >
-										<div class="bg-white text-purple-1000 px-4 py-8 pb-5 rounded w-48 md:w-64 mt-6 text-center border border-gray-200 shadow-md hover:shadow-lg ">
-											<div class="border-b border-black">
-												<h2 class="text-4xl tracking-wide font-display" x-text="chosenEvent.name"></h2>
-												<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
+							   <div >
+									<div class="relative text-left mx-auto bg-[url('https://cruisehq.fun/cruise-back-yellow.png')] bg-no-repeat bg-[length:100%_100%] bg-origin-center text-purple-1000 px-10 py-20 pb-5 w-full md:w-64 mt-6 border border-gray-200 hover:shadow-lg rounded-[40px]">
+                                        <p class="text-center pb-6 " x-text="ticket.name"></p>
+										<div class="border-b border-black">
+											<h2 class="text-4xl tracking-wide text-center font-display" x-text="chosenEvent.name"></h2>
+											<p class="text-sm font-bold py-2 text-center" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
+										</div>
+										<div class="grid grid-cols-2 gap-6 text-left mt-5">
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">Ticket owner</p>
+												<p class="font-bold text-sm md:text-lg " x-text="user.nickname">CruiseHq</p>
 											</div>
-											<div class="grid grid-cols-2 gap-6 text-left mt-5">
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Ticket owner</p>
-													<p class="font-bold text-sm md:text-lg " x-text="user.nickname">CruiseHq</p>
-												</div>
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Organizer</p>
-													<p class="font-bold text-sm md:text-lg" x-text="user.nickname">CruiseHq</p>
-												</div>
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Date</p>
-													<p class="font-bold text-sm" x-text="new Date(chosenEvent.event_date).toDateString()"></p>
-												</div>
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Time</p>
-													<p class="font-bold text-sm" x-text="chosenEvent.starting_time">4:00 PM</p>
-												</div>
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">Location</p>
-													<p class="font-bold text-sm" x-text="chosenEvent.location"></p>
-												</div>
-												<div class="pb-3 border-b border-gray-300">
-													<p class="text-greyish text-sm">State</p>
-													<p class="font-bold text-sm" x-text="chosenEvent.state"></p>
-												</div>
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">Promoter</p>
+												<p class="font-bold text-sm md:text-lg" x-text="user.nickname">CruiseHq</p>
 											</div>
-											<div class="mt-10 font-body">
-												<p>
-													<span class="text-greyish">Price : </span>
-													<span class="font-bold text-xl">&#8358; </span>
-													<span class="text-xl font-bold " x-text="new Intl.NumberFormat().format(ticket.price)"></span>
-												</p>
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">Date</p>
+												<p class="font-bold text-sm" x-text="new Date(chosenEvent.event_date).toDateString()"></p>
+											</div>
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">Time</p>
+												<p class="font-bold text-sm" x-text="chosenEvent.starting_time">4:00 PM</p>
+											</div>
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">Location</p>
+												<p class="font-bold text-sm" x-text="chosenEvent.location"></p>
+											</div>
+											<div class="pb-3 border-b border-gray-300">
+												<p class="text-greyish text-sm">State</p>
+												<p class="font-bold text-sm" x-text="chosenEvent.state"></p>
 											</div>
 										</div>
-										<div class="mt-6 md:mt-10 text-purple-1000">
-											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
-											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
-										</div>
-									</div>
-			            		</template>		
-			            		<template x-if="ticket.type.length >= 16">
-			            			<div>
-										<div class="bg-purple-1000 pt-4 pb-10 w-48 md:w-64 mx-auto text-gray-300 mt-6 text-center">
-											<p class="text-md text-greyish py-2 block bg-transparent" x-text="user.nickname">Light</p>
-											<h2 class="font-bold text-xl py-3 text-purple-1000 block bg-greyish">General admission</h2>
-											<div class="px-4 text-greyish">
-												<h2 class="my-4 text-4xl md:text-5xl font-display text-lightpurple" x-text="chosenEvent.name"></h2>
-												<p class="mt-4 text-sm" x-text="chosenEvent.event_date"></p>
-												<p x-text="new Date(chosenEvent.event_date).toDateString()"></p>
-												<p x-text="chosenEvent.location"></p>
-												<p x-text="chosenEvent.state "></p>
-												<p class="pb-4">Orginizer: <span x-text="user.nickname"></span></p>
-											</div>
-											<div class="mt-10">
-												<p>
-													<span class="text-gray-700">Price :</span> 
-													<span class="font-bold text-2xl text-lightpurple">&#8358; </span>
-													<span class="font-bold text-2xl text-lightpurple" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
-												</p>
-											</div>
-										</div>
-										<div class="mt-6 md:mt-10 text-purple-1000">
-											<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
-											<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
-										</div>
-									</div>
-			            		</template>
-			            		<template x-if="ticket.type.length >= 3">
-			            			<div>
-			            				<div class="px-4 bg-gray-950 py-6 pb-10 rounded w-48 md:w-64 mx-auto text-gray-300 mt-6 text-center shadow-md border border-gray-200 hover:shadow-3xl hover:border-gray-100 relative ">
-										<div class="grid gap-4">
-											<div>
-												<p class="text-sm text-greyish" x-text="user.nickname + ' \'s'">Light's</p>
-												<h2 class="font-bold text-4xl py-2 text-red-1000">VIP</h2>
-												<p class="text-sm text-greyish">ticket</p>
-											</div>
-											<div>
-												<p x-text="user.nickname" class="text-greyish"></p>
-												<p class="text-greyish">presents</p>
-												<h2 class="text-4xl md:text-5xl font-display text-red-1000 py-3" x-text="chosenEvent.name"></h2>
-											</div>
-											<div class="text-greyish">
-												<p class="mt-4 text-sm" x-text="chosenEvent.event_date"></p>
-												<p>
-													<span x-text="new Date(chosenEvent.event_date).toDateString()"></span> @ 
-													<span x-text="chosenEvent.starting_time"></span>
-												</p>
-												<p class="mt-4 text-sm" x-text="chosenEvent.location"></p>
-												<p x-text="chosenEvent.state"></p>
-											</div>
-										</div>
-										<div class="mt-10">
+										<div class="py-10 font-body">
 											<p>
-												<span class="text-greyish">Price :</span> 
-												<span class="font-bold text-2xl text-red-1000">&#8358; </span>
-												<span class="font-bold text-2xl text-red-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
+												<span class="text-greyish">Price : </span>
+												<span class="font-bold text-xl">&#8358; </span>
+												<span class="text-xl font-bold " x-text="new Intl.NumberFormat().format(ticket.price)"></span>
 											</p>
 										</div>
 									</div>
 									<div class="mt-6 md:mt-10 text-purple-1000">
-										<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.type"></span></h2>
+										<h2 class="font-bold text-left py-2 text-md font-body md:text-lg">USP of <span x-text="ticket.name"></span></h2>
 										<p x-text="ticket.type_copy" class="text-left tracking-wider leading-8 text-sm md:text-md"></p>
 									</div>
-			            			</div>
-			            		</template>	
+								</div>
 			       			</div>
 			       		</template>
 			       	</template>

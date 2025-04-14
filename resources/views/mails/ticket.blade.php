@@ -6,7 +6,9 @@
     <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
     <style>
 		#ticket-container{
-			background-image: url('https://cruisehq.fun/images/cruise-back-gray.png'); background-repeat: no-repeat; background-size: 100% 100% ; 
+			background-image: url('https://cruisehq.fun/images/cruise-back-yellow.png'); 
+			background-repeat: no-repeat; 
+			background-size: 100% 100% ; 
 			background-origin: center; 
 			position: relative;
 			padding: 40px 30px;
