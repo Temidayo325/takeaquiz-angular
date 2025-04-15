@@ -48,7 +48,7 @@
             </div>
 
             <template x-if="plug != null && plug.status == 'Suspended'">
-                <p class="p-2 bg-red-300 text-purple-1000 leading-6">Your account has been suspended by the admin. Kindly reach out to the admin via email including the email address you used to register on CruiseHq to find out what the problem was.</p>
+                <p class="p-2 bg-red-300 text-purple-1000 leading-6">Your account has been suspended by the admin. Kindly reach out to the admin via email using the email address you used to register on CruiseHq to find out what the problem was.</p>
             </template>
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-6xl">

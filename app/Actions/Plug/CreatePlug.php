@@ -16,6 +16,7 @@ class CreatePlug
 	{
         try {
             $path = $plug->flier->store('plugs');
+            $logo = $plug->logo->store('logo');
             $newPlug = Plug::create([
                 'user_id' => auth()->id(), 
                 'state' => $plug->state,
@@ -23,6 +24,7 @@ class CreatePlug
                 'address' => $plug->address,
                 'travel' => ( $plug->has('travel') != null && $plug->travel == 'on' ) ? 1 : 0,
                 'flier' => $path,
+                'logo' => $logo,
                 'service' => $plug->service,
                 'service_summary' => $plug->service_summary,
                 'usp' => $plug->usp ,

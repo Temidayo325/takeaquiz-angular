@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable()->default(null);
             $table->integer('travel');
             $table->string('flier');
+            $table->string('logo')->nullable()->default('/logo/logo.png');
             $table->string('service');
             $table->text('service_summary');
             $table->text('usp')->nullable()->default(null);

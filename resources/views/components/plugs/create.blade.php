@@ -1,21 +1,20 @@
 @props(['user'])
 <section class="py-4 text-purple-1000 " x-data='{user: @json($user), 
 			plug: @json($user->plug),
-			placeholder: {flier: null, service: null, service_summary: null, tags: null, address: null, state: null, social_media_links: null, travel: null, location_based: null, physical_address: null, contact_email: null, contact_portfolio: null, contact_whatsapp: null },
+			placeholder: {logo: null, flier: null, service: null, service_summary: null, tags: null, address: null, state: null, social_media_links: null, travel: null, location_based: null, physical_address: null, contact_email: null, contact_portfolio: null, contact_whatsapp: null },
 			init(){
-				console.log(this.plug)
 				if(this.plug != null)
 				{
 					this.placeholder = this.plug
 				}
 			},
-			async shareEvent(event)
+			async shareEvent()
 			{
 				let baseUrl = `${window.location.protocol}//${window.location.host}`;
 				let shareData = {
 					title: "My CruiseHq plug card",
-					text: plug.service_summary,
-					url: baseUrl + "/plug/" + plug.slug,
+					text: this.plug.service_summary,
+					url: baseUrl + "/plug/" + this.plug.slug,
 				}
 				try {
 					await navigator.share(shareData);
@@ -180,6 +179,16 @@
 						</template>
 						<x-input-error :messages="$errors->get('flier')" class="mt-2" />
 					</li>
+
+					<li class="mt-4">
+						<label for="logo" class="font-bold text-sm block mb-1">Logo of the service <span class="text-red-700 mb-10" title="This field must be filled">&#8727;</span></label>
+						<p class="text-sm text-greyish py-1">Upload the logo of your service outfit. Should be a simple square dimension less than 1MB.</p>
+						<input x-show="plug == null" accept="image/png, image/jpeg" type="file" name="logo" id="logo" required class="w-56 border border-gray-300 shadow-md focus:shadow-lg transition duration-500 focus:border-gray-500 focus:outline-none focus:ring-0 md:w-full invalid:border invalid:border-red-600" />
+						<template x-if="plug != null ">
+							<img :src="`{{ asset('/images') }}/${plug.logo}`" alt="logo of the plug" class="w-full h-56 mt-2">
+						</template>
+						<x-input-error :messages="$errors->get('logo')" class="mt-2" />
+					</li>
 				</ul>
 				<button class="px-5 py-3 bg-red-1000 border-none text-gray-200 mt-4 rounded-lg md:shadow-sm disabled:bg-gray-400 disabled:text-purple-1000 disabled:shadow-none md:px-10 md:mt-8 hover:shadow-md shadow-sm hover:bg-red-800 hover:text-purple-200" type="submit">
 					Create plug profile
@@ -192,7 +201,7 @@
 		<div class=" overflow-x-hidden flex justify-center py-3">
 			<div class="rounded-xl shadow-md md:w-96 md:mx-auto border-t border-gray-300">
 				<div class="flex justify-end py-3 px-4">
-					<svg @click="shareEvent(event)" class="text-purple-1000 w-5 font-bold cursor-pointer h-6 pr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" /></svg>
+					<svg @click="shareEvent()" class="text-purple-1000 w-10 font-bold cursor-pointer h-6 pr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" /></svg>
 				</div>
 				<div class="flex justify-center items-center pb-4 ">
 					<img :src=`{{asset('images')}}/${plug.flier}` alt="" class="w-full h-24 md:h-44 rounded-tr-xl rounded-tl-xl mx-auto bg-white">

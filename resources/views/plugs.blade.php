@@ -142,8 +142,11 @@
                 }
             },
         }' class="md:px-10 px-4 py-6 md:py-4">
+            <div class="my-5 md:my-10">
+                <x-plugs.premium-plugs-carousel :plugs="$plugs"></x-plugs.premium-plugs-carousel>
+            </div>
             <div>
-                <h2 class="font-bold text-xl mb-3">Plugs</h2>
+                <h2 class="font-bold text-xl mb-3 mt-7">Plugs</h2>
                 <button class="rounded-xl bg-yellow-200 text-sm text-purple-1000 py-1 px-4 hidden" title="View the full description of the Plug" x-ref="target" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example" id="right-drawer-button" ></button>
                 <form method="POST" class="flex justify-end md:items-center">
                     <input type="text" x-model="searchTerm" id="" placeholder="e.g. DJ" class="md:w-96 border border-gray-300 shadow-sm focus:outline-none focus:border-gray-300 focus:shadow-xl focus:border focus:ring-0" @input.debounce.500ms="searchDatabaseForPlug">
@@ -162,7 +165,7 @@
                         <div class=" overflow-x-hidden" :key="plug.id" @click="showPlug(plug.slug)">
                             <div class="hover:shadow-xl hover:border-gray-400 hover:duration-700 rounded-xl shadow-md p-4 bg-white border border-gray-300">
                                 <div class="flex justify-between items-center pb-4 ">
-                                    <img :src="`{{ asset('/images') }}/${plug.flier}`" alt="" class="w-12 h-12 rounded-full bg-white">
+                                    <img :src="`{{ asset('/images') }}/${plug.logo}`" alt="" class="w-12 h-12 rounded-full bg-white">
                                     <button class="rounded-xl bg-yellow-200 text-sm text-purple-1000 py-1 px-4" title="View the full description of the Plug" data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example" id="right-drawer-button" @click="showFullDetails(plug)">View full profile</button>
                                 </div>
                                 <div class="pb-3 border-b border-gray-400">   
@@ -217,7 +220,10 @@
                 <template x-if="chosenPlug != null ">
                     <div class="rounded-xl shadow-md p-4 bg-white border border-gray-300">
                             <div class="flex justify-center items-center pb-4 ">
-                                <img :src="`{{ asset('/images') }}/${chosenPlug.flier}`" alt="" class="w-20 h-20 mx-auto rounded-full bg-white">
+                                <img :src="`{{ asset('/images') }}/${chosenPlug.logo}`" alt="" class="w-20 h-20 mx-auto rounded-full bg-white">
+                            </div>
+                            <div class="flex justify-center items-center pb-4 ">
+                                <img :src="`{{ asset('/images') }}/${chosenPlug.flier}`" alt="" class="w-full h-auto mx-auto bg-white">
                             </div>
                             <div class="pb-3 border-b border-gray-400">   
                                 <h3 class="font-bold text-lg tracking-wide text-center" x-text="chosenPlug.user.nickname">Name of the plug</h3>
