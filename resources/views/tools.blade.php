@@ -11,11 +11,11 @@
 		<header class="mb-6">
 			<h1 class="font-bold font-display text-4xl md:text-6xl md:max-w-3xl md:leading-12 py-3 tracking-wide">We've curated the tools to make your next gathering fun and memorable</h1>
 		</header>
-		<div class="mt-10 md:mt-20 mb-10 md:mb-20 grid justify-start grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-10 w-full max-w-7xl ">
+		<div class="mt-10 md:mt-20 mb-10 md:mb-20 grid justify-center items-center md:justify-start grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-12 w-full max-w-7xl ">
 			<!-- Loop through cards -->
 			<template x-for="tool in tools" :key="tool.id">
 			<div
-				class="relative w-full h-72 cursor-pointer"
+				class="mx-auto relative w-44 md:w-full h-72 cursor-pointer"
 			>
 				<!-- tool Container -->
 				<a

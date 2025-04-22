@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\UserBoughtTicket;
 use App\Services\Paystack;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Node\Stmt\TryCatch;
+use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 
 class TicketController extends Controller
 {
@@ -43,14 +43,19 @@ class TicketController extends Controller
 
     public function Checkout($ticket_name)
     {
-        $ticket_id = (int) session('ticket_id');
-        $ticket = \App\Models\Ticket::with('event.user')->where('name', 'LIKE', '%'.$ticket_name.'%')->first();
+        $ticket_name = preg_replace('/-/', ' ', $ticket_name);
+        $ticket = Search::add(\App\Models\Ticket::with('event.user')->where('status', 'PUBLISHED'), ['name'])
+					    ->beginWithWildcard(true)
+					    ->endWithWildcard(true)
+					    ->orderByRelevance()
+					    ->search($ticket_name);
+        // $ticket = \App\Models\Ticket::with('event.user')->where('name', 'LIKE', '%'.$ticket_name.'%')->first();
         if(auth()->user() != null)
         {
             $user = \App\Models\User::with('va', 'role')->where('id', auth()->id())->first();
-            return view("dashboard.user.ticket.checkout", ['user' => $user, 'ticket' => $ticket]);
+            return view("dashboard.user.ticket.checkout", ['user' => $user, 'ticket' => $ticket[0]]);
         }
-        return view("guest.checkout", ['ticket' => $ticket]);
+        return view("guest.checkout", ['ticket' => $ticket[0]]);
     }
 
     public function purchase()

@@ -19,7 +19,7 @@ class CreatePlug
             $logo = $plug->logo->store('logo');
             $newPlug = Plug::create([
                 'user_id' => auth()->id(), 
-                'state' => $plug->state,
+                'state' => ucfirst($plug->state),
                 'tags' => TurningStringToArray::convert( $plug->tags ),
                 'address' => $plug->address,
                 'travel' => ( $plug->has('travel') != null && $plug->travel == 'on' ) ? 1 : 0,

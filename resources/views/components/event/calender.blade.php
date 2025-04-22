@@ -291,7 +291,7 @@
 														loading="lazy"
 														allowfullscreen
 														referrerpolicy="no-referrer-when-downgrade"
-														:src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyA2uqj1FOYR1H7fNEPSu5t9P60kBAOrhDY&q=Eiffel+Tower,Paris+France'">
+														:src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBAUx7lSXeKaQ8UYMNkbBf_uAYjtcFAI_0&q=Eiffel+Tower,Paris+France'">
 													</iframe>
 													</div>
 												</details>
@@ -338,9 +338,8 @@
 			       		<template x-for="ticket in chosenTickets">
 			       			<div class="grid gap-8">
 								<div class="">
-									<div class="relative text-left mx-auto bg-[url('https://cruisehq.fun/cruise-back-yellow.png')] bg-no-repeat bg-[length:100%_100%] bg-origin-center text-purple-1000 px-10 py-20 pb-5 w-full md:w-64 mt-6 border border-gray-200 rounded-[30px]">
+									<div class="relative text-left mx-auto bg-[url('https://cruisehq.fun/cruise-back-yellow.png')] bg-no-repeat bg-[length:100%_100%] bg-origin-center text-purple-1000 px-10 py-24 pb-5 w-full md:w-64 mt-6 border border-gray-200 rounded-[30px]">
 										<div>
-											<h3 x-text="ticket.name" class="font-bold text-lg mb-5 tracking-wider"></h3>
 											<div class="border-b border-black text-center">
 												<h2 class="text-3xl font-display" x-text="chosenEvent.name"></h2>
 												<p class="text-sm py-3" x-text="chosenEvent.starting_time + ' , ' + chosenEvent.event_date"></p>
@@ -373,6 +372,7 @@
 												</div>
 											</div>
 											<div class="mt-10 text-center">
+												<p x-text="ticket.name + ' ticket price'" class="font-bold text-sm mb-5 tracking-wider text-left"></p>
 												<p>	
 													<span class="font-bold text-xl text-purple-1000">&#8358; </span>
 													<span class="font-bold text-xl text-purple-1000" x-text="new Intl.NumberFormat().format(ticket.price)"></span>

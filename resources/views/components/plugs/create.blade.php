@@ -113,18 +113,41 @@
 						<p class="text-sm text-greyish py-1">Select the state where your business is primarily located.</p>
 						<select name="state" id="state" class="border border-purple-100 focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg focus:border focus:border-gray-100 mt-2 w-full md:w-5/6 md:border-gray-300" x-model="placeholder.state" :disabled="plug != null && placeholder.state != null">
 							<option value="" disabled>Select desired state</option>
-							<option value="abia">Abia</option>
 							<option value="abuja">Abuja</option>
+							<option value="Abia">Abia</option>
+							<option value="Adamawa">Adamawa</option>
+							<option value="Akwa Ibom">Akwa Ibom</option>
+							<option value="Anambra">Anambra</option>
+							<option value="Bauchi">Bauchi</option>
+							<option value="Bayelsa">Bayelsa</option>
+							<option value="Borno">Borno</option>
+							<option value="Cross river">Cross river</option>
+							<option value="Delta">Delta</option>
+							<option value="Ebonyi">Ebonyi</option>
 							<option value="edo">Edo</option>
 							<option value="ekiti">Ekiti</option>
+							<option value="Enugu">Enugu</option>
+							<option value="Gombe">Gombe</option>
+							<option value="Imo">Imo</option>
+							<option value="Jigawa">Jigawa</option>
+							<option value="Kaduna">Kaduna</option>
+							<option value="Kano">Kano</option>							
 							<option value="kebbi">Kebbi</option>
 							<option value="kogi">Kogi</option>
 							<option value="kwara">Kwara</option>
 							<option value="lagos">Lagos</option>
+							<option value="Nasarawa">Nasarawa</option>
+							<option value="Niger">Niger</option>
+							<option value="Ogun">Ogun</option>
 							<option value="ondo">Ondo</option>
 							<option value="osun">Osun</option>
+							<option value="Oyo">Oyo</option>
+							<option value="Plateau">Plateau</option>
 							<option value="rivers">Rivers</option>
 							<option value="sokoto">Sokoto</option>
+							<option value="Taraba">Taraba</option>
+							<option value="Yobe">Yobe</option>
+							<option value="Zamfara">Zamfara</option>
 						</select>
 						<x-input-error :messages="$errors->get('state')" class="mt-2" />
 

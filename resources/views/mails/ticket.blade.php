@@ -88,6 +88,7 @@
 		<p style="text-align: left; padding: 10px;">This ticket can be presented as evidence of ticket purchase at the entry of the event</p>
 		<p style="font-size: 1.5em; font-weight: bold;">Signed by TCG</p>
 		<p style=" font-size: 1.2em; ">The Cruise god</p>
+		<img src='https://cruisehq.fun/images/hero-pacy.png' alt="" style="width: 40px; height: 20px; margin: 10px auto">
 	</div>
 </body>
 </html>

@@ -1,12 +1,12 @@
 @props(['ticket'])
 <style>
 	#ticket-container{
-			background-image: url('https://cruisehq.fun/images/cruise-back-gray.png'); 
+			background-image: url('https://cruisehq.fun/cruise-back-yellow.png'); 
 			background-repeat: no-repeat; 
 			background-size: 100% 100% ; 
 			background-origin: center; 
 			position: relative;
-			padding: 65px 35px;
+			padding: 65px 40px;
 			text-align: left;
 			margin: 0 auto;
 			min-width: 270px;
@@ -28,7 +28,6 @@
 	<div id="ticket-container" class='rounded-3xl mt-2 text-center font-body' >
 		<div class="">
 			<div class="border-b border-black text-center">
-				<p x-text="ticket.name"></p>
 				<h2 class="text-3xl font-bold" x-text="chosenEvent.name"></h2>
 				<p class="text-sm font-bold py-2" x-text="chosenEvent.starting_time + ' ,' + chosenEvent.event_date"></p>
 			</div>
@@ -59,7 +58,8 @@
 				</div>
 			</div>
 			<div class="mt-10 text-purple-1000">
-				<p>Price : 
+				<p>
+					<span x-text="ticket.name + ' ticket price'"></span>
 					<span class="font-bold text-2xl">&#8358; </span>
 					<span class="font-bold text-2xl" x-text="new Intl.NumberFormat().format(ticket.price)"></span>
 				</p>

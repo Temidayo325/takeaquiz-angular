@@ -90,7 +90,7 @@
             },
             searchDatabaseForPlug()
             {
-                this.toast("Searching for user", "blue")
+                this.toast("Searching for plug", "blue")
                 axios.post("/plugs/search", { searchTerm: this.searchTerm })
                 .then( ( response ) => {
                     if(!response.data.error)
@@ -237,8 +237,10 @@
                                 <h3 class="font-bold text-sm mt-3">Service summary</h3>
                                 <p x-text="chosenPlug.service_summary" class="text-gray-500"></p>
 
-                                <h3 class="font-bold mt-3 text-sm">Plug's Unique Selling Point</h3>
-                                <p x-text="chosenPlug.usp" class="text-gray-500"></p>
+                                <div x-show="chosenPlug.usp != null">
+                                    <h3 class="font-bold mt-3 text-sm">Plug's Unique Selling Point</h3>
+                                    <p x-text="chosenPlug.usp" class="text-gray-500"></p>
+                                </div>
 
                             </div>
                             <div class="grid mt-2 border-t border-gray-400">
@@ -248,18 +250,22 @@
                                 <h3 class="font-bold mt-3 text-sm">State</h3>
                                 <p x-text="chosenPlug.state" class="text-gray-500"></p>
 
-                                <h3 class="font-bold mt-3 text-sm">Contact Address (If location-based)</h3>
-                                <p x-text="chosenPlug.physical_address" class="text-gray-500"></p>
+                                <div x-show="chosenPlug.physical_address != null">
+                                    <h3 class="font-bold mt-3 text-sm">Contact Address (If location-based)</h3>
+                                    <p x-text="chosenPlug.physical_address" class="text-gray-500"></p>
+                                </div>
 
                                 <h3 class="font-bold mt-3 text-sm">Available for travel ?</h3>
                                 <p x-text="( chosenPlug.travel == 1) ? 'Yes' : 'No'" class="text-gray-500"></p>
                             </div>
                             <div class="grid mt-2 border-t border-gray-400">
                                 <h3 class="font-bold mt-3 text-sm">Email</h3>
-                                <a :href="'mailto:' + chosenPlug.user.email" class="text-gray-500 block" x-text="( chosenPlug.contact_email == null ) ? chosenPlug.user.email :  chosenPlug.contact_email"></a>
+                                <a :href="'mailto:' + ( chosenPlug.contact_email == null ) ? chosenPlug.user.email :  chosenPlug.contact_email" class="text-gray-500 block" x-text="( chosenPlug.contact_email == null ) ? chosenPlug.user.email :  chosenPlug.contact_email"></a>
 
-                                <h3 class="font-bold mt-3 text-sm">Website / Portfolio</h3>
-                                <a :href="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" class="text-gray-500" x-text="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" ></a>
+                                <div x-show="chosenPlug.contact_portfolio != null">
+                                    <h3 class="font-bold mt-3 text-sm">Website / Portfolio</h3>
+                                    <a :href="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" class="text-gray-500" x-text="( chosenPlug.contact_portfolio == null ) ? chosenPlug.user.phone :  chosenPlug.contact_portfolio" ></a>
+                                </div>
 
                                 <h3 class="font-bold mt-3 text-sm">Phone / WhatsApp</h3>
                                 <a :href="'tel:' + ( chosenPlug.contact_whatsapp == null ) ? chosenPlug.user.phone :  chosenPlug.contact_whatsapp" class="text-gray-500" x-text="( chosenPlug.contact_whatsapp == null ) ? chosenPlug.user.phone :  chosenPlug.contact_whatsapp"></a>
