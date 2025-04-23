@@ -49,7 +49,7 @@ const routes: Routes = [
      {path: 'instructions', component: InstructionsComponent},
      {path: 'change-password', component: ChangePasswordComponent},
      { path: 'test', component: TestComponent },
-     { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+     { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
      // { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
      { path: '**', component: PageNotFoundComponent },
 

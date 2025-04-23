@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
      // public baseUrl = " http://127.0.0.1:8000/api/v1/";
-     public baseUrl = "https://takeaquiz.aeesdamilola.com/api/v1/";
+     public baseUrl = "https://cruisehq.fun/api/";
      // public headers = {'Content-Type': 'application/json' , 'Accept': 'application/json'};
 
   constructor(
@@ -27,7 +27,7 @@ export class UserService {
 
   register(user: object): Observable<any>
   {
-       return this.http.post(this.baseUrl+"users", user, this.options )
+       return this.http.post(this.baseUrl+"login", user, this.options )
   }
 
   verifyAccount(user: object): Observable<any>

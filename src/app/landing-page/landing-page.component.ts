@@ -85,6 +85,7 @@ export class LandingPageComponent implements OnInit {
                  }, 5000);
             },
             (err) => {
+               console.log(err)
                  this.errors = err.error.errors
                  this.loading.complete()
                  this.registerForm.enable()

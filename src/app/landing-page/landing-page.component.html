@@ -7,7 +7,7 @@
           <div class="md:flex md:justify-between md:items-center md:mt-14 ">
                <div class="md:max-w-2xl">
                     <h1 class="font-bold font-headline text-4xl leading-[45px] mt-10 md:mt-0 md:text-6xl tracking-wider md:leading-[60px] text-grayish my-0">Grade Essays in Minutes, Not Hours: Automate Assessments with Takeaquiz</h1>
-                    <p class="hidden font-word md:block md:text-md tracking-widest md:leading-7 w-3/4 text-white/80 my-6 ">Takeaquiz: Grade smarter, not harder. Nigeria's most automated assessment platform.</p>
+                    <p class="hidden font-word md:block md:text-md tracking-widest md:leading-7 w-3/4 text-white/80 my-6 ">For tertiary institution lecturers across Nigeria: Automate assessments, meet academic goals, and make room for the things that grow your influence.</p>
                     <div class="flex gap-0 justify-start hidden md:block">
                          <img src="https://xsgames.co/randomusers/avatar.php?g=male" alt="" class="h-10 w-10 rounded-full">
                          <img src="https://xsgames.co/randomusers/avatar.php?g=female" alt="" class="h-10 w-10 rounded-full">
@@ -18,31 +18,31 @@
                     </div>
                     <div class="">
                          <p class="text-sm font-bold md:mt-5 mt-8 text-grayish font-word tracking-widest">Free for the First 50! Limited Spots Available</p>
-                         <p class="my-1 decoration-4 underline underline-offset-8 decoration-orangish text-white ">Launching on the 3<sup>rd</sup> of June, 2024</p>
+                         <!-- <p class="my-1 decoration-4 underline underline-offset-8 decoration-orangish text-white ">Launching on the 3<sup>rd</sup> of June, 2024</p> -->
                     </div>
                </div>
-               <form [formGroup]="registerForm" (submit)="registerUser()" class="bg-grayish md:mt-0 mt-8 md:px-8 px-3 py-4 px-4 md:w-[300px]  overflow-hidden z-30">
+               <form [formGroup]="registerForm" (submit)="registerUser()" class="bg-grayish md:mt-0 mt-8 md:px-8 px-3 py-4 md:w-[300px]  overflow-hidden z-30">
                     <h2 class="font-bold font-headline text-center text-orangish md:text-blueish">Book your own slot</h2>
                     <div class="mb-4 overflow-hidden mx-2 ">
                          <!-- <label for="name" class="block text-lg">Full name</label> -->
                          <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.name }}</p>
-                         <input type="text" id="name" autofocus class="text-blueish placeholder-blueish border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Full name" formControlName="name" required />
+                         <input type="text" id="name" autofocus class="text-blueish placeholder-blueish border-none font-bold placeholder:font-light focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Full name" formControlName="name" required />
                     </div>
                     <div class="mb-4 overflow-hidden mx-2 ">
                          <!-- <label for="email" class="block text-lg">Email</label> -->
                          <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.email }}</p>
-                         <input type="email" id="email" class="text-blueish placeholder-blueish font-bold border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Email address" formControlName="email" required />
+                         <input type="email" id="email" class="text-blueish placeholder-blueish font-bold placeholder:font-light border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="Email address" formControlName="email" required />
                     </div>
                     <div class="mb-8 overflow-hidden mx-2 ">
                          <!-- <label for="institution" class="block text-lg">Institution</label> -->
                          <p class="text-orange-700 text-sm text-left my-2" *ngIf="errors != null">{{ errors.institution }}</p>
-                         <input type="text" id="institution" class="text-blueish placeholder-blueish font-bold border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="University of Ilorin" formControlName="institution" required />
+                         <input type="text" id="institution" class="text-blueish placeholder-blueish font-bold placeholder:font-light border-none focus:border-none focus:outline-none focus:shadow-2xl bg-gray-300 shadow-md p-4 text-md w-full" placeholder="University of Ilorin" formControlName="institution" required />
                     </div>
                     <div class="overflow-hidden mx-2 ">
                          <button type="submit" class="mx-auto w-full py-5 px-10 disabled:bg-orange-300 bg-orangish text-grayish disabled:text-blueish font-bold border-none disabled:shadow-inner shadow-xl disabled:cursor-not-allowed cursor-pointer " [disabled]="!registerForm.valid" >Sign me up Now </button>
                     </div>
-                    <p [class]="signUpSuccessful ? 'block bg-green-300 py-2 px-3 text-md font-word' : 'hidden'"  [@showHide]="signUpSuccessful ? 'show' : 'hide'"> You will be notified when it's ready to launch in 2 weeks</p>
-                    <p class="text-blueish text-center text-md my-5 font-word">We treat your information with the utmost care. We promise not to spam your email</p>
+                    <p [class]="signUpSuccessful ? 'block bg-green-300 py-2 px-3 text-md font-word' : 'hidden'"  [@showHide]="signUpSuccessful ? 'show' : 'hide'"> You will be notified when we're ready to roll out the first use case</p>
+                    <p class="text-blueish text-center text-md my-5 font-word">Your privacy is important to us. We’ll never share your information or send unwanted emails.</p>
 
                </form>
           </div>
@@ -52,8 +52,21 @@
           </div>
      </header>
 
+     <section class="bg-white pt-10 md:pt-20 pb-32 px-10 md:px-28 text-blueish">
+          <h2 class="text-left font-headline max-w-2xl md:max-w-4xl font-bolder md:text-5xl text-4xl block md:mb-10 mb-16 leading-10 tracking-wider">We Understand the Challenges You Face as a Lecturer</h2>
+          <div class="md:flex grid grid-10 md:justify-center md:items-center md:gap-20 md:max-w-4xl mx-auto md:mx-0 leading-9 tracking-wide text-xl text-left font-normal max-w-xl font-word">
+               <div>
+                    <p >
+                         As a lecturer in a tertiary institution, balancing grading, assessments, and your own professional growth is tough enough. Add to that the challenge of keeping students engaged and motivated in an environment full of distractions, and your workload becomes even more demanding.
+                    </p>
+                    <p>Takeaquiz is here to lighten the load. By automating grading and streamlining your reporting, we help you save precious time and focus more on what truly matters: your students’ development and your own academic progress.</p>
+                    <p>We know your work isn’t easy. Our mission is to provide a tool that supports you — giving you the time and peace of mind to focus on what you do best. We're here to help, not add to your burdens.</p>
+               </div>
+          </div>
+     </section>
+
      <section class="bg-grayish md:py-14 pb-28 px-5 py-8 md:px-28 text-blueish">
-          <h2 class="text-center mx-auto max-w-2xl font-bolder font-headline text-2xl md:text-4xl block leading-10 tracking-wider">Create, schedule, grade - effortlessly. Elevate assessments with Takeaquiz.</h2>
+          <h2 class="text-center md:text-left mx-auto md:mx-0 md:max-w-3xl max-w-2xl font-bolder font-headline text-2xl md:text-4xl block leading-10 tracking-wider">Create, schedule, grade - effortlessly. Elevate assessments with Takeaquiz.</h2>
           <div class="md:grid-cols-4 grid md:gap-10 gap-14 md:items-start tracking-wide leading-6 mt-10 md:mt-20 md:pb-20">
                <div>
                     <svg data-slot="icon" class="w-10 h-10 bg-orange-100 p-4" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"></path></svg>
@@ -79,7 +92,7 @@
      </section>
 
      <section class="bg-[#f9f4ed] pt-10 md:pt-20 pb-32 px-10 md:px-28 text-blueish">
-          <h2 class="text-center font-headline mx-auto max-w-2xl font-bolder text-4xl block md:mb-0 mb-16 leading-10 tracking-wider">Free for the First 50! Limited Slots Available</h2>
+          <h2 class="text-center font-headline mx-auto max-w-2xl font-bolder text-4xl block md:mb-10 mb-16 leading-10 tracking-wider">Only 50 Spots Available — Act Fast to Secure Your Access!</h2>
           <div class="md:flex grid grid-10 md:justify-center md:items-center md:gap-20 md:max-w-4xl mx-auto">
                <p class="leading-8 tracking-wide text-xl text-left font-normal max-w-xl font-word">
                     Grading your Essays for 120 students would take you about 5 hours of intensive work, would it surprise you to know Takeaquiz gets that done in <span class="bg-[#FFC09F] px-3 py-2 text-blueish">less than 10 minutes</span> without sacrificing quality. Interestingly, you have access to the script of each student which allows you to double check in scenarios of complaints.
@@ -93,33 +106,34 @@
           <p class="text-center font-light text-lg mt-2 font-word">We've curated answers to some questions you might have </p>
           <div class="mt-6 text-md grid gap-10  md:mt-20 text-blueish">
                <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
-                    <h3 class="my-0 font-headline">What types of assessments can I create with Takeaquiz?</h3>
-                    <p class="my-4 font-word">Takeaquiz allows you to create a variety of assessments, including multiple-choice questions, fill-in-the-gaps, essays, and basic true or false assessment types.</p>
-               </div>
-               <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
-                    <h3 class="my-0 font-headline">What kind of support does Takeaquiz offer me as a new member to the platform?</h3>
-                    <p class="my-4 font-word">We’re ready to onboard you at an agreed time to provide a smooth experience using the platform. We offer tutorials, and webinars on how to use the system.</p>
-               </div>
-               <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
-                    <h3 class="my-0 font-headline">Is Takeaquiz free to use? </h3>
-                    <p class="my-4 font-word">Takeaquiz offers a free trial for the first 50 people to sign up. Paid plans are available with various features to suit your needs.</p>
+                    <h3 class="my-0 font-headline">How does Takeaquiz automate the grading process?</h3>
+                    <p class="my-4 font-word">Our grading process uses advanced Natural Language Processing (NLP) and other algorithms to evaluate student responses. As we promised, our goal is to make your work easier. We compare each student's answer to your marking scheme, assessing the context and relevance to ensure it aligns with the criteria you’ve set. This ensures consistency and accuracy in grading, tailored to your specific standards.</p>
                </div>
                <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
                     <h3 class="my-0 font-headline">Is Takeaquiz secure? </h3>
                     <p class="my-4 font-word">Yes, Takeaquiz prioritizes security. We offer features like secure lockdown browsers and question randomization to prevent cheating. Our systems also encrypt most of the questions at rest.</p>
                </div>
                <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
+                    <h3 class="my-0 font-headline">What types of assessments can I create with Takeaquiz?</h3>
+                    <p class="my-4 font-word">Takeaquiz allows you to create a variety of assessments, including multiple-choice questions, fill-in-the-gaps, essays, and basic true or false assessment types.</p>
+               </div>
+               <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
+                    <h3 class="my-0 font-headline">Can I ensure the quality of grading or assessment with Takeaquiz? Is there human oversight?</h3>
+                    <p class="my-4 font-word">Takeaquiz combines the power of automation with the quality assurance you expect in academic grading. Our system uses advanced Natural Language Processing (NLP) and other intelligent algorithms to evaluate student responses against your marking scheme. While the system efficiently automates grading, we understand the importance of maintaining academic integrity and the quality of assessments. To ensure that grading remains accurate and aligned with your expectations, Takeaquiz allows you to manually review any responses if you feel further oversight is required, allowing for a balanced mix of automation and personal judgment.</p>
+               </div>
+               <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
+                    <h3 class="my-0 font-headline">What kind of support does Takeaquiz offer me as a new member to the platform?</h3>
+                    <p class="my-4 font-word">We’re ready to onboard you at an agreed time to provide a smooth experience using the platform. We offer tutorials, and webinars on how to use the system.</p>
+               </div>
+               
+               <div class="mb-3 shadow-md bg-grayish border border-gray-300 px-5 pt-6 pb-12 mx-auto md:py-12 md:px-12 md:w-2/4">
                     <h3 class="my-0 font-headline">Does Takeaquiz integrate with other learning management systems (LMS) used in Nigerian universities? </h3>
                     <p class="my-4 font-word">Takeaquiz is a new product, specific LMS integrations aren’t available yet. However, you can inquire about their development roadmap or potential future integrations.</p>
                </div>
-               <!-- <details class="mb-3 shadow-md bg-grayish border border-gray-300">
-                    <summary class="px-3 list-none shadow-md font-header py-2 font-bold cursor-pointer">What types of assessments can I create with Takeaquiz?</summary>
-                    <p class="px-3 py-2 leading-6">Takeaquiz allows you to create a variety of assessments, including multiple-choice questions, fill-in-the-gaps, essays, and basic true or false assessment types.</p>
-               </details> -->
           </div>
      </div>
 
      <footer class="bg-blueish pt-10 border-t-2 border-orange-400">
-          <p class="py-4 font-bold text-lg text-white/80 my-0 text-center py-12 font-word">&copy; Copyright of Luminaace 2024</p>
+          <p class="font-bold text-md md:text-lg text-white/80 my-0 text-center py-12 font-word">&copy; Copyright of Luminaace 2025</p>
      </footer>
 </main>
