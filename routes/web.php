@@ -16,12 +16,13 @@ use App\Http\Controllers\Promoter\TicketController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/input', function () {
+    return view('components.event.search-by-location');
+});
 
 Route::get('/', [\App\Http\Controllers\User\EventController::class, 'homepage']);
 Route::post('/events/filterByState', [\App\Http\Controllers\User\EventController::class, 'searchByState']);
+Route::post('/events/filterByLatnLong', [\App\Http\Controllers\User\EventController::class, 'searchByLocation']);
 
 Route::post('/tickets/checkout', [\App\Http\Controllers\User\TicketController::class, 'toCheckout']);
 Route::get('/ticket/checkout/{ticket_name}', [\App\Http\Controllers\User\TicketController::class, 'Checkout']);

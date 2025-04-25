@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use ProtoneMedia\LaravelCrossEloquentSearch\Search;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class EventController extends Controller
 {
@@ -62,7 +63,51 @@ class EventController extends Controller
 			  'events_today' => $events_today
     	]);
     }
-
+    public function searchByLocation(Request $request)
+    {
+      $now = \Carbon\Carbon::now()->format('Y-m-d');
+    	$events = DB::table('events')
+      ->join('users', 'events.user_id', '=', 'users.id')
+      // ->join('event_media', 'events.id', '=', 'event_media.event_id')
+      ->join('tickets', 'events.id', '=', 'tickets.event_id')
+      ->select('events.*', DB::raw("
+          (3959 * ACOS(
+              COS(RADIANS(?)) * COS(RADIANS(lat)) *
+              COS(RADIANS(`long`) - RADIANS(?)) +
+              SIN(RADIANS(?)) * SIN(RADIANS(lat))
+          )) AS distance
+      "))
+      ->addBinding([$request->lat, $request->long, $request->lat], 'select')
+      ->whereBetween('events.event_date', [$now, Carbon::parse('+30 days')])
+      ->having('distance', '<=', 1)
+      ->orderBy('distance')
+      ->get();
+    	$premium_events = $events->filter( function($event){
+    		return $event->isPremium == true;
+    	})->toArray();
+      $premium_events = array_values($premium_events);
+    	$events_today = DB::table('events')
+      ->join('users', 'events.user_id', '=', 'users.id')
+      // ->join('event_media', 'events.id', '=', 'event_media.event_id')
+      ->join('tickets', 'events.id', '=', 'tickets.event_id')
+      ->select('events.*', DB::raw("
+          (3959 * ACOS(
+              COS(RADIANS(?)) * COS(RADIANS(lat)) *
+              COS(RADIANS(`long`) - RADIANS(?)) +
+              SIN(RADIANS(?)) * SIN(RADIANS(lat))
+          )) AS distance
+      "))
+      ->addBinding([$request->lat, $request->long, $request->lat], 'select')
+      ->where('events.event_date', '=', Carbon::today())
+      ->having('distance', '<=', 1)
+      ->orderBy('distance')
+      ->get();
+    	return response()->json([
+    		'events' => $events, 
+			  'premium_events' => $premium_events,
+			  'events_today' => $events_today
+    	]);
+    }
     public function searchByTags(Request $request)
     {
       

@@ -96,6 +96,35 @@
                 console.error(error)
             }
    		},
+		searchDatabaseForLocation()
+		{
+			try {
+                axios.post("/events/filterByLatnLong", { ...$store.place.details })
+                .then(response => {
+                	this.calender_days = this.getDates(response.data.events)
+                	this.events_today = response.data.events_today
+                	this.premium_events = response.data.premium_events
+					if(response.data.events.length < 1)
+					{
+						$store.universal.toast("No events found for this location", "blue")
+						
+					}
+            	})
+                .catch(error => console.log(error))
+            } catch (error) {
+                console.error(error)
+            }
+		},
+		toast(text, background)
+		{
+			Toastify({
+				text: text, 
+				style: {
+				background: background,
+				color: "#fff"
+				}
+			}).showToast();
+		},
    		sortByName()
    		{
    			alert("Search by name")
@@ -182,20 +211,23 @@
 				<div>
 					<div class="mt-3 text-greyish font-body md:mt-6 md:px-4">
 						{{-- <h4 class="font-body font-normal md:hidden text-sm mb-3 text-purple-1000 md:text-greyish ">Filters</h4> --}}
-						<div class="md:flex md:justify-start">
-							<form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3 text-purple-1000 md:text-greyish">
-								<div class="">
-									<label for="state" class="font-body text-sm md:inline">Filter by state</label>
-									<select name="state" id="state" @change="sortByState()" class="border border-purple-100 focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg focus:border focus:border-gray-100 mt-2 w-full md:w-5/6 md:border-gray-300" x-model="state">
-										<option value="" disabled>Select desired state</option>
-										<option value="all">All states</option>
-										<option value="abuja">Abuja</option>
-										<option value="kwara">Kwara</option>
-										<option value="lagos">Lagos</option>
-										<option value="osun">Osun</option>
-									</select>
-								</div>
-							</form>
+						<div class="md:flex md:justify-start md:items-center">
+								<!-- <form @submit.prevent="sortByState()" class="mt-8 md:flex md:justify-start md:items-center md:gap-3 text-purple-1000 md:text-greyish">
+									<div class="">
+										<label for="state" class="font-body text-sm md:inline">Filter by state</label>
+										<select name="state" id="state" @change="sortByState()" class="border border-purple-100 focus:outline-none focus:ring-0 focus:border-none focus:shadow-lg focus:border focus:border-gray-100 mt-2 w-full md:w-5/6 md:border-gray-300" x-model="state">
+											<option value="" disabled>Select desired state</option>
+											<option value="all">All states</option>
+											<option value="abuja">Abuja</option>
+											<option value="kwara">Kwara</option>
+											<option value="lagos">Lagos</option>
+											<option value="osun">Osun</option>
+										</select>
+									</div>
+								</form> -->
+							<div @new-place-chosen="searchDatabaseForLocation()" class="w-full">
+								<x-event.search-by-location></x-event.search-by-location>
+							</div>
 						</div>
 					</div>
 					<div class="mt-10 md:px-10 md:w-5/6">
@@ -284,21 +316,24 @@
 												<details>
 													<summary class="text-purple-1000 font-bold text-sm">Show location on map</summary>
 													<div>
-													<iframe
-														width="100%"
-														height="200px"
-														style="border:0"
-														loading="lazy"
-														allowfullscreen
-														referrerpolicy="no-referrer-when-downgrade"
-														:src="'https://www.google.com/maps/embed/v1/place?key=AIzaSyBAUx7lSXeKaQ8UYMNkbBf_uAYjtcFAI_0&q=Eiffel+Tower,Paris+France'">
-													</iframe>
+													<gmp-map
+														:center="`${event.lat} , ${event.long}`"
+														zoom="4"
+														map-id="DEMO_MAP_ID"
+														style="height: 200px"
+														>
+														<gmp-advanced-marker
+															:position="`${event.lat} , ${event.long}`"
+															title="Mountain View, CA"
+														></gmp-advanced-marker>
+														</gmp-map>
+													
 													</div>
 												</details>
-											</p>
+											</p>	
 										</div>
 										<div class="py-2 grid gap-3 mt-2 text-purple-1000">
-											<div>
+											<div x-show="event.duration != null">
 												<h3 class="text-sm font-bold ">Event duration</h3>
 												<p x-text="event.duration"></p>
 											</div>
@@ -308,7 +343,7 @@
 												<p x-text="event.audience"></p>
 											</div>
 
-											<div>
+											<div x-show="event.dress_code != null">
 												<h3 class="text-sm font-bold ">Dress code</h3>
 												<p x-text="event.dress_code"></p>
 											</div>

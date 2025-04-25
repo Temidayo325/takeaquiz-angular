@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/confirm-transaction', [\App\Http\Controllers\User\WalletController::class, 'fundWallet']);
 Route::get('/confirm-transaction', [\App\Http\Controllers\User\WalletController::class, 'fundWallet']);
+
+Route::post('/login', [\App\Http\Controllers\Api\ApiController::class, 'register']);

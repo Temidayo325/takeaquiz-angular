@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('starting_time'); 
             $table->string('state', 30);
             $table->string('location_name')->nullable();
-            $table->decimal('lat', 10, 7)->nullable();
-            $table->decimal('long', 11, 8)->nullable();
+            $table->double('lat', 15, 10)->nullable();
+            $table->double('long', 15, 10)->nullable();
             $table->string('ticket_information')->nullable();
             $table->text('location');
             $table->text('tags');

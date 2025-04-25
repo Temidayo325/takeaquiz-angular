@@ -142,7 +142,7 @@
                 }
             },
         }' class="md:px-10 px-4 py-6 md:py-4">
-            <div class="my-5 md:my-10">
+            <div class="my-5 md:my-7 md:w-2/4 md:mx-auto">
                 <x-plugs.premium-plugs-carousel :plugs="$plugs"></x-plugs.premium-plugs-carousel>
             </div>
             <div>

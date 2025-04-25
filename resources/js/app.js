@@ -10,4 +10,25 @@ import 'flowbite';
 
 window.Alpine = Alpine;
 
+Alpine.store('place', {
+    details: {
+        address: '',
+        lat: '',
+        long: '',
+        id: ''
+    }
+})
+
+Alpine.store('universal', {
+    toast(text, background)
+    {
+        Toastify({
+            text: text, 
+            style: {
+            background: background,
+            color: '#fff'
+            }
+        }).showToast();
+    },
+})
 Alpine.start();
